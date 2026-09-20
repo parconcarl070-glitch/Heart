@@ -8,14 +8,10 @@
 <title>Heart Fusion</title>
 
 <!-- =====================================================
-     ADCASH ADS — LIBRARY + AUTOTAG
+     MONETAG — REWARDED INTERSTITIAL SDK
+     Zone: 11847520
 ===================================================== -->
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-<script type="text/javascript">
-    aclib.runAutoTag({
-        zoneId: 'ax6kggaxvs',
-    });
-</script>
+<script src='//libtl.com/sdk.js' data-zone='11847520' data-sdk='show_11847520'></script>
 
 <style>
 
@@ -8011,8 +8007,8 @@ function submitGameAnswer(){
 
 
 /* =====================================================
-   WATCH AD — ADCASH INTEGRATED
-   Zone: ax6kggaxvs (Autotag)
+   WATCH AD — MONETAG REWARDED INTERSTITIAL
+   Zone: 11847520
 ===================================================== */
 
 function watchGameAd(){
@@ -8027,35 +8023,29 @@ function watchGameAd(){
     status.textContent="Loading advertisement...";
 
     /* 
-       Ang Adcash Autotag ay nag-a-inject ng ads automatically sa page.
-       Walang reward callback, kaya gumagamit tayo ng timer-based 
-       approach para magbigay ng reward pagkatapos ng 5 seconds.
+       Monetag Rewarded Interstitial:
+       - Nagbabalik ng Promise
+       - Nagre-resolve PAGKATAPOS mapanood ng user ang ad
+       - Walang parameters na kailangan
     */
 
-    let seconds=5;
-    let countdownStarted=false;
-
-    function startCountdown(){
-        if(countdownStarted) return;
-        countdownStarted=true;
-        status.textContent="Advertisement loaded. Wait 5 seconds...";
-
-        const timer=setInterval(function(){
-            if(adResolved){ clearInterval(timer); return; }
-            status.textContent="Advertisement playing... "+seconds+" second(s).";
-            seconds--;
-            if(seconds<0){
-                clearInterval(timer);
-                adResolved=true;
-                adWatched=true;
-                status.textContent="✓ Ad completed.";
-                claimGameReward();
-            }
-        },1000);
-    }
-
-    /* Simulate ad load — Adcash Autotag auto-injects on page */
-    setTimeout(startCountdown, 800);
+    show_11847520()
+        .then(() => {
+            // Ang code na ito ay tatakbo PAGKATAPOS mapanood ng user ang ad
+            adResolved = true;
+            adWatched = true;
+            status.textContent = "✓ Ad completed.";
+            claimGameReward();
+        })
+        .catch((error) => {
+            // Kapag nag-error o hindi natapos ang ad
+            console.error("Monetag ad error:", error);
+            adResolved = true;
+            status.textContent = "❌ No ad loaded. Continue without points.";
+            recordGameResult(currentGame.userAnswer, true, 0, "No Ad - No Reward");
+            showNotification("No Ad Loaded", "No points added.");
+            prepareNextGame();
+        });
 }
 
 
@@ -8316,4 +8306,4 @@ setInterval(function(){
 </script>
 
 </body>
-</html>
+     </html>
