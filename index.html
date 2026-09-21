@@ -13,15 +13,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
-body{
-    min-height:100vh;
-    font-family:Arial,sans-serif;
-    background:
-        radial-gradient(circle at top left,#ffd5e1,transparent 35%),
-        radial-gradient(circle at bottom right,#ffe5ec,transparent 35%),
-        #fff8fa;
-    color:#4b1f2a;
-}
+body{min-height:100vh;font-family:Arial,sans-serif;background:radial-gradient(circle at top left,#ffd5e1,transparent 35%),radial-gradient(circle at bottom right,#ffe5ec,transparent 35%),#fff8fa;color:#4b1f2a;}
 
 button,input,select{font-family:inherit;}
 button{-webkit-tap-highlight-color:transparent;}
@@ -521,8 +513,9 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 .penalty-modal .penalty-sub{text-align:center;color:#aaa;font-size:12px;margin-bottom:18px;}
 .penalty-field{margin-bottom:14px;}
 .penalty-field label{display:block;color:#ccc;font-size:12px;font-weight:bold;margin-bottom:6px;}
-.penalty-field select,.penalty-field input{width:100%;height:44px;padding:0 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;}
-.penalty-field select:focus,.penalty-field input:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
+.penalty-field select,.penalty-field input,.penalty-field textarea{width:100%;height:44px;padding:0 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;font-family:inherit;}
+.penalty-field textarea{height:auto;min-height:80px;padding:12px;resize:vertical;line-height:1.5;}
+.penalty-field select:focus,.penalty-field input:focus,.penalty-field textarea:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
 .penalty-field select option{background:#1e1e3a;color:white;}
 .penalty-summary{padding:12px;background:rgba(255,107,157,.1);border:1px solid rgba(255,107,157,.3);border-radius:10px;color:#ff8fb3;font-size:12px;line-height:1.6;text-align:center;margin-bottom:16px;}
 .penalty-buttons{display:flex;gap:10px;}
@@ -893,8 +886,25 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 
 <div class="form-section">
 <h3>Withdrawal</h3>
-<div class="input-group"><label>Amount to Withdraw</label><div class="input-box"><span class="icon">₱</span><input type="number" id="cashoutAmount" min="1" max="5" step="0.01" placeholder="₱1 - ₱5" required oninput="calculateCashout()"></div></div>
-<div class="info-box"><strong>Cashout Fee Rule</strong><br>₱1 – ₱2 = No deduction<br>₱3 – ₱5 = 50% deduction<br><br><strong>⏱️ Processing Time:</strong><br>1 to 10 hours</div>
+<div class="input-group">
+    <label>Amount to Withdraw</label>
+    <div class="input-box">
+        <span class="icon">₱</span>
+        <select id="cashoutAmount" required onchange="calculateCashout()">
+            <option value="">Select amount</option>
+            <option value="1">₱1.00</option>
+            <option value="3">₱3.00</option>
+            <option value="5">₱5.00</option>
+        </select>
+    </div>
+</div>
+<div class="info-box">
+    <strong>Cashout Fee Rule (₱1, ₱3, ₱5 only)</strong><br>
+    ₱1 = No deduction (full ₱1.00)<br>
+    ₱3 = 50% deduction (₱1.50 received)<br>
+    ₱5 = 50% deduction (₱2.50 received)<br><br>
+    <strong>⏱️ Processing Time:</strong><br>1 to 10 hours
+</div>
 <div class="input-group"><label>Total Received</label><div class="input-box"><span class="icon">💰</span><input type="text" id="totalReceived" readonly value="₱0.00"></div></div>
 <button type="submit" class="main-btn" id="cashoutButton">REQUEST CASHOUT</button>
 </div>
@@ -1152,8 +1162,9 @@ Need help? Reach out to our support team or join the community for updates.
         <h3>ᘳᗒ.ᗕᘰ 𝐏𝐀𝐘𝐎𝐔𝐓 𝐃𝐄𝐓𝐀𝐈𝐋𝐒 ᘳᗒ.ᗕᘰ</h3>
         <ul class="complan-list">
             <li>ᴍᴀʏᴀ ᴀɴᴅ ɢᴄᴀsʜ ᴏɴʟʏ</li>
-            <li>ᴍɪɴɪᴍᴜᴍ ʀᴇǫᴜᴇsᴛ 1 ᴀɴᴅ ᴍᴀxɪᴍᴜᴍ ʀᴇǫᴜᴇsᴛ 5</li>
-            <li>3 ᴀɴᴅ 5 ʜᴀᴠᴇ 50% ᴅᴇᴅᴜᴄᴛɪᴏɴ ғᴏʀ sᴀғᴇᴛʏ ɴᴇᴛ</li>
+            <li>ᴀᴍᴏᴜɴᴛ ᴏᴘᴛɪᴏɴs: ₱1, ₱3, ₱5 ᴏɴʟʏ</li>
+            <li>₱1 = ɴᴏ ᴅᴇᴅᴜᴄᴛɪᴏɴ (ғᴜʟʟ ᴀᴍᴏᴜɴᴛ)</li>
+            <li>₱3 ᴀɴᴅ ₱5 ʜᴀᴠᴇ 50% ᴅᴇᴅᴜᴄᴛɪᴏɴ ғᴏʀ sᴀғᴇᴛʏ ɴᴇᴛ</li>
             <li>1-10 ʜᴏᴜʀs ᴄʜᴇᴄᴋɪɴɢ</li>
             <li>ɴᴏ ᴏᴛʜᴇʀ ᴄᴏɴᴅɪᴛɪᴏɴ ᴡʜᴇɴ ʏᴏᴜ ᴀᴄʜɪᴇᴠᴇᴅ ᴛʜᴇ ᴍɪɴɪᴍᴜᴍ</li>
         </ul>
@@ -1487,9 +1498,10 @@ CS
     <div class="penalty-field">
         <label>Violation Type</label>
         <select id="penaltyViolationType">
-            <option value="Multiple Payout">Multiple Payout (2+ cashouts in 1 day)</option>
-            <option value="Multiple Account">Multiple Account (same device/IP)</option>
-            <option value="Other Violation">Other Violation</option>
+            <option value="Using Cheat">Using Cheat</option>
+            <option value="Giving False Information">Giving False Information</option>
+            <option value="Multiple Account in 1 IP Address">Multiple Account in 1 IP Address</option>
+            <option value="Multiple Payout In 1 Day">Multiple Payout In 1 Day</option>
         </select>
     </div>
 
@@ -1509,8 +1521,8 @@ CS
     </div>
 
     <div class="penalty-field">
-        <label>Details / Reason</label>
-        <input type="text" id="penaltyDetails" placeholder="e.g. 3 cashouts on Sept 18, 2026">
+        <label>Reason (Optional — makikita ito ng user)</label>
+        <textarea id="penaltyDetails" placeholder="e.g. 3 cashouts on Sept 18, 2026" maxlength="300"></textarea>
     </div>
 
     <div class="penalty-summary" id="penaltySummary">Select penalty type to see summary.</div>
@@ -1518,6 +1530,29 @@ CS
     <div class="penalty-buttons">
         <button class="penalty-btn penalty-btn-cancel" onclick="closePenaltyModal()">Cancel</button>
         <button class="penalty-btn penalty-btn-confirm" onclick="confirmIssuePenalty()">Issue Penalty</button>
+    </div>
+</div>
+</div>
+
+
+
+<!-- ===== REJECT REASON MODAL ===== -->
+<div class="penalty-modal-overlay" id="rejectReasonModalOverlay">
+<div class="penalty-modal">
+    <h3>❌ Reject Cashout Request</h3>
+    <p class="penalty-sub" id="rejectReasonUserInfo">Cashout</p>
+
+    <div class="penalty-field">
+        <label>Reason (Optional)</label>
+        <textarea id="rejectReasonInput" placeholder="e.g. Wrong payout info, Suspicious activity..." maxlength="300"></textarea>
+        <div class="user-edit-hint" style="color:#ff8fb3;margin-top:8px;">
+            💡 Kung wala kang ilalagay na reason, ang user ay makakakuha lang ng "Request Rejected" warning.
+        </div>
+    </div>
+
+    <div class="penalty-buttons">
+        <button class="penalty-btn penalty-btn-cancel" onclick="closeRejectReasonModal()">Cancel</button>
+        <button class="penalty-btn penalty-btn-confirm" onclick="confirmRejectWithReason()">❌ Reject Request</button>
     </div>
 </div>
 </div>
@@ -1594,6 +1629,7 @@ let isAdmin=false;
 
 let currentPenaltyUserId=null;
 let currentEditingUserId=null;
+let pendingRejectInfo=null;
 
 let aiInitialized=false;
 
@@ -1621,6 +1657,19 @@ let currentAdminTicketRef = null;
 
 const ADMIN_EMAIL = "Carl";
 const ADMIN_PASSWORD = "carl123";
+
+
+/* =====================================================
+   CASHOUT CONFIG — 1, 3, 5 ONLY
+===================================================== */
+
+const CASHOUT_ALLOWED_AMOUNTS = [1, 3, 5];
+
+function getCashoutReceived(amount){
+    if(amount === 1) return 1;
+    if(amount === 3 || amount === 5) return amount * 0.5;
+    return 0;
+}
 
 
 /* =====================================================
@@ -1914,6 +1963,65 @@ async function showCongratsAlert(congrats){
 
 
 /* =====================================================
+   CASHOUT REJECTION CHECK (USER SIDE)
+===================================================== */
+
+async function checkPendingCashoutRejections(){
+
+    if(!currentUser) return;
+    if(isAdmin) return;
+
+    const users = getUsers();
+    const fresh = users.find(u => u.userId === currentUser.userId);
+    if(!fresh) return;
+
+    currentUser = fresh;
+
+    const history = fresh.cashoutHistory || [];
+    const unseenRejections = history.filter(c => 
+        c.status === "Rejected" && c.rejectionSeen !== true
+    );
+
+    if(!unseenRejections.length) return;
+
+    // Ipakita ang mga rejection na hindi pa nakikita
+    for(let i = 0; i < unseenRejections.length; i++){
+        const rej = unseenRejections[i];
+
+        let message = "❌ REQUEST REJECTED\n\n" +
+            "Reference: " + rej.reference + "\n" +
+            "Amount: ₱" + Number(rej.amount).toFixed(3) + "\n" +
+            "Date: " + rej.dateTime + "\n\n";
+
+        if(rej.rejectionReason && rej.rejectionReason.trim()){
+            message += "📝 Reason: " + rej.rejectionReason + "\n\n";
+        }
+
+        message += "Ang bayad na amount ay ibinalik na sa iyong balance.";
+
+        await customAlert(message, {
+            type:"error",
+            title:"❌ Request Rejected",
+            okText:"OK"
+        });
+
+        // Mark as seen
+        rej.rejectionSeen = true;
+    }
+
+    // Save
+    const idx = users.findIndex(u => u.userId === fresh.userId);
+    if(idx !== -1){
+        users[idx] = currentUser;
+        saveUsers(users);
+    }
+
+    updateBalanceDisplay();
+    renderCashoutHistory();
+}
+
+
+/* =====================================================
    COMPLAN FROM SIGNUP
 ===================================================== */
 
@@ -1945,7 +2053,7 @@ function returnFromSignupComplan(){
 
 
 /* =====================================================
-   TICKET SYSTEM — CREATE
+   TICKET SYSTEM
 ===================================================== */
 
 const SERIOUS_KEYWORDS = [
@@ -2814,6 +2922,10 @@ function renderAdminTickets(){
 }
 
 
+/* =====================================================
+   VIOLATION DETECTION
+===================================================== */
+
 function getViolationSignature(v){
     return v.type + "|" + v.details;
 }
@@ -2831,7 +2943,7 @@ function detectMultiplePayouts(user){
         if(c>=2){ count++; violationDays.push(date+" ("+c+" requests)"); }
     });
     return {
-        type:"Multiple Payout",
+        type:"Multiple Payout In 1 Day",
         hasViolation:count>0,
         count:count,
         details:violationDays.join(" • ")
@@ -2848,7 +2960,7 @@ function detectMultipleAccounts(user, allUsers){
     );
     const hasViolation=sameIP.length>0 || sameDevice.length>0;
     return {
-        type:"Multiple Account",
+        type:"Multiple Account in 1 IP Address",
         hasViolation:hasViolation,
         sameIPCount:sameIP.length,
         sameDeviceCount:sameDevice.length,
@@ -2894,6 +3006,10 @@ function getAllUsersWithViolations(){
 }
 
 
+/* =====================================================
+   PENALTY MODAL — MANUAL & AUTO
+===================================================== */
+
 function openPenaltyModal(userId){
     currentPenaltyUserId=userId;
     const users=getUsers();
@@ -2901,7 +3017,7 @@ function openPenaltyModal(userId){
     if(!user) return;
 
     document.getElementById("penaltyUserInfo").textContent="User: @"+user.username+" • "+user.name;
-    document.getElementById("penaltyViolationType").value="Multiple Payout";
+    document.getElementById("penaltyViolationType").value="Using Cheat";
     document.getElementById("penaltyType").value="hours";
     document.getElementById("penaltyDuration").value="1";
     document.getElementById("penaltyDetails").value="";
@@ -2976,7 +3092,7 @@ async function confirmIssuePenalty(){
         penaltyEndTime:penaltyEndTime,
         active:true,
         acknowledged:false,
-        issuedBy:"Admin"
+        issuedBy:"Admin (Manual)"
     };
 
     user.violations.unshift(violation);
@@ -3460,7 +3576,10 @@ function renderAdminUsers(){
             <div class="admin-user-row"><span>Balance</span><strong>₱${Number(user.balance||0).toFixed(3)}</strong></div>
             <div class="admin-user-row"><span>Invite Code</span><strong>${escapeHtml(user.inviteCode||"—")}</strong></div>
             <div class="admin-user-row"><span>Registered</span><strong>${escapeHtml(user.registeredAt||"—")}</strong></div>
-            <button class="admin-view-btn" onclick="openUserInfoModal('${user.userId}')">✏️ View / Edit Info</button>
+            <div class="admin-cashout-actions">
+                <button class="admin-view-btn" onclick="openUserInfoModal('${user.userId}')">✏️ View / Edit Info</button>
+                <button class="admin-penalty-btn" onclick="openPenaltyModal('${user.userId}')">⚠️ Issue Penalty</button>
+            </div>
             <button class="admin-delete-btn" onclick="adminDeleteUser('${user.userId}')">🗑 Delete User</button>
         `;
 
@@ -3502,7 +3621,7 @@ function openUserInfoModal(userId){
         <div class="user-edit-field">
             <label>Balance (Editable)</label>
             <input type="number" id="editUserBalance" value="${Number(user.balance||0)}" step="0.001" min="0">
-            <div class="user-edit-hint">Ang balanse ng user. Pwede mong i-adjust kung kailangan (halimbawa, mag-add ng reward o i-correct ang error).</div>
+            <div class="user-edit-hint">Ang balanse ng user. Pwede mong i-adjust kung kailangan.</div>
         </div>
         <div class="user-edit-field"><label>Registered On</label><input type="text" value="${escapeHtml(user.registeredAt||"—")}" disabled></div>
 
@@ -3608,7 +3727,7 @@ function renderAdminCashouts(){
             actionsHTML=`
                 <div class="admin-cashout-actions">
                     <button class="admin-approve-btn" onclick="adminApproveCashout('${cashout.userId}','${cashout.reference}')">✓ Approve</button>
-                    <button class="admin-reject-btn" onclick="adminRejectCashout('${cashout.userId}','${cashout.reference}')">✕ Reject</button>
+                    <button class="admin-reject-btn" onclick="openRejectReasonModal('${cashout.userId}','${cashout.reference}')">✕ Reject</button>
                 </div>
             `;
         }
@@ -3630,6 +3749,7 @@ function renderAdminCashouts(){
             <div class="admin-user-row"><span>Total Received</span><strong>₱${Number(cashout.totalReceived).toFixed(3)}</strong></div>
             <div class="admin-user-row"><span>Reference</span><strong>${escapeHtml(cashout.reference)}</strong></div>
             <div class="admin-user-row"><span>Date</span><strong>${escapeHtml(cashout.dateTime)}</strong></div>
+            ${cashout.status==="Rejected" && cashout.rejectionReason ? '<div class="admin-user-row"><span>❌ Reject Reason</span><strong style="color:#ff8a96;">'+escapeHtml(cashout.rejectionReason)+'</strong></div>' : ''}
             ${actionsHTML}
         `;
 
@@ -3660,23 +3780,58 @@ async function adminApproveCashout(userId, reference){
 }
 
 
-async function adminRejectCashout(userId, reference){
+/* ===== REJECT WITH OPTIONAL REASON ===== */
 
-    const confirmed=await customAlert("Reject this cashout? The reserved amount will be returned to the user.",{type:"warning",title:"Confirm Rejection",okText:"Yes, Reject"});
-    if(!confirmed) return;
+function openRejectReasonModal(userId, reference){
+    pendingRejectInfo = { userId: userId, reference: reference };
 
-    const users=getUsers();
-    const user=users.find(u=>u.userId===userId);
-    if(!user) return;
+    const users = getUsers();
+    const user = users.find(u => u.userId === userId);
+    const cashout = user ? (user.cashoutHistory||[]).find(c => c.reference === reference) : null;
 
-    const cashout=(user.cashoutHistory||[]).find(c=>c.reference===reference);
-    if(!cashout||cashout.status!=="Pending") return;
+    const infoEl = document.getElementById("rejectReasonUserInfo");
+    if(infoEl && user && cashout){
+        infoEl.textContent = "@" + user.username + " • ₱" + Number(cashout.amount).toFixed(3) + " • " + reference;
+    }
 
-    cashout.status="Rejected";
-    user.balance=Number(user.balance||0)+Number(cashout.amount);
+    document.getElementById("rejectReasonInput").value = "";
+    document.getElementById("rejectReasonModalOverlay").classList.add("show");
+}
+
+
+function closeRejectReasonModal(){
+    pendingRejectInfo = null;
+    document.getElementById("rejectReasonModalOverlay").classList.remove("show");
+}
+
+
+async function confirmRejectWithReason(){
+
+    if(!pendingRejectInfo) return;
+
+    const reason = document.getElementById("rejectReasonInput").value.trim();
+    const { userId, reference } = pendingRejectInfo;
+
+    const users = getUsers();
+    const user = users.find(u => u.userId === userId);
+    if(!user){ closeRejectReasonModal(); return; }
+
+    const cashout = (user.cashoutHistory||[]).find(c => c.reference === reference);
+    if(!cashout || cashout.status !== "Pending"){ closeRejectReasonModal(); return; }
+
+    // Save status and reason
+    cashout.status = "Rejected";
+    cashout.rejectionReason = reason;  // Empty string kung walang reason
+    cashout.rejectionSeen = false;      // Para makita ng user sa popup
+    cashout.rejectedAt = new Date().toLocaleString();
+
+    // Ibalik ang amount sa balance ng user
+    user.balance = Number(user.balance||0) + Number(cashout.amount);
 
     saveUsers(users);
-    updateLiveCashoutStatus(reference,"Rejected");
+    updateLiveCashoutStatus(reference, "Rejected");
+    closeRejectReasonModal();
+
     showNotification("Cashout Rejected","The amount has been returned to the user's balance.");
     renderAdminPanel();
 }
@@ -3712,7 +3867,7 @@ function renderAdminViolations(){
     const usersWithViolations=getAllUsersWithViolations();
 
     if(!usersWithViolations.length){
-        list.innerHTML='<div class="admin-empty">✅ No violations detected. All users are clean!</div>';
+        list.innerHTML='<div class="admin-empty">✅ No violations detected. All users are clean!<br><br>💡 Tip: Pwede ka pa ring mag-manual penalty gamit ang Users tab → "⚠️ Issue Penalty" button.</div>';
         return;
     }
 
@@ -3727,6 +3882,7 @@ function renderAdminViolations(){
         </div>
         <div class="admin-user-row"><span>Members with violations</span><strong>${usersWithViolations.length}</strong></div>
         <div class="admin-user-row"><span>Auto-detected</span><strong>Multiple Payout / Multiple Account</strong></div>
+        <div class="admin-user-row"><span>💡 Manual Penalty</span><strong>Pumunta sa "Users" tab at pindutin ang "⚠️ Issue Penalty" button</strong></div>
     `;
     list.appendChild(summary);
 
@@ -3750,6 +3906,7 @@ function renderAdminViolations(){
             }
             activeHTML+=`
                 <div class="admin-user-row"><span>⚠️ Active Penalty</span><strong>${escapeHtml(v.type)} — ${escapeHtml(v.penaltyLabel)}</strong></div>
+                <div class="admin-user-row"><span>Reason</span><strong>${escapeHtml(v.details)}</strong></div>
                 <div class="admin-user-row"><span>Until</span><strong>${escapeHtml(endText)}</strong></div>
             `;
         });
@@ -3816,11 +3973,7 @@ async function checkPendingViolations(){
         await customAlert(
             "🎉 WELCOME BACK!\n\n"+
             "Your account has been reactivated by the admin and your access has been restored.\n\n"+
-            "Please remember: this is a friendly earning community built on trust. "+
-            "We kindly ask you to follow all our Rules and Regulations from now on — "+
-            "no multiple accounts, no multiple payouts, and no cheating. "+
-            "We all work hard to keep this a fair and safe place for everyone, so let's "+
-            "help each other grow together. Thank you for understanding, and enjoy earning again! 💖",
+            "Please follow all our Rules and Regulations from now on — no multiple accounts, no multiple payouts, and no cheating.\n\nEnjoy earning again! 💖",
             {type:"success",title:"Welcome Back!"}
         );
 
@@ -3831,25 +3984,39 @@ async function checkPendingViolations(){
 }
 
 
+/* =====================================================
+   VIOLATION ALERT — MAY REASON NA
+===================================================== */
+
 async function showViolationAlertAndLogout(violation){
 
-    let endText="Permanent (forever)";
+    let endText = "Permanent (forever)";
     if(violation.penaltyEndTime){
-        endText=new Date(violation.penaltyEndTime).toLocaleString();
+        endText = new Date(violation.penaltyEndTime).toLocaleString();
     }
 
-    const message=
-        "⚠️ ACCOUNT VIOLATION DETECTED\n\n"+
-        "Violation: "+violation.type+"\n"+
-        "Details: "+violation.details+"\n\n"+
-        "Penalty: "+violation.penaltyLabel+"\n"+
-        "Account invalid until: "+endText+"\n\n"+
+    let message =
+        "⚠️ ACCOUNT VIOLATION DETECTED\n\n" +
+        "Violation: " + violation.type + "\n";
+
+    // Isama ang reason kung meron
+    if(violation.details && violation.details !== "No additional details."){
+        message += "📝 Reason: " + violation.details + "\n";
+    }
+
+    message +=
+        "\nPenalty: " + violation.penaltyLabel + "\n" +
+        "Account invalid until: " + endText + "\n\n" +
         "You will be logged out automatically.";
 
     await customAlert(message,{type:"error",title:"Account Penalty Issued",okText:"I Understand"});
     logout();
 }
 
+
+/* =====================================================
+   LANGUAGE DETECTOR
+===================================================== */
 
 const TAGALOG_MARKERS=[
     "paano","ano","saan","kailan","bakit","sino","magkano",
@@ -3876,6 +4043,10 @@ function detectLanguage(text){
     return score>=1 ? "tl" : "en";
 }
 
+
+/* =====================================================
+   AI KNOWLEDGE BASE
+===================================================== */
 
 const AI_KB = [
 
@@ -3922,23 +4093,23 @@ const AI_KB = [
     },
     {
         keys:["sad","malungkot","lungkot","depressed","depress","down","hindi ako okay","not okay","di ako okay","malungkot ako"],
-        en:"I'm really sorry to hear that. 💔 Whatever you're going through, I'm here to listen and help however I can.\n\nIf it's about the site, just tell me what's wrong and I'll do my best to help. If it's a serious account issue, we can create a support ticket so a live agent can assist you personally.",
-        tl:"Sorry to hear na malungkot ka. 💔 Anuman ang pinagdadaanan mo, nandito ako para makinig at tumulong sa abot ng makakaya ko.\n\nKung tungkol ito sa site, sabihin mo lang kung ano ang mali at gagawin ko ang lahat para tumulong. Kung seryosong account issue ito, pwede tayong gumawa ng support ticket para may live agent na tumulong sa'yo."
+        en:"I'm really sorry to hear that. 💔 Whatever you're going through, I'm here to listen and help however I can.\n\nIf it's about the site, just tell me what's wrong and I'll do my best to help.",
+        tl:"Sorry to hear na malungkot ka. 💔 Anuman ang pinagdadaanan mo, nandito ako para makinig at tumulong sa abot ng makakaya ko.\n\nKung tungkol ito sa site, sabihin mo lang kung ano ang mali at gagawin ko ang lahat para tumulong."
     },
     {
         keys:["angry","galit","inis","asar","bwisit","bwiset","nakakabwisit","nagagalit"],
-        en:"I hear you, and I understand your frustration. 💔 Let's fix this together.\n\nPlease tell me what happened — I'll do my best to help. If it's a serious issue that needs a real person, I'll guide you to the Support Ticket section.",
-        tl:"Naririnig kita, at naiintindihan ko ang inis mo. 💔 Ayusin natin 'to nang sabay.\n\nSabihin mo lang kung ano ang nangyari — gagawin ko ang lahat para tumulong. Kung seryosong issue ito na kailangan ng totoong tao, i-guide kita sa Support Ticket section."
+        en:"I hear you, and I understand your frustration. 💔 Let's fix this together.\n\nPlease tell me what happened — I'll do my best to help.",
+        tl:"Naririnig kita, at naiintindihan ko ang inis mo. 💔 Ayusin natin 'to nang sabay.\n\nSabihin mo lang kung ano ang nangyari — gagawin ko ang lahat para tumulong."
     },
     {
         keys:["confused","confusing","nalilito","lito","hindi ko maintindihan","hindi ko gets","di ko maintindihan","di ko gets","hindi ko magets"],
-        en:"No worries! 💖 I'm here to explain everything clearly. Just tell me what part you're confused about, and I'll break it down step by step for you.\n\nPwedeng Tagalog o English — your choice!",
-        tl:"Walang problema! 💖 Nandito ako para ipaliwanag ang lahat nang malinaw. Sabihin mo lang kung anong part ang nalilito ka, at i-break down ko step by step para sa'yo.\n\nPwedeng Tagalog o English — bahala ka!"
+        en:"No worries! 💖 I'm here to explain everything clearly. Just tell me what part you're confused about, and I'll break it down step by step for you.",
+        tl:"Walang problema! 💖 Nandito ako para ipaliwanag ang lahat nang malinaw. Sabihin mo lang kung anong part ang nalilito ka, at i-break down ko step by step para sa'yo."
     },
     {
         keys:["scared","takot","natatakot","worried","worried ako","nag-aalala","nag aalala","anxious","kinakabahan"],
-        en:"I understand your worry. 💖 Let's take this one step at a time.\n\nTell me what's concerning you, and I'll help you figure it out. If it's a serious account or money issue, we'll create a support ticket so a live agent can personally handle it.",
-        tl:"Naiintindihan ko ang worry mo. 💖 Isa-isahin natin 'to.\n\nSabihin mo kung ano ang kinakabahan ka, at tutulungan kita. Kung seryosong account o pera issue ito, gagawa tayo ng support ticket para personal na asikasuhin ito ng live agent."
+        en:"I understand your worry. 💖 Let's take this one step at a time.\n\nTell me what's concerning you, and I'll help you figure it out.",
+        tl:"Naiintindihan ko ang worry mo. 💖 Isa-isahin natin 'to.\n\nSabihin mo kung ano ang kinakabahan ka, at tutulungan kita."
     },
 
     {
@@ -3961,26 +4132,26 @@ const AI_KB = [
 
     {
         keys:["sign up","signup","sign-up","register","gumawa ng account","mag register","paano mag register","how to register","create account","gumawa account","mag sign up","paano mag sign up"],
-        en:"📝 HOW TO SIGN UP:\n\n1️⃣ Open Heart Fusion website.\n2️⃣ Tap 'SIGN UP' button.\n3️⃣ Fill in these details:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (optional)\n4️⃣ Check the box to agree to the Complan.\n5️⃣ Tap 'SIGN UP →'.\n\n✅ DONE! You'll receive your User ID and Invite Code.\n\n⚠️ IMPORTANT:\n• Only 1 account per device and IP.\n• Multiple accounts = Permanent Ban.",
-        tl:"📝 PAANO MAG SIGN UP:\n\n1️⃣ Buksan ang Heart Fusion website.\n2️⃣ I-tap ang 'SIGN UP' button.\n3️⃣ Ilagay ang mga sumusunod:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (kung meron)\n4️⃣ I-check ang box para sumang-ayon sa Complan.\n5️⃣ I-tap ang 'SIGN UP →'.\n\n✅ TAPOS! Makakatanggap ka ng User ID at Invite Code.\n\n⚠️ MAHALAGA:\n• Isang account lang per device at IP.\n• Multiple accounts = Permanent Ban."
+        en:"📝 HOW TO SIGN UP:\n\n1️⃣ Open Heart Fusion website.\n2️⃣ Tap 'SIGN UP' button.\n3️⃣ Fill in these details:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (optional)\n4️⃣ Check the box to agree to the Complan.\n5️⃣ Tap 'SIGN UP →'.\n\n✅ DONE! You'll receive your User ID and Invite Code.",
+        tl:"📝 PAANO MAG SIGN UP:\n\n1️⃣ Buksan ang Heart Fusion website.\n2️⃣ I-tap ang 'SIGN UP' button.\n3️⃣ Ilagay ang mga sumusunod:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (kung meron)\n4️⃣ I-check ang box para sumang-ayon sa Complan.\n5️⃣ I-tap ang 'SIGN UP →'.\n\n✅ TAPOS! Makakatanggap ka ng User ID at Invite Code."
     },
 
     {
         keys:["login","log in","sign in","signin","mag login","paano mag login","how to login","paano mag sign in"],
-        en:"🔑 HOW TO LOGIN:\n\n1️⃣ Tap 'Sign In' on the login page.\n2️⃣ Enter your Email Address.\n3️⃣ Enter your Password.\n4️⃣ Tap 'SIGN IN →'.\n\n✅ DONE! You'll be redirected to your dashboard.\n\n💡 Tip: If you forgot your password, go to Account Settings or contact CS via Facebook/Telegram.",
-        tl:"🔑 PAANO MAG LOGIN:\n\n1️⃣ I-tap ang 'Sign In' sa login page.\n2️⃣ Ilagay ang Email Address mo.\n3️⃣ Ilagay ang Password mo.\n4️⃣ I-tap ang 'SIGN IN →'.\n\n✅ TAPOS! Ma-redirect ka sa dashboard mo.\n\n💡 Tip: Kung nakalimutan mo ang password, pumunta sa Account Settings o kontakin ang CS sa Facebook/Telegram."
+        en:"🔑 HOW TO LOGIN:\n\n1️⃣ Tap 'Sign In' on the login page.\n2️⃣ Enter your Email Address.\n3️⃣ Enter your Password.\n4️⃣ Tap 'SIGN IN →'.\n\n✅ DONE! You'll be redirected to your dashboard.",
+        tl:"🔑 PAANO MAG LOGIN:\n\n1️⃣ I-tap ang 'Sign In' sa login page.\n2️⃣ Ilagay ang Email Address mo.\n3️⃣ Ilagay ang Password mo.\n4️⃣ I-tap ang 'SIGN IN →'.\n\n✅ TAPOS! Ma-redirect ka sa dashboard mo."
     },
 
     {
         keys:["forgot password","nakalimutan password","nakalimutan ko password","hindi ko na alam password","password reset","reset password","change password","palitan password"],
-        en:"🔑 FORGOT PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Login to your account (if still logged in).\n2️⃣ Go to Account Settings.\n3️⃣ Type your new password under 'New Password'.\n4️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Contact CS:\n• Message us on Facebook Group or Telegram Channel.\n• Provide your Username, User ID, and Email.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket system para may live agent na tumulong sa'yo.",
-        tl:"🔑 NAKALIMUTAN ANG PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Mag-login sa account mo (kung naka-login pa).\n2️⃣ Pumunta sa Account Settings.\n3️⃣ I-type ang bagong password sa 'New Password'.\n4️⃣ I-tap ang 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Kontakin ang CS:\n• I-message kami sa Facebook Group o Telegram Channel.\n• Ibigay ang Username, User ID, at Email mo.\n\n⚠️ Kung hindi ka na talaga makapasok, gamitin ang Support Ticket system para may live agent na tumulong sa'yo."
+        en:"🔑 FORGOT PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Login to your account (if still logged in).\n2️⃣ Go to Account Settings.\n3️⃣ Type your new password under 'New Password'.\n4️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Contact CS:\n• Message us on Facebook Group or Telegram Channel.",
+        tl:"🔑 NAKALIMUTAN ANG PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Mag-login sa account mo (kung naka-login pa).\n2️⃣ Pumunta sa Account Settings.\n3️⃣ I-type ang bagong password sa 'New Password'.\n4️⃣ I-tap ang 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Kontakin ang CS:\n• I-message kami sa Facebook Group o Telegram Channel."
     },
 
     {
         keys:["balance","balanse","magkano balance","ano balance ko","how much balance","check balance","tingnan balance","balanse ko"],
-        en:"💰 YOUR BALANCE:\n\nYou can check your balance sa Dashboard — look for 'ACCOUNT BALANCE' sa taas.\n\nAlso visible doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out\n\n💡 Balance updates in real-time kapag may nakuha kang reward, nag-receive ng transfer, o nag-request ng cashout.",
-        tl:"💰 ANG BALANSE MO:\n\nMakikita mo ang balance sa Dashboard — hanapin ang 'ACCOUNT BALANCE' sa taas.\n\nMakikita rin doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out\n\n💡 Nag-uupdate ang balance in real-time kapag may nakuha kang reward, nag-receive ng transfer, o nag-request ng cashout."
+        en:"💰 YOUR BALANCE:\n\nYou can check your balance sa Dashboard — look for 'ACCOUNT BALANCE' sa taas.\n\nAlso visible doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out",
+        tl:"💰 ANG BALANSE MO:\n\nMakikita mo ang balance sa Dashboard — hanapin ang 'ACCOUNT BALANCE' sa taas.\n\nMakikita rin doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out"
     },
 
     {
@@ -3991,164 +4162,170 @@ const AI_KB = [
 
     {
         keys:["transfer","mag transfer","paano mag transfer","how to transfer","send money","padala","padalhan","magpadala","transfer funds","fund transfer"],
-        en:"💸 HOW TO TRANSFER FUNDS:\n\n1️⃣ Go to Dashboard → Tap 'TRANSFER'.\n2️⃣ Enter receiver's info:\n   • Username\n   • User ID\n   • Email\n3️⃣ Tap 'VERIFY RECEIVER' to confirm.\n4️⃣ Enter Amount (minimum ₱1.00).\n5️⃣ Check the confirmation box.\n6️⃣ Tap 'TRANSFER →'.\n7️⃣ Enter the OTP (sent via in-app notification).\n\n✅ DONE! Receipt will be generated.\n\n⚠️ IMPORTANT:\n• All 3 receiver info must match exactly.\n• You cannot transfer to yourself.\n• OTP expires — restart if needed.",
-        tl:"💸 PAANO MAG TRANSFER NG FUNDS:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'TRANSFER'.\n2️⃣ Ilagay ang info ng receiver:\n   • Username\n   • User ID\n   • Email\n3️⃣ I-tap ang 'VERIFY RECEIVER' para kumpirmahin.\n4️⃣ Ilagay ang Amount (minimum ₱1.00).\n5️⃣ I-check ang confirmation box.\n6️⃣ I-tap ang 'TRANSFER →'.\n7️⃣ Ilagay ang OTP (ipapadala via in-app notification).\n\n✅ TAPOS! Mag-ge-generate ng receipt.\n\n⚠️ MAHALAGA:\n• Lahat ng 3 info ng receiver ay dapat eksaktong match.\n• Hindi ka pwedeng mag-transfer sa sarili mo.\n• Nag-e-expire ang OTP — restart kung kailangan."
+        en:"💸 HOW TO TRANSFER FUNDS:\n\n1️⃣ Go to Dashboard → Tap 'TRANSFER'.\n2️⃣ Enter receiver's info:\n   • Username\n   • User ID\n   • Email\n3️⃣ Tap 'VERIFY RECEIVER' to confirm.\n4️⃣ Enter Amount (minimum ₱1.00).\n5️⃣ Check the confirmation box.\n6️⃣ Tap 'TRANSFER →'.\n7️⃣ Enter the OTP (sent via in-app notification).\n\n✅ DONE! Receipt will be generated.",
+        tl:"💸 PAANO MAG TRANSFER NG FUNDS:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'TRANSFER'.\n2️⃣ Ilagay ang info ng receiver:\n   • Username\n   • User ID\n   • Email\n3️⃣ I-tap ang 'VERIFY RECEIVER' para kumpirmahin.\n4️⃣ Ilagay ang Amount (minimum ₱1.00).\n5️⃣ I-check ang confirmation box.\n6️⃣ I-tap ang 'TRANSFER →'.\n7️⃣ Ilagay ang OTP (ipapadala via in-app notification).\n\n✅ TAPOS! Mag-ge-generate ng receipt."
     },
 
     {
         keys:["otp","one time pin","walang otp","hindi dumating otp","mali otp","incorrect otp","otp expired","otp code"],
-        en:"🔐 ABOUT OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, restart the transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based).\n\n⚠️ Kung tuloy-tuloy na problema ito, gamitin ang Support Ticket system para may live agent na tumulong.",
-        tl:"🔐 TUNGKOL SA OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, ulitin ang transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based).\n\n⚠️ Kung tuloy-tuloy ang problema, gamitin ang Support Ticket system para may live agent na tumulong."
+        en:"🔐 ABOUT OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, restart the transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based).",
+        tl:"🔐 TUNGKOL SA OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, ulitin ang transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based)."
     },
 
     {
-        keys:["cashout","cash out","withdraw","mag cashout","paano mag cashout","how to cashout","paano mag withdraw","withdrawal","mag-withdraw","kailan cashout","cashout time","oras ng cashout"],
-        en:"💰 HOW TO CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM only (daily)\n\n1️⃣ Go to Dashboard → Tap 'CASHOUT'.\n2️⃣ Choose Mode of Payout:\n   • GCash or Maya\n3️⃣ Enter:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (account name)\n4️⃣ Enter Amount (₱1.00 – ₱5.00).\n5️⃣ Tap 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 – ₱2 = No deduction (full amount)\n• ₱3 – ₱5 = 50% deduction\n\n⏱️ PROCESSING: 1 to 10 hours\n\n⚠️ REMINDERS:\n• Only 1 cashout request per day.\n• Cashout is CLOSED outside 6PM-8PM.",
-        tl:"💰 PAANO MAG CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM lamang (araw-araw)\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'CASHOUT'.\n2️⃣ Piliin ang Mode of Payout:\n   • GCash o Maya\n3️⃣ Ilagay:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (pangalan ng account)\n4️⃣ Ilagay ang Amount (₱1.00 – ₱5.00).\n5️⃣ I-tap ang 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 – ₱2 = Walang bawas (buong amount)\n• ₱3 – ₱5 = 50% bawas\n\n⏱️ PROCESSING: 1 hanggang 10 oras\n\n⚠️ PAALALA:\n• Isang cashout request lang per day.\n• Sarado ang cashout kapag labas ng 6PM-8PM."
+        keys:["cashout","cash out","withdraw","mag cashout","paano mag cashout","how to cashout","paano mag withdraw","withdrawal","mag-withdraw","kailan cashout","cashout time","oras ng cashout","bakit 1 3 5 lang","bakit walang 2","2 pesos"],
+        en:"💰 HOW TO CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM only (daily)\n\n1️⃣ Go to Dashboard → Tap 'CASHOUT'.\n2️⃣ Choose Mode of Payout:\n   • GCash or Maya\n3️⃣ Enter:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (account name)\n4️⃣ Select Amount: ₱1, ₱3, or ₱5 ONLY\n5️⃣ Tap 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 = No deduction (full ₱1.00)\n• ₱3 = 50% deduction (₱1.50 received)\n• ₱5 = 50% deduction (₱2.50 received)\n\n⏱️ PROCESSING: 1 to 10 hours",
+        tl:"💰 PAANO MAG CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM lamang (araw-araw)\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'CASHOUT'.\n2️⃣ Piliin ang Mode of Payout:\n   • GCash o Maya\n3️⃣ Ilagay:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (pangalan ng account)\n4️⃣ Piliin ang Amount: ₱1, ₱3, o ₱5 LAMANG\n5️⃣ I-tap ang 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 = Walang bawas (buong ₱1.00)\n• ₱3 = 50% bawas (₱1.50 matatanggap)\n• ₱5 = 50% bawas (₱2.50 matatanggap)\n\n⏱️ PROCESSING: 1 hanggang 10 oras"
     },
 
     {
         keys:["processing time","gaano katagal processing","how long processing","tagal ng processing","kelan darating cashout","when will i receive","kailan darating pera"],
-        en:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 to 10 HOURS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name).\n• Kung lumipas na ang 10 hours at wala pa, gamitin ang Support Ticket system para may live agent na tumulong.",
-        tl:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 hanggang 10 ORAS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name).\n• Kung lumipas na ang 10 oras at wala pa, gamitin ang Support Ticket system para may live agent na tumulong."
+        en:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 to 10 HOURS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name).",
+        tl:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 hanggang 10 ORAS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name)."
+    },
+
+    {
+        keys:["rejected","na-reject","ni-reject","reject cashout","bakit na reject"],
+        en:"❌ CASHOUT REJECTED?\n\nKapag na-reject ang cashout request mo:\n• Ibabalik ang amount sa iyong balance.\n• May makikitang popup warning na magsasabi ng reason (kung meron).\n\n💡 What to do:\n• Basahin ang reason (kung meron).\n• I-check ang payout info mo — baka mali ang number o name.\n• Subukan ulit sa susunod na cashout window (6PM-8PM).\n\n⚠️ Kung feeling mo unfair ang rejection, gamitin ang Support Ticket para i-review ng admin.",
+        tl:"❌ NA-REJECT ANG CASHOUT?\n\nKapag na-reject ang cashout request mo:\n• Ibabalik ang amount sa iyong balance.\n• May makikitang popup warning na magsasabi ng reason (kung meron).\n\n💡 Ano'ng gagawin:\n• Basahin ang reason (kung meron).\n• I-check ang payout info mo — baka mali ang number o name.\n• Subukan ulit sa susunod na cashout window (6PM-8PM).\n\n⚠️ Kung feeling mo unfair ang rejection, gamitin ang Support Ticket para i-review ng admin."
     },
 
     {
         keys:["game","math game","paano maglaro","how to play","how to play game","laro","maglaro","games","math game paano"],
-        en:"🎮 HOW TO PLAY THE MATH GAME:\n\n1️⃣ Go to Dashboard → Tap 'Games'.\n2️⃣ Tap 'START GAME'.\n3️⃣ Solve the math question (5 seconds only).\n4️⃣ Type your answer → Tap 'SUBMIT'.\n5️⃣ If correct → Tap 'WATCH AD' to unlock your reward.\n\n💰 REWARD: ₱0.001 per correct answer\n\n⚠️ REMINDERS:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question\n• Bawat question ay hindi na mauulit sa loob ng isang linggo",
-        tl:"🎮 PAANO MAGLARO NG MATH GAME:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'Games'.\n2️⃣ I-tap ang 'START GAME'.\n3️⃣ Sagutin ang math question (5 seconds lang).\n4️⃣ I-type ang sagot → I-tap ang 'SUBMIT'.\n5️⃣ Kung tama → I-tap ang 'WATCH AD' para makuha ang reward.\n\n💰 REWARD: ₱0.001 per tamang sagot\n\n⚠️ PAALALA:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question\n• Bawat question ay hindi na mauulit sa loob ng isang linggo"
+        en:"🎮 HOW TO PLAY THE MATH GAME:\n\n1️⃣ Go to Dashboard → Tap 'Games'.\n2️⃣ Tap 'START GAME'.\n3️⃣ Solve the math question (5 seconds only).\n4️⃣ Type your answer → Tap 'SUBMIT'.\n5️⃣ If correct → Tap 'WATCH AD' to unlock your reward.\n\n💰 REWARD: ₱0.001 per correct answer\n\n⚠️ REMINDERS:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question",
+        tl:"🎮 PAANO MAGLARO NG MATH GAME:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'Games'.\n2️⃣ I-tap ang 'START GAME'.\n3️⃣ Sagutin ang math question (5 seconds lang).\n4️⃣ I-type ang sagot → I-tap ang 'SUBMIT'.\n5️⃣ Kung tama → I-tap ang 'WATCH AD' para makuha ang reward.\n\n💰 REWARD: ₱0.001 per tamang sagot\n\n⚠️ PAALALA:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question"
     },
 
     {
         keys:["ads","advertisement","watch ad","panood ng ads","ad","no ads","walang ads","ads mandatory","bakit walang ads"],
-        en:"📺 ABOUT ADS:\n\n⚠️ ADS IS MANDATORY. NO ADS = NO REWARD!\n\n• Pagkatapos makakuha ng correct answer, kailangan mong panoorin ang ads para makuha ang reward.\n• Kapag hindi nag-load ang ad, wala kang makukuhang points.\n• Ang ads ay nag-e-enable ng rewards para sa lahat.\n\n💡 Tips:\n• Siguraduhing stable ang internet connection.\n• Huwag i-close ang page habang naglo-load ang ad.\n• Kung palaging hindi nag-load ang ad, hintayin ang susunod na question.",
-        tl:"📺 TUNGKOL SA ADS:\n\n⚠️ MANDATORY ANG ADS. NO ADS = NO REWARD!\n\n• Pagkatapos makuha ang tamang sagot, kailangan mong panoorin ang ad para makuha ang reward.\n• Kapag hindi nag-load ang ad, walang points na makukuha.\n• Ang ads ay nag-e-enable ng rewards para sa lahat.\n\n💡 Tips:\n• Siguraduhing stable ang internet.\n• Huwag i-close ang page habang naglo-load ang ad.\n• Kung palaging hindi nag-load, hintayin ang susunod na question."
+        en:"📺 ABOUT ADS:\n\n⚠️ ADS IS MANDATORY. NO ADS = NO REWARD!\n\n• Pagkatapos makakuha ng correct answer, kailangan mong panoorin ang ads para makuha ang reward.\n• Kapag hindi nag-load ang ad, wala kang makukuhang points.",
+        tl:"📺 TUNGKOL SA ADS:\n\n⚠️ MANDATORY ANG ADS. NO ADS = NO REWARD!\n\n• Pagkatapos makuha ang tamang sagot, kailangan mong panoorin ang ad para makuha ang reward.\n• Kapag hindi nag-load ang ad, walang points na makukuha."
     },
 
     {
         keys:["invite","inviter","invitation","paano mag invite","how to invite","mag invite","invite code","invitation code","referral","refer"],
-        en:"🎁 INVITE PROGRAM:\n\n📍 Where to find your Invite Code:\nGo to Account Settings → Look for 'INVITE PROGRAM' → Your code is there (ex: ER-XXXXXX).\n\n📤 How to share:\n• Send your Invite Code to friends.\n• Ibigay sa kanila kapag nag-sign up sila sa 'Inviter Code' field.\n\n💰 REWARDS:\n• You (Inviter): ₱0.005 per successful invite\n• Friend (New User): ₱0.003 welcome bonus\n\n📊 Tracking:\nSa Account Settings makikita mo ang:\n• Total Invites\n• Total Income",
-        tl:"🎁 INVITE PROGRAM:\n\n📍 Saan makikita ang Invite Code:\nPumunta sa Account Settings → Hanapin ang 'INVITE PROGRAM' → Nandiyan ang code mo (ex: ER-XXXXXX).\n\n📤 Paano i-share:\n• Ipadala ang Invite Code sa mga kaibigan mo.\n• Ibigay sa kanila kapag nag-sign up sila sa 'Inviter Code' field.\n\n💰 REWARDS:\n• Ikaw (Inviter): ₱0.005 per successful invite\n• Kaibigan (New User): ₱0.003 welcome bonus\n\n📊 Tracking:\nSa Account Settings makikita mo ang:\n• Total Invites\n• Total Income"
+        en:"🎁 INVITE PROGRAM:\n\n📍 Where to find your Invite Code:\nGo to Account Settings → Look for 'INVITE PROGRAM' → Your code is there (ex: ER-XXXXXX).\n\n💰 REWARDS:\n• You (Inviter): ₱0.005 per successful invite\n• Friend (New User): ₱0.003 welcome bonus",
+        tl:"🎁 INVITE PROGRAM:\n\n📍 Saan makikita ang Invite Code:\nPumunta sa Account Settings → Hanapin ang 'INVITE PROGRAM' → Nandiyan ang code mo (ex: ER-XXXXXX).\n\n💰 REWARDS:\n• Ikaw (Inviter): ₱0.005 per successful invite\n• Kaibigan (New User): ₱0.003 welcome bonus"
     },
 
     {
         keys:["complan","patakaran","rules","policy","regulations","ano ang complan","what is complan","rules and regulations","mga patakaran","mga rules"],
-        en:"📖 THE COMPLAN — Rules & Guidelines:\n\n📍 Where to read: CS → Group Community → 'Heart Fusion Complan'\n\n📋 Key Points:\n\n🤖 BOT INFORMATION:\n• Ads is mandatory. NO ADS = NO POINTS\n• 0.001 per correct answer\n• 5 seconds per question\n• 0.005 per invite\n• 24/7 open\n\n💰 PAYOUT DETAILS:\n• Maya & GCash only\n• Min: ₱1, Max: ₱5\n• ₱3-₱5 = 50% deduction\n• 1-10 hours processing\n\n⚠️ RULES:\n• Respect owner & members\n• Wrong payout info = not compensated\n• No to attaters\n• Use accurate info when registering\n• No cheating\n• 1 payout request per day\n\n🚫 VIOLATIONS (Permanent Ban):\n• Using cheats/abusing bugs\n• Multiple accounts in 1 phone\n• Giving false info",
-        tl:"📖 ANG COMPLAN — Mga Patakaran:\n\n📍 Saan basahin: CS → Group Community → 'Heart Fusion Complan'\n\n📋 Mga Key Points:\n\n🤖 BOT INFORMATION:\n• Mandatory ang ads. NO ADS = NO POINTS\n• 0.001 per tamang sagot\n• 5 seconds per question\n• 0.005 per invite\n• 24/7 open\n\n💰 PAYOUT DETAILS:\n• Maya at GCash lang\n• Min: ₱1, Max: ₱5\n• ₱3-₱5 = 50% bawas\n• 1-10 oras processing\n\n⚠️ RULES:\n• Igalang ang owner at members\n• Maling payout info = hindi compensated\n• No to attaters\n• Gamitin ang tamang info sa registration\n• Bawal ang cheating\n• Isang payout request per day\n\n🚫 VIOLATIONS (Permanent Ban):\n• Paggamit ng cheats/abusing bugs\n• Multiple accounts sa 1 phone\n• Pagbibigay ng false info"
+        en:"📖 THE COMPLAN — Rules & Guidelines:\n\n📍 Where to read: CS → Group Community → 'Heart Fusion Complan'\n\n💰 PAYOUT DETAILS:\n• Maya & GCash only\n• Amount options: ₱1, ₱3, ₱5 ONLY\n• ₱1 = no deduction\n• ₱3 and ₱5 = 50% deduction\n• 1-10 hours processing\n\n⚠️ RULES:\n• Respect owner & members\n• Wrong payout info = not compensated\n• Use accurate info when registering\n• No cheating\n• 1 payout request per day",
+        tl:"📖 ANG COMPLAN — Mga Patakaran:\n\n📍 Saan basahin: CS → Group Community → 'Heart Fusion Complan'\n\n💰 PAYOUT DETAILS:\n• Maya at GCash lang\n• Amount options: ₱1, ₱3, ₱5 LAMANG\n• ₱1 = walang bawas\n• ₱3 at ₱5 = 50% bawas\n• 1-10 oras processing\n\n⚠️ RULES:\n• Igalang ang owner at members\n• Maling payout info = hindi compensated\n• Gamitin ang tamang info sa registration\n• Bawal ang cheating\n• Isang payout request per day"
     },
 
     {
         keys:["updates","update","announcement","anunsyo","balita","may update ba","new update","latest news"],
-        en:"📢 UPDATES:\n\n📍 Where to read: CS → Group Community → 'Updates'\n\n💡 How it works:\n• May RED BADGE number sa 'Updates' kung may bagong announcement.\n• Ang number ay nagpapakita kung ilan ang hindi mo pa nababasa.\n• Once na-open mo na, mawawala na ang badge.\n\n📌 Always check ang Updates para sa:\n• Bagong cashout schedule\n• Bagong rules\n• Maintenance notices\n• Special announcements",
-        tl:"📢 UPDATES:\n\n📍 Saan basahin: CS → Group Community → 'Updates'\n\n💡 Paano gumagana:\n• May PULANG BADGE number sa 'Updates' kung may bagong announcement.\n• Ipinapakita nito kung ilan ang hindi mo pa nababasa.\n• Kapag na-open mo na, mawawala na ang badge.\n\n📌 Laging i-check ang Updates para sa:\n• Bagong cashout schedule\n• Bagong rules\n• Maintenance notices\n• Special announcements"
+        en:"📢 UPDATES:\n\n📍 Where to read: CS → Group Community → 'Updates'\n\n💡 May RED BADGE number sa 'Updates' kung may bagong announcement. Once na-open mo na, mawawala na ang badge.",
+        tl:"📢 UPDATES:\n\n📍 Saan basahin: CS → Group Community → 'Updates'\n\n💡 May PULANG BADGE number sa 'Updates' kung may bagong announcement. Kapag na-open mo na, mawawala na ang badge."
     },
 
     {
         keys:["leaderboard","ranking","rank","top earners","ranggo","top 30","weekly reward","monday reward"],
-        en:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Every Monday (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001\n\n📊 Paano sumali:\n• Earn points from the Math Game.\n• Top 30 every week ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Monday!\n\n💡 Tip: Maglaro ng game everyday para tumaas ang rank!",
-        tl:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Tuwing Lunes (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001\n\n📊 Paano sumali:\n• Kumita ng points mula sa Math Game.\n• Top 30 tuwing linggo ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Lunes!\n\n💡 Tip: Maglaro ng game araw-araw para tumaas ang rank!"
+        en:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Every Monday (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001",
+        tl:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Tuwing Lunes (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001"
     },
 
     {
         keys:["device info","device information","impormasyon ng device","ip address","device model","registered device","duplicate account"],
-        en:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n📋 Ano ang nakikita:\n• Device Model\n• IP Address\n• Registered On (date)\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN\n\n💡 Ito ay para sa fairness sa lahat ng members.",
-        tl:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n📋 Ano ang nakikita:\n• Device Model\n• IP Address\n• Registered On (date)\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN\n\n💡 Ito ay para sa fairness ng lahat ng members."
+        en:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN",
+        tl:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN"
     },
 
     {
         keys:["ticket","support ticket","create ticket","ticket system","help ticket","report","reklamo","complaint"],
-        en:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions\n• General inquiries\n\n💡 Paano:\n1️⃣ I-tap ang 'Create Ticket'.\n2️⃣ Ilarawan ang issue.\n3️⃣ Ibigay ang username.\n4️⃣ Magbigay ng detalye.\n5️⃣ Makikita mo ang ticket sa 'Your Ticket' section.\n\n⏱️ LIVE AGENT will respond ASAP.",
-        tl:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions\n• General inquiries\n\n💡 Paano:\n1️⃣ I-tap ang 'Create Ticket'.\n2️⃣ Ilarawan ang issue.\n3️⃣ Ibigay ang username.\n4️⃣ Magbigay ng detalye.\n5️⃣ Makikita mo ang ticket sa 'Your Ticket' section.\n\n⏱️ LIVE AGENT ang sasagot ASAP."
+        en:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions",
+        tl:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions"
     },
 
     {
         keys:["paused","pause","maintenance","naka pause","site down","offline","not working site","under maintenance"],
-        en:"⏸️ SITE PAUSED:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable.\n\n💡 What to do:\n• Hintayin ang announcement sa Updates section.\n• Bumalik kapag na-resume na ang site.\n\n⚠️ Ito ay normal kapag may maintenance o importanteng update.",
-        tl:"⏸️ NAKA-PAUSE ANG SITE:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable.\n\n💡 Ano'ng gagawin:\n• Hintayin ang announcement sa Updates section.\n• Bumalik kapag na-resume na ang site.\n\n⚠️ Normal ito kapag may maintenance o importanteng update."
+        en:"⏸️ SITE PAUSED:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable.",
+        tl:"⏸️ NAKA-PAUSE ANG SITE:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable."
     },
 
     {
         keys:["nawala balance","missing balance","nawalang pera","nawala pera","hindi pumasok balance","hindi dumating pera","hindi natanggap transfer","lost balance"],
-        en:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction (transfer/cashout)?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo.\n\n✅ Ang admin ay personally a-assist sa'yo.\n\n⚠️ HUWAG mag-panic. Naka-record lahat ng transactions.",
-        tl:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction (transfer/cashout)?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo.\n\n✅ Admin ang personally a-assist sa'yo.\n\n⚠️ HUWAG mag-panic. Naka-record lahat ng transactions."
+        en:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo.",
+        tl:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo."
     },
 
     {
         keys:["hacked","hack","naka-hack","nahack","account stolen","ninakaw account","nawala account","hindi ko na account","account compromised"],
-        en:"🚨 ACCOUNT HACKED?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Sabihin:\n   • Username\n   • Kailan na-hack\n   • Anong nangyari\n   • Ano pang info ang kailangan\n3️⃣ Hintayin ang admin response.\n\n⚠️ HUWAG mag-login gamit ang bagong password kahit sino ang magbigay — ang admin lang ang legit na mag-a-assist sa'yo.\n\n✅ Naka-lock ang system at naka-record ang lahat — matutulungan ka ng admin.",
-        tl:"🚨 NA-HACK ANG ACCOUNT?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Sabihin:\n   • Username\n   • Kailan na-hack\n   • Anong nangyari\n   • Ano pang info ang kailangan\n3️⃣ Hintayin ang admin response.\n\n⚠️ HUWAG mag-login gamit ang bagong password kahit sino ang magbigay — ang admin lang ang legit na mag-a-assist sa'yo.\n\n✅ Naka-lock ang system at naka-record ang lahat — matutulungan ka ng admin."
+        en:"🚨 ACCOUNT HACKED?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Sabihin ang username, kailan na-hack, at ano ang nangyari.\n3️⃣ Hintayin ang admin response.",
+        tl:"🚨 NA-HACK ANG ACCOUNT?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Sabihin ang username, kailan na-hack, at ano ang nangyari.\n3️⃣ Hintayin ang admin response."
     },
 
     {
         keys:["multiple account","duplicate account","maraming account","dalawang account","2 accounts","one account","isang account lang"],
-        en:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN\n\n💡 Kung kailangan mo ng bagong account:\n• Kailangan ng bagong device at bagong IP.\n• Hindi pwedeng gumamit ng VPN para mag-multiple accounts.\n\n⚠️ Ang system ay may detection para sa duplicate accounts. Huwag subukan.",
-        tl:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN\n\n💡 Kung kailangan mo ng bagong account:\n• Kailangan ng bagong device at bagong IP.\n• Hindi pwedeng gumamit ng VPN para mag-multiple accounts.\n\n⚠️ Ang system ay may detection para sa duplicate accounts. Huwag subukan."
+        en:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN",
+        tl:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN"
     },
 
     {
         keys:["contact","community","facebook","telegram","social media","cs","customer service","support","makipag-ugnayan","saan kontakin"],
-        en:"📞 CONTACT & COMMUNITY:\n\n📍 Where to find us:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (for serious issues)\n\n💖 Heart Fusion AI (that's me!):\n• For general questions, tutorials, at simpleng tulong\n• Available 24/7 in Tagalog & English\n\n🎫 Support Ticket:\n• Para sa serious issues lang\n• May live agent na sasagot\n\n💡 Join the community for updates, tips, at makipag-ugnayan sa ibang members!",
-        tl:"📞 CONTACT AT COMMUNITY:\n\n📍 Saan kami mahahanap:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (para sa serious issues)\n\n💖 Heart Fusion AI (ako 'to!):\n• Para sa general questions, tutorials, at simpleng tulong\n• Available 24/7 sa Tagalog at English\n\n🎫 Support Ticket:\n• Para sa serious issues lang\n• May live agent na sasagot\n\n💡 Sumali sa community para sa updates, tips, at makipag-ugnayan sa ibang members!"
+        en:"📞 CONTACT & COMMUNITY:\n\n📍 Where to find us:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (for serious issues)\n\n💖 Heart Fusion AI (that's me!) is available 24/7 in Tagalog & English.",
+        tl:"📞 CONTACT AT COMMUNITY:\n\n📍 Saan kami mahahanap:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (para sa serious issues)\n\n💖 Available 24/7 ang Heart Fusion AI (ako 'to!) sa Tagalog at English."
     },
 
     {
         keys:["welcome bonus","bonus","signup bonus","new user bonus","libreng pera","free money","starting balance"],
-        en:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per correct answer\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Monday",
-        tl:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per tamang sagot\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Lunes"
+        en:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per correct answer\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Monday",
+        tl:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per tamang sagot\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Lunes"
     },
 
     {
         keys:["account settings","settings","change username","change email","change password","palitan username","palitan email","baguhin account","account info"],
-        en:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n👤 Ano ang makikita mo:\n• Name, Username, User ID, Email\n• Device Information (read-only)\n• Invite Code & Stats\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\n⚠️ Siguraduhing tama ang info — naka-save ito sa system.",
-        tl:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n👤 Ano ang makikita mo:\n• Name, Username, User ID, Email\n• Device Information (read-only)\n• Invite Code & Stats\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\n⚠️ Siguraduhing tama ang info — naka-save ito sa system."
+        en:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'.",
+        tl:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'."
     },
 
     {
         keys:["receiver not found","hindi mahanap receiver","invalid receiver","mali receiver info","hindi tumutugma info"],
-        en:"⚠️ RECEIVER NOT FOUND?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID.\n\n⚠️ Kung talagang tama ang info pero hindi pa rin mahanap, posibleng:\n• Hindi pa naka-register ang receiver.\n• Maling info ang binigay sa'yo.\n\n💡 Ask the receiver to double-check their info, o gamitin ang Support Ticket kung talagang problema.",
-        tl:"⚠️ HINDI MAHANAP ANG RECEIVER?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID.\n\n⚠️ Kung talagang tama ang info pero hindi pa rin mahanap, posibleng:\n• Hindi pa naka-register ang receiver.\n• Maling info ang binigay sa'yo.\n\n💡 Ask the receiver to double-check their info, o gamitin ang Support Ticket kung talagang problema."
+        en:"⚠️ RECEIVER NOT FOUND?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID.",
+        tl:"⚠️ HINDI MAHANAP ANG RECEIVER?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID."
     },
 
     {
         keys:["how to earn","paano kumita","paano mag earn","earn money","kumita ng pera","make money","paano yumaman"],
-        en:"💰 HOW TO EARN AT HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Solve math questions correctly\n• Watch ads to unlock rewards\n• ₱0.001 per correct answer\n\n2️⃣ 🎁 INVITE PROGRAM\n• Share your Invite Code\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Monday\n• Rewards: ₱0.001 to ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Other members can send you funds\n\n💡 Combination = mas mabilis ang pag-earn!",
-        tl:"💰 PAANO KUMITA SA HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Sagutin ng tama ang math questions\n• Manood ng ads para sa reward\n• ₱0.001 per tamang sagot\n\n2️⃣ 🎁 INVITE PROGRAM\n• I-share ang Invite Code mo\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Lunes\n• Rewards: ₱0.001 hanggang ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Pwedeng magpadala sa'yo ang ibang members\n\n💡 Combination = mas mabilis ang pag-earn!"
+        en:"💰 HOW TO EARN AT HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Solve math questions correctly\n• Watch ads to unlock rewards\n• ₱0.001 per correct answer\n\n2️⃣ 🎁 INVITE PROGRAM\n• Share your Invite Code\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Monday\n• Rewards: ₱0.001 to ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Other members can send you funds",
+        tl:"💰 PAANO KUMITA SA HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Sagutin ng tama ang math questions\n• Manood ng ads para sa reward\n• ₱0.001 per tamang sagot\n\n2️⃣ 🎁 INVITE PROGRAM\n• I-share ang Invite Code mo\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Lunes\n• Rewards: ₱0.001 hanggang ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Pwedeng magpadala sa'yo ang ibang members"
     },
 
     {
         keys:["minimum","minimum amount","min cashout","min transfer","pinakamaliit","maliit na amount"],
-        en:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Minimum: ₱1.00\n• Maximum: ₱5.00\n• Per request lang\n\n⏰ REMINDER:\n• Isang cashout request lang per day.\n• Cashout is 6PM-8PM only.",
-        tl:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Minimum: ₱1.00\n• Maximum: ₱5.00\n• Per request lang\n\n⏰ PAALALA:\n• Isang cashout request lang per day.\n• Cashout ay 6PM-8PM lamang."
+        en:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Options: ₱1, ₱3, ₱5 ONLY\n• ₱1 = full amount\n• ₱3 and ₱5 = 50% deduction\n\n⏰ REMINDER:\n• Isang cashout request lang per day.\n• Cashout is 6PM-8PM only.",
+        tl:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Options: ₱1, ₱3, ₱5 LAMANG\n• ₱1 = buong amount\n• ₱3 at ₱5 = 50% bawas\n\n⏰ PAALALA:\n• Isang cashout request lang per day.\n• Cashout ay 6PM-8PM lamang."
     },
 
     {
         keys:["cashout closed","sarado cashout","hindi maka-cashout","cashout hindi pwede","hindi makapag-cashout","cashout unavailable"],
-        en:"🔴 CASHOUT IS CLOSED:\n\nCashout is available only from 6:00 PM to 8:00 PM (daily).\n\n⏰ Current time check:\n• Before 6PM → Wait lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Wait for tomorrow\n\n💡 Tips:\n• I-set ang alarm para di ka makalimot.\n• Mag-check ng balance bago mag-6PM.\n• Siguraduhing tama ang GCash/Maya info mo.\n\n⚠️ Kapag naka-pause ang cashout ng admin (kahit 6PM-8PM), hindi rin ito pwede.",
-        tl:"🔴 SARADO ANG CASHOUT:\n\nAvailable lang ang cashout mula 6:00 PM hanggang 8:00 PM (araw-araw).\n\n⏰ Check ng oras:\n• Bago mag-6PM → Hintay lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Bukas na lang\n\n💡 Tips:\n• I-set ang alarm para di ka makalimot.\n• Mag-check ng balance bago mag-6PM.\n• Siguraduhing tama ang GCash/Maya info mo.\n\n⚠️ Kapag naka-pause ang cashout ng admin (kahit 6PM-8PM), hindi rin pwede."
+        en:"🔴 CASHOUT IS CLOSED:\n\nCashout is available only from 6:00 PM to 8:00 PM (daily).\n\n⏰ Current time check:\n• Before 6PM → Wait lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Wait for tomorrow\n\n⚠️ Kapag naka-pause ang cashout ng admin, hindi rin ito pwede.",
+        tl:"🔴 SARADO ANG CASHOUT:\n\nAvailable lang ang cashout mula 6:00 PM hanggang 8:00 PM (araw-araw).\n\n⏰ Check ng oras:\n• Bago mag-6PM → Hintay lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Bukas na lang\n\n⚠️ Kapag naka-pause ang cashout ng admin, hindi rin pwede."
     },
 
     {
         keys:["cannot register","hindi makapag register","error sign up","error register","sign up failed","hindi maka-sign up","device already registered"],
-        en:"⚠️ CANNOT REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered\n• Naka-register na ang device mo.\n• Solution: Kailangan ng bagong device.\n\n2️⃣ Email Already Used\n• Naka-register na ang email.\n• Solution: Gumamit ng ibang email o mag-login na lang.\n\n3️⃣ Username Taken\n• May gumagamit na ng username.\n• Solution: Pumili ng ibang username.\n\n4️⃣ Password Mismatch\n• Hindi tugma ang password at confirm.\n• Solution: I-type ulit.\n\n5️⃣ Network/IP Already Registered\n• Naka-register na ang IP mo.\n• Solution: Gumamit ng ibang network.\n\n⚠️ Kung tuloy-tuloy pa rin, gamitin ang Support Ticket.",
-        tl:"⚠️ HINDI MAKAPAG-REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered\n• Naka-register na ang device mo.\n• Solution: Kailangan ng bagong device.\n\n2️⃣ Email Already Used\n• Naka-register na ang email.\n• Solution: Gumamit ng ibang email o mag-login na lang.\n\n3️⃣ Username Taken\n• May gumagamit na ng username.\n• Solution: Pumili ng ibang username.\n\n4️⃣ Password Mismatch\n• Hindi tugma ang password at confirm.\n• Solution: I-type ulit.\n\n5️⃣ Network/IP Already Registered\n• Naka-register na ang IP mo.\n• Solution: Gumamit ng ibang network.\n\n⚠️ Kung tuloy-tuloy pa rin, gamitin ang Support Ticket."
+        en:"⚠️ CANNOT REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered → Kailangan ng bagong device.\n2️⃣ Email Already Used → Gumamit ng ibang email o mag-login na lang.\n3️⃣ Username Taken → Pumili ng ibang username.\n4️⃣ Password Mismatch → I-type ulit.\n5️⃣ Network/IP Already Registered → Gumamit ng ibang network.",
+        tl:"⚠️ HINDI MAKAPAG-REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered → Kailangan ng bagong device.\n2️⃣ Email Already Used → Gumamit ng ibang email o mag-login na lang.\n3️⃣ Username Taken → Pumili ng ibang username.\n4️⃣ Password Mismatch → I-type ulit.\n5️⃣ Network/IP Already Registered → Gumamit ng ibang network."
     },
 
     {
         keys:["wrong password","mali password","incorrect password","password error","hindi tinatanggap password"],
-        en:"⚠️ WRONG PASSWORD?\n\nLet's fix this:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 HOW TO RESET:\n• Login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password.\n• O kontakin ang CS via Facebook/Telegram.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket para may live agent na tumulong.",
-        tl:"⚠️ MALI ANG PASSWORD?\n\nAyusin natin 'to:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 PAANO I-RESET:\n• Mag-login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password.\n• O kontakin ang CS via Facebook/Telegram.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket para may live agent na tumulong."
+        en:"⚠️ WRONG PASSWORD?\n\nLet's fix this:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 HOW TO RESET:\n• Login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password.",
+        tl:"⚠️ MALI ANG PASSWORD?\n\nAyusin natin 'to:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 PAANO I-RESET:\n• Mag-login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password."
     },
 
     {
         keys:["banned","ban","na-ban","na ban","account banned","account suspended","na-suspend","suspended","on hold","naka hold"],
-        en:"🚫 ACCOUNT BANNED OR ON HOLD?\n\nReason: Violations of Complan\n\nCommon violations:\n• Multiple accounts (permanent ban)\n• Multiple payouts in 1 day (temporary hold)\n• Cheating/abusing bugs (permanent ban)\n\n💡 What to do:\n• Basahin ang alert message para sa detalye (reason, penalty, kailan pwede bumalik).\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin.\n\n⚠️ HUWAG subukang mag-register ng bagong account habang banned — dagdag na violation ito.",
-        tl:"🚫 NAKA-BAN O NAKA-HOLD ANG ACCOUNT?\n\nDahilan: Paglabag sa Complan\n\nKaraniwang violations:\n• Multiple accounts (permanent ban)\n• Multiple payouts sa 1 araw (temporary hold)\n• Cheating/abusing bugs (permanent ban)\n\n💡 Ano'ng gagawin:\n• Basahin ang alert message para sa detalye (reason, penalty, kailan pwede bumalik).\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin.\n\n⚠️ HUWAG subukang mag-register ng bagong account habang banned — dagdag na violation ito."
+        en:"🚫 ACCOUNT BANNED OR ON HOLD?\n\nReason: Violations of Complan\n\nCommon violations:\n• Using Cheat\n• Giving False Information\n• Multiple Account in 1 IP Address\n• Multiple Payout In 1 Day\n\n💡 What to do:\n• Basahin ang alert message para sa detalye at reason.\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin.",
+        tl:"🚫 NAKA-BAN O NAKA-HOLD ANG ACCOUNT?\n\nDahilan: Paglabag sa Complan\n\nKaraniwang violations:\n• Using Cheat\n• Giving False Information\n• Multiple Account in 1 IP Address\n• Multiple Payout In 1 Day\n\n💡 Ano'ng gagawin:\n• Basahin ang alert message para sa detalye at reason.\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin."
     },
 
     {
         keys:["what time","anong oras","kailan pwede","oras ng","time ng","schedule"],
-        en:"🕐 SCHEDULES:\n\n💰 CASHOUT:\n• 6:00 PM – 8:00 PM (daily)\n• 1 request per day\n• Processing: 1-10 hours\n\n🏆 LEADERBOARD RESET:\n• Every Monday\n• Rewards idadagdag agad\n\n🎮 MATH GAME:\n• 24/7 open\n• Walang time limit (5 sec lang per question)\n\n💸 TRANSFER:\n• 24/7 open (unless naka-pause)\n• Walang time limit\n\n🛑 SITE PAUSE:\n• Kailan lang nangyari (admin decision)\n• Hintayin ang update",
-        tl:"🕐 MGA SCHEDULES:\n\n💰 CASHOUT:\n• 6:00 PM – 8:00 PM (araw-araw)\n• 1 request per day\n• Processing: 1-10 oras\n\n🏆 LEADERBOARD RESET:\n• Every Lunes\n• Rewards idadagdag agad\n\n🎮 MATH GAME:\n• 24/7 open\n• Walang time limit (5 sec lang per question)\n\n💸 TRANSFER:\n• 24/7 open (maliban kung naka-pause)\n• Walang time limit\n\n🛑 SITE PAUSE:\n• Kailan lang nangyari (admin decision)\n• Hintayin ang update"
+        en:"🕐 SCHEDULES:\n\n💰 CASHOUT:\n• 6:00 PM – 8:00 PM (daily)\n• 1 request per day\n• Processing: 1-10 hours\n• Amounts: ₱1, ₱3, ₱5 only\n\n🏆 LEADERBOARD RESET:\n• Every Monday\n\n🎮 MATH GAME:\n• 24/7 open\n\n💸 TRANSFER:\n• 24/7 open (unless naka-pause)",
+        tl:"🕐 MGA SCHEDULES:\n\n💰 CASHOUT:\n• 6:00 PM – 8:00 PM (araw-araw)\n• 1 request per day\n• Processing: 1-10 oras\n• Amounts: ₱1, ₱3, ₱5 lamang\n\n🏆 LEADERBOARD RESET:\n• Every Lunes\n\n🎮 MATH GAME:\n• 24/7 open\n\n💸 TRANSFER:\n• 24/7 open (maliban kung naka-pause)"
     }
 
 ];
@@ -4180,9 +4357,9 @@ function getAIResponse(userMessage){
 
         if(isSeriousIssue(userMessage)){
             if(lang === "tl"){
-                return "⚠️ Mukhang SERIOUS ISSUE ito.\n\nPara sa mga ganitong problema, kailangan ng live agent na personally tumulong sa'yo.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Ilarawan ang issue nang detalyado.\n3️⃣ Hintayin ang admin response.\n\n✅ Ang admin ay a-assist sa'yo ASAP.\n\n💡 Kung ito ay simpleng tanong lang, pwede mo rin akong tanungin ulit — baka sakaling matulungan kita.";
+                return "⚠️ Mukhang SERIOUS ISSUE ito.\n\nPara sa mga ganitong problema, kailangan ng live agent na personally tumulong sa'yo.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Ilarawan ang issue nang detalyado.\n3️⃣ Hintayin ang admin response.";
             }
-            return "⚠️ This looks like a SERIOUS ISSUE.\n\nFor problems like this, you need a live agent to personally assist you.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Describe your issue in detail.\n3️⃣ Wait for the admin's response.\n\n✅ The admin will assist you ASAP.\n\n💡 If it's just a simple question, feel free to ask me again — maybe I can still help.";
+            return "⚠️ This looks like a SERIOUS ISSUE.\n\nFor problems like this, you need a live agent to personally assist you.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Describe your issue in detail.\n3️⃣ Wait for the admin's response.";
         }
 
         if(lang === "tl"){
@@ -4666,11 +4843,7 @@ document.getElementById("loginForm").addEventListener("submit",async function(ev
             await customAlert(
                 "🎉 WELCOME BACK!\n\n"+
                 "Your account penalty has been lifted and your access has been restored.\n\n"+
-                "Please remember: this is a friendly earning community built on trust. "+
-                "We kindly ask you to follow all our Rules and Regulations from now on — "+
-                "no multiple accounts, no multiple payouts, and no cheating. "+
-                "We all work hard to keep this a fair and safe place for everyone, so let's "+
-                "help each other grow together. Thank you for understanding, and enjoy earning again! 💖",
+                "Please follow all our Rules and Regulations from now on.\n\nEnjoy earning again! 💖",
                 {type:"success",title:"Welcome Back!"}
             );
 
@@ -4688,13 +4861,17 @@ document.getElementById("loginForm").addEventListener("submit",async function(ev
             endText=new Date(activeViolation.penaltyEndTime).toLocaleString();
         }
 
-        await customAlert(
-            "⏸ YOUR ACCOUNT IS ON HOLD\n\n"+
-            "Violation: "+(activeViolation ? activeViolation.type : "Unknown")+"\n"+
-            "Penalty: "+(activeViolation ? activeViolation.penaltyLabel : "—")+"\n"+
-            "Account invalid until: "+endText,
-            {type:"error",title:"Account On Hold"}
-        );
+        let holdMessage = "⏸ YOUR ACCOUNT IS ON HOLD\n\n"+
+            "Violation: "+(activeViolation ? activeViolation.type : "Unknown")+"\n";
+
+        if(activeViolation && activeViolation.details && activeViolation.details !== "No additional details."){
+            holdMessage += "📝 Reason: "+activeViolation.details+"\n";
+        }
+
+        holdMessage += "Penalty: "+(activeViolation ? activeViolation.penaltyLabel : "—")+"\n"+
+            "Account invalid until: "+endText;
+
+        await customAlert(holdMessage,{type:"error",title:"Account On Hold"});
         return;
     }
 
@@ -4707,11 +4884,7 @@ document.getElementById("loginForm").addEventListener("submit",async function(ev
         await customAlert(
             "🎉 WELCOME BACK!\n\n"+
             "Your account has been reactivated by the admin and your access has been restored.\n\n"+
-            "Please remember: this is a friendly earning community built on trust. "+
-            "We kindly ask you to follow all our Rules and Regulations from now on — "+
-            "no multiple accounts, no multiple payouts, and no cheating. "+
-            "We all work hard to keep this a fair and safe place for everyone, so let's "+
-            "help each other grow together. Thank you for understanding, and enjoy earning again! 💖",
+            "Please follow all our Rules and Regulations from now on.\n\nEnjoy earning again! 💖",
             {type:"success",title:"Welcome Back!"}
         );
     }
@@ -4755,6 +4928,10 @@ function showDashboard(user){
     setTimeout(function(){
         checkPendingCongrats();
     }, 800);
+
+    setTimeout(function(){
+        checkPendingCashoutRejections();
+    }, 1500);
 }
 
 
@@ -5117,10 +5294,10 @@ function updateCashoutWindow(){
     }
 
     if(isCashoutTime()){
-        message.innerHTML="🟢 <strong>Cashout is OPEN.</strong><br>6PM to 8PM.<br>⏱️ Processing: 1 to 10 hours.";
+        message.innerHTML="🟢 <strong>Cashout is OPEN.</strong><br>6PM to 8PM.<br>Amounts: ₱1, ₱3, ₱5 only.<br>⏱️ Processing: 1 to 10 hours.";
         button.disabled=false;
     }else{
-        message.innerHTML="🔴 <strong>Cashout is CLOSED.</strong><br>Only 6PM to 8PM.<br>⏱️ Processing: 1 to 10 hours.";
+        message.innerHTML="🔴 <strong>Cashout is CLOSED.</strong><br>Only 6PM to 8PM.<br>Amounts: ₱1, ₱3, ₱5 only.<br>⏱️ Processing: 1 to 10 hours.";
         button.disabled=true;
     }
     updateBalanceDisplay();
@@ -5143,9 +5320,7 @@ function resetCashoutForm(){
 
 function calculateCashout(){
     const amount=Number(document.getElementById("cashoutAmount").value);
-    let received=amount;
-    if(amount>=3 && amount<=5) received=amount*.5;
-    if(!amount || amount<1 || amount>5) received=0;
+    const received=getCashoutReceived(amount);
     document.getElementById("totalReceived").value="₱"+received.toFixed(3);
 }
 
@@ -5168,13 +5343,15 @@ document.getElementById("cashoutForm").addEventListener("submit",async function(
     const payoutNumber=document.getElementById("payoutNumber").value.trim();
     const payoutName=document.getElementById("payoutName").value.trim();
 
-    if(amount<1||amount>5){ await customAlert("Amount must be ₱1 to ₱5.",{type:"warning"}); return; }
+    if(!CASHOUT_ALLOWED_AMOUNTS.includes(amount)){
+        await customAlert("Amount must be ₱1, ₱3, or ₱5 only.",{type:"warning"});
+        return;
+    }
     if(amount>balance){ await customAlert("Insufficient balance.",{type:"error"}); return; }
     if(!mode){ await customAlert("Select GCash or Maya.",{type:"warning"}); return; }
     if(!payoutNumber||!payoutName){ await customAlert("Complete payout info.",{type:"warning"}); return; }
 
-    let received=amount;
-    if(amount>=3) received=amount*.5;
+    const received=getCashoutReceived(amount);
 
     const reference="CASH-"+Date.now()+"-"+Math.floor(100+Math.random()*900);
     const dateTime=new Date().toLocaleString();
@@ -5227,13 +5404,30 @@ function renderCashoutHistory(){
     if(!history.length){ list.innerHTML='<div class="empty-history">No cashout transactions this week.</div>'; return; }
     list.innerHTML="";
     history.forEach(item=>{
+
+        // Status display
+        let statusColor = "#856300";
+        if(item.status === "Approved") statusColor = "#287344";
+        if(item.status === "Rejected") statusColor = "#a21d3d";
+
+        // Reason if rejected
+        let reasonHTML = "";
+        if(item.status === "Rejected" && item.rejectionReason && item.rejectionReason.trim()){
+            reasonHTML = `<br>❌ Reason: <span style="color:#a21d3d;font-weight:bold;">${escapeHtml(item.rejectionReason)}</span>`;
+        }
+
         const div=document.createElement("div");
         div.className="history-item";
         div.innerHTML=`
 <div class="history-top"><span class="history-title">Cashout</span><span class="history-amount">₱${Number(item.amount).toFixed(3)}</span></div>
-<div class="history-bottom">Reference: ${escapeHtml(item.reference)}<br>${escapeHtml(item.dateTime)}<br>Status: ${escapeHtml(item.status)}<br>⏱️ Processing: 1–10 hours</div>`;
+<div class="history-bottom">Reference: ${escapeHtml(item.reference)}<br>${escapeHtml(item.dateTime)}<br>Status: <span style="color:${statusColor};font-weight:bold;">${escapeHtml(item.status)}</span>${reasonHTML}<br>⏱️ Processing: 1–10 hours</div>`;
         div.onclick=function(){
             receipt.style.display="block";
+            let receiptReason = "";
+            if(item.status === "Rejected" && item.rejectionReason && item.rejectionReason.trim()){
+                receiptReason = receiptRow("❌ Reject Reason", item.rejectionReason);
+            }
+
             receipt.innerHTML=`
 <div class="receipt-title">CASHOUT RECEIPT</div>
 ${receiptRow("Username",item.username)}
@@ -5245,6 +5439,7 @@ ${receiptRow("GCash / Maya Name",item.payoutName)}
 ${receiptRow("Amount Requested","₱"+Number(item.amount).toFixed(3))}
 ${receiptRow("Total Received","₱"+Number(item.totalReceived).toFixed(3))}
 ${receiptRow("Status",item.status)}
+${receiptReason}
 ${receiptRow("Processing Time","1 to 10 hours")}
 ${receiptRow("Reference",item.reference)}
 ${receiptRow("Date and Time",item.dateTime)}`;
@@ -5737,6 +5932,7 @@ setInterval(function(){
         updateBalanceDisplay();
         updateCashoutWindow();
         checkPendingViolations();
+        checkPendingCashoutRejections();
         updateYourTicketSection();
         checkSitePause();
         checkPendingCongrats();
@@ -5754,8 +5950,9 @@ setInterval(function(){
         const active = document.activeElement;
         const isTypingInTicket = active && active.id && active.id.startsWith("adminTicketInput_");
         const isTypingInUpdate = active && (active.id === "adminUpdateTitle" || active.id === "adminUpdateMessage");
+        const isTypingInReject = active && active.id === "rejectReasonInput";
 
-        if(!isTypingInTicket && !isTypingInUpdate){
+        if(!isTypingInTicket && !isTypingInUpdate && !isTypingInReject){
             renderAdminPanel();
         }
 
@@ -5769,4 +5966,4 @@ setInterval(function(){
 </script>
 
 </body>
-     </html>
+    </html>
