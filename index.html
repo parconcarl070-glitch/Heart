@@ -7,7 +7,8 @@
 
 <title>Heart Fusion</title>
 
-<script src='//libtl.com/sdk.js' data-zone='11847520' data-sdk='show_11847520'></script>
+<!-- ===== NEW ADS — SITE VERIFICATION ===== -->
+<meta name="6a97888e-site-verification" content="7f5c6e40754201ad39d892eead448d33">
 
 <style>
 
@@ -5702,6 +5703,15 @@ function submitGameAnswer(){
 }
 
 
+/* =====================================================
+   WATCH GAME AD
+   =====================================================
+   ⚠️ TEMPORARY: Walang ad script na naka-integrate.
+   Auto-grant muna ang reward para gumana ang game.
+   Kapag may actual ad script ka na, i-paste mo sa loob
+   ng function na ito para kumita ka.
+===================================================== */
+
 function watchGameAd(){
 
     if(!currentGame||!currentGame.correct) return;
@@ -5713,21 +5723,13 @@ function watchGameAd(){
     button.disabled=true;
     status.textContent="Loading advertisement...";
 
-    show_11847520()
-        .then(() => {
-            adResolved = true;
-            adWatched = true;
-            status.textContent = "✓ Ad completed.";
-            claimGameReward();
-        })
-        .catch((error) => {
-            console.error("Monetag ad error:", error);
-            adResolved = true;
-            status.textContent = "❌ No ad loaded. Continue without points.";
-            recordGameResult(currentGame.userAnswer, true, 0, "No Ad - No Reward");
-            showNotification("No Ad Loaded", "No points added.");
-            prepareNextGame();
-        });
+    // TEMPORARY: Auto-grant reward since no ad script is active
+    setTimeout(function(){
+        adResolved = true;
+        adWatched = true;
+        status.textContent = "✓ Ad completed.";
+        claimGameReward();
+    }, 1500);
 }
 
 
