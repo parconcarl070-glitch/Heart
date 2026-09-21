@@ -7,10 +7,6 @@
 
 <title>Heart Fusion</title>
 
-<!-- =====================================================
-     MONETAG — REWARDED INTERSTITIAL SDK
-     Zone: 11847520
-===================================================== -->
 <script src='//libtl.com/sdk.js' data-zone='11847520' data-sdk='show_11847520'></script>
 
 <style>
@@ -30,1675 +26,319 @@ body{
 button,input,select{font-family:inherit;}
 button{-webkit-tap-highlight-color:transparent;}
 
-
-/* ========== AUTH ========== */
-
-.auth-page{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.card{
-    width:100%;
-    max-width:450px;
-    padding:35px 30px;
-    background:rgba(255,255,255,.97);
-    border:1px solid #f1c3cf;
-    border-radius:24px;
-    box-shadow:0 25px 60px rgba(120,30,55,.15);
-}
-
-.logo{
-    width:70px;height:70px;
-    margin:0 auto 18px;
-    display:flex;justify-content:center;align-items:center;
-    border-radius:50%;
-    background:linear-gradient(145deg,#fff0f4,#ffd0dc);
-    border:2px solid #df6682;
-    color:#c52d50;
-    font-size:30px;
-}
-
-h1{
-    text-align:center;
-    font-family:Georgia,serif;
-    color:#9d1839;
-    font-size:31px;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    text-align:center;
-    color:#9b6875;
-    font-size:14px;
-    margin-bottom:28px;
-}
-
+.auth-page{min-height:100vh;display:flex;justify-content:center;align-items:center;padding:20px;}
+.card{width:100%;max-width:450px;padding:35px 30px;background:rgba(255,255,255,.97);border:1px solid #f1c3cf;border-radius:24px;box-shadow:0 25px 60px rgba(120,30,55,.15);}
+.logo{width:70px;height:70px;margin:0 auto 18px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(145deg,#fff0f4,#ffd0dc);border:2px solid #df6682;color:#c52d50;font-size:30px;}
+h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;margin-bottom:8px;}
+.subtitle{text-align:center;color:#9b6875;font-size:14px;margin-bottom:28px;}
 .input-group{margin-bottom:17px;}
-
-.input-group label{
-    display:block;
-    margin-bottom:7px;
-    font-size:13px;
-    font-weight:bold;
-    color:#692637;
-}
-
-.input-box{
-    display:flex;
-    align-items:center;
-    min-height:53px;
-    background:#fffafb;
-    border:1px solid #e4bac6;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.input-box:focus-within{
-    border-color:#d83f61;
-    box-shadow:0 0 0 4px rgba(216,63,97,.09);
-}
-
-.icon{
-    width:45px;
-    text-align:center;
-    color:#c52e50;
-    font-size:18px;
-}
-
-.input-box input,
-.input-box select{
-    flex:1;
-    min-width:0;
-    height:50px;
-    border:none;
-    outline:none;
-    background:transparent;
-    font-size:14px;
-    color:#4b1f2a;
-    padding-right:10px;
-}
-
-.show-password{
-    width:45px;height:50px;
-    border:none;background:transparent;
-    cursor:pointer;
-}
-
-.terms{
-    margin:5px 0 22px;
-    font-size:12px;
-    color:#87606b;
-}
-
+.input-group label{display:block;margin-bottom:7px;font-size:13px;font-weight:bold;color:#692637;}
+.input-box{display:flex;align-items:center;min-height:53px;background:#fffafb;border:1px solid #e4bac6;border-radius:12px;overflow:hidden;}
+.input-box:focus-within{border-color:#d83f61;box-shadow:0 0 0 4px rgba(216,63,97,.09);}
+.icon{width:45px;text-align:center;color:#c52e50;font-size:18px;}
+.input-box input,.input-box select{flex:1;min-width:0;height:50px;border:none;outline:none;background:transparent;font-size:14px;color:#4b1f2a;padding-right:10px;}
+.show-password{width:45px;height:50px;border:none;background:transparent;cursor:pointer;}
+.terms{margin:5px 0 22px;font-size:12px;color:#87606b;}
 .terms label{display:flex;gap:8px;align-items:flex-start;}
 .terms input{accent-color:#c52e50;margin-top:2px;}
-
-.terms a{
-    color:#b51f43;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.main-btn{
-    width:100%;
-    min-height:56px;
-    border:none;
-    border-radius:13px;
-    cursor:pointer;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    font-size:13px;
-    font-weight:bold;
-    letter-spacing:1px;
-    box-shadow:0 10px 22px rgba(181,31,67,.25);
-    transition:.25s;
-}
-
+.terms a{color:#b51f43;font-weight:bold;cursor:pointer;}
+.main-btn{width:100%;min-height:56px;border:none;border-radius:13px;cursor:pointer;background:linear-gradient(135deg,#b51f43,#e34968);color:white;font-size:13px;font-weight:bold;letter-spacing:1px;box-shadow:0 10px 22px rgba(181,31,67,.25);transition:.25s;}
 .main-btn:active{transform:scale(.98);}
 .main-btn:disabled{opacity:.5;cursor:not-allowed;}
-
-.switch-text{
-    text-align:center;
-    margin-top:16px;
-    font-size:13px;
-    color:#92717a;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:2px;
-}
-
+.switch-text{text-align:center;margin-top:16px;font-size:13px;color:#92717a;display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:2px;}
 .switch-text span{color:#92717a;}
+.switch-text button{border:none;background:none;color:#b51f43;font-weight:bold;cursor:pointer;font-size:13px;padding:4px 4px;border-radius:8px;transition:.2s;position:relative;z-index:11;touch-action:manipulation;user-select:none;}
+.switch-text button:hover,.switch-text button:active{background:#fff0f4;color:#9d1839;}
 
-.switch-text button{
-    border:none;
-    background:none;
-    color:#b51f43;
-    font-weight:bold;
-    cursor:pointer;
-    font-size:13px;
-    padding:4px 4px;
-    border-radius:8px;
-    transition:.2s;
-    position:relative;
-    z-index:11;
-    touch-action:manipulation;
-    user-select:none;
-}
-
-.switch-text button:hover,
-.switch-text button:active{
-    background:#fff0f4;
-    color:#9d1839;
-}
-
-
-/* ========== DASHBOARD ========== */
-
-.dashboard{
-    display:none;
-    min-height:100vh;
-    padding-bottom:85px;
-    background:
-        radial-gradient(circle at top left,#ffdce6,transparent 30%),
-        #fff8fa;
-}
-
-.dashboard-header{
-    padding:18px 20px;
-    background:rgba(255,255,255,.94);
-    border-bottom:1px solid #f1c3cf;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.brand{
-    font-family:Georgia,serif;
-    font-size:21px;
-    font-weight:bold;
-    color:#a21d3d;
-}
-
-.logout-btn{
-    padding:9px 15px;
-    border:1px solid #e5a8b7;
-    border-radius:10px;
-    background:white;
-    color:#b51f43;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.dashboard-content{
-    max-width:1050px;
-    margin:auto;
-    padding:25px 18px;
-}
-
+.dashboard{display:none;min-height:100vh;padding-bottom:85px;background:radial-gradient(circle at top left,#ffdce6,transparent 30%),#fff8fa;}
+.dashboard-header{padding:18px 20px;background:rgba(255,255,255,.94);border-bottom:1px solid #f1c3cf;display:flex;justify-content:space-between;align-items:center;}
+.brand{font-family:Georgia,serif;font-size:21px;font-weight:bold;color:#a21d3d;}
+.logout-btn{padding:9px 15px;border:1px solid #e5a8b7;border-radius:10px;background:white;color:#b51f43;font-weight:bold;cursor:pointer;}
+.dashboard-content{max-width:1050px;margin:auto;padding:25px 18px;}
 .welcome{margin-bottom:20px;}
-
-.welcome h2{
-    font-family:Georgia,serif;
-    color:#8f1936;
-    margin-bottom:5px;
-}
-
+.welcome h2{font-family:Georgia,serif;color:#8f1936;margin-bottom:5px;}
 .welcome p{color:#98717b;font-size:13px;}
 
-
-/* ========== BALANCE ========== */
-
-.balance-card{
-    padding:25px;
-    border-radius:22px;
-    color:white;
-    background:linear-gradient(135deg,#a9183c,#e34968);
-    box-shadow:0 15px 35px rgba(181,31,67,.25);
-    margin-bottom:25px;
-}
-
+.balance-card{padding:25px;border-radius:22px;color:white;background:linear-gradient(135deg,#a9183c,#e34968);box-shadow:0 15px 35px rgba(181,31,67,.25);margin-bottom:25px;}
 .balance-title{font-size:13px;opacity:.85;margin-bottom:7px;}
 .balance{font-size:36px;font-weight:bold;margin-bottom:5px;}
 .points{font-size:14px;font-weight:bold;margin-bottom:20px;}
-
 .balance-buttons{display:flex;gap:10px;}
-
-.balance-btn{
-    flex:1;
-    min-height:45px;
-    border:1px solid rgba(255,255,255,.55);
-    border-radius:10px;
-    background:rgba(255,255,255,.15);
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
+.balance-btn{flex:1;min-height:45px;border:1px solid rgba(255,255,255,.55);border-radius:10px;background:rgba(255,255,255,.15);color:white;font-weight:bold;cursor:pointer;}
 .balance-btn:hover{background:white;color:#b51f43;}
-
-.total-stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-    margin-top:12px;
-}
-
-.total-stat{
-    padding:12px;
-    border-radius:11px;
-    background:rgba(255,255,255,.12);
-    border:1px solid rgba(255,255,255,.25);
-    font-size:11px;
-}
-
+.total-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.total-stat{padding:12px;border-radius:11px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);font-size:11px;}
 .total-stat strong{display:block;font-size:15px;margin-top:3px;}
 
-
-/* ========== DASHBOARD BOXES ========== */
-
-.dashboard-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.dashboard-box{
-    padding:23px;
-    background:white;
-    border:1px solid #f0c6d0;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(100,20,40,.07);
-    cursor:pointer;
-    transition:.25s;
-}
-
+.dashboard-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;}
+.dashboard-box{padding:23px;background:white;border:1px solid #f0c6d0;border-radius:18px;box-shadow:0 8px 25px rgba(100,20,40,.07);cursor:pointer;transition:.25s;}
 .dashboard-box:hover{transform:translateY(-3px);}
 .dashboard-box .box-icon{font-size:30px;margin-bottom:12px;}
 .dashboard-box h3{color:#a21d3d;margin-bottom:7px;}
 .dashboard-box p{color:#94717b;font-size:13px;line-height:1.5;}
 
-
-/* ========== FOCUS ========== */
-
 .focus-page{display:none;}
-
-.focus-card{
-    padding:28px;
-    background:white;
-    border:1px solid #f0c6d0;
-    border-radius:20px;
-    box-shadow:0 10px 30px rgba(100,20,40,.07);
-}
-
-.focus-card h2{
-    font-family:Georgia,serif;
-    color:#9d1839;
-    margin-bottom:10px;
-}
-
+.focus-card{padding:28px;background:white;border:1px solid #f0c6d0;border-radius:20px;box-shadow:0 10px 30px rgba(100,20,40,.07);}
+.focus-card h2{font-family:Georgia,serif;color:#9d1839;margin-bottom:10px;}
 .focus-card p{color:#94717b;font-size:14px;line-height:1.6;}
-
-.form-section{
-    margin-top:20px;
-    padding:18px;
-    background:#fff8fa;
-    border:1px solid #f0c6d0;
-    border-radius:15px;
-}
-
+.form-section{margin-top:20px;padding:18px;background:#fff8fa;border:1px solid #f0c6d0;border-radius:15px;}
 .form-section h3{color:#9d1839;font-size:16px;margin-bottom:15px;}
-
-.info-box{
-    margin:15px 0;
-    padding:14px;
-    border-radius:12px;
-    background:#fff0f4;
-    border:1px solid #f2c2ce;
-    color:#754653;
-    font-size:13px;
-    line-height:1.6;
-}
-
+.info-box{margin:15px 0;padding:14px;border-radius:12px;background:#fff0f4;border:1px solid #f2c2ce;color:#754653;font-size:13px;line-height:1.6;}
 .success-box{background:#f0fff5;border-color:#9bd7b0;color:#287344;}
 .error-box{background:#fff0f2;border-color:#e8a7b5;color:#a21d3d;}
-
-.receiver-result,.receiver-error,.inviter-result,.inviter-error{
-    display:none;
-    margin-top:12px;
-    padding:14px;
-    border-radius:12px;
-    font-size:13px;
-    line-height:1.6;
-}
-
-.receiver-result,.inviter-result{
-    background:#f0fff5;
-    border:1px solid #9bd7b0;
-    color:#287344;
-}
-
-.receiver-error,.inviter-error{
-    background:#fff0f2;
-    border:1px solid #e8a7b5;
-    color:#a21d3d;
-}
-
-.confirm-box{
-    margin:18px 0;
-    padding:14px;
-    border:1px solid #edc2cc;
-    border-radius:12px;
-    background:white;
-}
-
-.confirm-box label{
-    display:flex;
-    align-items:flex-start;
-    gap:9px;
-    color:#69404c;
-    font-size:13px;
-    line-height:1.5;
-}
-
+.receiver-result,.receiver-error,.inviter-result,.inviter-error{display:none;margin-top:12px;padding:14px;border-radius:12px;font-size:13px;line-height:1.6;}
+.receiver-result,.inviter-result{background:#f0fff5;border:1px solid #9bd7b0;color:#287344;}
+.receiver-error,.inviter-error{background:#fff0f2;border:1px solid #e8a7b5;color:#a21d3d;}
+.confirm-box{margin:18px 0;padding:14px;border:1px solid #edc2cc;border-radius:12px;background:white;}
+.confirm-box label{display:flex;align-items:flex-start;gap:9px;color:#69404c;font-size:13px;line-height:1.5;}
 .confirm-box input{margin-top:3px;accent-color:#b51f43;}
+.back-btn{margin-top:20px;padding:12px 20px;border:none;border-radius:10px;background:linear-gradient(135deg,#b51f43,#e34968);color:white;font-weight:bold;cursor:pointer;}
 
-.back-btn{
-    margin-top:20px;
-    padding:12px 20px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-
-/* ========== CS SECTIONS ========== */
-
-.cs-section{
-    margin-top:20px;
-    padding:18px;
-    background:#fff8fa;
-    border:1px solid #f0c6d0;
-    border-radius:15px;
-}
-
-.cs-section-header{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin-bottom:12px;
-}
-
-.cs-section-icon{
-    width:40px;height:40px;
-    display:flex;justify-content:center;align-items:center;
-    background:#fff0f4;
-    border:1px solid #f2c2ce;
-    border-radius:11px;
-    font-size:19px;
-    flex-shrink:0;
-}
-
+.cs-section{margin-top:20px;padding:18px;background:#fff8fa;border:1px solid #f0c6d0;border-radius:15px;}
+.cs-section-header{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.cs-section-icon{width:40px;height:40px;display:flex;justify-content:center;align-items:center;background:#fff0f4;border:1px solid #f2c2ce;border-radius:11px;font-size:19px;flex-shrink:0;}
 .cs-section-header h3{color:#9d1839;font-size:16px;}
-
 .cs-section-desc{color:#94717b;font-size:13px;margin-bottom:12px;line-height:1.5;}
-
 .community-links{display:flex;flex-direction:column;gap:8px;}
-
-.community-link{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 14px;
-    background:white;
-    border:1px solid #f0c6d0;
-    border-radius:12px;
-    color:#714c57;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:13px;
-    transition:.2s;
-    cursor:pointer;
-}
-
-.community-link:hover{
-    background:#fff0f4;
-    transform:translateX(4px);
-    border-color:#df6682;
-}
-
+.community-link{display:flex;align-items:center;gap:12px;padding:12px 14px;background:white;border:1px solid #f0c6d0;border-radius:12px;color:#714c57;text-decoration:none;font-weight:bold;font-size:13px;transition:.2s;cursor:pointer;}
+.community-link:hover{background:#fff0f4;transform:translateX(4px);border-color:#df6682;}
 .community-icon{font-size:20px;width:30px;text-align:center;}
+.updates-link-badge{margin-left:auto;min-width:22px;height:22px;padding:0 7px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b51f43,#e34968);color:#fff;border-radius:11px;font-size:11px;font-weight:bold;letter-spacing:.3px;box-shadow:0 4px 10px rgba(181,31,67,.35);flex-shrink:0;}
 
-.updates-link-badge{
-    margin-left:auto;
-    min-width:22px;
-    height:22px;
-    padding:0 7px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:#fff;
-    border-radius:11px;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:.3px;
-    box-shadow:0 4px 10px rgba(181,31,67,.35);
-    flex-shrink:0;
-}
+.update-card{position:relative;padding:18px;margin-bottom:14px;border:1px solid #f0c6d0;border-left:5px solid #b51f43;border-radius:14px;box-shadow:0 6px 18px rgba(100,20,40,.08);overflow:hidden;transition:transform .25s ease, box-shadow .25s ease;}
+.update-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(100,20,40,.15);}
+.update-card .update-content{position:relative;z-index:3;}
+.update-card h4{font-family:Georgia,serif;font-size:15px;margin-bottom:8px;line-height:1.5;white-space:pre-line;word-break:break-word;}
+.update-card .update-date{font-size:11px;margin-bottom:10px;display:block;opacity:.75;}
+.update-card p{font-size:13px;line-height:1.7;white-space:pre-line;word-break:break-word;}
+.update-new-tag{display:inline-block;padding:2px 8px;margin-left:8px;background:#b51f43;color:white;border-radius:10px;font-size:10px;font-weight:bold;letter-spacing:.5px;vertical-align:middle;animation:newTagPulse 1.5s infinite;}
+@keyframes newTagPulse{0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(181,31,67,.6); }50%{ transform:scale(1.05); box-shadow:0 0 0 8px rgba(181,31,67,0); }}
 
-
-/* ========== UPDATES (USER) — WITH THEMES & STICKERS ========== */
-
-.update-card{
-    position:relative;
-    padding:18px;
-    margin-bottom:14px;
-    border:1px solid #f0c6d0;
-    border-left:5px solid #b51f43;
-    border-radius:14px;
-    box-shadow:0 6px 18px rgba(100,20,40,.08);
-    overflow:hidden;
-    transition:transform .25s ease, box-shadow .25s ease;
-}
-
-.update-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 28px rgba(100,20,40,.15);
-}
-
-.update-card .update-content{
-    position:relative;
-    z-index:3;
-}
-
-.update-card h4{
-    font-family:Georgia,serif;
-    font-size:15px;
-    margin-bottom:8px;
-    line-height:1.5;
-    white-space:pre-line;
-    word-break:break-word;
-}
-
-.update-card .update-date{
-    font-size:11px;
-    margin-bottom:10px;
-    display:block;
-    opacity:.75;
-}
-
-.update-card p{
-    font-size:13px;
-    line-height:1.7;
-    white-space:pre-line;
-    word-break:break-word;
-}
-
-.update-new-tag{
-    display:inline-block;
-    padding:2px 8px;
-    margin-left:8px;
-    background:#b51f43;
-    color:white;
-    border-radius:10px;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:.5px;
-    vertical-align:middle;
-    animation:newTagPulse 1.5s infinite;
-}
-
-@keyframes newTagPulse{
-    0%,100%{ transform:scale(1); box-shadow:0 0 0 0 rgba(181,31,67,.6); }
-    50%{ transform:scale(1.05); box-shadow:0 0 0 8px rgba(181,31,67,0); }
-}
-
-/* ---- THEMES ---- */
-
-.update-card[data-theme="pink"]{
-    background:linear-gradient(135deg,#fff0f4,#ffe0e9);
-    border-color:#f2c2ce; border-left-color:#b51f43;
-}
+.update-card[data-theme="pink"]{background:linear-gradient(135deg,#fff0f4,#ffe0e9);border-color:#f2c2ce;border-left-color:#b51f43;}
 .update-card[data-theme="pink"] h4{ color:#9d1839; }
 .update-card[data-theme="pink"] p{ color:#69404c; }
-
-.update-card[data-theme="gold"]{
-    background:linear-gradient(135deg,#fff8e6,#ffe9c2);
-    border-color:#e6c66e; border-left-color:#b8860b;
-}
+.update-card[data-theme="gold"]{background:linear-gradient(135deg,#fff8e6,#ffe9c2);border-color:#e6c66e;border-left-color:#b8860b;}
 .update-card[data-theme="gold"] h4{ color:#8a6500; }
 .update-card[data-theme="gold"] p{ color:#5c4600; }
-
-.update-card[data-theme="purple"]{
-    background:linear-gradient(135deg,#f5ebff,#ead5ff);
-    border-color:#c7a5ea; border-left-color:#7b3fa3;
-}
+.update-card[data-theme="purple"]{background:linear-gradient(135deg,#f5ebff,#ead5ff);border-color:#c7a5ea;border-left-color:#7b3fa3;}
 .update-card[data-theme="purple"] h4{ color:#5c2880; }
 .update-card[data-theme="purple"] p{ color:#412060; }
-
-.update-card[data-theme="blue"]{
-    background:linear-gradient(135deg,#e8f4ff,#d5e8ff);
-    border-color:#a5c8ea; border-left-color:#1e5fa3;
-}
+.update-card[data-theme="blue"]{background:linear-gradient(135deg,#e8f4ff,#d5e8ff);border-color:#a5c8ea;border-left-color:#1e5fa3;}
 .update-card[data-theme="blue"] h4{ color:#0f4177; }
 .update-card[data-theme="blue"] p{ color:#1a3a5c; }
-
-.update-card[data-theme="green"]{
-    background:linear-gradient(135deg,#e8fff0,#cff5dd);
-    border-color:#9bd7b0; border-left-color:#1e8449;
-}
+.update-card[data-theme="green"]{background:linear-gradient(135deg,#e8fff0,#cff5dd);border-color:#9bd7b0;border-left-color:#1e8449;}
 .update-card[data-theme="green"] h4{ color:#0f5c33; }
 .update-card[data-theme="green"] p{ color:#1a4a2c; }
-
-.update-card[data-theme="sunset"]{
-    background:linear-gradient(135deg,#fff0e6,#ffd9b3);
-    border-color:#e6a570; border-left-color:#c95a1e;
-}
+.update-card[data-theme="sunset"]{background:linear-gradient(135deg,#fff0e6,#ffd9b3);border-color:#e6a570;border-left-color:#c95a1e;}
 .update-card[data-theme="sunset"] h4{ color:#a33f0f; }
 .update-card[data-theme="sunset"] p{ color:#6e2a00; }
-
-.update-card[data-theme="galaxy"]{
-    background:linear-gradient(135deg,#1a1a2e,#2d1b4e);
-    border-color:#5c3d8a; border-left-color:#b51f8c;
-}
+.update-card[data-theme="galaxy"]{background:linear-gradient(135deg,#1a1a2e,#2d1b4e);border-color:#5c3d8a;border-left-color:#b51f8c;}
 .update-card[data-theme="galaxy"] h4{ color:#e6c2ff; text-shadow:0 0 8px rgba(230,194,255,.5); }
 .update-card[data-theme="galaxy"] p{ color:#d5c2ff; }
 .update-card[data-theme="galaxy"] .update-date{ color:#b8a5e0; }
-
-.update-card[data-theme="royal"]{
-    background:linear-gradient(135deg,#fff0f0,#ffd5d5);
-    border-color:#e6a5a5; border-left-color:#8b0000;
-}
+.update-card[data-theme="royal"]{background:linear-gradient(135deg,#fff0f0,#ffd5d5);border-color:#e6a5a5;border-left-color:#8b0000;}
 .update-card[data-theme="royal"] h4{ color:#8b0000; }
 .update-card[data-theme="royal"] p{ color:#6b2020; }
-
-.update-card[data-theme="neon"]{
-    background:linear-gradient(135deg,#0a0a1a,#1a0a2e);
-    border-color:#00ffcc; border-left-color:#ff00aa;
-    box-shadow:0 6px 18px rgba(0,255,204,.2), inset 0 0 30px rgba(0,255,204,.08);
-}
-.update-card[data-theme="neon"] h4{
-    color:#00ffcc;
-    text-shadow:0 0 10px #00ffcc, 0 0 20px #00ffcc;
-}
+.update-card[data-theme="neon"]{background:linear-gradient(135deg,#0a0a1a,#1a0a2e);border-color:#00ffcc;border-left-color:#ff00aa;box-shadow:0 6px 18px rgba(0,255,204,.2), inset 0 0 30px rgba(0,255,204,.08);}
+.update-card[data-theme="neon"] h4{color:#00ffcc;text-shadow:0 0 10px #00ffcc, 0 0 20px #00ffcc;}
 .update-card[data-theme="neon"] p{ color:#c2fff2; }
 .update-card[data-theme="neon"] .update-date{ color:#7fffe0; }
-
-.update-card[data-theme="rainbow"]{
-    background:linear-gradient(135deg,#ffb3d9,#ffe6b3,#b3ffcc,#b3e6ff,#e6b3ff);
-    background-size:400% 400%;
-    animation:rainbowShift 8s ease infinite;
-    border-color:#df6682; border-left-color:#b51f43;
-}
+.update-card[data-theme="rainbow"]{background:linear-gradient(135deg,#ffb3d9,#ffe6b3,#b3ffcc,#b3e6ff,#e6b3ff);background-size:400% 400%;animation:rainbowShift 8s ease infinite;border-color:#df6682;border-left-color:#b51f43;}
 .update-card[data-theme="rainbow"] h4{ color:#4b1f2a; }
 .update-card[data-theme="rainbow"] p{ color:#4b1f2a; }
+@keyframes rainbowShift{0%,100%{ background-position:0% 50%; }50%{ background-position:100% 50%; }}
 
-@keyframes rainbowShift{
-    0%,100%{ background-position:0% 50%; }
-    50%{ background-position:100% 50%; }
-}
-
-/* ---- STICKERS ---- */
-
-.update-card .update-stickers{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:1;
-}
-
-.update-card .update-stickers span{
-    position:absolute;
-    font-size:22px;
-    opacity:.45;
-    animation:stickerFloat 6s ease-in-out infinite;
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));
-}
-
+.update-card .update-stickers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1;}
+.update-card .update-stickers span{position:absolute;font-size:22px;opacity:.45;animation:stickerFloat 6s ease-in-out infinite;filter:drop-shadow(0 2px 4px rgba(0,0,0,.1));}
 .update-card .update-stickers span:nth-child(1){ top:8%;  left:6%;  animation-delay:0s;   }
 .update-card .update-stickers span:nth-child(2){ top:20%; right:10%; animation-delay:.8s;  }
 .update-card .update-stickers span:nth-child(3){ bottom:15%; left:15%; animation-delay:1.6s;}
 .update-card .update-stickers span:nth-child(4){ bottom:10%; right:20%; animation-delay:2.4s;}
 .update-card .update-stickers span:nth-child(5){ top:45%; left:4%;  animation-delay:3.2s; }
 .update-card .update-stickers span:nth-child(6){ top:55%; right:5%; animation-delay:4s;   }
+@keyframes stickerFloat{0%,100%{ transform:translateY(0) rotate(0deg) scale(1); opacity:.35; }50%    { transform:translateY(-14px) rotate(12deg) scale(1.15); opacity:.7; }}
+.update-card[data-sticker="sparkles"] .update-stickers span{animation:stickerTwinkle 2.2s ease-in-out infinite;}
+@keyframes stickerTwinkle{0%,100%{ opacity:.25; transform:scale(.9) rotate(0deg); }50%    { opacity:.95; transform:scale(1.3) rotate(180deg); }}
+.update-card[data-sticker="stars"] .update-stickers span{animation:stickerSpin 5s linear infinite;}
+@keyframes stickerSpin{0%{ transform:rotate(0deg) scale(1); opacity:.5; }50%{ transform:rotate(180deg) scale(1.2); opacity:.85; }100%{ transform:rotate(360deg) scale(1); opacity:.5; }}
+.update-card[data-sticker="confetti"] .update-stickers span{animation:stickerConfetti 3.5s ease-in-out infinite;}
+@keyframes stickerConfetti{0%{ transform:translateY(-10px) rotate(0deg); opacity:0; }20%{ opacity:.9; }80%{ opacity:.7; }100%{ transform:translateY(40px) rotate(360deg); opacity:0; }}
+.update-card[data-sticker="fire"] .update-stickers span{animation:stickerFire 1.5s ease-in-out infinite;}
+@keyframes stickerFire{0%,100%{ transform:scale(1) translateY(0); opacity:.6; }50%    { transform:scale(1.25) translateY(-6px); opacity:1; }}
+.update-card[data-sticker="crown"] .update-stickers span{animation:stickerCrown 3s ease-in-out infinite;}
+@keyframes stickerCrown{0%,100%{ transform:translateY(0) rotate(-6deg); }50%    { transform:translateY(-10px) rotate(6deg); }}
+.update-card[data-sticker="diamond"] .update-stickers span{animation:stickerDiamond 2.8s ease-in-out infinite;}
+@keyframes stickerDiamond{0%,100%{ transform:scale(1) rotate(0deg); opacity:.5; filter:brightness(1); }50%    { transform:scale(1.2) rotate(180deg); opacity:.95; filter:brightness(1.5); }}
 
-@keyframes stickerFloat{
-    0%,100%{ transform:translateY(0) rotate(0deg) scale(1); opacity:.35; }
-    50%    { transform:translateY(-14px) rotate(12deg) scale(1.15); opacity:.7; }
-}
-
-.update-card[data-sticker="sparkles"] .update-stickers span{
-    animation:stickerTwinkle 2.2s ease-in-out infinite;
-}
-@keyframes stickerTwinkle{
-    0%,100%{ opacity:.25; transform:scale(.9) rotate(0deg); }
-    50%    { opacity:.95; transform:scale(1.3) rotate(180deg); }
-}
-
-.update-card[data-sticker="stars"] .update-stickers span{
-    animation:stickerSpin 5s linear infinite;
-}
-@keyframes stickerSpin{
-    0%{ transform:rotate(0deg) scale(1); opacity:.5; }
-    50%{ transform:rotate(180deg) scale(1.2); opacity:.85; }
-    100%{ transform:rotate(360deg) scale(1); opacity:.5; }
-}
-
-.update-card[data-sticker="confetti"] .update-stickers span{
-    animation:stickerConfetti 3.5s ease-in-out infinite;
-}
-@keyframes stickerConfetti{
-    0%{ transform:translateY(-10px) rotate(0deg); opacity:0; }
-    20%{ opacity:.9; }
-    80%{ opacity:.7; }
-    100%{ transform:translateY(40px) rotate(360deg); opacity:0; }
-}
-
-.update-card[data-sticker="fire"] .update-stickers span{
-    animation:stickerFire 1.5s ease-in-out infinite;
-}
-@keyframes stickerFire{
-    0%,100%{ transform:scale(1) translateY(0); opacity:.6; }
-    50%    { transform:scale(1.25) translateY(-6px); opacity:1; }
-}
-
-.update-card[data-sticker="crown"] .update-stickers span{
-    animation:stickerCrown 3s ease-in-out infinite;
-}
-@keyframes stickerCrown{
-    0%,100%{ transform:translateY(0) rotate(-6deg); }
-    50%    { transform:translateY(-10px) rotate(6deg); }
-}
-
-.update-card[data-sticker="diamond"] .update-stickers span{
-    animation:stickerDiamond 2.8s ease-in-out infinite;
-}
-@keyframes stickerDiamond{
-    0%,100%{ transform:scale(1) rotate(0deg); opacity:.5; filter:brightness(1); }
-    50%    { transform:scale(1.2) rotate(180deg); opacity:.95; filter:brightness(1.5); }
-}
-
-
-/* ========== YOUR TICKET SECTION ========== */
-
-.your-ticket-card{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:14px;
-    background:white;
-    border:1px solid #f0c6d0;
-    border-radius:12px;
-    margin-bottom:10px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.your-ticket-card:hover{
-    background:#fff8e6;
-    border-color:#d4a017;
-    transform:translateX(4px);
-}
-
-.your-ticket-card.resolved-card{
-    background:linear-gradient(135deg,#f0fff5,#e8f8ee);
-    border-color:#9bd7b0;
-}
-
-.your-ticket-card.resolved-card:hover{
-    background:linear-gradient(135deg,#e8f8ee,#d1f2dd);
-    border-color:#6dc490;
-}
-
-.your-ticket-icon{
-    width:40px;height:40px;
-    display:flex;justify-content:center;align-items:center;
-    border-radius:50%;
-    background:linear-gradient(135deg,#f5b942,#d4a017);
-    color:white;
-    font-size:18px;
-    flex-shrink:0;
-    font-weight:bold;
-}
-
-.your-ticket-icon.resolved{
-    background:linear-gradient(135deg,#2ecc71,#27ae60);
-}
-
+.your-ticket-card{display:flex;align-items:center;gap:12px;padding:14px;background:white;border:1px solid #f0c6d0;border-radius:12px;margin-bottom:10px;cursor:pointer;transition:.2s;}
+.your-ticket-card:hover{background:#fff8e6;border-color:#d4a017;transform:translateX(4px);}
+.your-ticket-card.resolved-card{background:linear-gradient(135deg,#f0fff5,#e8f8ee);border-color:#9bd7b0;}
+.your-ticket-card.resolved-card:hover{background:linear-gradient(135deg,#e8f8ee,#d1f2dd);border-color:#6dc490;}
+.your-ticket-icon{width:40px;height:40px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,#f5b942,#d4a017);color:white;font-size:18px;flex-shrink:0;font-weight:bold;}
+.your-ticket-icon.resolved{background:linear-gradient(135deg,#2ecc71,#27ae60);}
 .your-ticket-info{flex:1;min-width:0;}
-
-.your-ticket-info strong{
-    display:block;
-    color:#8a6500;
-    font-family:Georgia,serif;
-    font-size:14px;
-    margin-bottom:3px;
-}
-
-.your-ticket-card.resolved-card .your-ticket-info strong{
-    color:#1e8449;
-}
-
-.your-ticket-info span{
-    display:block;
-    color:#94717b;
-    font-size:11.5px;
-    line-height:1.4;
-}
-
-.your-ticket-status{
-    padding:4px 9px;
-    border-radius:20px;
-    font-size:10px;
-    font-weight:bold;
-    text-transform:uppercase;
-    letter-spacing:.5px;
-    flex-shrink:0;
-}
-
+.your-ticket-info strong{display:block;color:#8a6500;font-family:Georgia,serif;font-size:14px;margin-bottom:3px;}
+.your-ticket-card.resolved-card .your-ticket-info strong{color:#1e8449;}
+.your-ticket-info span{display:block;color:#94717b;font-size:11.5px;line-height:1.4;}
+.your-ticket-status{padding:4px 9px;border-radius:20px;font-size:10px;font-weight:bold;text-transform:uppercase;letter-spacing:.5px;flex-shrink:0;}
 .your-ticket-status.open{background:#fff2c9;color:#856300;}
 .your-ticket-status.resolved{background:#dcf8e6;color:#287344;}
 .your-ticket-status.awaiting{background:#d1ecf1;color:#0c5460;}
+.your-ticket-arrow{font-size:18px;color:#b51f43;font-weight:bold;flex-shrink:0;}
+.your-ticket-card.resolved-card .your-ticket-arrow{color:#27ae60;}
 
-.your-ticket-arrow{
-    font-size:18px;
-    color:#b51f43;
-    font-weight:bold;
-    flex-shrink:0;
-}
-
-.your-ticket-card.resolved-card .your-ticket-arrow{
-    color:#27ae60;
-}
-
-
-/* ========== COMPLAN ========== */
-
-.complan-header{
-    text-align:center;
-    padding:18px 10px 14px;
-    margin:-28px -28px 18px;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    border-radius:20px 20px 0 0;
-}
-
-.complan-header h2{
-    color:white;
-    font-size:20px;
-    font-family:Georgia,serif;
-    margin:0;
-    line-height:1.4;
-    letter-spacing:.5px;
-}
-
-.complan-header small{
-    display:block;
-    margin-top:6px;
-    font-size:11px;
-    opacity:.9;
-    letter-spacing:2px;
-}
-
-.complan-section{
-    margin-top:18px;
-    padding:16px;
-    background:#fff8fa;
-    border:1px solid #f0c6d0;
-    border-radius:14px;
-}
-
-.complan-section h3{
-    text-align:center;
-    color:#9d1839;
-    font-family:Georgia,serif;
-    font-size:15px;
-    margin-bottom:12px;
-    letter-spacing:1px;
-    padding-bottom:8px;
-    border-bottom:1px dashed #f2c2ce;
-}
-
-.complan-intro{
-    text-align:center;
-    color:#69404c;
-    font-size:13px;
-    line-height:1.7;
-    font-style:italic;
-    padding:6px 4px 14px;
-    border-bottom:1px dashed #f2c2ce;
-    margin-bottom:12px;
-}
-
+.complan-header{text-align:center;padding:18px 10px 14px;margin:-28px -28px 18px;background:linear-gradient(135deg,#b51f43,#e34968);color:white;border-radius:20px 20px 0 0;}
+.complan-header h2{color:white;font-size:20px;font-family:Georgia,serif;margin:0;line-height:1.4;letter-spacing:.5px;}
+.complan-header small{display:block;margin-top:6px;font-size:11px;opacity:.9;letter-spacing:2px;}
+.complan-section{margin-top:18px;padding:16px;background:#fff8fa;border:1px solid #f0c6d0;border-radius:14px;}
+.complan-section h3{text-align:center;color:#9d1839;font-family:Georgia,serif;font-size:15px;margin-bottom:12px;letter-spacing:1px;padding-bottom:8px;border-bottom:1px dashed #f2c2ce;}
+.complan-intro{text-align:center;color:#69404c;font-size:13px;line-height:1.7;font-style:italic;padding:6px 4px 14px;border-bottom:1px dashed #f2c2ce;margin-bottom:12px;}
 .complan-list{list-style:none;padding:0;margin:0;}
-
-.complan-list li{
-    position:relative;
-    padding:9px 0 9px 26px;
-    color:#69404c;
-    font-size:13px;
-    line-height:1.6;
-    border-bottom:1px dashed #f8dfe5;
-}
-
+.complan-list li{position:relative;padding:9px 0 9px 26px;color:#69404c;font-size:13px;line-height:1.6;border-bottom:1px dashed #f8dfe5;}
 .complan-list li:last-child{border-bottom:none;}
-
-.complan-list li::before{
-    content:"✦";
-    position:absolute;
-    left:4px;
-    top:9px;
-    color:#b51f43;
-    font-weight:bold;
-    font-size:12px;
-}
-
+.complan-list li::before{content:"✦";position:absolute;left:4px;top:9px;color:#b51f43;font-weight:bold;font-size:12px;}
 .complan-list.warning li::before{content:"☆";}
 .complan-list.danger li::before{content:"⚠";color:#c52d50;}
 .complan-list.danger li{color:#8f1936;font-weight:bold;}
+.complan-note{text-align:center;margin-top:16px;padding:14px;background:linear-gradient(135deg,#fff0f4,#ffe0e9);border:1px solid #f2c2ce;border-radius:12px;color:#9d1839;font-size:12px;line-height:1.7;font-weight:bold;font-style:italic;letter-spacing:.3px;}
+.complan-signature{text-align:center;margin-top:20px;padding:16px;background:#9d1839;color:white;border-radius:12px;font-family:Georgia,serif;font-size:14px;letter-spacing:1px;line-height:1.6;}
 
-.complan-note{
-    text-align:center;
-    margin-top:16px;
-    padding:14px;
-    background:linear-gradient(135deg,#fff0f4,#ffe0e9);
-    border:1px solid #f2c2ce;
-    border-radius:12px;
-    color:#9d1839;
-    font-size:12px;
-    line-height:1.7;
-    font-weight:bold;
-    font-style:italic;
-    letter-spacing:.3px;
-}
-
-.complan-signature{
-    text-align:center;
-    margin-top:20px;
-    padding:16px;
-    background:#9d1839;
-    color:white;
-    border-radius:12px;
-    font-family:Georgia,serif;
-    font-size:14px;
-    letter-spacing:1px;
-    line-height:1.6;
-}
-
-
-/* ========== AI LAUNCH CARD ========== */
-
-.ai-launch-card{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    padding:16px;
-    background:linear-gradient(135deg,#fff0f4,#ffe0e9);
-    border:1px solid #f2c2ce;
-    border-radius:16px;
-    cursor:pointer;
-    transition:.22s;
-}
-
-.ai-launch-card:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 28px rgba(181,31,67,.18);
-    border-color:#df6682;
-}
-
-.ai-launch-card.ticket-card{
-    background:linear-gradient(135deg,#fff8e6,#ffe0c2);
-    border-color:#e6c66e;
-}
-
-.ai-launch-card.ticket-card:hover{
-    border-color:#d4a017;
-    box-shadow:0 12px 28px rgba(212,160,23,.22);
-}
-
-.ai-launch-icon{
-    width:52px;height:52px;
-    display:flex;justify-content:center;align-items:center;
-    border-radius:50%;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    font-size:24px;
-    flex-shrink:0;
-    animation:aiPulse 2.2s infinite;
-}
-
-.ai-launch-icon.ticket-icon{
-    background:linear-gradient(135deg,#d4a017,#f5b942);
-    animation:ticketPulse 2.2s infinite;
-}
-
-@keyframes aiPulse{
-    0%,100%{ box-shadow:0 0 0 0 rgba(181,31,67,.5); }
-    50%{ box-shadow:0 0 0 12px rgba(181,31,67,0); }
-}
-
-@keyframes ticketPulse{
-    0%,100%{ box-shadow:0 0 0 0 rgba(212,160,23,.5); }
-    50%{ box-shadow:0 0 0 12px rgba(212,160,23,0); }
-}
-
+.ai-launch-card{display:flex;align-items:center;gap:14px;padding:16px;background:linear-gradient(135deg,#fff0f4,#ffe0e9);border:1px solid #f2c2ce;border-radius:16px;cursor:pointer;transition:.22s;}
+.ai-launch-card:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(181,31,67,.18);border-color:#df6682;}
+.ai-launch-card.ticket-card{background:linear-gradient(135deg,#fff8e6,#ffe0c2);border-color:#e6c66e;}
+.ai-launch-card.ticket-card:hover{border-color:#d4a017;box-shadow:0 12px 28px rgba(212,160,23,.22);}
+.ai-launch-icon{width:52px;height:52px;display:flex;justify-content:center;align-items:center;border-radius:50%;background:linear-gradient(135deg,#b51f43,#e34968);color:white;font-size:24px;flex-shrink:0;animation:aiPulse 2.2s infinite;}
+.ai-launch-icon.ticket-icon{background:linear-gradient(135deg,#d4a017,#f5b942);animation:ticketPulse 2.2s infinite;}
+@keyframes aiPulse{0%,100%{ box-shadow:0 0 0 0 rgba(181,31,67,.5); }50%{ box-shadow:0 0 0 12px rgba(181,31,67,0); }}
+@keyframes ticketPulse{0%,100%{ box-shadow:0 0 0 0 rgba(212,160,23,.5); }50%{ box-shadow:0 0 0 12px rgba(212,160,23,0); }}
 .ai-launch-text{flex:1;min-width:0;}
-
-.ai-launch-text strong{
-    display:block;
-    color:#9d1839;
-    font-family:Georgia,serif;
-    font-size:16px;
-    margin-bottom:3px;
-}
-
+.ai-launch-text strong{display:block;color:#9d1839;font-family:Georgia,serif;font-size:16px;margin-bottom:3px;}
 .ticket-card .ai-launch-text strong{color:#8a6500;}
-
 .ai-launch-text span{display:block;color:#94717b;font-size:12px;line-height:1.45;}
-
 .ticket-card .ai-launch-text span{color:#8a6500;opacity:.8;}
-
 .ai-launch-arrow{font-size:22px;color:#b51f43;font-weight:bold;flex-shrink:0;}
 .ticket-card .ai-launch-arrow{color:#d4a017;}
 
-
-/* ========== AI / TICKET PAGE ========== */
-
-#heartFusionAiFocus .focus-card,
-#ticketFocus .focus-card,
-#ticketInboxFocus .focus-card{
-    padding:0;
-    overflow:hidden;
-}
-
-.ai-page-header{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:16px 18px;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-}
-
-.ticket-header{
-    background:linear-gradient(135deg,#d4a017,#f5b942) !important;
-}
-
-.ticket-inbox-header{
-    background:linear-gradient(135deg,#16a085,#1abc9c) !important;
-}
-
-.ai-page-avatar{
-    width:46px;height:46px;
-    display:flex;justify-content:center;align-items:center;
-    background:rgba(255,255,255,.22);
-    border:2px solid rgba(255,255,255,.5);
-    border-radius:50%;
-    font-size:22px;
-    flex-shrink:0;
-    animation:aiPulse 2.2s infinite;
-}
-
+#heartFusionAiFocus .focus-card,#ticketFocus .focus-card,#ticketInboxFocus .focus-card{padding:0;overflow:hidden;}
+.ai-page-header{display:flex;align-items:center;gap:12px;padding:16px 18px;background:linear-gradient(135deg,#b51f43,#e34968);color:white;}
+.ticket-header{background:linear-gradient(135deg,#d4a017,#f5b942) !important;}
+.ticket-inbox-header{background:linear-gradient(135deg,#16a085,#1abc9c) !important;}
+.ai-page-avatar{width:46px;height:46px;display:flex;justify-content:center;align-items:center;background:rgba(255,255,255,.22);border:2px solid rgba(255,255,255,.5);border-radius:50%;font-size:22px;flex-shrink:0;animation:aiPulse 2.2s infinite;}
 .ticket-header .ai-page-avatar{animation:ticketPulse 2.2s infinite;}
 .ticket-inbox-header .ai-page-avatar{animation:none;background:rgba(255,255,255,.25);}
-
 .ai-page-header strong{display:block;font-size:16px;font-family:Georgia,serif;}
 .ai-page-header small{display:block;font-size:11px;opacity:.92;margin-top:2px;}
-
-.ai-page-header .ai-status-dot{
-    display:inline-block;
-    width:8px;height:8px;
-    background:#7dff9a;
-    border-radius:50%;
-    margin-right:5px;
-    box-shadow:0 0 6px #7dff9a;
-}
-
-.ticket-ref-bar{
-    padding:8px 16px;
-    background:#fff8e6;
-    border-bottom:1px solid #f0c6d0;
-    font-size:12px;
-    color:#8a6500;
-    text-align:center;
-    font-family:monospace;
-    letter-spacing:1px;
-    font-weight:bold;
-}
-
-.ai-chat-messages{
-    padding:18px 16px;
-    height:min(60vh,520px);
-    overflow-y:auto;
-    background:radial-gradient(circle at top right,#fff0f4,transparent 60%),#fffafb;
-    scroll-behavior:smooth;
-}
-
+.ai-page-header .ai-status-dot{display:inline-block;width:8px;height:8px;background:#7dff9a;border-radius:50%;margin-right:5px;box-shadow:0 0 6px #7dff9a;}
+.ticket-ref-bar{padding:8px 16px;background:#fff8e6;border-bottom:1px solid #f0c6d0;font-size:12px;color:#8a6500;text-align:center;font-family:monospace;letter-spacing:1px;font-weight:bold;}
+.ai-chat-messages{padding:18px 16px;height:min(60vh,520px);overflow-y:auto;background:radial-gradient(circle at top right,#fff0f4,transparent 60%),#fffafb;scroll-behavior:smooth;}
 .ai-chat-messages::-webkit-scrollbar{width:6px;}
 .ai-chat-messages::-webkit-scrollbar-thumb{background:#f2c2ce;border-radius:6px;}
-
-.ai-msg{
-    display:flex;
-    margin-bottom:12px;
-    animation:aiMsgIn .28s ease;
-}
-
+.ai-msg{display:flex;margin-bottom:12px;animation:aiMsgIn .28s ease;}
 @keyframes aiMsgIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-
 .ai-msg.user{justify-content:flex-end;}
-
-.ai-msg .ai-bubble{
-    max-width:82%;
-    padding:12px 15px;
-    border-radius:14px;
-    font-size:13.5px;
-    line-height:1.6;
-    white-space:pre-line;
-    word-break:break-word;
-}
-
-.ai-msg.bot .ai-bubble{
-    background:white;
-    color:#4b1f2a;
-    border:1px solid #f0c6d0;
-    border-bottom-left-radius:4px;
-    box-shadow:0 4px 12px rgba(100,20,40,.06);
-}
-
-.ai-msg.user .ai-bubble{
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    border-bottom-right-radius:4px;
-    box-shadow:0 6px 15px rgba(181,31,67,.22);
-}
-
-.ai-msg.admin .ai-bubble{
-    background:linear-gradient(135deg,#16a085,#1abc9c);
-    color:white;
-    border-bottom-left-radius:4px;
-    box-shadow:0 6px 15px rgba(26,188,156,.22);
-}
-
-.ai-msg .msg-time{
-    display:block;
-    font-size:10px;
-    opacity:.6;
-    margin-top:5px;
-    text-align:right;
-}
-
-.ai-typing{
-    display:flex;
-    gap:4px;
-    padding:12px 16px;
-    background:white;
-    border:1px solid #f0c6d0;
-    border-radius:14px;
-    border-bottom-left-radius:4px;
-    width:fit-content;
-}
-
-.ai-typing span{
-    width:7px;height:7px;
-    background:#df6682;
-    border-radius:50%;
-    animation:aiTyping 1.3s infinite;
-}
-
+.ai-msg .ai-bubble{max-width:82%;padding:12px 15px;border-radius:14px;font-size:13.5px;line-height:1.6;white-space:pre-line;word-break:break-word;}
+.ai-msg.bot .ai-bubble{background:white;color:#4b1f2a;border:1px solid #f0c6d0;border-bottom-left-radius:4px;box-shadow:0 4px 12px rgba(100,20,40,.06);}
+.ai-msg.user .ai-bubble{background:linear-gradient(135deg,#b51f43,#e34968);color:white;border-bottom-right-radius:4px;box-shadow:0 6px 15px rgba(181,31,67,.22);}
+.ai-msg.admin .ai-bubble{background:linear-gradient(135deg,#16a085,#1abc9c);color:white;border-bottom-left-radius:4px;box-shadow:0 6px 15px rgba(26,188,156,.22);}
+.ai-msg .msg-time{display:block;font-size:10px;opacity:.6;margin-top:5px;text-align:right;}
+.ai-typing{display:flex;gap:4px;padding:12px 16px;background:white;border:1px solid #f0c6d0;border-radius:14px;border-bottom-left-radius:4px;width:fit-content;}
+.ai-typing span{width:7px;height:7px;background:#df6682;border-radius:50%;animation:aiTyping 1.3s infinite;}
 .ai-typing span:nth-child(2){animation-delay:.18s;}
 .ai-typing span:nth-child(3){animation-delay:.36s;}
-
-@keyframes aiTyping{
-    0%,60%,100%{opacity:.35;transform:translateY(0);}
-    30%{opacity:1;transform:translateY(-3px);}
-}
-
-.ai-chat-input{
-    display:flex;
-    gap:8px;
-    padding:12px;
-    background:white;
-    border-top:1px solid #f0c6d0;
-}
-
-.ai-chat-input input{
-    flex:1;
-    height:46px;
-    padding:0 14px;
-    border:1px solid #e4bac6;
-    border-radius:12px;
-    outline:none;
-    font-size:13px;
-    background:#fffafb;
-    color:#4b1f2a;
-    transition:.2s;
-}
-
-.ai-chat-input input:focus{
-    border-color:#d83f61;
-    box-shadow:0 0 0 4px rgba(216,63,97,.09);
-}
-
-.ai-chat-input input:disabled{
-    opacity:.55;
-    cursor:not-allowed;
-    background:#f5f5f5;
-}
-
-.ai-chat-input button{
-    width:46px;height:46px;
-    border:none;border-radius:12px;
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    cursor:pointer;
-    box-shadow:0 8px 18px rgba(181,31,67,.28);
-    transition:.2s;
-    display:flex;justify-content:center;align-items:center;
-}
-
+@keyframes aiTyping{0%,60%,100%{opacity:.35;transform:translateY(0);}30%{opacity:1;transform:translateY(-3px);}}
+.ai-chat-input{display:flex;gap:8px;padding:12px;background:white;border-top:1px solid #f0c6d0;}
+.ai-chat-input input{flex:1;height:46px;padding:0 14px;border:1px solid #e4bac6;border-radius:12px;outline:none;font-size:13px;background:#fffafb;color:#4b1f2a;transition:.2s;}
+.ai-chat-input input:focus{border-color:#d83f61;box-shadow:0 0 0 4px rgba(216,63,97,.09);}
+.ai-chat-input input:disabled{opacity:.55;cursor:not-allowed;background:#f5f5f5;}
+.ai-chat-input button{width:46px;height:46px;border:none;border-radius:12px;background:linear-gradient(135deg,#b51f43,#e34968);color:white;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 8px 18px rgba(181,31,67,.28);transition:.2s;display:flex;justify-content:center;align-items:center;}
 .ai-chat-input button:active{transform:scale(.95);}
 .ai-chat-input button:disabled{opacity:.5;cursor:not-allowed;}
 
+.ticket-confirm-card{margin:14px 16px;padding:18px;background:linear-gradient(135deg,#fff8e6,#ffe9c2);border:2px dashed #d4a017;border-radius:14px;text-align:center;}
+.ticket-confirm-card .ticket-icon-big{font-size:38px;margin-bottom:8px;}
+.ticket-confirm-card h4{color:#8a6500;font-family:Georgia,serif;font-size:16px;margin-bottom:8px;}
+.ticket-confirm-card .ticket-ref{display:inline-block;padding:8px 16px;background:#8a6500;color:white;border-radius:8px;font-family:monospace;font-size:14px;font-weight:bold;letter-spacing:2px;margin:8px 0;}
+.ticket-confirm-card p{color:#8a6500;font-size:12px;line-height:1.6;margin-top:8px;}
 
-/* ========== TICKET CONFIRMATION CARD ========== */
-
-.ticket-confirm-card{
-    margin:14px 16px;
-    padding:18px;
-    background:linear-gradient(135deg,#fff8e6,#ffe9c2);
-    border:2px dashed #d4a017;
-    border-radius:14px;
-    text-align:center;
-}
-
-.ticket-confirm-card .ticket-icon-big{
-    font-size:38px;
-    margin-bottom:8px;
-}
-
-.ticket-confirm-card h4{
-    color:#8a6500;
-    font-family:Georgia,serif;
-    font-size:16px;
-    margin-bottom:8px;
-}
-
-.ticket-confirm-card .ticket-ref{
-    display:inline-block;
-    padding:8px 16px;
-    background:#8a6500;
-    color:white;
-    border-radius:8px;
-    font-family:monospace;
-    font-size:14px;
-    font-weight:bold;
-    letter-spacing:2px;
-    margin:8px 0;
-}
-
-.ticket-confirm-card p{
-    color:#8a6500;
-    font-size:12px;
-    line-height:1.6;
-    margin-top:8px;
-}
-
-
-/* ========== YES / NO RESOLUTION PROMPT ========== */
-
-.resolution-prompt{
-    margin:14px 16px;
-    padding:16px;
-    background:linear-gradient(135deg,#e8f8ff,#d1ecf1);
-    border:2px solid #16a085;
-    border-radius:14px;
-    text-align:center;
-}
-
-.resolution-prompt h4{
-    color:#0c5460;
-    font-size:14px;
-    font-family:Georgia,serif;
-    margin-bottom:6px;
-}
-
-.resolution-prompt p{
-    color:#0c5460;
-    font-size:12px;
-    margin-bottom:12px;
-    line-height:1.5;
-}
-
-.resolution-buttons{
-    display:flex;
-    gap:10px;
-}
-
-.resolution-btn{
-    flex:1;
-    height:44px;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    font-size:13px;
-    cursor:pointer;
-    transition:.2s;
-    letter-spacing:.5px;
-}
-
-.resolution-btn-yes{
-    background:linear-gradient(135deg,#27ae60,#2ecc71);
-    color:white;
-    box-shadow:0 6px 16px rgba(46,204,113,.35);
-}
-
-.resolution-btn-no{
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
-    color:white;
-    box-shadow:0 6px 16px rgba(231,76,60,.35);
-}
-
+.resolution-prompt{margin:14px 16px;padding:16px;background:linear-gradient(135deg,#e8f8ff,#d1ecf1);border:2px solid #16a085;border-radius:14px;text-align:center;}
+.resolution-prompt h4{color:#0c5460;font-size:14px;font-family:Georgia,serif;margin-bottom:6px;}
+.resolution-prompt p{color:#0c5460;font-size:12px;margin-bottom:12px;line-height:1.5;}
+.resolution-buttons{display:flex;gap:10px;}
+.resolution-btn{flex:1;height:44px;border:none;border-radius:10px;font-weight:bold;font-size:13px;cursor:pointer;transition:.2s;letter-spacing:.5px;}
+.resolution-btn-yes{background:linear-gradient(135deg,#27ae60,#2ecc71);color:white;box-shadow:0 6px 16px rgba(46,204,113,.35);}
+.resolution-btn-no{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;box-shadow:0 6px 16px rgba(231,76,60,.35);}
 .resolution-btn:active{transform:scale(.97);}
 
-
-/* ========== RATING MODAL ========== */
-
-.rating-modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(80,20,35,.65);
-    backdrop-filter:blur(5px);
-    -webkit-backdrop-filter:blur(5px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    z-index:700;
-}
-
+.rating-modal-overlay{position:fixed;inset:0;background:rgba(80,20,35,.65);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);display:none;justify-content:center;align-items:center;padding:20px;z-index:700;}
 .rating-modal-overlay.show{display:flex;}
-
-.rating-modal{
-    width:100%;
-    max-width:400px;
-    padding:26px 24px;
-    background:white;
-    border:1px solid #f1c3cf;
-    border-radius:22px;
-    box-shadow:0 30px 70px rgba(120,30,55,.35);
-    text-align:center;
-    max-height:90vh;
-    overflow-y:auto;
-}
-
-.rating-modal h3{
-    color:#9d1839;
-    font-family:Georgia,serif;
-    font-size:20px;
-    margin-bottom:6px;
-}
-
-.rating-modal .rating-sub{
-    color:#94717b;
-    font-size:13px;
-    margin-bottom:18px;
-    line-height:1.5;
-}
-
-.rating-stars{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-bottom:20px;
-}
-
-.rating-stars .star{
-    font-size:38px;
-    cursor:pointer;
-    color:#ddd;
-    transition:.2s;
-    user-select:none;
-}
-
-.rating-stars .star:hover,
-.rating-stars .star.active{
-    color:#f5b942;
-    transform:scale(1.1);
-}
-
-.rating-notes-label{
-    display:block;
-    color:#692637;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:6px;
-    text-align:left;
-}
-
-.rating-notes{
-    width:100%;
-    min-height:80px;
-    padding:12px;
-    border:1px solid #e4bac6;
-    border-radius:12px;
-    outline:none;
-    font-size:13px;
-    font-family:inherit;
-    resize:vertical;
-    background:#fffafb;
-    color:#4b1f2a;
-    margin-bottom:6px;
-}
-
-.rating-notes:focus{
-    border-color:#d83f61;
-    box-shadow:0 0 0 4px rgba(216,63,97,.09);
-}
-
-.rating-notes-hint{
-    display:block;
-    color:#94717b;
-    font-size:11px;
-    font-style:italic;
-    margin-bottom:18px;
-    text-align:left;
-}
-
-.rating-buttons{
-    display:flex;
-    gap:10px;
-}
-
-.rating-btn{
-    flex:1;
-    height:48px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    font-size:13px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.rating-btn-submit{
-    background:linear-gradient(135deg,#27ae60,#2ecc71);
-    color:white;
-    box-shadow:0 8px 20px rgba(46,204,113,.35);
-}
-
-.rating-btn-cancel{
-    background:#fff8fa;
-    color:#714c57;
-    border:1px solid #f0c6d0;
-}
-
+.rating-modal{width:100%;max-width:400px;padding:26px 24px;background:white;border:1px solid #f1c3cf;border-radius:22px;box-shadow:0 30px 70px rgba(120,30,55,.35);text-align:center;max-height:90vh;overflow-y:auto;}
+.rating-modal h3{color:#9d1839;font-family:Georgia,serif;font-size:20px;margin-bottom:6px;}
+.rating-modal .rating-sub{color:#94717b;font-size:13px;margin-bottom:18px;line-height:1.5;}
+.rating-stars{display:flex;justify-content:center;gap:8px;margin-bottom:20px;}
+.rating-stars .star{font-size:38px;cursor:pointer;color:#ddd;transition:.2s;user-select:none;}
+.rating-stars .star:hover,.rating-stars .star.active{color:#f5b942;transform:scale(1.1);}
+.rating-notes-label{display:block;color:#692637;font-size:12px;font-weight:bold;margin-bottom:6px;text-align:left;}
+.rating-notes{width:100%;min-height:80px;padding:12px;border:1px solid #e4bac6;border-radius:12px;outline:none;font-size:13px;font-family:inherit;resize:vertical;background:#fffafb;color:#4b1f2a;margin-bottom:6px;}
+.rating-notes:focus{border-color:#d83f61;box-shadow:0 0 0 4px rgba(216,63,97,.09);}
+.rating-notes-hint{display:block;color:#94717b;font-size:11px;font-style:italic;margin-bottom:18px;text-align:left;}
+.rating-buttons{display:flex;gap:10px;}
+.rating-btn{flex:1;height:48px;border:none;border-radius:12px;font-weight:bold;font-size:13px;cursor:pointer;transition:.2s;}
+.rating-btn-submit{background:linear-gradient(135deg,#27ae60,#2ecc71);color:white;box-shadow:0 8px 20px rgba(46,204,113,.35);}
+.rating-btn-cancel{background:#fff8fa;color:#714c57;border:1px solid #f0c6d0;}
 .rating-btn:active{transform:scale(.97);}
 
-
-/* ========== DEVICE INFO ========== */
-
-.device-info-row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    padding:12px 0;
-    border-bottom:1px solid #f5dde3;
-    font-size:13px;
-}
-
+.device-info-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #f5dde3;font-size:13px;}
 .device-info-row:last-child{border-bottom:none;}
 .device-info-label{color:#8c6872;font-weight:bold;flex-shrink:0;}
+.device-info-value{color:#4d2630;font-weight:bold;text-align:right;word-break:break-word;}
 
-.device-info-value{
-    color:#4d2630;
-    font-weight:bold;
-    text-align:right;
-    word-break:break-word;
-}
-
-
-/* ========== RECEIPT ========== */
-
-.receipt{
-    margin-top:20px;
-    padding:20px;
-    border:2px dashed #d98da0;
-    border-radius:16px;
-    background:#fffdfd;
-}
-
-.receipt-title{
-    text-align:center;
-    font-family:Georgia,serif;
-    color:#9d1839;
-    font-size:21px;
-    margin-bottom:18px;
-}
-
-.receipt-row{
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    padding:10px 0;
-    border-bottom:1px solid #f0dce1;
-    font-size:13px;
-}
-
+.receipt{margin-top:20px;padding:20px;border:2px dashed #d98da0;border-radius:16px;background:#fffdfd;}
+.receipt-title{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:21px;margin-bottom:18px;}
+.receipt-row{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #f0dce1;font-size:13px;}
 .receipt-row:last-child{border-bottom:none;}
 .receipt-label{color:#8c6872;}
 .receipt-value{color:#4d2630;font-weight:bold;text-align:right;word-break:break-word;}
 .receipt-amount{font-size:20px;color:#b51f43;}
 
-
-/* ========== OTP ========== */
-
 .otp-container{text-align:center;padding:20px 0;}
 .otp-icon{font-size:45px;margin-bottom:10px;}
+.otp-code{width:100%;height:58px;text-align:center;letter-spacing:10px;font-size:25px;font-weight:bold;border:1px solid #e2b5c1;border-radius:12px;outline:none;color:#9d1839;background:#fffafb;}
 
-.otp-code{
-    width:100%;height:58px;
-    text-align:center;
-    letter-spacing:10px;
-    font-size:25px;
-    font-weight:bold;
-    border:1px solid #e2b5c1;
-    border-radius:12px;
-    outline:none;
-    color:#9d1839;
-    background:#fffafb;
-}
-
-
-/* ========== NOTIFICATION ========== */
-
-.app-notification{
-    position:fixed;
-    top:15px;left:15px;right:15px;
-    max-width:450px;
-    margin:auto;
-    padding:16px;
-    background:white;
-    border:1px solid #e8afbd;
-    border-left:5px solid #b51f43;
-    border-radius:14px;
-    box-shadow:0 15px 40px rgba(80,20,35,.20);
-    z-index:300;
-    display:none;
-}
-
+.app-notification{position:fixed;top:15px;left:15px;right:15px;max-width:450px;margin:auto;padding:16px;background:white;border:1px solid #e8afbd;border-left:5px solid #b51f43;border-radius:14px;box-shadow:0 15px 40px rgba(80,20,35,.20);z-index:300;display:none;}
 .app-notification strong{color:#9d1839;display:block;margin-bottom:5px;}
 .app-notification span{color:#76525d;font-size:13px;line-height:1.5;}
 
-
-/* ========== CUSTOM MODAL ========== */
-
-.modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(80,20,35,.55);
-    backdrop-filter:blur(4px);
-    -webkit-backdrop-filter:blur(4px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    z-index:500;
-    animation:modalFadeIn .22s ease;
-}
-
+.modal-overlay{position:fixed;inset:0;background:rgba(80,20,35,.55);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:none;justify-content:center;align-items:center;padding:20px;z-index:500;animation:modalFadeIn .22s ease;}
 .modal-overlay.show{display:flex;}
-
 @keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
-
-.modal-card{
-    width:100%;
-    max-width:400px;
-    padding:30px 26px 24px;
-    background:white;
-    border:1px solid #f1c3cf;
-    border-radius:24px;
-    box-shadow:0 30px 70px rgba(120,30,55,.35);
-    text-align:center;
-    animation:modalPop .3s cubic-bezier(.2,.9,.3,1.2);
-    max-height:90vh;
-    overflow-y:auto;
-}
-
-@keyframes modalPop{
-    from{transform:scale(.85);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-
-.modal-icon{
-    width:66px;height:66px;
-    margin:0 auto 16px;
-    display:flex;justify-content:center;align-items:center;
-    border-radius:50%;
-    font-size:30px;
-    font-weight:bold;
-    background:#fff0f4;
-    border:2px solid #df6682;
-    color:#c52d50;
-}
-
+.modal-card{width:100%;max-width:400px;padding:30px 26px 24px;background:white;border:1px solid #f1c3cf;border-radius:24px;box-shadow:0 30px 70px rgba(120,30,55,.35);text-align:center;animation:modalPop .3s cubic-bezier(.2,.9,.3,1.2);max-height:90vh;overflow-y:auto;}
+@keyframes modalPop{from{transform:scale(.85);opacity:0}to{transform:scale(1);opacity:1}}
+.modal-icon{width:66px;height:66px;margin:0 auto 16px;display:flex;justify-content:center;align-items:center;border-radius:50%;font-size:30px;font-weight:bold;background:#fff0f4;border:2px solid #df6682;color:#c52d50;}
 .modal-icon.success{background:#f0fff5;border-color:#6dc490;color:#287344;}
 .modal-icon.error{background:#fff0f2;border-color:#e8a7b5;color:#a21d3d;}
 .modal-icon.warning{background:#fff8e6;border-color:#e6c66e;color:#856300;}
-
-.modal-title{
-    font-family:Georgia,serif;
-    color:#9d1839;
-    font-size:21px;
-    margin-bottom:10px;
-}
-
-.modal-message{
-    color:#76525d;
-    font-size:14px;
-    line-height:1.65;
-    margin-bottom:24px;
-    white-space:pre-line;
-    word-break:break-word;
-}
-
+.modal-title{font-family:Georgia,serif;color:#9d1839;font-size:21px;margin-bottom:10px;}
+.modal-message{color:#76525d;font-size:14px;line-height:1.65;margin-bottom:24px;white-space:pre-line;word-break:break-word;}
 .modal-buttons{display:flex;gap:10px;}
-
-.modal-btn{
-    flex:1;
-    min-height:50px;
-    border:none;
-    border-radius:12px;
-    font-weight:bold;
-    font-size:13px;
-    letter-spacing:.5px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.modal-btn-primary{
-    background:linear-gradient(135deg,#b51f43,#e34968);
-    color:white;
-    box-shadow:0 10px 22px rgba(181,31,67,.28);
-}
-
+.modal-btn{flex:1;min-height:50px;border:none;border-radius:12px;font-weight:bold;font-size:13px;letter-spacing:.5px;cursor:pointer;transition:.2s;}
+.modal-btn-primary{background:linear-gradient(135deg,#b51f43,#e34968);color:white;box-shadow:0 10px 22px rgba(181,31,67,.28);}
 .modal-btn-primary:active{transform:scale(.97);}
-
-.modal-btn-secondary{
-    background:#fff8fa;
-    color:#714c57;
-    border:1px solid #f0c6d0;
-}
-
+.modal-btn-secondary{background:#fff8fa;color:#714c57;border:1px solid #f0c6d0;}
 .modal-btn-secondary:active{transform:scale(.97);}
 
-
-/* ========== HISTORY ========== */
-
-.history-item{
-    padding:15px;
-    margin-bottom:10px;
-    background:#fff8fa;
-    border:1px solid #f0c6d0;
-    border-radius:12px;
-    cursor:pointer;
-}
-
+.history-item{padding:15px;margin-bottom:10px;background:#fff8fa;border:1px solid #f0c6d0;border-radius:12px;cursor:pointer;}
 .history-item:hover{background:#ffeef3;}
 .history-top{display:flex;justify-content:space-between;gap:10px;}
 .history-title{color:#9d1839;font-weight:bold;font-size:14px;}
 .history-amount{color:#b51f43;font-weight:bold;}
 .history-bottom{margin-top:7px;color:#94717b;font-size:12px;}
+.empty-history{padding:30px 15px;text-align:center;color:#a17c87;font-size:13px;}
 
-.empty-history{
-    padding:30px 15px;
-    text-align:center;
-    color:#a17c87;
-    font-size:13px;
-}
-
-
-/* ========== LIVE CASHOUT ========== */
-
-.live-item{
-    padding:15px;
-    margin-bottom:10px;
-    border-radius:13px;
-    border:1px solid #f0c6d0;
-    background:#fff8fa;
-}
-
-.live-row{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:7px;
-    font-size:13px;
-}
-
+.live-item{padding:15px;margin-bottom:10px;border-radius:13px;border:1px solid #f0c6d0;background:#fff8fa;}
+.live-row{display:flex;justify-content:space-between;gap:10px;margin-bottom:7px;font-size:13px;}
 .live-label{color:#94717b;}
 .live-value{color:#4b1f2a;font-weight:bold;text-align:right;}
-
-.status{
-    display:inline-block;
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-}
-
+.status{display:inline-block;padding:5px 9px;border-radius:20px;font-size:11px;font-weight:bold;}
 .status.pending{background:#fff2c9;color:#856300;}
 .status.approved{background:#dcf8e6;color:#287344;}
 .status.rejected{background:#ffe1e6;color:#a21d3d;}
@@ -1706,664 +346,105 @@ h1{
 .status.resolved{background:#dcf8e6;color:#287344;}
 .status.awaiting{background:#d1ecf1;color:#0c5460;}
 
+.transaction-panel{display:none;position:fixed;left:10px;right:10px;bottom:78px;padding:15px;background:white;border:1px solid #efc3ce;border-radius:18px;box-shadow:0 15px 40px rgba(100,20,40,.18);z-index:90;}
+.transaction-panel h3{color:#a21d3d;font-family:Georgia,serif;margin-bottom:12px;}
+.transaction-option{width:100%;padding:13px;margin-bottom:8px;border:1px solid #f0c6d0;border-radius:10px;background:#fff8fa;color:#714c57;text-align:left;font-weight:bold;cursor:pointer;}
 
-/* ========== TRANSACTION PANEL ========== */
-
-.transaction-panel{
-    display:none;
-    position:fixed;
-    left:10px;right:10px;
-    bottom:78px;
-    padding:15px;
-    background:white;
-    border:1px solid #efc3ce;
-    border-radius:18px;
-    box-shadow:0 15px 40px rgba(100,20,40,.18);
-    z-index:90;
-}
-
-.transaction-panel h3{
-    color:#a21d3d;
-    font-family:Georgia,serif;
-    margin-bottom:12px;
-}
-
-.transaction-option{
-    width:100%;
-    padding:13px;
-    margin-bottom:8px;
-    border:1px solid #f0c6d0;
-    border-radius:10px;
-    background:#fff8fa;
-    color:#714c57;
-    text-align:left;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-
-/* ========== BOTTOM NAV ========== */
-
-.bottom-nav{
-    position:fixed;
-    left:0;right:0;bottom:0;
-    height:70px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    background:rgba(255,255,255,.97);
-    border-top:1px solid #efc3ce;
-    box-shadow:0 -5px 25px rgba(100,20,40,.10);
-    z-index:100;
-}
-
-.nav-item{
-    flex:1;
-    height:60px;
-    border:none;
-    background:transparent;
-    color:#98717b;
-    font-size:11px;
-    font-weight:bold;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:4px;
-}
-
+.bottom-nav{position:fixed;left:0;right:0;bottom:0;height:70px;display:flex;justify-content:space-around;align-items:center;background:rgba(255,255,255,.97);border-top:1px solid #efc3ce;box-shadow:0 -5px 25px rgba(100,20,40,.10);z-index:100;}
+.nav-item{flex:1;height:60px;border:none;background:transparent;color:#98717b;font-size:11px;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;}
 .nav-icon{font-size:20px;}
 .nav-item.active{color:#b51f43;}
 
-
-/* ========== GAME ========== */
-
 .game-card{text-align:center;}
-
-.game-question{
-    margin:20px 0;
-    padding:25px;
-    border-radius:18px;
-    background:linear-gradient(135deg,#fff0f4,#ffe0e9);
-    border:1px solid #efbdca;
-}
-
+.game-question{margin:20px 0;padding:25px;border-radius:18px;background:linear-gradient(135deg,#fff0f4,#ffe0e9);border:1px solid #efbdca;}
 .question-number{font-size:12px;color:#98717b;margin-bottom:8px;}
 .question-text{font-size:32px;font-weight:bold;color:#9d1839;}
-
-.timer{
-    font-size:25px;
-    font-weight:bold;
-    color:#b51f43;
-    margin:12px;
-}
-
-.game-answer{
-    width:100%;
-    height:52px;
-    border:1px solid #e2b5c1;
-    border-radius:12px;
-    text-align:center;
-    font-size:20px;
-    outline:none;
-}
-
+.timer{font-size:25px;font-weight:bold;color:#b51f43;margin:12px;}
+.game-answer{width:100%;height:52px;border:1px solid #e2b5c1;border-radius:12px;text-align:center;font-size:20px;outline:none;}
 .game-buttons{display:flex;gap:10px;margin-top:12px;}
 .game-buttons button{flex:1;}
-
-.calculator{
-    margin-top:20px;
-    padding:15px;
-    border:1px solid #efc3ce;
-    border-radius:16px;
-    background:#fff8fa;
-}
-
-.calc-display{
-    width:100%;height:48px;
-    border:1px solid #e0b4c0;
-    border-radius:10px;
-    background:white;
-    text-align:right;
-    padding:10px;
-    font-size:20px;
-    margin-bottom:10px;
-}
-
+.calculator{margin-top:20px;padding:15px;border:1px solid #efc3ce;border-radius:16px;background:#fff8fa;}
+.calc-display{width:100%;height:48px;border:1px solid #e0b4c0;border-radius:10px;background:white;text-align:right;padding:10px;font-size:20px;margin-bottom:10px;}
 .calc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;}
-
-.calc-grid button{
-    min-height:43px;
-    border:1px solid #e7bdc8;
-    border-radius:8px;
-    background:white;
-    color:#8e1936;
-    font-weight:bold;
-}
-
-.ad-box{
-    margin-top:15px;
-    padding:15px;
-    border:1px dashed #d98da0;
-    border-radius:13px;
-    background:#fffdfd;
-}
-
+.calc-grid button{min-height:43px;border:1px solid #e7bdc8;border-radius:8px;background:white;color:#8e1936;font-weight:bold;}
+.ad-box{margin-top:15px;padding:15px;border:1px dashed #d98da0;border-radius:13px;background:#fffdfd;}
 .ad-status{font-size:12px;color:#94717b;margin-bottom:10px;}
 
-
-/* ========== SETTINGS ========== */
-
-.settings-code{
-    font-size:22px;
-    font-weight:bold;
-    color:#9d1839;
-    letter-spacing:2px;
-}
-
-.invite-stats{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:10px;
-    margin-top:12px;
-}
-
-.invite-stat{
-    padding:15px;
-    background:white;
-    border:1px solid #efc3ce;
-    border-radius:12px;
-}
-
+.settings-code{font-size:22px;font-weight:bold;color:#9d1839;letter-spacing:2px;}
+.invite-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px;}
+.invite-stat{padding:15px;background:white;border:1px solid #efc3ce;border-radius:12px;}
 .invite-stat span{display:block;color:#94717b;font-size:12px;}
 .invite-stat strong{display:block;color:#9d1839;font-size:19px;margin-top:5px;}
 
-
-/* ========== ADMIN PANEL ========== */
-
-.admin-dashboard{
-    display:none;
-    min-height:100vh;
-    padding-bottom:110px;
-    background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f1a33 100%);
-    color:#fff;
-}
-
-.admin-header{
-    padding:18px 20px;
-    background:rgba(0,0,0,.45);
-    border-bottom:1px solid rgba(255,107,157,.25);
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:sticky;
-    top:0;
-    z-index:50;
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-}
-
-.admin-brand{
-    font-family:Georgia,serif;
-    font-size:19px;
-    font-weight:bold;
-    color:#ff6b9d;
-    letter-spacing:1px;
-    text-shadow:0 0 12px rgba(255,107,157,.5);
-}
-
-.admin-header .logout-btn{
-    padding:9px 16px;
-    border:1px solid rgba(255,107,157,.4);
-    border-radius:10px;
-    background:rgba(255,107,157,.15);
-    color:#ff6b9d;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
-}
-
+.admin-dashboard{display:none;min-height:100vh;padding-bottom:110px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f1a33 100%);color:#fff;}
+.admin-header{padding:18px 20px;background:rgba(0,0,0,.45);border-bottom:1px solid rgba(255,107,157,.25);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:50;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);}
+.admin-brand{font-family:Georgia,serif;font-size:19px;font-weight:bold;color:#ff6b9d;letter-spacing:1px;text-shadow:0 0 12px rgba(255,107,157,.5);}
+.admin-header .logout-btn{padding:9px 16px;border:1px solid rgba(255,107,157,.4);border-radius:10px;background:rgba(255,107,157,.15);color:#ff6b9d;font-weight:bold;cursor:pointer;transition:.2s;}
 .admin-header .logout-btn:hover{background:#ff6b9d;color:#1a1a2e;}
-
-.admin-content{
-    max-width:1100px;
-    margin:auto;
-    padding:22px 18px;
-}
-
-.admin-stats-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-    margin-bottom:22px;
-}
-
-.admin-stat-card{
-    padding:16px 12px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,107,157,.15);
-    border-radius:14px;
-    text-align:center;
-    transition:.2s;
-}
-
+.admin-content{max-width:1100px;margin:auto;padding:22px 18px;}
+.admin-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+.admin-stat-card{padding:16px 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,107,157,.15);border-radius:14px;text-align:center;transition:.2s;}
 .admin-stat-card.clickable{cursor:pointer;}
-
-.admin-stat-card:hover{
-    background:rgba(255,107,157,.10);
-    border-color:rgba(255,107,157,.4);
-    transform:translateY(-2px);
-}
-
-.admin-stat-card.danger{
-    border-color:rgba(231,76,60,.4);
-    background:rgba(231,76,60,.10);
-}
-
+.admin-stat-card:hover{background:rgba(255,107,157,.10);border-color:rgba(255,107,157,.4);transform:translateY(-2px);}
+.admin-stat-card.danger{border-color:rgba(231,76,60,.4);background:rgba(231,76,60,.10);}
 .admin-stat-card.danger strong{color:#ff6b7d;text-shadow:0 0 12px rgba(231,76,60,.4);}
-
-.admin-stat-card.user-info-card{
-    border-color:rgba(52,152,219,.5);
-    background:rgba(52,152,219,.10);
-}
-
-.admin-stat-card.user-info-card strong{
-    color:#5dade2;
-    text-shadow:0 0 12px rgba(52,152,219,.4);
-    font-size:16px;
-    padding-top:3px;
-}
-
-.admin-stat-card span{
-    display:block;
-    color:#8a8aa0;
-    font-size:11px;
-    margin-bottom:8px;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-weight:bold;
-}
-
-.admin-stat-card strong{
-    display:block;
-    color:#ff6b9d;
-    font-size:22px;
-    font-weight:bold;
-    text-shadow:0 0 12px rgba(255,107,157,.4);
-}
-
-.admin-tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:18px;
-    overflow-x:auto;
-    padding-bottom:6px;
-    scrollbar-width:none;
-}
-
+.admin-stat-card.user-info-card{border-color:rgba(52,152,219,.5);background:rgba(52,152,219,.10);}
+.admin-stat-card.user-info-card strong{color:#5dade2;text-shadow:0 0 12px rgba(52,152,219,.4);font-size:16px;padding-top:3px;}
+.admin-stat-card span{display:block;color:#8a8aa0;font-size:11px;margin-bottom:8px;text-transform:uppercase;letter-spacing:1.2px;font-weight:bold;}
+.admin-stat-card strong{display:block;color:#ff6b9d;font-size:22px;font-weight:bold;text-shadow:0 0 12px rgba(255,107,157,.4);}
+.admin-tabs{display:flex;gap:8px;margin-bottom:18px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
 .admin-tabs::-webkit-scrollbar{display:none;}
-
-.admin-tabs button{
-    padding:10px 18px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:10px;
-    color:#aaa;
-    font-size:12.5px;
-    font-weight:bold;
-    cursor:pointer;
-    white-space:nowrap;
-    transition:.2s;
-    letter-spacing:.3px;
-}
-
+.admin-tabs button{padding:10px 18px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;color:#aaa;font-size:12.5px;font-weight:bold;cursor:pointer;white-space:nowrap;transition:.2s;letter-spacing:.3px;}
 .admin-tabs button:hover{color:#ff6b9d;border-color:rgba(255,107,157,.4);}
-
-.admin-tabs button.active{
-    background:linear-gradient(135deg,#ff4b7d,#ff6b9d);
-    color:white;
-    border-color:transparent;
-    box-shadow:0 8px 20px rgba(255,107,157,.4);
-}
-
-.admin-user-item,
-.admin-cashout-item,
-.admin-violation-item,
-.admin-ticket-item{
-    padding:16px;
-    margin-bottom:12px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    transition:.2s;
-}
-
-.admin-violation-item{
-    background:rgba(231,76,60,.08);
-    border-color:rgba(231,76,60,.3);
-}
-
-.admin-ticket-item{
-    background:rgba(255,200,60,.06);
-    border-color:rgba(255,200,60,.25);
-}
-
-.admin-ticket-item.awaiting{
-    background:rgba(52,152,219,.08);
-    border-color:rgba(52,152,219,.35);
-}
-
-.admin-ticket-item.resolved{
-    background:rgba(46,204,113,.08);
-    border-color:rgba(46,204,113,.35);
-}
-
-.admin-user-item:hover,
-.admin-cashout-item:hover,
-.admin-ticket-item:hover{
-    background:rgba(255,107,157,.06);
-    border-color:rgba(255,107,157,.25);
-}
-
-.admin-violation-item:hover{
-    background:rgba(231,76,60,.12);
-    border-color:rgba(231,76,60,.5);
-}
-
-.admin-ticket-item:hover{
-    background:rgba(255,200,60,.12);
-    border-color:rgba(255,200,60,.45);
-}
-
-.admin-user-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    margin-bottom:10px;
-    padding-bottom:10px;
-    border-bottom:1px solid rgba(255,255,255,.08);
-    flex-wrap:wrap;
-}
-
-.admin-user-header strong{
-    color:#ff6b9d;
-    font-size:14.5px;
-    letter-spacing:.3px;
-}
-
+.admin-tabs button.active{background:linear-gradient(135deg,#ff4b7d,#ff6b9d);color:white;border-color:transparent;box-shadow:0 8px 20px rgba(255,107,157,.4);}
+.admin-user-item,.admin-cashout-item,.admin-violation-item,.admin-ticket-item{padding:16px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;transition:.2s;}
+.admin-violation-item{background:rgba(231,76,60,.08);border-color:rgba(231,76,60,.3);}
+.admin-ticket-item{background:rgba(255,200,60,.06);border-color:rgba(255,200,60,.25);}
+.admin-ticket-item.awaiting{background:rgba(52,152,219,.08);border-color:rgba(52,152,219,.35);}
+.admin-ticket-item.resolved{background:rgba(46,204,113,.08);border-color:rgba(46,204,113,.35);}
+.admin-user-item:hover,.admin-cashout-item:hover,.admin-ticket-item:hover{background:rgba(255,107,157,.06);border-color:rgba(255,107,157,.25);}
+.admin-violation-item:hover{background:rgba(231,76,60,.12);border-color:rgba(231,76,60,.5);}
+.admin-ticket-item:hover{background:rgba(255,200,60,.12);border-color:rgba(255,200,60,.45);}
+.admin-user-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;}
+.admin-user-header strong{color:#ff6b9d;font-size:14.5px;letter-spacing:.3px;}
 .violation-title{color:#ff6b7d !important;}
 .ticket-title{color:#ffd166 !important;}
-
-.admin-user-id{
-    padding:3px 9px;
-    background:rgba(255,107,157,.15);
-    color:#ff6b9d;
-    border-radius:6px;
-    font-size:11px;
-    font-weight:bold;
-    border:1px solid rgba(255,107,157,.25);
-}
-
-.violation-badge{
-    padding:4px 10px;
-    background:rgba(231,76,60,.25);
-    color:#ff8a96;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-    border:1px solid rgba(231,76,60,.4);
-}
-
-.admin-user-row{
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:6px 0;
-    font-size:12.5px;
-    color:#ddd;
-    border-bottom:1px dashed rgba(255,255,255,.05);
-}
-
+.admin-user-id{padding:3px 9px;background:rgba(255,107,157,.15);color:#ff6b9d;border-radius:6px;font-size:11px;font-weight:bold;border:1px solid rgba(255,107,157,.25);}
+.violation-badge{padding:4px 10px;background:rgba(231,76,60,.25);color:#ff8a96;border-radius:20px;font-size:11px;font-weight:bold;border:1px solid rgba(231,76,60,.4);}
+.admin-user-row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:12.5px;color:#ddd;border-bottom:1px dashed rgba(255,255,255,.05);}
 .admin-user-row:last-of-type{border-bottom:none;}
 .admin-user-row span{color:#8a8aa0;}
-
-.admin-user-row strong{
-    color:#fff;
-    text-align:right;
-    word-break:break-word;
-    font-weight:bold;
-}
-
-.admin-cashout-actions{
-    display:flex;
-    gap:8px;
-    margin-top:12px;
-    flex-wrap:wrap;
-}
-
-.admin-approve-btn,
-.admin-reject-btn,
-.admin-delete-btn,
-.admin-penalty-btn,
-.admin-reactivate-btn,
-.admin-view-btn{
-    flex:1;
-    min-width:100px;
-    padding:11px;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    font-size:12px;
-    cursor:pointer;
-    transition:.2s;
-    letter-spacing:.5px;
-}
-
+.admin-user-row strong{color:#fff;text-align:right;word-break:break-word;font-weight:bold;}
+.admin-cashout-actions{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+.admin-approve-btn,.admin-reject-btn,.admin-delete-btn,.admin-penalty-btn,.admin-reactivate-btn,.admin-view-btn{flex:1;min-width:100px;padding:11px;border:none;border-radius:10px;font-weight:bold;font-size:12px;cursor:pointer;transition:.2s;letter-spacing:.5px;}
 .admin-approve-btn{background:linear-gradient(135deg,#27ae60,#2ecc71);color:white;box-shadow:0 6px 16px rgba(46,204,113,.35);}
 .admin-reject-btn{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;box-shadow:0 6px 16px rgba(231,76,60,.35);}
 .admin-penalty-btn{background:linear-gradient(135deg,#8e44ad,#9b59b6);color:white;box-shadow:0 6px 16px rgba(155,89,182,.35);}
 .admin-reactivate-btn{background:linear-gradient(135deg,#2980b9,#3498db);color:white;box-shadow:0 6px 16px rgba(52,152,219,.35);}
 .admin-view-btn{background:linear-gradient(135deg,#16a085,#1abc9c);color:white;box-shadow:0 6px 16px rgba(26,188,156,.35);}
-
-.admin-delete-btn{
-    width:100%;
-    margin-top:12px;
-    flex:none;
-    background:rgba(192,57,43,.15);
-    color:#ff6b7d;
-    border:1px solid rgba(192,57,43,.4);
-}
-
+.admin-delete-btn{width:100%;margin-top:12px;flex:none;background:rgba(192,57,43,.15);color:#ff6b7d;border:1px solid rgba(192,57,43,.4);}
 .admin-delete-btn:hover{background:rgba(192,57,43,.3);}
+.admin-approve-btn:active,.admin-reject-btn:active,.admin-delete-btn:active,.admin-penalty-btn:active,.admin-reactivate-btn:active,.admin-view-btn:active{transform:scale(.97);}
+.admin-empty{padding:40px 20px;text-align:center;color:#8a8aa0;font-size:13px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.1);border-radius:14px;}
 
-.admin-approve-btn:active,
-.admin-reject-btn:active,
-.admin-delete-btn:active,
-.admin-penalty-btn:active,
-.admin-reactivate-btn:active,
-.admin-view-btn:active{transform:scale(.97);}
+.admin-floating-nav{position:fixed;left:0;right:0;bottom:0;height:76px;display:flex;justify-content:space-around;align-items:center;background:linear-gradient(135deg,rgba(15,15,30,.98),rgba(25,25,45,.98));border-top:1px solid rgba(255,107,157,.4);box-shadow:0 -10px 30px rgba(0,0,0,.5), 0 -2px 20px rgba(255,107,157,.15);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:200;padding:0 6px;}
+.admin-nav-item{flex:1;max-width:180px;height:60px;border:none;background:transparent;color:#8a8aa0;font-size:10.5px;font-weight:bold;cursor:pointer;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;border-radius:14px;transition:.2s;position:relative;padding:0 4px;letter-spacing:.3px;}
+.admin-nav-item .admin-nav-icon{font-size:22px;line-height:1;transition:.2s;}
+.admin-nav-item:hover{color:#ff6b9d;background:rgba(255,107,157,.08);}
+.admin-nav-item.active{color:#fff;background:linear-gradient(135deg,#ff4b7d,#ff6b9d);box-shadow:0 8px 20px rgba(255,107,157,.5);}
+.admin-nav-item.active .admin-nav-icon{transform:scale(1.15);}
+.admin-nav-badge{position:absolute;top:6px;right:calc(50% - 26px);min-width:20px;height:20px;padding:0 6px;display:none;align-items:center;justify-content:center;background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border-radius:10px;font-size:10px;font-weight:bold;letter-spacing:.3px;box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 10px rgba(231,76,60,.6);animation:badgePulse 1.8s infinite;}
+@keyframes badgePulse{0%,100%{ box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 10px rgba(231,76,60,.6); }50%{ box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 18px rgba(231,76,60,1); }}
 
-.admin-empty{
-    padding:40px 20px;
-    text-align:center;
-    color:#8a8aa0;
-    font-size:13px;
-    background:rgba(255,255,255,.03);
-    border:1px dashed rgba(255,255,255,.1);
-    border-radius:14px;
-}
-
-
-/* ========== ADMIN FLOATING NAV ========== */
-
-.admin-floating-nav{
-    position:fixed;
-    left:0;
-    right:0;
-    bottom:0;
-    height:76px;
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    background:linear-gradient(135deg,rgba(15,15,30,.98),rgba(25,25,45,.98));
-    border-top:1px solid rgba(255,107,157,.4);
-    box-shadow:0 -10px 30px rgba(0,0,0,.5), 0 -2px 20px rgba(255,107,157,.15);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    z-index:200;
-    padding:0 6px;
-}
-
-.admin-nav-item{
-    flex:1;
-    max-width:180px;
-    height:60px;
-    border:none;
-    background:transparent;
-    color:#8a8aa0;
-    font-size:10.5px;
-    font-weight:bold;
-    cursor:pointer;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:3px;
-    border-radius:14px;
-    transition:.2s;
-    position:relative;
-    padding:0 4px;
-    letter-spacing:.3px;
-}
-
-.admin-nav-item .admin-nav-icon{
-    font-size:22px;
-    line-height:1;
-    transition:.2s;
-}
-
-.admin-nav-item:hover{
-    color:#ff6b9d;
-    background:rgba(255,107,157,.08);
-}
-
-.admin-nav-item.active{
-    color:#fff;
-    background:linear-gradient(135deg,#ff4b7d,#ff6b9d);
-    box-shadow:0 8px 20px rgba(255,107,157,.5);
-}
-
-.admin-nav-item.active .admin-nav-icon{
-    transform:scale(1.15);
-}
-
-.admin-nav-badge{
-    position:absolute;
-    top:6px;
-    right:calc(50% - 26px);
-    min-width:20px;
-    height:20px;
-    padding:0 6px;
-    display:none;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
-    color:#fff;
-    border-radius:10px;
-    font-size:10px;
-    font-weight:bold;
-    letter-spacing:.3px;
-    box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 10px rgba(231,76,60,.6);
-    animation:badgePulse 1.8s infinite;
-}
-
-@keyframes badgePulse{
-    0%,100%{ box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 10px rgba(231,76,60,.6); }
-    50%{ box-shadow:0 0 0 2px rgba(15,15,30,.9), 0 4px 18px rgba(231,76,60,1); }
-}
-
-
-/* ========== ADMIN UPDATES ========== */
-
-.admin-update-form{
-    padding:18px;
-    margin-bottom:16px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-}
-
-.admin-update-form label{
-    display:block;
-    color:#ccc;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.admin-update-form input,
-.admin-update-form textarea{
-    width:100%;
-    padding:11px 12px;
-    margin-bottom:14px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:10px;
-    color:white;
-    font-size:13px;
-    outline:none;
-    font-family:inherit;
-    resize:vertical;
-    line-height:1.6;
-}
-
-.admin-update-form input:focus,
-.admin-update-form textarea:focus{
-    border-color:#ff6b9d;
-    box-shadow:0 0 0 3px rgba(255,107,157,.2);
-}
-
-.admin-update-form input::placeholder,
-.admin-update-form textarea::placeholder{color:#8a8aa0;}
-
-.theme-picker,
-.sticker-picker{
-    display:grid;
-    grid-template-columns:repeat(auto-fill, minmax(90px, 1fr));
-    gap:8px;
-    margin-bottom:16px;
-}
-
-.theme-btn,
-.sticker-btn{
-    padding:10px 8px;
-    border:2px solid rgba(255,255,255,.15);
-    border-radius:10px;
-    background:rgba(255,255,255,.06);
-    color:#fff;
-    font-size:11px;
-    font-weight:bold;
-    cursor:pointer;
-    text-align:center;
-    transition:.2s;
-    letter-spacing:.3px;
-}
-
-.theme-btn:hover,
-.sticker-btn:hover{
-    transform:translateY(-2px);
-    border-color:#ff6b9d;
-}
-
-.theme-btn.active,
-.sticker-btn.active{
-    border-color:#ff4b7d;
-    box-shadow:0 0 0 3px rgba(255,107,157,.35), 0 6px 14px rgba(255,107,157,.3);
-    transform:scale(1.03);
-}
-
+.admin-update-form{padding:18px;margin-bottom:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;}
+.admin-update-form label{display:block;color:#ccc;font-size:12px;font-weight:bold;margin-bottom:6px;}
+.admin-update-form input,.admin-update-form textarea{width:100%;padding:11px 12px;margin-bottom:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;font-family:inherit;resize:vertical;line-height:1.6;}
+.admin-update-form input:focus,.admin-update-form textarea:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
+.admin-update-form input::placeholder,.admin-update-form textarea::placeholder{color:#8a8aa0;}
+.theme-picker,.sticker-picker{display:grid;grid-template-columns:repeat(auto-fill, minmax(90px, 1fr));gap:8px;margin-bottom:16px;}
+.theme-btn,.sticker-btn{padding:10px 8px;border:2px solid rgba(255,255,255,.15);border-radius:10px;background:rgba(255,255,255,.06);color:#fff;font-size:11px;font-weight:bold;cursor:pointer;text-align:center;transition:.2s;letter-spacing:.3px;}
+.theme-btn:hover,.sticker-btn:hover{transform:translateY(-2px);border-color:#ff6b9d;}
+.theme-btn.active,.sticker-btn.active{border-color:#ff4b7d;box-shadow:0 0 0 3px rgba(255,107,157,.35), 0 6px 14px rgba(255,107,157,.3);transform:scale(1.03);}
 .theme-btn[data-theme="pink"]{    background:linear-gradient(135deg,#fff0f4,#ffe0e9); color:#9d1839; }
 .theme-btn[data-theme="gold"]{    background:linear-gradient(135deg,#fff8e6,#ffe9c2); color:#8a6500; }
 .theme-btn[data-theme="purple"]{  background:linear-gradient(135deg,#f5ebff,#ead5ff); color:#5c2880; }
@@ -2374,509 +455,83 @@ h1{
 .theme-btn[data-theme="royal"]{   background:linear-gradient(135deg,#fff0f0,#ffd5d5); color:#8b0000; }
 .theme-btn[data-theme="neon"]{    background:linear-gradient(135deg,#0a0a1a,#1a0a2e); color:#00ffcc; border-color:#00ffcc; }
 .theme-btn[data-theme="rainbow"]{ background:linear-gradient(135deg,#ffb3d9,#b3e6ff,#e6b3ff); color:#4b1f2a; }
-
-.admin-publish-btn{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#ff4b7d,#ff6b9d);
-    color:white;
-    font-weight:bold;
-    font-size:13px;
-    cursor:pointer;
-    box-shadow:0 8px 20px rgba(255,107,157,.35);
-    letter-spacing:.5px;
-    transition:.2s;
-    margin-top:6px;
-}
-
+.admin-publish-btn{width:100%;padding:13px;border:none;border-radius:10px;background:linear-gradient(135deg,#ff4b7d,#ff6b9d);color:white;font-weight:bold;font-size:13px;cursor:pointer;box-shadow:0 8px 20px rgba(255,107,157,.35);letter-spacing:.5px;transition:.2s;margin-top:6px;}
 .admin-publish-btn:active{transform:scale(.98);}
-
-.admin-update-preview{
-    padding:16px;
-    margin-bottom:16px;
-    background:rgba(255,255,255,.04);
-    border:1px dashed rgba(255,107,157,.35);
-    border-radius:14px;
-}
-
-.admin-update-preview-label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    color:#ff6b9d;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:1.5px;
-    margin-bottom:12px;
-    text-transform:uppercase;
-}
-
+.admin-update-preview{padding:16px;margin-bottom:16px;background:rgba(255,255,255,.04);border:1px dashed rgba(255,107,157,.35);border-radius:14px;}
+.admin-update-preview-label{display:flex;align-items:center;gap:8px;color:#ff6b9d;font-size:11px;font-weight:bold;letter-spacing:1.5px;margin-bottom:12px;text-transform:uppercase;}
 .admin-update-preview-label::before{ content:"👁"; font-size:14px; }
+.admin-update-preview-inner{background:#fff;border-radius:12px;padding:16px;max-height:280px;overflow-y:auto;}
 
-.admin-update-preview-inner{
-    background:#fff;
-    border-radius:12px;
-    padding:16px;
-    max-height:280px;
-    overflow-y:auto;
-}
-
-
-/* ========== ADMIN SITE CONTROL ========== */
-
-.admin-control-card{
-    padding:18px;
-    margin-bottom:12px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:14px;
-    flex-wrap:wrap;
-    transition:.2s;
-}
-
-.admin-control-card.on{
-    background:rgba(231,76,60,.12);
-    border-color:rgba(231,76,60,.45);
-}
-
+.admin-control-card{padding:18px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;transition:.2s;}
+.admin-control-card.on{background:rgba(231,76,60,.12);border-color:rgba(231,76,60,.45);}
 .admin-control-info{flex:1;min-width:180px;}
-
-.admin-control-info strong{
-    display:block;
-    color:#fff;
-    font-size:14px;
-    margin-bottom:4px;
-    letter-spacing:.3px;
-}
-
-.admin-control-info span{
-    display:block;
-    color:#8a8aa0;
-    font-size:11.5px;
-    line-height:1.5;
-}
-
-.admin-switch{
-    position:relative;
-    width:58px;
-    height:30px;
-    flex-shrink:0;
-    cursor:pointer;
-    background:rgba(255,255,255,.15);
-    border-radius:15px;
-    transition:.25s;
-    border:1px solid rgba(255,255,255,.15);
-}
-
-.admin-switch::after{
-    content:"";
-    position:absolute;
-    top:3px;left:3px;
-    width:22px;height:22px;
-    border-radius:50%;
-    background:#fff;
-    transition:.25s;
-}
-
-.admin-switch.on{
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
-    border-color:transparent;
-}
-
+.admin-control-info strong{display:block;color:#fff;font-size:14px;margin-bottom:4px;letter-spacing:.3px;}
+.admin-control-info span{display:block;color:#8a8aa0;font-size:11.5px;line-height:1.5;}
+.admin-switch{position:relative;width:58px;height:30px;flex-shrink:0;cursor:pointer;background:rgba(255,255,255,.15);border-radius:15px;transition:.25s;border:1px solid rgba(255,255,255,.15);}
+.admin-switch::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.25s;}
+.admin-switch.on{background:linear-gradient(135deg,#c0392b,#e74c3c);border-color:transparent;}
 .admin-switch.on::after{left:31px;}
+.admin-control-status{padding:5px 12px;border-radius:20px;font-size:11px;font-weight:bold;letter-spacing:.5px;flex-shrink:0;}
+.admin-control-status.active{background:rgba(46,204,113,.2);color:#7dff9a;border:1px solid rgba(46,204,113,.4);}
+.admin-control-status.paused{background:rgba(231,76,60,.25);color:#ff8a96;border:1px solid rgba(231,76,60,.5);}
 
-.admin-control-status{
-    padding:5px 12px;
-    border-radius:20px;
-    font-size:11px;
-    font-weight:bold;
-    letter-spacing:.5px;
-    flex-shrink:0;
-}
-
-.admin-control-status.active{
-    background:rgba(46,204,113,.2);
-    color:#7dff9a;
-    border:1px solid rgba(46,204,113,.4);
-}
-
-.admin-control-status.paused{
-    background:rgba(231,76,60,.25);
-    color:#ff8a96;
-    border:1px solid rgba(231,76,60,.5);
-}
-
-
-/* ========== ADMIN TICKET STATS ========== */
-
-.admin-ticket-stats{
-    display:flex;
-    gap:10px;
-    margin-bottom:14px;
-    flex-wrap:wrap;
-}
-
-.admin-ticket-stat{
-    flex:1;
-    min-width:140px;
-    padding:14px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:14px;
-    text-align:center;
-}
-
-.admin-ticket-stat span{
-    display:block;
-    color:#8a8aa0;
-    font-size:11px;
-    text-transform:uppercase;
-    letter-spacing:1.2px;
-    font-weight:bold;
-    margin-bottom:4px;
-}
-
-.admin-ticket-stat strong{
-    display:block;
-    font-size:24px;
-    font-weight:bold;
-}
-
+.admin-ticket-stats{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+.admin-ticket-stat{flex:1;min-width:140px;padding:14px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;text-align:center;}
+.admin-ticket-stat span{display:block;color:#8a8aa0;font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:bold;margin-bottom:4px;}
+.admin-ticket-stat strong{display:block;font-size:24px;font-weight:bold;}
 .admin-ticket-stat.total strong{color:#ffd166;}
 .admin-ticket-stat.resolved strong{color:#7dff9a;}
 .admin-ticket-stat.active strong{color:#ff6b9d;}
-
-.admin-clear-tickets-btn{
-    flex:1;
-    min-width:200px;
-    padding:14px;
-    border:none;
-    border-radius:14px;
-    background:rgba(192,57,43,.15);
-    color:#ff6b7d;
-    border:1px solid rgba(192,57,43,.4);
-    font-weight:bold;
-    font-size:12.5px;
-    cursor:pointer;
-    transition:.2s;
-    letter-spacing:.5px;
-}
-
+.admin-clear-tickets-btn{flex:1;min-width:200px;padding:14px;border:none;border-radius:14px;background:rgba(192,57,43,.15);color:#ff6b7d;border:1px solid rgba(192,57,43,.4);font-weight:bold;font-size:12.5px;cursor:pointer;transition:.2s;letter-spacing:.5px;}
 .admin-clear-tickets-btn:hover{background:rgba(192,57,43,.3);}
 .admin-clear-tickets-btn:active{transform:scale(.97);}
 
-
-/* ========== ADMIN TICKET CHAT ========== */
-
-.admin-ticket-chat{
-    max-height:220px;
-    overflow-y:auto;
-    padding:12px;
-    background:rgba(0,0,0,.25);
-    border-radius:10px;
-    margin-top:10px;
-    margin-bottom:10px;
-}
-
+.admin-ticket-chat{max-height:220px;overflow-y:auto;padding:12px;background:rgba(0,0,0,.25);border-radius:10px;margin-top:10px;margin-bottom:10px;}
 .admin-ticket-chat::-webkit-scrollbar{width:5px;}
 .admin-ticket-chat::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:4px;}
-
-.admin-chat-msg{
-    padding:9px 12px;
-    border-radius:10px;
-    margin-bottom:8px;
-    font-size:12.5px;
-    line-height:1.5;
-    max-width:88%;
-    word-break:break-word;
-}
-
-.admin-chat-msg.from-user{
-    background:rgba(255,255,255,.12);
-    color:#fff;
-    margin-right:auto;
-    border-left:3px solid #ff6b9d;
-}
-
-.admin-chat-msg.from-admin{
-    background:linear-gradient(135deg,#16a085,#1abc9c);
-    color:white;
-    margin-left:auto;
-    border-right:3px solid #27ae60;
-}
-
-.admin-chat-msg .msg-meta{
-    display:block;
-    font-size:10px;
-    opacity:.7;
-    margin-top:4px;
-}
-
-.admin-ticket-input-row{
-    display:flex;
-    gap:8px;
-    margin-top:8px;
-}
-
-.admin-ticket-input-row input{
-    flex:1;
-    height:42px;
-    padding:0 12px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:10px;
-    color:white;
-    font-size:13px;
-    outline:none;
-}
-
-.admin-ticket-input-row input:focus{
-    border-color:#ff6b9d;
-    box-shadow:0 0 0 3px rgba(255,107,157,.2);
-}
-
+.admin-chat-msg{padding:9px 12px;border-radius:10px;margin-bottom:8px;font-size:12.5px;line-height:1.5;max-width:88%;word-break:break-word;}
+.admin-chat-msg.from-user{background:rgba(255,255,255,.12);color:#fff;margin-right:auto;border-left:3px solid #ff6b9d;}
+.admin-chat-msg.from-admin{background:linear-gradient(135deg,#16a085,#1abc9c);color:white;margin-left:auto;border-right:3px solid #27ae60;}
+.admin-chat-msg .msg-meta{display:block;font-size:10px;opacity:.7;margin-top:4px;}
+.admin-ticket-input-row{display:flex;gap:8px;margin-top:8px;}
+.admin-ticket-input-row input{flex:1;height:42px;padding:0 12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;}
+.admin-ticket-input-row input:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
 .admin-ticket-input-row input::placeholder{color:#8a8aa0;}
-
-.admin-ticket-input-row button{
-    padding:0 18px;
-    height:42px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#2980b9,#3498db);
-    color:white;
-    font-weight:bold;
-    font-size:12px;
-    cursor:pointer;
-    transition:.2s;
-}
-
+.admin-ticket-input-row button{padding:0 18px;height:42px;border:none;border-radius:10px;background:linear-gradient(135deg,#2980b9,#3498db);color:white;font-weight:bold;font-size:12px;cursor:pointer;transition:.2s;}
 .admin-ticket-input-row button:active{transform:scale(.97);}
-
-.admin-ask-resolved-btn{
-    width:100%;
-    padding:11px;
-    margin-top:8px;
-    border:none;
-    border-radius:10px;
-    background:linear-gradient(135deg,#f39c12,#f1c40f);
-    color:white;
-    font-weight:bold;
-    font-size:12px;
-    cursor:pointer;
-    transition:.2s;
-    letter-spacing:.5px;
-    box-shadow:0 6px 16px rgba(243,156,18,.35);
-}
-
+.admin-ask-resolved-btn{width:100%;padding:11px;margin-top:8px;border:none;border-radius:10px;background:linear-gradient(135deg,#f39c12,#f1c40f);color:white;font-weight:bold;font-size:12px;cursor:pointer;transition:.2s;letter-spacing:.5px;box-shadow:0 6px 16px rgba(243,156,18,.35);}
 .admin-ask-resolved-btn:active{transform:scale(.97);}
 
-
-/* ========== USER INFO MODAL ========== */
-
-.user-info-modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    backdrop-filter:blur(6px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    z-index:600;
-    overflow-y:auto;
-}
-
+.user-info-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;justify-content:center;align-items:center;padding:20px;z-index:600;overflow-y:auto;}
 .user-info-modal-overlay.show{display:flex;}
-
-.user-info-modal{
-    width:100%;
-    max-width:440px;
-    padding:24px;
-    background:linear-gradient(145deg,#1e1e3a,#16162e);
-    border:1px solid rgba(255,107,157,.4);
-    border-radius:20px;
-    box-shadow:0 30px 70px rgba(255,107,157,.3);
-    max-height:90vh;
-    overflow-y:auto;
-    margin:auto;
-}
-
-.user-info-modal h3{
-    color:#ff6b9d;
-    font-family:Georgia,serif;
-    font-size:19px;
-    margin-bottom:6px;
-    text-align:center;
-}
-
-.user-info-modal .user-modal-sub{
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-    margin-bottom:18px;
-}
-
+.user-info-modal{width:100%;max-width:440px;padding:24px;background:linear-gradient(145deg,#1e1e3a,#16162e);border:1px solid rgba(255,107,157,.4);border-radius:20px;box-shadow:0 30px 70px rgba(255,107,157,.3);max-height:90vh;overflow-y:auto;margin:auto;}
+.user-info-modal h3{color:#ff6b9d;font-family:Georgia,serif;font-size:19px;margin-bottom:6px;text-align:center;}
+.user-info-modal .user-modal-sub{text-align:center;color:#aaa;font-size:12px;margin-bottom:18px;}
 .user-edit-field{margin-bottom:14px;}
-
-.user-edit-field label{
-    display:block;
-    color:#ccc;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.user-edit-field input{
-    width:100%;
-    height:44px;
-    padding:0 12px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:10px;
-    color:white;
-    font-size:13px;
-    outline:none;
-}
-
-.user-edit-field input:focus{
-    border-color:#ff6b9d;
-    box-shadow:0 0 0 3px rgba(255,107,157,.2);
-}
-
+.user-edit-field label{display:block;color:#ccc;font-size:12px;font-weight:bold;margin-bottom:6px;}
+.user-edit-field input{width:100%;height:44px;padding:0 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;}
+.user-edit-field input:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
 .user-edit-field input:disabled{opacity:.6;cursor:not-allowed;}
+.user-edit-hint{color:#8a8aa0;font-size:11px;margin-top:4px;font-style:italic;}
 
-.user-edit-hint{
-    color:#8a8aa0;
-    font-size:11px;
-    margin-top:4px;
-    font-style:italic;
-}
-
-
-/* ========== PENALTY MODAL ========== */
-
-.penalty-modal-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.75);
-    backdrop-filter:blur(6px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    z-index:600;
-}
-
+.penalty-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);display:none;justify-content:center;align-items:center;padding:20px;z-index:600;}
 .penalty-modal-overlay.show{display:flex;}
-
-.penalty-modal{
-    width:100%;
-    max-width:420px;
-    padding:26px 24px;
-    background:linear-gradient(145deg,#1e1e3a,#16162e);
-    border:1px solid rgba(255,107,157,.4);
-    border-radius:20px;
-    box-shadow:0 30px 70px rgba(255,107,157,.3);
-    max-height:90vh;
-    overflow-y:auto;
-}
-
-.penalty-modal h3{
-    color:#ff6b9d;
-    font-family:Georgia,serif;
-    font-size:20px;
-    text-align:center;
-    margin-bottom:6px;
-}
-
-.penalty-modal .penalty-sub{
-    text-align:center;
-    color:#aaa;
-    font-size:12px;
-    margin-bottom:18px;
-}
-
+.penalty-modal{width:100%;max-width:420px;padding:26px 24px;background:linear-gradient(145deg,#1e1e3a,#16162e);border:1px solid rgba(255,107,157,.4);border-radius:20px;box-shadow:0 30px 70px rgba(255,107,157,.3);max-height:90vh;overflow-y:auto;}
+.penalty-modal h3{color:#ff6b9d;font-family:Georgia,serif;font-size:20px;text-align:center;margin-bottom:6px;}
+.penalty-modal .penalty-sub{text-align:center;color:#aaa;font-size:12px;margin-bottom:18px;}
 .penalty-field{margin-bottom:14px;}
-
-.penalty-field label{
-    display:block;
-    color:#ccc;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:6px;
-}
-
-.penalty-field select,
-.penalty-field input{
-    width:100%;
-    height:44px;
-    padding:0 12px;
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:10px;
-    color:white;
-    font-size:13px;
-    outline:none;
-}
-
-.penalty-field select:focus,
-.penalty-field input:focus{
-    border-color:#ff6b9d;
-    box-shadow:0 0 0 3px rgba(255,107,157,.2);
-}
-
+.penalty-field label{display:block;color:#ccc;font-size:12px;font-weight:bold;margin-bottom:6px;}
+.penalty-field select,.penalty-field input{width:100%;height:44px;padding:0 12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:white;font-size:13px;outline:none;}
+.penalty-field select:focus,.penalty-field input:focus{border-color:#ff6b9d;box-shadow:0 0 0 3px rgba(255,107,157,.2);}
 .penalty-field select option{background:#1e1e3a;color:white;}
-
-.penalty-summary{
-    padding:12px;
-    background:rgba(255,107,157,.1);
-    border:1px solid rgba(255,107,157,.3);
-    border-radius:10px;
-    color:#ff8fb3;
-    font-size:12px;
-    line-height:1.6;
-    text-align:center;
-    margin-bottom:16px;
-}
-
+.penalty-summary{padding:12px;background:rgba(255,107,157,.1);border:1px solid rgba(255,107,157,.3);border-radius:10px;color:#ff8fb3;font-size:12px;line-height:1.6;text-align:center;margin-bottom:16px;}
 .penalty-buttons{display:flex;gap:10px;}
-
-.penalty-btn{
-    flex:1;
-    height:46px;
-    border:none;
-    border-radius:10px;
-    font-weight:bold;
-    font-size:13px;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.penalty-btn-confirm{
-    background:linear-gradient(135deg,#c0392b,#e74c3c);
-    color:white;
-    box-shadow:0 8px 20px rgba(231,76,60,.4);
-}
-
-.penalty-btn-cancel{
-    background:rgba(255,255,255,.1);
-    color:#ccc;
-    border:1px solid rgba(255,255,255,.15);
-}
-
+.penalty-btn{flex:1;height:46px;border:none;border-radius:10px;font-weight:bold;font-size:13px;cursor:pointer;transition:.2s;}
+.penalty-btn-confirm{background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;box-shadow:0 8px 20px rgba(231,76,60,.4);}
+.penalty-btn-cancel{background:rgba(255,255,255,.1);color:#ccc;border:1px solid rgba(255,255,255,.15);}
 .penalty-btn:active{transform:scale(.97);}
 
-
-/* ========== MOBILE ========== */
-
 @media(max-width:700px){
-
     .dashboard-grid{grid-template-columns:1fr;}
     .balance{font-size:32px;}
     .focus-card{padding:20px;}
@@ -2884,17 +539,9 @@ h1{
     .receipt-value{text-align:left;}
     .total-stats,.invite-stats{grid-template-columns:1fr 1fr;}
     .modal-card{padding:26px 20px 20px;}
-
-    .device-info-row{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:4px;
-    }
-
+    .device-info-row{flex-direction:column;align-items:flex-start;gap:4px;}
     .device-info-value{text-align:left;}
-    #heartFusionAiFocus .focus-card,
-    #ticketFocus .focus-card,
-    #ticketInboxFocus .focus-card{padding:0;}
+    #heartFusionAiFocus .focus-card,#ticketFocus .focus-card,#ticketInboxFocus .focus-card{padding:0;}
     .ai-chat-messages{height:min(52vh,420px);}
     .ai-msg .ai-bubble{font-size:13px;}
     .complan-header{margin:-20px -20px 16px;}
@@ -2905,8 +552,7 @@ h1{
     .rating-stars .star{font-size:32px;}
     .admin-nav-item{font-size:9.5px;}
     .admin-nav-item .admin-nav-icon{font-size:20px;}
-    .theme-picker,
-    .sticker-picker{grid-template-columns:repeat(auto-fill, minmax(70px, 1fr));}
+    .theme-picker,.sticker-picker{grid-template-columns:repeat(auto-fill, minmax(70px, 1fr));}
 }
 
 </style>
@@ -2915,10 +561,6 @@ h1{
 
 <body>
 
-
-<!-- =====================================================
-     AUTH
-===================================================== -->
 
 <div class="auth-page" id="authPage">
 
@@ -3043,10 +685,6 @@ h1{
 
 
 
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
-
 <div class="dashboard" id="dashboard">
 
 <header class="dashboard-header">
@@ -3101,8 +739,6 @@ h1{
 
 
 
-<!-- LEADERBOARD -->
-
 <div class="focus-page" id="leaderboardFocus">
 <div class="focus-card">
 <h2>🏆 Leaderboard</h2>
@@ -3114,8 +750,6 @@ h1{
 
 
 
-<!-- LIVE CASHOUT -->
-
 <div class="focus-page" id="liveCashoutFocus">
 <div class="focus-card">
 <h2>💸 Live Cashout</h2>
@@ -3126,8 +760,6 @@ h1{
 </div>
 
 
-
-<!-- SETTINGS -->
 
 <div class="focus-page" id="settingsFocus">
 <div class="focus-card">
@@ -3173,8 +805,6 @@ h1{
 
 
 
-<!-- TRANSFER -->
-
 <div class="focus-page" id="transferFocus">
 <div class="focus-card">
 <h2>💸 Transfer Funds</h2>
@@ -3209,8 +839,6 @@ h1{
 
 
 
-<!-- TRANSFER OTP -->
-
 <div class="focus-page" id="transferOtpFocus">
 <div class="focus-card">
 <div class="otp-container">
@@ -3228,8 +856,6 @@ h1{
 
 
 
-<!-- TRANSFER RECEIPT -->
-
 <div class="focus-page" id="transferReceiptFocus">
 <div class="focus-card">
 <div class="receipt" id="transferReceipt"></div>
@@ -3239,8 +865,6 @@ h1{
 </div>
 
 
-
-<!-- CASHOUT -->
 
 <div class="focus-page" id="cashoutFocus">
 <div class="focus-card">
@@ -3283,8 +907,6 @@ h1{
 
 
 
-<!-- CASHOUT RECEIPT -->
-
 <div class="focus-page" id="cashoutReceiptFocus">
 <div class="focus-card">
 <div class="receipt" id="cashoutReceipt"></div>
@@ -3294,8 +916,6 @@ h1{
 </div>
 
 
-
-<!-- GAMES -->
 
 <div class="focus-page" id="gamesFocus">
 <div class="focus-card game-card">
@@ -3353,8 +973,6 @@ h1{
 
 
 
-<!-- TRANSFER TRANSACTIONS -->
-
 <div class="focus-page" id="transferTransactionFocus">
 <div class="focus-card">
 <h2>💸 Transfer Transactions</h2>
@@ -3365,8 +983,6 @@ h1{
 </div>
 
 
-
-<!-- GAME TRANSACTIONS -->
 
 <div class="focus-page" id="gameTransactionFocus">
 <div class="focus-card">
@@ -3379,8 +995,6 @@ h1{
 
 
 
-<!-- CASHOUT TRANSACTIONS -->
-
 <div class="focus-page" id="cashoutTransactionFocus">
 <div class="focus-card">
 <h2>💰 Cashout Transactions</h2>
@@ -3392,8 +1006,6 @@ h1{
 </div>
 
 
-
-<!-- CUSTOMER SERVICE -->
 
 <div class="focus-page" id="customerServiceFocus">
 
@@ -3510,8 +1122,6 @@ Need help? Reach out to our support team or join the community for updates.
 
 
 
-<!-- COMPLAN PAGE -->
-
 <div class="focus-page" id="complanFocus">
 
 <div class="focus-card">
@@ -3592,10 +1202,6 @@ Need help? Reach out to our support team or join the community for updates.
 
 
 
-<!-- =====================================================
-     UPDATES PAGE (USER)
-===================================================== -->
-
 <div class="focus-page" id="updatesFocus">
 
 <div class="focus-card">
@@ -3614,8 +1220,6 @@ Need help? Reach out to our support team or join the community for updates.
 </div>
 
 
-
-<!-- HEART FUSION AI PAGE -->
 
 <div class="focus-page" id="heartFusionAiFocus">
 <div class="focus-card">
@@ -3647,8 +1251,6 @@ Need help? Reach out to our support team or join the community for updates.
 
 
 
-<!-- TICKET CREATION PAGE -->
-
 <div class="focus-page" id="ticketFocus">
 <div class="focus-card">
     <div class="ai-page-header ticket-header">
@@ -3670,8 +1272,6 @@ Need help? Reach out to our support team or join the community for updates.
 </div>
 
 
-
-<!-- TICKET INBOX PAGE -->
 
 <div class="focus-page" id="ticketInboxFocus">
 <div class="focus-card">
@@ -3699,8 +1299,6 @@ Need help? Reach out to our support team or join the community for updates.
 </main>
 
 
-<!-- TRANSACTION PANEL -->
-
 <div class="transaction-panel" id="transactionPanel">
 <h3>💳 Transactions</h3>
 <button class="transaction-option" onclick="showFocus('transferTransactionFocus')">💸 Transfer Transactions</button>
@@ -3709,8 +1307,6 @@ Need help? Reach out to our support team or join the community for updates.
 </div>
 
 
-
-<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 <button class="nav-item active" id="dashboardNav" onclick="goDashboard(this)">
@@ -3734,10 +1330,6 @@ CS
 </div>
 
 
-
-<!-- =====================================================
-     ADMIN PANEL
-===================================================== -->
 
 <div class="admin-dashboard" id="adminDashboard">
 
@@ -3767,18 +1359,18 @@ CS
         </div>
     </div>
 
-    <!-- MAIN TABS (Users, Cashouts, Violations only) -->
     <div class="admin-tabs">
         <button class="active" onclick="showAdminTab('users', this)">👥 Users</button>
         <button onclick="showAdminTab('cashouts', this)">💰 Cashout Requests</button>
         <button onclick="showAdminTab('violations', this)">⚠️ Violations</button>
+        <button onclick="showAdminTab('leaderboard', this)">🏆 Leaderboard</button>
     </div>
 
     <div id="adminUsersTab"><div id="adminUsersList"></div></div>
     <div id="adminCashoutsTab" style="display:none;"><div id="adminCashoutsList"></div></div>
     <div id="adminViolationsTab" style="display:none;"><div id="adminViolationsList"></div></div>
+    <div id="adminLeaderboardTab" style="display:none;"><div id="adminLeaderboardList"></div></div>
 
-    <!-- SUPPORT TICKETS TAB (hidden by default, shown via floating nav) -->
     <div id="adminTicketsTab" style="display:none;">
 
         <div class="admin-ticket-stats">
@@ -3800,7 +1392,6 @@ CS
         <div id="adminTicketsList"></div>
     </div>
 
-    <!-- UPDATES TAB (hidden, shown via floating nav) -->
     <div id="adminUpdatesTab" style="display:none;">
 
         <div class="admin-update-form">
@@ -3856,14 +1447,12 @@ CS
 
     </div>
 
-    <!-- SITE CONTROL TAB (hidden, shown via floating nav) -->
     <div id="adminSiteControlTab" style="display:none;">
         <div id="adminSiteControlList"></div>
     </div>
 
 </div>
 
-<!-- FLOATING BOTTOM NAV (Tickets, Updates, Site Control) -->
 <nav class="admin-floating-nav" id="adminFloatingNav">
     <button class="admin-nav-item" id="adminNavTickets" onclick="showAdminFloating('tickets', this)">
         <span class="admin-nav-icon">🎫</span>
@@ -3884,19 +1473,11 @@ CS
 
 
 
-<!-- =====================================================
-     USER INFO MODAL
-===================================================== -->
-
 <div class="user-info-modal-overlay" id="userInfoModalOverlay">
 <div class="user-info-modal" id="userInfoModalContent"></div>
 </div>
 
 
-
-<!-- =====================================================
-     PENALTY MODAL
-===================================================== -->
 
 <div class="penalty-modal-overlay" id="penaltyModalOverlay">
 <div class="penalty-modal">
@@ -3943,10 +1524,6 @@ CS
 
 
 
-<!-- =====================================================
-     RATING MODAL
-===================================================== -->
-
 <div class="rating-modal-overlay" id="ratingModalOverlay">
 <div class="rating-modal">
     <h3>⭐ Rate Your Experience</h3>
@@ -3973,20 +1550,12 @@ CS
 
 
 
-<!-- =====================================================
-     NOTIFICATION
-===================================================== -->
-
 <div class="app-notification" id="appNotification">
 <strong id="notificationTitle">Notification</strong>
 <span id="notificationMessage">Message</span>
 </div>
 
 
-
-<!-- =====================================================
-     CUSTOM MODAL
-===================================================== -->
 
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal-card" role="dialog" aria-modal="true">
@@ -4030,7 +1599,6 @@ let aiInitialized=false;
 
 let sitePauseHandled=false;
 
-/* Update designer state */
 let selectedUpdateTheme = "pink";
 let selectedUpdateSticker = "none";
 
@@ -4056,15 +1624,18 @@ const ADMIN_PASSWORD = "carl123";
 
 
 /* =====================================================
-   LEADERBOARD REWARDS CONFIG
+   LEADERBOARD REWARDS CONFIG (TOP 30 ONLY)
 ===================================================== */
 
 const LEADERBOARD_REWARDS = [
-    {min:1,  max:15,  reward:0.020},
-    {min:16, max:30,  reward:0.015},
-    {min:31, max:50,  reward:0.010},
-    {min:51, max:80,  reward:0.008},
-    {min:81, max:100, reward:0.005}
+    {min:1,  max:1,  reward:0.010},
+    {min:2,  max:2,  reward:0.008},
+    {min:3,  max:3,  reward:0.006},
+    {min:4,  max:8,  reward:0.005},
+    {min:9,  max:14, reward:0.004},
+    {min:15, max:20, reward:0.003},
+    {min:21, max:25, reward:0.002},
+    {min:26, max:30, reward:0.001}
 ];
 
 function getRankReward(rank){
@@ -4136,7 +1707,7 @@ const STICKER_MAP = {
 
 
 /* =====================================================
-   BUILD UPDATE CARD HTML (shared between user & preview)
+   BUILD UPDATE CARD HTML
 ===================================================== */
 
 function buildUpdateCardHTML(u, isPreview){
@@ -4243,7 +1814,7 @@ async function checkSitePause(){
 
 
 /* =====================================================
-   LEADERBOARD — WEEKLY PROCESSING
+   LEADERBOARD — WEEKLY PROCESSING (TOP 30 ONLY)
 ===================================================== */
 
 function processLeaderboardRewards(users){
@@ -4253,7 +1824,7 @@ function processLeaderboardRewards(users){
     const sorted = users
         .filter(u => Number(u.weeklyPoints||0) > 0)
         .sort((a,b) => Number(b.weeklyPoints||0) - Number(a.weeklyPoints||0))
-        .slice(0, 100);
+        .slice(0, 30);
 
     const results = [];
 
@@ -4646,10 +2217,6 @@ document.getElementById("ticketChatForm").addEventListener("submit", function(ev
 });
 
 
-/* =====================================================
-   TICKET STORAGE HELPERS
-===================================================== */
-
 function getAllTickets(){
     return JSON.parse(localStorage.getItem("supportTickets") || "[]");
 }
@@ -4680,10 +2247,6 @@ function getMyUnresolvedTicket(){
     return tickets[0];
 }
 
-
-/* =====================================================
-   YOUR TICKET SECTION (in CS)
-===================================================== */
 
 function updateYourTicketSection(){
 
@@ -4834,10 +2397,6 @@ function renderTicketInboxMessages(ticket){
 }
 
 
-/* =====================================================
-   USER ANSWERS RESOLUTION (Yes/No)
-===================================================== */
-
 function answerResolution(reference, isResolved){
 
     const allTickets = getAllTickets();
@@ -4976,10 +2535,6 @@ document.getElementById("ticketInboxForm").addEventListener("submit", function(e
 });
 
 
-/* =====================================================
-   ADMIN — TICKET HANDLERS
-===================================================== */
-
 function adminSendTicketMessage(reference){
 
     if(!currentAdminTicketRef || currentAdminTicketRef !== reference) {
@@ -5054,10 +2609,6 @@ function adminDeleteTicket(reference){
 }
 
 
-/* =====================================================
-   ADMIN — CLEAR ALL TICKETS
-===================================================== */
-
 async function adminClearAllTickets(){
 
     const allTickets = getAllTickets();
@@ -5091,10 +2642,6 @@ async function adminClearAllTickets(){
 }
 
 
-/* =====================================================
-   ADMIN — TICKET BADGE (Floating Nav)
-===================================================== */
-
 function updateAdminTicketBadge(){
     const badge = document.getElementById("adminTicketBadge");
     if(!badge) return;
@@ -5112,10 +2659,6 @@ function updateAdminTicketBadge(){
     }
 }
 
-
-/* =====================================================
-   ADMIN — RENDER TICKETS
-===================================================== */
 
 function renderAdminTickets(){
 
@@ -5271,10 +2814,6 @@ function renderAdminTickets(){
 }
 
 
-/* =====================================================
-   VIOLATION DETECTION
-===================================================== */
-
 function getViolationSignature(v){
     return v.type + "|" + v.details;
 }
@@ -5354,10 +2893,6 @@ function getAllUsersWithViolations(){
     return results;
 }
 
-
-/* =====================================================
-   PENALTY MODAL
-===================================================== */
 
 function openPenaltyModal(userId){
     currentPenaltyUserId=userId;
@@ -5496,10 +3031,6 @@ async function reactivateUser(userId){
 }
 
 
-/* =====================================================
-   ADMIN PANEL
-===================================================== */
-
 function showAdminPanel(){
     isAdmin=true;
     document.getElementById("authPage").style.display="none";
@@ -5542,6 +3073,7 @@ function renderAdminPanel(){
     renderAdminViolations();
     renderAdminUpdates();
     renderAdminSiteControl();
+    renderAdminLeaderboard();
 
     updateAdminTicketBadge();
 }
@@ -5555,6 +3087,7 @@ function showAdminTab(tab, btn){
     document.getElementById("adminTicketsTab").style.display="none";
     document.getElementById("adminUpdatesTab").style.display="none";
     document.getElementById("adminSiteControlTab").style.display="none";
+    document.getElementById("adminLeaderboardTab").style.display="none";
 
     document.querySelectorAll(".admin-tabs button").forEach(b=>{
         b.classList.remove("active");
@@ -5566,6 +3099,10 @@ function showAdminTab(tab, btn){
     if(tab==="users") document.getElementById("adminUsersTab").style.display="block";
     if(tab==="cashouts") document.getElementById("adminCashoutsTab").style.display="block";
     if(tab==="violations") document.getElementById("adminViolationsTab").style.display="block";
+    if(tab==="leaderboard"){
+        document.getElementById("adminLeaderboardTab").style.display="block";
+        renderAdminLeaderboard();
+    }
 
     if(btn) btn.classList.add("active");
 }
@@ -5579,6 +3116,7 @@ function showAdminFloating(section, btn){
     document.getElementById("adminTicketsTab").style.display="none";
     document.getElementById("adminUpdatesTab").style.display="none";
     document.getElementById("adminSiteControlTab").style.display="none";
+    document.getElementById("adminLeaderboardTab").style.display="none";
 
     document.querySelectorAll(".admin-tabs button").forEach(b=>{
         b.classList.remove("active");
@@ -5598,7 +3136,85 @@ function showAdminFloating(section, btn){
 
 
 /* =====================================================
-   UPDATE DESIGNER — THEME / STICKER SELECTION + LIVE PREVIEW
+   ADMIN — RENDER LEADERBOARD (TOP 30 + ADS STATS)
+===================================================== */
+
+function renderAdminLeaderboard(){
+
+    const list = document.getElementById("adminLeaderboardList");
+    if(!list) return;
+
+    let html = "";
+
+    html += `
+        <div class="admin-ticket-item">
+            <div class="admin-user-header">
+                <strong class="ticket-title">🏆 Leaderboard Rewards System (Top 30)</strong>
+            </div>
+            <div class="admin-user-row"><span>Rank 1</span><strong>₱0.010</strong></div>
+            <div class="admin-user-row"><span>Rank 2</span><strong>₱0.008</strong></div>
+            <div class="admin-user-row"><span>Rank 3</span><strong>₱0.006</strong></div>
+            <div class="admin-user-row"><span>Rank 4-8</span><strong>₱0.005</strong></div>
+            <div class="admin-user-row"><span>Rank 9-14</span><strong>₱0.004</strong></div>
+            <div class="admin-user-row"><span>Rank 15-20</span><strong>₱0.003</strong></div>
+            <div class="admin-user-row"><span>Rank 21-25</span><strong>₱0.002</strong></div>
+            <div class="admin-user-row"><span>Rank 26-30</span><strong>₱0.001</strong></div>
+        </div>
+    `;
+
+    const allUsers = getUsers();
+    const totalAdsAll = allUsers.reduce((sum, u) => sum + Number(u.weeklyAdsWatched || 0), 0);
+
+    const ranked = allUsers
+        .filter(u => Number(u.weeklyPoints||0) > 0)
+        .sort((a,b) => Number(b.weeklyPoints||0) - Number(a.weeklyPoints||0))
+        .slice(0, 30);
+
+    if(!ranked.length){
+        html += '<div class="admin-empty">📊 No members with points yet this week.</div>';
+        list.innerHTML = html;
+        return;
+    }
+
+    html += `
+        <div class="admin-ticket-item" style="background:rgba(255,200,60,.1);border-color:rgba(255,200,60,.4);">
+            <div class="admin-user-header">
+                <strong class="ticket-title">📊 Total Ads Watched (All Users This Week)</strong>
+                <span class="admin-user-id">${totalAdsAll} ads</span>
+            </div>
+            <div class="admin-user-row"><span>Total Ranked Members</span><strong>${ranked.length}</strong></div>
+        </div>
+    `;
+
+    ranked.forEach((user, index) => {
+        const rank = index + 1;
+        const reward = getRankReward(rank);
+        const adsWatched = Number(user.weeklyAdsWatched || 0);
+        const adsPercent = totalAdsAll > 0 ? ((adsWatched / totalAdsAll) * 100) : 0;
+
+        html += `
+            <div class="admin-ticket-item" style="background:linear-gradient(135deg,rgba(255,107,157,.08),rgba(255,107,157,.03));border-color:rgba(255,107,157,.3);">
+                <div class="admin-user-header">
+                    <strong class="ticket-title">#${rank} @${escapeHtml(user.username)}</strong>
+                    <span class="admin-user-id">${Number(user.weeklyPoints||0).toFixed(3)} pts</span>
+                </div>
+                <div class="admin-user-row"><span>Name</span><strong>${escapeHtml(user.name)}</strong></div>
+                <div class="admin-user-row"><span>User ID</span><strong>${escapeHtml(user.userId)}</strong></div>
+                <div class="admin-user-row"><span>Email</span><strong>${escapeHtml(user.email)}</strong></div>
+                <div class="admin-user-row"><span>Weekly Points</span><strong>${Number(user.weeklyPoints||0).toFixed(3)}</strong></div>
+                <div class="admin-user-row"><span>📺 Ads Watched This Week</span><strong>${adsWatched}</strong></div>
+                <div class="admin-user-row"><span>📊 Ads Contribution</span><strong>${adsPercent.toFixed(2)}%</strong></div>
+                <div class="admin-user-row"><span>🏆 Potential Reward</span><strong style="color:#f5b942;">₱${reward.toFixed(3)}</strong></div>
+            </div>
+        `;
+    });
+
+    list.innerHTML = html;
+}
+
+
+/* =====================================================
+   UPDATE DESIGNER
 ===================================================== */
 
 function selectUpdateTheme(theme, btn){
@@ -5638,7 +3254,6 @@ function updateAdminPreview(){
     container.innerHTML = buildUpdateCardHTML(previewUpdate, true);
 }
 
-/* Attach live preview to inputs (once) */
 window.addEventListener("load", function(){
     const t = document.getElementById("adminUpdateTitle");
     const m = document.getElementById("adminUpdateMessage");
@@ -5646,10 +3261,6 @@ window.addEventListener("load", function(){
     if(m) m.addEventListener("input", updateAdminPreview);
 });
 
-
-/* =====================================================
-   ADMIN — PUBLISH UPDATE (with theme + sticker)
-===================================================== */
 
 function adminPublishUpdate(){
 
@@ -5675,7 +3286,6 @@ function adminPublishUpdate(){
     });
     saveUpdates(updates);
 
-    /* Reset only title & message — theme/sticker stays */
     titleEl.value = "";
     msgEl.value = "";
     updateAdminPreview();
@@ -5684,10 +3294,6 @@ function adminPublishUpdate(){
     showNotification("Update Published","Users will now see this update in the CS → Updates section.");
 }
 
-
-/* =====================================================
-   ADMIN — DELETE UPDATE
-===================================================== */
 
 async function adminDeleteUpdate(id){
 
@@ -5705,10 +3311,6 @@ async function adminDeleteUpdate(id){
     showNotification("Update Deleted","The update has been removed.");
 }
 
-
-/* =====================================================
-   ADMIN — RENDER UPDATES LIST (with themed preview)
-===================================================== */
 
 function renderAdminUpdates(){
 
@@ -5760,10 +3362,6 @@ function renderAdminUpdates(){
     });
 }
 
-
-/* =====================================================
-   ADMIN — SITE CONTROL (PAUSE)
-===================================================== */
 
 function toggleSiteSetting(key){
 
@@ -6187,10 +3785,6 @@ function renderAdminViolations(){
 }
 
 
-/* =====================================================
-   CHECK PENDING VIOLATIONS
-===================================================== */
-
 async function checkPendingViolations(){
 
     if(!currentUser || isAdmin) return;
@@ -6257,10 +3851,6 @@ async function showViolationAlertAndLogout(violation){
 }
 
 
-/* =====================================================
-   LANGUAGE DETECTOR
-===================================================== */
-
 const TAGALOG_MARKERS=[
     "paano","ano","saan","kailan","bakit","sino","magkano",
     "pwede","puwede","ba ","po","opo","kumusta","kamusta",
@@ -6287,55 +3877,44 @@ function detectLanguage(text){
 }
 
 
-/* =====================================================
-   HEART FUSION AI — PROFESSIONAL KNOWLEDGE BASE
-===================================================== */
-
 const AI_KB = [
 
-    /* ============ GREETINGS ============ */
     {
         keys:["hello","hi","hey","helo","hoy","yo","good morning","good afternoon","good evening","kamusta","kumusta","musta","kumusta ka"],
         en:"Hello there! 💖 I'm Heart Fusion AI — your 24/7 assistant here at Heart Fusion.\n\nI can help you with:\n• Sign up & Login\n• Transfer & Cashout\n• Math Game & Ads\n• Invite Program\n• Complan, Updates & Leaderboard\n• And more!\n\nWhat can I help you with today?",
         tl:"Kumusta! 💖 Ako si Heart Fusion AI — ang 24/7 assistant mo dito sa Heart Fusion.\n\nMatutulungan kita sa:\n• Sign up at Login\n• Transfer at Cashout\n• Math Game at Ads\n• Invite Program\n• Complan, Updates at Leaderboard\n• At marami pa!\n\nAno'ng maitutulong ko sa'yo ngayon?"
     },
 
-    /* ============ HOW ARE YOU ============ */
     {
         keys:["how are you","kamusta ka","musta ka na","how do you do","okay ka lang","ayos ka lang"],
         en:"I'm doing great, thank you for asking! 💖 I'm always here and ready to help you anytime. How about you — how's your day going?",
         tl:"Mabuti naman ako, salamat sa pagtatanong! 💖 Lagi akong nandito at ready tumulong sa'yo anytime. Ikaw, kamusta ang araw mo?"
     },
 
-    /* ============ THANKS ============ */
     {
         keys:["thank","thanks","salamat","ty","tysm","thank you","maraming salamat"],
         en:"You're very welcome! 💖 I'm always happy to help. Feel free to ask me anything anytime. Happy earning!",
         tl:"Walang anuman! 💖 Masaya akong tumulong. Tawagin mo lang ako anytime. Happy earning!"
     },
 
-    /* ============ GOODBYE ============ */
     {
         keys:["bye","goodbye","paalam","ingat","see you","hanggang sa muli"],
         en:"Goodbye and take care! 💖 Ingat ka palagi. Come back anytime if you need help — I'm here 24/7 for you!",
         tl:"Paalam at ingat ka! 💖 Bumalik ka lang anytime kung kailangan mo ng tulong — 24/7 ako para sa'yo!"
     },
 
-    /* ============ WHO ARE YOU ============ */
     {
         keys:["who are you","sino ka","ano ka","pangalan mo","your name","what are you"],
         en:"💖 I'm Heart Fusion AI — your professional assistant here at Heart Fusion.\n\nI'm designed to help users with everything about the website: sign up, login, transfer, cashout, games, ads, invite program, complan, updates, leaderboard, at marami pang iba.\n\nI'm available 24/7 in both Tagalog and English!",
         tl:"💖 Ako si Heart Fusion AI — ang professional assistant mo dito sa Heart Fusion.\n\nNakadesenyo ako para tumulong sa lahat ng tungkol sa website: sign up, login, transfer, cashout, games, ads, invite program, complan, updates, leaderboard, at marami pang iba.\n\nAvailable ako 24/7 sa Tagalog at English!"
     },
 
-    /* ============ HELP / WHAT CAN YOU DO ============ */
     {
         keys:["help","tulong","what can you do","ano magagawa mo","anong kaya mo","ano kaya mo"],
         en:"💖 Here's what I can help you with:\n\n📝 Sign up & Login\n💸 Transfer & Cashout\n🎮 Math Game & Ads\n🎁 Invite Program\n💰 Balance & Points\n🏆 Leaderboard\n📢 Updates\n📖 Complan\n🔒 Device Info\n🎫 Support Tickets\n\nJust ask me anything about Heart Fusion!",
         tl:"💖 Narito ang mga matutulungan kita:\n\n📝 Sign up at Login\n💸 Transfer at Cashout\n🎮 Math Game at Ads\n🎁 Invite Program\n💰 Balance at Points\n🏆 Leaderboard\n📢 Updates\n📖 Complan\n🔒 Device Info\n🎫 Support Tickets\n\nMagtanong ka lang tungkol sa Heart Fusion!"
     },
 
-    /* ============ FRUSTRATION / EMOTIONS ============ */
     {
         keys:["frustrated","frustrating","annoying","nakakainis","inis","bad trip","bad mood","galit","asar","nakakagalit","hassle","nakakastress","stress","stressed","nakakapagod"],
         en:"I understand how you feel, and I'm really sorry you're going through this. 💔\n\nLet me help you. Can you tell me exactly what happened so I can guide you properly?\n\nIf it's a serious issue (like missing balance, hacked account, or a system bug), I can direct you to our Support Ticket system so a live agent can personally assist you.",
@@ -6362,249 +3941,210 @@ const AI_KB = [
         tl:"Naiintindihan ko ang worry mo. 💖 Isa-isahin natin 'to.\n\nSabihin mo kung ano ang kinakabahan ka, at tutulungan kita. Kung seryosong account o pera issue ito, gagawa tayo ng support ticket para personal na asikasuhin ito ng live agent."
     },
 
-    /* ============ PRAISE / POSITIVE ============ */
     {
         keys:["thank you so much","thank you po","salamat po","salamat ng marami","ang galing","galing mo","ang bait mo","nice","awesome","great job","magaling"],
         en:"Aww, thank you so much! 💖 That means a lot to me. I'm always here to help you. Keep on earning and enjoy your stay here at Heart Fusion! 💕",
         tl:"Aww, salamat ng marami! 💖 Sobrang nakakataba ng puso. Lagi akong nandito para tumulong sa'yo. Tuloy-tuloy lang ang pag-eearn at enjoyin mo ang stay mo dito sa Heart Fusion! 💕"
     },
 
-    /* ============ LAUGH ============ */
     {
         keys:["haha","hehe","lol","hihi","joke","biro","nakakatawa","funny"],
         en:"Haha, glad to see you smiling! 😄 It's always nice to have a light moment. But anytime you need serious help, I'm here for you! 💖",
         tl:"Haha, buti naman nakangiti ka! 😄 Sarap sa feeling ng magaan na usapan. Pero anytime na kailangan mo ng seryosong tulong, nandito lang ako! 💖"
     },
 
-    /* ============ LOVE / HEART ============ */
     {
         keys:["i love you","mahal kita","love you","lab you","labyu"],
         en:"Aww, that's so sweet! 💖 Love you too (as your friendly AI assistant 😊). Now let's get back to earning — ask me anything about Heart Fusion!",
         tl:"Aww, ang sweet naman! 💖 Love you too (as your friendly AI assistant 😊). Ngayon, balik tayo sa pag-eearn — magtanong ka lang tungkol sa Heart Fusion!"
     },
 
-    /* ============================================================
-       TUTORIALS / HOW TO
-       ============================================================ */
-
-    /* ---- SIGN UP ---- */
     {
         keys:["sign up","signup","sign-up","register","gumawa ng account","mag register","paano mag register","how to register","create account","gumawa account","mag sign up","paano mag sign up"],
         en:"📝 HOW TO SIGN UP:\n\n1️⃣ Open Heart Fusion website.\n2️⃣ Tap 'SIGN UP' button.\n3️⃣ Fill in these details:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (optional)\n4️⃣ Check the box to agree to the Complan.\n5️⃣ Tap 'SIGN UP →'.\n\n✅ DONE! You'll receive your User ID and Invite Code.\n\n⚠️ IMPORTANT:\n• Only 1 account per device and IP.\n• Multiple accounts = Permanent Ban.",
         tl:"📝 PAANO MAG SIGN UP:\n\n1️⃣ Buksan ang Heart Fusion website.\n2️⃣ I-tap ang 'SIGN UP' button.\n3️⃣ Ilagay ang mga sumusunod:\n   • Full Name\n   • Username\n   • Email Address\n   • Password (min 6 characters)\n   • Confirm Password\n   • Inviter Code (kung meron)\n4️⃣ I-check ang box para sumang-ayon sa Complan.\n5️⃣ I-tap ang 'SIGN UP →'.\n\n✅ TAPOS! Makakatanggap ka ng User ID at Invite Code.\n\n⚠️ MAHALAGA:\n• Isang account lang per device at IP.\n• Multiple accounts = Permanent Ban."
     },
 
-    /* ---- LOGIN ---- */
     {
         keys:["login","log in","sign in","signin","mag login","paano mag login","how to login","paano mag sign in"],
         en:"🔑 HOW TO LOGIN:\n\n1️⃣ Tap 'Sign In' on the login page.\n2️⃣ Enter your Email Address.\n3️⃣ Enter your Password.\n4️⃣ Tap 'SIGN IN →'.\n\n✅ DONE! You'll be redirected to your dashboard.\n\n💡 Tip: If you forgot your password, go to Account Settings or contact CS via Facebook/Telegram.",
         tl:"🔑 PAANO MAG LOGIN:\n\n1️⃣ I-tap ang 'Sign In' sa login page.\n2️⃣ Ilagay ang Email Address mo.\n3️⃣ Ilagay ang Password mo.\n4️⃣ I-tap ang 'SIGN IN →'.\n\n✅ TAPOS! Ma-redirect ka sa dashboard mo.\n\n💡 Tip: Kung nakalimutan mo ang password, pumunta sa Account Settings o kontakin ang CS sa Facebook/Telegram."
     },
 
-    /* ---- FORGOT PASSWORD ---- */
     {
         keys:["forgot password","nakalimutan password","nakalimutan ko password","hindi ko na alam password","password reset","reset password","change password","palitan password"],
         en:"🔑 FORGOT PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Login to your account (if still logged in).\n2️⃣ Go to Account Settings.\n3️⃣ Type your new password under 'New Password'.\n4️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Contact CS:\n• Message us on Facebook Group or Telegram Channel.\n• Provide your Username, User ID, and Email.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket system para may live agent na tumulong sa'yo.",
         tl:"🔑 NAKALIMUTAN ANG PASSWORD?\n\nOption 1 — Self-Service:\n1️⃣ Mag-login sa account mo (kung naka-login pa).\n2️⃣ Pumunta sa Account Settings.\n3️⃣ I-type ang bagong password sa 'New Password'.\n4️⃣ I-tap ang 'SAVE ACCOUNT CHANGES'.\n\nOption 2 — Kontakin ang CS:\n• I-message kami sa Facebook Group o Telegram Channel.\n• Ibigay ang Username, User ID, at Email mo.\n\n⚠️ Kung hindi ka na talaga makapasok, gamitin ang Support Ticket system para may live agent na tumulong sa'yo."
     },
 
-    /* ---- BALANCE ---- */
     {
         keys:["balance","balanse","magkano balance","ano balance ko","how much balance","check balance","tingnan balance","balanse ko"],
         en:"💰 YOUR BALANCE:\n\nYou can check your balance sa Dashboard — look for 'ACCOUNT BALANCE' sa taas.\n\nAlso visible doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out\n\n💡 Balance updates in real-time kapag may nakuha kang reward, nag-receive ng transfer, o nag-request ng cashout.",
         tl:"💰 ANG BALANSE MO:\n\nMakikita mo ang balance sa Dashboard — hanapin ang 'ACCOUNT BALANCE' sa taas.\n\nMakikita rin doon:\n• ⭐ Points (total points)\n• Total Transferred\n• Total Cashed Out\n\n💡 Nag-uupdate ang balance in real-time kapag may nakuha kang reward, nag-receive ng transfer, o nag-request ng cashout."
     },
 
-    /* ---- POINTS ---- */
     {
         keys:["points","puntos","ano points","ano ang points","paano makakuha ng points","how to earn points","earn points","points ko"],
-        en:"⭐ POINTS:\n\nPoints are earned from:\n• ✅ Correct answer sa Math Game = +0.001 points\n• 📺 Watching ads = required para makuha ang reward\n\n💡 Points are used for:\n• Leaderboard ranking\n• Weekly rewards (top 100 earners every Monday!)\n\n🏆 REWARDS:\n• Rank 1-15 = ₱0.020\n• Rank 16-30 = ₱0.015\n• Rank 31-50 = ₱0.010\n• Rank 51-80 = ₱0.008\n• Rank 81-100 = ₱0.005",
-        tl:"⭐ POINTS:\n\nNakukuha ang points mula sa:\n• ✅ Tamang sagot sa Math Game = +0.001 points\n• 📺 Panonood ng ad = required para sa reward\n\n💡 Gamit ng points:\n• Leaderboard ranking\n• Weekly rewards (top 100 every Lunes!)\n\n🏆 PREMYO:\n• Rank 1-15 = ₱0.020\n• Rank 16-30 = ₱0.015\n• Rank 31-50 = ₱0.010\n• Rank 51-80 = ₱0.008\n• Rank 81-100 = ₱0.005"
+        en:"⭐ POINTS:\n\nPoints are earned from:\n• ✅ Correct answer sa Math Game = +0.001 points\n• 📺 Watching ads = required para makuha ang reward\n\n💡 Points are used for:\n• Leaderboard ranking\n• Weekly rewards (top 30 earners every Monday!)\n\n🏆 REWARDS:\n• Rank 1 = ₱0.010\n• Rank 2 = ₱0.008\n• Rank 3 = ₱0.006\n• Rank 4-8 = ₱0.005\n• Rank 9-14 = ₱0.004\n• Rank 15-20 = ₱0.003\n• Rank 21-25 = ₱0.002\n• Rank 26-30 = ₱0.001",
+        tl:"⭐ POINTS:\n\nNakukuha ang points mula sa:\n• ✅ Tamang sagot sa Math Game = +0.001 points\n• 📺 Panonood ng ad = required para sa reward\n\n💡 Gamit ng points:\n• Leaderboard ranking\n• Weekly rewards (top 30 every Lunes!)\n\n🏆 PREMYO:\n• Rank 1 = ₱0.010\n• Rank 2 = ₱0.008\n• Rank 3 = ₱0.006\n• Rank 4-8 = ₱0.005\n• Rank 9-14 = ₱0.004\n• Rank 15-20 = ₱0.003\n• Rank 21-25 = ₱0.002\n• Rank 26-30 = ₱0.001"
     },
 
-    /* ---- TRANSFER ---- */
     {
         keys:["transfer","mag transfer","paano mag transfer","how to transfer","send money","padala","padalhan","magpadala","transfer funds","fund transfer"],
         en:"💸 HOW TO TRANSFER FUNDS:\n\n1️⃣ Go to Dashboard → Tap 'TRANSFER'.\n2️⃣ Enter receiver's info:\n   • Username\n   • User ID\n   • Email\n3️⃣ Tap 'VERIFY RECEIVER' to confirm.\n4️⃣ Enter Amount (minimum ₱1.00).\n5️⃣ Check the confirmation box.\n6️⃣ Tap 'TRANSFER →'.\n7️⃣ Enter the OTP (sent via in-app notification).\n\n✅ DONE! Receipt will be generated.\n\n⚠️ IMPORTANT:\n• All 3 receiver info must match exactly.\n• You cannot transfer to yourself.\n• OTP expires — restart if needed.",
         tl:"💸 PAANO MAG TRANSFER NG FUNDS:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'TRANSFER'.\n2️⃣ Ilagay ang info ng receiver:\n   • Username\n   • User ID\n   • Email\n3️⃣ I-tap ang 'VERIFY RECEIVER' para kumpirmahin.\n4️⃣ Ilagay ang Amount (minimum ₱1.00).\n5️⃣ I-check ang confirmation box.\n6️⃣ I-tap ang 'TRANSFER →'.\n7️⃣ Ilagay ang OTP (ipapadala via in-app notification).\n\n✅ TAPOS! Mag-ge-generate ng receipt.\n\n⚠️ MAHALAGA:\n• Lahat ng 3 info ng receiver ay dapat eksaktong match.\n• Hindi ka pwedeng mag-transfer sa sarili mo.\n• Nag-e-expire ang OTP — restart kung kailangan."
     },
 
-    /* ---- OTP ---- */
     {
         keys:["otp","one time pin","walang otp","hindi dumating otp","mali otp","incorrect otp","otp expired","otp code"],
         en:"🔐 ABOUT OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, restart the transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based).\n\n⚠️ Kung tuloy-tuloy na problema ito, gamitin ang Support Ticket system para may live agent na tumulong.",
         tl:"🔐 TUNGKOL SA OTP:\n\nAng OTP ay lalabas sa in-app notification (sa taas ng screen) kapag nag-transfer ka.\n\nKung walang OTP:\n• Check ang notification bar sa taas.\n• Kung expired na, ulitin ang transfer.\n• Siguraduhing naka-login ka pa rin (OTP is session-based).\n\n⚠️ Kung tuloy-tuloy ang problema, gamitin ang Support Ticket system para may live agent na tumulong."
     },
 
-    /* ---- CASHOUT ---- */
     {
         keys:["cashout","cash out","withdraw","mag cashout","paano mag cashout","how to cashout","paano mag withdraw","withdrawal","mag-withdraw","kailan cashout","cashout time","oras ng cashout"],
         en:"💰 HOW TO CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM only (daily)\n\n1️⃣ Go to Dashboard → Tap 'CASHOUT'.\n2️⃣ Choose Mode of Payout:\n   • GCash or Maya\n3️⃣ Enter:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (account name)\n4️⃣ Enter Amount (₱1.00 – ₱5.00).\n5️⃣ Tap 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 – ₱2 = No deduction (full amount)\n• ₱3 – ₱5 = 50% deduction\n\n⏱️ PROCESSING: 1 to 10 hours\n\n⚠️ REMINDERS:\n• Only 1 cashout request per day.\n• Cashout is CLOSED outside 6PM-8PM.",
         tl:"💰 PAANO MAG CASHOUT:\n\n⏰ CASHOUT HOURS: 6:00 PM – 8:00 PM lamang (araw-araw)\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'CASHOUT'.\n2️⃣ Piliin ang Mode of Payout:\n   • GCash o Maya\n3️⃣ Ilagay:\n   • Payout Number (09XXXXXXXXX)\n   • Payout Name (pangalan ng account)\n4️⃣ Ilagay ang Amount (₱1.00 – ₱5.00).\n5️⃣ I-tap ang 'REQUEST CASHOUT'.\n\n💵 CASHOUT FEES:\n• ₱1 – ₱2 = Walang bawas (buong amount)\n• ₱3 – ₱5 = 50% bawas\n\n⏱️ PROCESSING: 1 hanggang 10 oras\n\n⚠️ PAALALA:\n• Isang cashout request lang per day.\n• Sarado ang cashout kapag labas ng 6PM-8PM."
     },
 
-    /* ---- CASHOUT PROCESSING TIME ---- */
     {
         keys:["processing time","gaano katagal processing","how long processing","tagal ng processing","kelan darating cashout","when will i receive","kailan darating pera"],
         en:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 to 10 HOURS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name).\n• Kung lumipas na ang 10 hours at wala pa, gamitin ang Support Ticket system para may live agent na tumulong.",
         tl:"⏱️ PROCESSING TIME:\n\nAng lahat ng cashout requests ay may processing time na 1 hanggang 10 ORAS.\n\n💡 Tips:\n• Mag-request ng maaga (6PM-7PM) para mas mabilis ma-process.\n• Siguraduhing tama ang payout info mo (GCash/Maya number at name).\n• Kung lumipas na ang 10 oras at wala pa, gamitin ang Support Ticket system para may live agent na tumulong."
     },
 
-    /* ---- GAME ---- */
     {
         keys:["game","math game","paano maglaro","how to play","how to play game","laro","maglaro","games","math game paano"],
-        en:"🎮 HOW TO PLAY THE MATH GAME:\n\n1️⃣ Go to Dashboard → Tap 'Games'.\n2️⃣ Tap 'START GAME'.\n3️⃣ Solve the math question (5 seconds only).\n4️⃣ Type your answer → Tap 'SUBMIT'.\n5️⃣ If correct → Tap 'WATCH AD' to unlock your reward.\n\n💰 REWARD: ₱0.001 per correct answer\n\n⚠️ REMINDERS:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question\n• Bawat question ay hindi na mauulit sa loob ng isang linggo (para sa variety)",
+        en:"🎮 HOW TO PLAY THE MATH GAME:\n\n1️⃣ Go to Dashboard → Tap 'Games'.\n2️⃣ Tap 'START GAME'.\n3️⃣ Solve the math question (5 seconds only).\n4️⃣ Type your answer → Tap 'SUBMIT'.\n5️⃣ If correct → Tap 'WATCH AD' to unlock your reward.\n\n💰 REWARD: ₱0.001 per correct answer\n\n⚠️ REMINDERS:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question\n• Bawat question ay hindi na mauulit sa loob ng isang linggo",
         tl:"🎮 PAANO MAGLARO NG MATH GAME:\n\n1️⃣ Pumunta sa Dashboard → I-tap ang 'Games'.\n2️⃣ I-tap ang 'START GAME'.\n3️⃣ Sagutin ang math question (5 seconds lang).\n4️⃣ I-type ang sagot → I-tap ang 'SUBMIT'.\n5️⃣ Kung tama → I-tap ang 'WATCH AD' para makuha ang reward.\n\n💰 REWARD: ₱0.001 per tamang sagot\n\n⚠️ PAALALA:\n• NO ADS = NO REWARD (mandatory!)\n• 5 seconds lang ang bawat question\n• Bawat question ay hindi na mauulit sa loob ng isang linggo"
     },
 
-    /* ---- ADS ---- */
     {
         keys:["ads","advertisement","watch ad","panood ng ads","ad","no ads","walang ads","ads mandatory","bakit walang ads"],
         en:"📺 ABOUT ADS:\n\n⚠️ ADS IS MANDATORY. NO ADS = NO REWARD!\n\n• Pagkatapos makakuha ng correct answer, kailangan mong panoorin ang ads para makuha ang reward.\n• Kapag hindi nag-load ang ad, wala kang makukuhang points.\n• Ang ads ay nag-e-enable ng rewards para sa lahat.\n\n💡 Tips:\n• Siguraduhing stable ang internet connection.\n• Huwag i-close ang page habang naglo-load ang ad.\n• Kung palaging hindi nag-load ang ad, hintayin ang susunod na question.",
         tl:"📺 TUNGKOL SA ADS:\n\n⚠️ MANDATORY ANG ADS. NO ADS = NO REWARD!\n\n• Pagkatapos makuha ang tamang sagot, kailangan mong panoorin ang ad para makuha ang reward.\n• Kapag hindi nag-load ang ad, walang points na makukuha.\n• Ang ads ay nag-e-enable ng rewards para sa lahat.\n\n💡 Tips:\n• Siguraduhing stable ang internet.\n• Huwag i-close ang page habang naglo-load ang ad.\n• Kung palaging hindi nag-load, hintayin ang susunod na question."
     },
 
-    /* ---- INVITE PROGRAM ---- */
     {
         keys:["invite","inviter","invitation","paano mag invite","how to invite","mag invite","invite code","invitation code","referral","refer"],
         en:"🎁 INVITE PROGRAM:\n\n📍 Where to find your Invite Code:\nGo to Account Settings → Look for 'INVITE PROGRAM' → Your code is there (ex: ER-XXXXXX).\n\n📤 How to share:\n• Send your Invite Code to friends.\n• Ibigay sa kanila kapag nag-sign up sila sa 'Inviter Code' field.\n\n💰 REWARDS:\n• You (Inviter): ₱0.005 per successful invite\n• Friend (New User): ₱0.003 welcome bonus\n\n📊 Tracking:\nSa Account Settings makikita mo ang:\n• Total Invites\n• Total Income",
         tl:"🎁 INVITE PROGRAM:\n\n📍 Saan makikita ang Invite Code:\nPumunta sa Account Settings → Hanapin ang 'INVITE PROGRAM' → Nandiyan ang code mo (ex: ER-XXXXXX).\n\n📤 Paano i-share:\n• Ipadala ang Invite Code sa mga kaibigan mo.\n• Ibigay sa kanila kapag nag-sign up sila sa 'Inviter Code' field.\n\n💰 REWARDS:\n• Ikaw (Inviter): ₱0.005 per successful invite\n• Kaibigan (New User): ₱0.003 welcome bonus\n\n📊 Tracking:\nSa Account Settings makikita mo ang:\n• Total Invites\n• Total Income"
     },
 
-    /* ---- COMPLAN ---- */
     {
         keys:["complan","patakaran","rules","policy","regulations","ano ang complan","what is complan","rules and regulations","mga patakaran","mga rules"],
         en:"📖 THE COMPLAN — Rules & Guidelines:\n\n📍 Where to read: CS → Group Community → 'Heart Fusion Complan'\n\n📋 Key Points:\n\n🤖 BOT INFORMATION:\n• Ads is mandatory. NO ADS = NO POINTS\n• 0.001 per correct answer\n• 5 seconds per question\n• 0.005 per invite\n• 24/7 open\n\n💰 PAYOUT DETAILS:\n• Maya & GCash only\n• Min: ₱1, Max: ₱5\n• ₱3-₱5 = 50% deduction\n• 1-10 hours processing\n\n⚠️ RULES:\n• Respect owner & members\n• Wrong payout info = not compensated\n• No to attaters\n• Use accurate info when registering\n• No cheating\n• 1 payout request per day\n\n🚫 VIOLATIONS (Permanent Ban):\n• Using cheats/abusing bugs\n• Multiple accounts in 1 phone\n• Giving false info",
         tl:"📖 ANG COMPLAN — Mga Patakaran:\n\n📍 Saan basahin: CS → Group Community → 'Heart Fusion Complan'\n\n📋 Mga Key Points:\n\n🤖 BOT INFORMATION:\n• Mandatory ang ads. NO ADS = NO POINTS\n• 0.001 per tamang sagot\n• 5 seconds per question\n• 0.005 per invite\n• 24/7 open\n\n💰 PAYOUT DETAILS:\n• Maya at GCash lang\n• Min: ₱1, Max: ₱5\n• ₱3-₱5 = 50% bawas\n• 1-10 oras processing\n\n⚠️ RULES:\n• Igalang ang owner at members\n• Maling payout info = hindi compensated\n• No to attaters\n• Gamitin ang tamang info sa registration\n• Bawal ang cheating\n• Isang payout request per day\n\n🚫 VIOLATIONS (Permanent Ban):\n• Paggamit ng cheats/abusing bugs\n• Multiple accounts sa 1 phone\n• Pagbibigay ng false info"
     },
 
-    /* ---- UPDATES ---- */
     {
         keys:["updates","update","announcement","anunsyo","balita","may update ba","new update","latest news"],
         en:"📢 UPDATES:\n\n📍 Where to read: CS → Group Community → 'Updates'\n\n💡 How it works:\n• May RED BADGE number sa 'Updates' kung may bagong announcement.\n• Ang number ay nagpapakita kung ilan ang hindi mo pa nababasa.\n• Once na-open mo na, mawawala na ang badge.\n\n📌 Always check ang Updates para sa:\n• Bagong cashout schedule\n• Bagong rules\n• Maintenance notices\n• Special announcements",
         tl:"📢 UPDATES:\n\n📍 Saan basahin: CS → Group Community → 'Updates'\n\n💡 Paano gumagana:\n• May PULANG BADGE number sa 'Updates' kung may bagong announcement.\n• Ipinapakita nito kung ilan ang hindi mo pa nababasa.\n• Kapag na-open mo na, mawawala na ang badge.\n\n📌 Laging i-check ang Updates para sa:\n• Bagong cashout schedule\n• Bagong rules\n• Maintenance notices\n• Special announcements"
     },
 
-    /* ---- LEADERBOARD ---- */
     {
-        keys:["leaderboard","ranking","rank","top earners","ranggo","top 100","weekly reward","monday reward"],
-        en:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Every Monday (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 100 members):\n• Rank 1-15 → ₱0.020\n• Rank 16-30 → ₱0.015\n• Rank 31-50 → ₱0.010\n• Rank 51-80 → ₱0.008\n• Rank 81-100 → ₱0.005\n\n📊 Paano sumali:\n• Earn points from the Math Game.\n• Top 100 every week ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Monday!\n\n💡 Tip: Maglaro ng game everyday para tumaas ang rank!",
-        tl:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Tuwing Lunes (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 100 members):\n• Rank 1-15 → ₱0.020\n• Rank 16-30 → ₱0.015\n• Rank 31-50 → ₱0.010\n• Rank 51-80 → ₱0.008\n• Rank 81-100 → ₱0.005\n\n📊 Paano sumali:\n• Kumita ng points mula sa Math Game.\n• Top 100 tuwing linggo ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Lunes!\n\n💡 Tip: Maglaro ng game araw-araw para tumaas ang rank!"
+        keys:["leaderboard","ranking","rank","top earners","ranggo","top 30","weekly reward","monday reward"],
+        en:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Every Monday (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001\n\n📊 Paano sumali:\n• Earn points from the Math Game.\n• Top 30 every week ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Monday!\n\n💡 Tip: Maglaro ng game everyday para tumaas ang rank!",
+        tl:"🏆 LEADERBOARD:\n\n📅 RESET SCHEDULE: Tuwing Lunes (weekly reset)\n\n🎁 WEEKLY REWARDS (Top 30 members):\n• Rank 1 → ₱0.010\n• Rank 2 → ₱0.008\n• Rank 3 → ₱0.006\n• Rank 4-8 → ₱0.005\n• Rank 9-14 → ₱0.004\n• Rank 15-20 → ₱0.003\n• Rank 21-25 → ₱0.002\n• Rank 26-30 → ₱0.001\n\n📊 Paano sumali:\n• Kumita ng points mula sa Math Game.\n• Top 30 tuwing linggo ang makakatanggap ng rewards.\n• Automatic ang rewards — idadagdag sa balance mo every Lunes!\n\n💡 Tip: Maglaro ng game araw-araw para tumaas ang rank!"
     },
 
-    /* ---- DEVICE INFO ---- */
     {
         keys:["device info","device information","impormasyon ng device","ip address","device model","registered device","duplicate account"],
         en:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n📋 Ano ang nakikita:\n• Device Model\n• IP Address\n• Registered On (date)\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN\n\n💡 Ito ay para sa fairness sa lahat ng members.",
         tl:"🔒 DEVICE INFORMATION:\n\n📍 Saan makikita: Account Settings → 'Device Information'\n\n📋 Ano ang nakikita:\n• Device Model\n• IP Address\n• Registered On (date)\n\n⚠️ BAKIT MAHALAGA:\n• 1 Device = 1 Account (strictly enforced)\n• 1 IP Address = 1 Account\n• Multiple accounts sa isang device/IP = PERMANENT BAN\n\n💡 Ito ay para sa fairness ng lahat ng members."
     },
 
-    /* ---- SUPPORT TICKET ---- */
     {
         keys:["ticket","support ticket","create ticket","ticket system","help ticket","report","reklamo","complaint"],
         en:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions\n• General inquiries\n\n💡 Paano:\n1️⃣ I-tap ang 'Create Ticket'.\n2️⃣ Ilarawan ang issue.\n3️⃣ Ibigay ang username.\n4️⃣ Magbigay ng detalye.\n5️⃣ Makikita mo ang ticket sa 'Your Ticket' section.\n\n⏱️ LIVE AGENT will respond ASAP.",
         tl:"🎫 SUPPORT TICKET:\n\n📍 Saan makikita: CS → Group Community → 'Create Ticket'\n\n✅ PARA SA SERIOUS ISSUES LANG:\n• Na-hack o nanakaw ang account\n• Nawalang/missing na balance\n• Maling cashout o double charge\n• Hindi maka-access ng account\n• System bugs o errors\n\n❌ HINDI para sa:\n• Simpleng tanong (gamitin ang AI)\n• How-to questions\n• General inquiries\n\n💡 Paano:\n1️⃣ I-tap ang 'Create Ticket'.\n2️⃣ Ilarawan ang issue.\n3️⃣ Ibigay ang username.\n4️⃣ Magbigay ng detalye.\n5️⃣ Makikita mo ang ticket sa 'Your Ticket' section.\n\n⏱️ LIVE AGENT ang sasagot ASAP."
     },
 
-    /* ---- SITE PAUSE / MAINTENANCE ---- */
     {
         keys:["paused","pause","maintenance","naka pause","site down","offline","not working site","under maintenance"],
         en:"⏸️ SITE PAUSED:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable.\n\n💡 What to do:\n• Hintayin ang announcement sa Updates section.\n• Bumalik kapag na-resume na ang site.\n\n⚠️ Ito ay normal kapag may maintenance o importanteng update.",
         tl:"⏸️ NAKA-PAUSE ANG SITE:\n\nKapag naka-pause ang site:\n• May warning na lalabas sa screen.\n• Awtomatiko kang ma-lo-logout.\n• Lahat ng services (transfer, cashout, games) ay temporarily unavailable.\n\n💡 Ano'ng gagawin:\n• Hintayin ang announcement sa Updates section.\n• Bumalik kapag na-resume na ang site.\n\n⚠️ Normal ito kapag may maintenance o importanteng update."
     },
 
-    /* ---- BALANCE MISSING ---- */
     {
         keys:["nawala balance","missing balance","nawalang pera","nawala pera","hindi pumasok balance","hindi dumating pera","hindi natanggap transfer","lost balance"],
         en:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction (transfer/cashout)?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo.\n\n✅ Ang admin ay personally a-assist sa'yo.\n\n⚠️ HUWAG mag-panic. Naka-record lahat ng transactions.",
         tl:"⚠️ NAWALANG BALANCE?\n\nIto ay SERIOUS ISSUE. Kailangan ng live agent na tumulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Ilarawan ang detalye:\n   • Kailan nangyari?\n   • Magkano ang nawala?\n   • Anong transaction (transfer/cashout)?\n   • May reference number ka ba?\n3️⃣ Ibigay ang username mo.\n\n✅ Admin ang personally a-assist sa'yo.\n\n⚠️ HUWAG mag-panic. Naka-record lahat ng transactions."
     },
 
-    /* ---- ACCOUNT HACKED ---- */
     {
         keys:["hacked","hack","naka-hack","nahack","account stolen","ninakaw account","nawala account","hindi ko na account","account compromised"],
         en:"🚨 ACCOUNT HACKED?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Sabihin:\n   • Username\n   • Kailan na-hack\n   • Anong nangyari\n   • Ano pang info ang kailangan\n3️⃣ Hintayin ang admin response.\n\n⚠️ HUWAG mag-login gamit ang bagong password kahit sino ang magbigay — ang admin lang ang legit na mag-a-assist sa'yo.\n\n✅ Naka-lock ang system at naka-record ang lahat — matutulungan ka ng admin.",
         tl:"🚨 NA-HACK ANG ACCOUNT?\n\nIto ay SERIOUS ISSUE. Kailangan ng agarang tulong.\n\n📌 PLEASE CREATE A SUPPORT TICKET AGAD:\n1️⃣ Pumunta sa CS → 'Create Ticket'.\n2️⃣ Sabihin:\n   • Username\n   • Kailan na-hack\n   • Anong nangyari\n   • Ano pang info ang kailangan\n3️⃣ Hintayin ang admin response.\n\n⚠️ HUWAG mag-login gamit ang bagong password kahit sino ang magbigay — ang admin lang ang legit na mag-a-assist sa'yo.\n\n✅ Naka-lock ang system at naka-record ang lahat — matutulungan ka ng admin."
     },
 
-    /* ---- MULTIPLE ACCOUNT WARNING ---- */
     {
         keys:["multiple account","duplicate account","maraming account","dalawang account","2 accounts","one account","isang account lang"],
         en:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN\n\n💡 Kung kailangan mo ng bagong account:\n• Kailangan ng bagong device at bagong IP.\n• Hindi pwedeng gumamit ng VPN para mag-multiple accounts.\n\n⚠️ Ang system ay may detection para sa duplicate accounts. Huwag subukan.",
         tl:"🔒 ONE ACCOUNT RULE:\n\n⚠️ STRICTLY ENFORCED:\n• 1 Device = 1 Account\n• 1 IP Address = 1 Account\n\n🚫 PAGLABAG = PERMANENT BAN\n\n💡 Kung kailangan mo ng bagong account:\n• Kailangan ng bagong device at bagong IP.\n• Hindi pwedeng gumamit ng VPN para mag-multiple accounts.\n\n⚠️ Ang system ay may detection para sa duplicate accounts. Huwag subukan."
     },
 
-    /* ---- CONTACT / COMMUNITY ---- */
     {
         keys:["contact","community","facebook","telegram","social media","cs","customer service","support","makipag-ugnayan","saan kontakin"],
         en:"📞 CONTACT & COMMUNITY:\n\n📍 Where to find us:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (for serious issues)\n\n💖 Heart Fusion AI (that's me!):\n• For general questions, tutorials, at simpleng tulong\n• Available 24/7 in Tagalog & English\n\n🎫 Support Ticket:\n• Para sa serious issues lang\n• May live agent na sasagot\n\n💡 Join the community for updates, tips, at makipag-ugnayan sa ibang members!",
         tl:"📞 CONTACT AT COMMUNITY:\n\n📍 Saan kami mahahanap:\n1️⃣ CS → Group Community → Facebook Group\n2️⃣ CS → Group Community → Telegram Channel\n3️⃣ CS → 'Create Ticket' (para sa serious issues)\n\n💖 Heart Fusion AI (ako 'to!):\n• Para sa general questions, tutorials, at simpleng tulong\n• Available 24/7 sa Tagalog at English\n\n🎫 Support Ticket:\n• Para sa serious issues lang\n• May live agent na sasagot\n\n💡 Sumali sa community para sa updates, tips, at makipag-ugnayan sa ibang members!"
     },
 
-    /* ---- WELCOME BONUS ---- */
     {
         keys:["welcome bonus","bonus","signup bonus","new user bonus","libreng pera","free money","starting balance"],
-        en:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per correct answer\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 100 every Monday",
-        tl:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per tamang sagot\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 100 every Lunes"
+        en:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per correct answer\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Monday",
+        tl:"🎁 WELCOME BONUS:\n\nPag nag-sign up ka gamit ang Inviter Code ng ibang member:\n• Ikaw (bagong user): ₱0.003 welcome bonus\n• Ang Inviter: ₱0.005 referral reward\n\n💡 Kung walang Inviter Code:\n• ₱0.000 starting balance\n• Mag-eearn ka through games, transfers, at invites\n\n📈 Paano mag-earn:\n• Math Game + Ads = ₱0.001 per tamang sagot\n• Invite Program = ₱0.005 per invite\n• Leaderboard = Top 30 every Lunes"
     },
 
-    /* ---- ACCOUNT SETTINGS ---- */
     {
         keys:["account settings","settings","change username","change email","change password","palitan username","palitan email","baguhin account","account info"],
         en:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n👤 Ano ang makikita mo:\n• Name, Username, User ID, Email\n• Device Information (read-only)\n• Invite Code & Stats\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\n⚠️ Siguraduhing tama ang info — naka-save ito sa system.",
         tl:"⚙️ ACCOUNT SETTINGS:\n\n📍 Saan: Dashboard → 'Account Settings'\n\n📋 Ano ang pwede mong baguhin:\n• Username\n• Email\n• Password\n\n👤 Ano ang makikita mo:\n• Name, Username, User ID, Email\n• Device Information (read-only)\n• Invite Code & Stats\n\n💡 Paano mag-change:\n1️⃣ Pumunta sa 'Change Account Information'.\n2️⃣ I-type ang bagong username/email/password.\n3️⃣ Tap 'SAVE ACCOUNT CHANGES'.\n\n⚠️ Siguraduhing tama ang info — naka-save ito sa system."
     },
 
-    /* ---- TRANSFER RECEIVER NOT FOUND ---- */
     {
         keys:["receiver not found","hindi mahanap receiver","invalid receiver","mali receiver info","hindi tumutugma info"],
         en:"⚠️ RECEIVER NOT FOUND?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID.\n\n⚠️ Kung talagang tama ang info pero hindi pa rin mahanap, posibleng:\n• Hindi pa naka-register ang receiver.\n• Maling info ang binigay sa'yo.\n\n💡 Ask the receiver to double-check their info, o gamitin ang Support Ticket kung talagang problema.",
         tl:"⚠️ HINDI MAHANAP ANG RECEIVER?\n\nSiguraduhing EKSAKTONG TUGMA ang lahat ng ito:\n✅ Username (case-sensitive dapat same)\n✅ User ID\n✅ Email\n\n💡 Tips:\n• I-double check ang spelling ng username.\n• I-copy-paste ang email para sigurado.\n• I-ask ang receiver ng kanilang exact User ID.\n\n⚠️ Kung talagang tama ang info pero hindi pa rin mahanap, posibleng:\n• Hindi pa naka-register ang receiver.\n• Maling info ang binigay sa'yo.\n\n💡 Ask the receiver to double-check their info, o gamitin ang Support Ticket kung talagang problema."
     },
 
-    /* ---- HOW TO EARN ---- */
     {
         keys:["how to earn","paano kumita","paano mag earn","earn money","kumita ng pera","make money","paano yumaman"],
-        en:"💰 HOW TO EARN AT HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Solve math questions correctly\n• Watch ads to unlock rewards\n• ₱0.001 per correct answer\n\n2️⃣ 🎁 INVITE PROGRAM\n• Share your Invite Code\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 100 every Monday\n• Rewards: ₱0.005 to ₱0.020\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Other members can send you funds\n\n💡 Combination = mas mabilis ang pag-earn!",
-        tl:"💰 PAANO KUMITA SA HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Sagutin ng tama ang math questions\n• Manood ng ads para sa reward\n• ₱0.001 per tamang sagot\n\n2️⃣ 🎁 INVITE PROGRAM\n• I-share ang Invite Code mo\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 100 every Lunes\n• Rewards: ₱0.005 hanggang ₱0.020\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Pwedeng magpadala sa'yo ang ibang members\n\n💡 Combination = mas mabilis ang pag-earn!"
+        en:"💰 HOW TO EARN AT HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Solve math questions correctly\n• Watch ads to unlock rewards\n• ₱0.001 per correct answer\n\n2️⃣ 🎁 INVITE PROGRAM\n• Share your Invite Code\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Monday\n• Rewards: ₱0.001 to ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Other members can send you funds\n\n💡 Combination = mas mabilis ang pag-earn!",
+        tl:"💰 PAANO KUMITA SA HEART FUSION:\n\n1️⃣ 🎮 MATH GAME + ADS\n• Sagutin ng tama ang math questions\n• Manood ng ads para sa reward\n• ₱0.001 per tamang sagot\n\n2️⃣ 🎁 INVITE PROGRAM\n• I-share ang Invite Code mo\n• ₱0.005 per successful invite\n\n3️⃣ 🏆 LEADERBOARD\n• Top 30 every Lunes\n• Rewards: ₱0.001 hanggang ₱0.010\n\n4️⃣ 💸 RECEIVE TRANSFERS\n• Pwedeng magpadala sa'yo ang ibang members\n\n💡 Combination = mas mabilis ang pag-earn!"
     },
 
-    /* ---- MINIMUM CASHOUT / TRANSFER ---- */
     {
         keys:["minimum","minimum amount","min cashout","min transfer","pinakamaliit","maliit na amount"],
         en:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Minimum: ₱1.00\n• Maximum: ₱5.00\n• Per request lang\n\n⏰ REMINDER:\n• Isang cashout request lang per day.\n• Cashout is 6PM-8PM only.",
         tl:"💵 MINIMUM AMOUNTS:\n\n💸 TRANSFER:\n• Minimum: ₱1.00\n• Walang maximum\n\n💰 CASHOUT:\n• Minimum: ₱1.00\n• Maximum: ₱5.00\n• Per request lang\n\n⏰ PAALALA:\n• Isang cashout request lang per day.\n• Cashout ay 6PM-8PM lamang."
     },
 
-    /* ---- CASHOUT CLOSED ---- */
     {
         keys:["cashout closed","sarado cashout","hindi maka-cashout","cashout hindi pwede","hindi makapag-cashout","cashout unavailable"],
         en:"🔴 CASHOUT IS CLOSED:\n\nCashout is available only from 6:00 PM to 8:00 PM (daily).\n\n⏰ Current time check:\n• Before 6PM → Wait lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Wait for tomorrow\n\n💡 Tips:\n• I-set ang alarm para di ka makalimot.\n• Mag-check ng balance bago mag-6PM.\n• Siguraduhing tama ang GCash/Maya info mo.\n\n⚠️ Kapag naka-pause ang cashout ng admin (kahit 6PM-8PM), hindi rin ito pwede.",
         tl:"🔴 SARADO ANG CASHOUT:\n\nAvailable lang ang cashout mula 6:00 PM hanggang 8:00 PM (araw-araw).\n\n⏰ Check ng oras:\n• Bago mag-6PM → Hintay lang\n• 6PM - 8PM → PWEDE na!\n• After 8PM → Bukas na lang\n\n💡 Tips:\n• I-set ang alarm para di ka makalimot.\n• Mag-check ng balance bago mag-6PM.\n• Siguraduhing tama ang GCash/Maya info mo.\n\n⚠️ Kapag naka-pause ang cashout ng admin (kahit 6PM-8PM), hindi rin pwede."
     },
 
-    /* ---- REGISTER ERROR ---- */
     {
         keys:["cannot register","hindi makapag register","error sign up","error register","sign up failed","hindi maka-sign up","device already registered"],
         en:"⚠️ CANNOT REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered\n• Naka-register na ang device mo.\n• Solution: Kailangan ng bagong device.\n\n2️⃣ Email Already Used\n• Naka-register na ang email.\n• Solution: Gumamit ng ibang email o mag-login na lang.\n\n3️⃣ Username Taken\n• May gumagamit na ng username.\n• Solution: Pumili ng ibang username.\n\n4️⃣ Password Mismatch\n• Hindi tugma ang password at confirm.\n• Solution: I-type ulit.\n\n5️⃣ Network/IP Already Registered\n• Naka-register na ang IP mo.\n• Solution: Gumamit ng ibang network.\n\n⚠️ Kung tuloy-tuloy pa rin, gamitin ang Support Ticket.",
         tl:"⚠️ HINDI MAKAPAG-REGISTER?\n\nKaraniwang dahilan:\n\n1️⃣ Device Already Registered\n• Naka-register na ang device mo.\n• Solution: Kailangan ng bagong device.\n\n2️⃣ Email Already Used\n• Naka-register na ang email.\n• Solution: Gumamit ng ibang email o mag-login na lang.\n\n3️⃣ Username Taken\n• May gumagamit na ng username.\n• Solution: Pumili ng ibang username.\n\n4️⃣ Password Mismatch\n• Hindi tugma ang password at confirm.\n• Solution: I-type ulit.\n\n5️⃣ Network/IP Already Registered\n• Naka-register na ang IP mo.\n• Solution: Gumamit ng ibang network.\n\n⚠️ Kung tuloy-tuloy pa rin, gamitin ang Support Ticket."
     },
 
-    /* ---- PASSWORD WRONG ---- */
     {
         keys:["wrong password","mali password","incorrect password","password error","hindi tinatanggap password"],
         en:"⚠️ WRONG PASSWORD?\n\nLet's fix this:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 HOW TO RESET:\n• Login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password.\n• O kontakin ang CS via Facebook/Telegram.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket para may live agent na tumulong.",
         tl:"⚠️ MALI ANG PASSWORD?\n\nAyusin natin 'to:\n\n1️⃣ Check kung CAPS LOCK ay naka-on.\n2️⃣ Siguraduhing walang extra space sa dulo.\n3️⃣ Try ang iba pang password na ginamit mo.\n4️⃣ If still can't login → Forgot Password option.\n\n💡 PAANO I-RESET:\n• Mag-login muna sa ibang device kung kaya.\n• Go to Account Settings → Change Password.\n• O kontakin ang CS via Facebook/Telegram.\n\n⚠️ Kung hindi ka na makapasok, gamitin ang Support Ticket para may live agent na tumulong."
     },
 
-    /* ---- ACCOUNT BANNED ---- */
     {
         keys:["banned","ban","na-ban","na ban","account banned","account suspended","na-suspend","suspended","on hold","naka hold"],
         en:"🚫 ACCOUNT BANNED OR ON HOLD?\n\nReason: Violations of Complan\n\nCommon violations:\n• Multiple accounts (permanent ban)\n• Multiple payouts in 1 day (temporary hold)\n• Cheating/abusing bugs (permanent ban)\n\n💡 What to do:\n• Basahin ang alert message para sa detalye (reason, penalty, kailan pwede bumalik).\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin.\n\n⚠️ HUWAG subukang mag-register ng bagong account habang banned — dagdag na violation ito.",
         tl:"🚫 NAKA-BAN O NAKA-HOLD ANG ACCOUNT?\n\nDahilan: Paglabag sa Complan\n\nKaraniwang violations:\n• Multiple accounts (permanent ban)\n• Multiple payouts sa 1 araw (temporary hold)\n• Cheating/abusing bugs (permanent ban)\n\n💡 Ano'ng gagawin:\n• Basahin ang alert message para sa detalye (reason, penalty, kailan pwede bumalik).\n• Hintayin ang penalty period na matapos.\n• Kung feeling mo unfair ang ban, gamitin ang Support Ticket para i-review ng admin.\n\n⚠️ HUWAG subukang mag-register ng bagong account habang banned — dagdag na violation ito."
     },
 
-    /* ---- TIME CASHOUT / ORAS ---- */
     {
         keys:["what time","anong oras","kailan pwede","oras ng","time ng","schedule"],
         en:"🕐 SCHEDULES:\n\n💰 CASHOUT:\n• 6:00 PM – 8:00 PM (daily)\n• 1 request per day\n• Processing: 1-10 hours\n\n🏆 LEADERBOARD RESET:\n• Every Monday\n• Rewards idadagdag agad\n\n🎮 MATH GAME:\n• 24/7 open\n• Walang time limit (5 sec lang per question)\n\n💸 TRANSFER:\n• 24/7 open (unless naka-pause)\n• Walang time limit\n\n🛑 SITE PAUSE:\n• Kailan lang nangyari (admin decision)\n• Hintayin ang update",
@@ -6614,15 +4154,10 @@ const AI_KB = [
 ];
 
 
-/* =====================================================
-   AI RESPONSE LOGIC
-===================================================== */
-
 function getAIResponse(userMessage){
 
     const lower = " " + userMessage.toLowerCase().trim() + " ";
 
-    /* 1. Find best matching entry */
     let bestScore = 0;
     let bestEntry = null;
 
@@ -6641,7 +4176,6 @@ function getAIResponse(userMessage){
 
     const lang = detectLanguage(userMessage);
 
-    /* 2. If no match, check if serious issue */
     if(!bestEntry || bestScore === 0){
 
         if(isSeriousIssue(userMessage)){
@@ -6651,21 +4185,15 @@ function getAIResponse(userMessage){
             return "⚠️ This looks like a SERIOUS ISSUE.\n\nFor problems like this, you need a live agent to personally assist you.\n\n📌 PLEASE CREATE A SUPPORT TICKET:\n1️⃣ Go to CS → 'Create Ticket'.\n2️⃣ Describe your issue in detail.\n3️⃣ Wait for the admin's response.\n\n✅ The admin will assist you ASAP.\n\n💡 If it's just a simple question, feel free to ask me again — maybe I can still help.";
         }
 
-        /* Non-serious fallback */
         if(lang === "tl"){
             return "Hmm, hindi ko sigurado ang sagot diyan. 🤔\n\nPero nandito ako para tumulong! Pwede mo akong tanungin tungkol sa:\n\n• 📝 Sign up & Login\n• 💸 Transfer & Cashout\n• 🎮 Game & Ads\n• 🎁 Invite Program\n• 💰 Balance & Points\n• 🏆 Leaderboard\n• 📢 Updates\n• 📖 Complan\n• 🎫 Support Tickets\n• At marami pa!\n\nI-type mo lang ang tanong mo sa Tagalog o English — ako na bahala! 💖";
         }
         return "Hmm, I'm not quite sure about that. 🤔\n\nBut I'm here to help! You can ask me about:\n\n• 📝 Sign up & Login\n• 💸 Transfer & Cashout\n• 🎮 Game & Ads\n• 🎁 Invite Program\n• 💰 Balance & Points\n• 🏆 Leaderboard\n• 📢 Updates\n• 📖 Complan\n• 🎫 Support Tickets\n• And more!\n\nJust type your question in Tagalog or English — I've got you! 💖";
     }
 
-    /* 3. Return matched answer */
     return bestEntry[lang] || bestEntry.en;
 }
 
-
-/* =====================================================
-   AI CHAT UI
-===================================================== */
 
 function aiAppendMessage(role,text){
     const container=document.getElementById("aiChatMessages");
@@ -6751,10 +4279,6 @@ document.getElementById("aiChatForm").addEventListener("submit",function(event){
 });
 
 
-/* =====================================================
-   CUSTOM MODAL
-===================================================== */
-
 function customAlert(message,options={}){
     return new Promise(resolve=>{
         const overlay=document.getElementById("modalOverlay");
@@ -6802,10 +4326,6 @@ function customAlert(message,options={}){
 }
 
 
-/* =====================================================
-   DEVICE & IP DETECTION
-===================================================== */
-
 function detectDevice(){
     const ua=navigator.userAgent || "";
     let brand="Unknown", model="Unknown";
@@ -6852,10 +4372,6 @@ function getDeviceInfo(){
 }
 
 
-/* =====================================================
-   STORAGE
-===================================================== */
-
 function getUsers(){
     return JSON.parse(localStorage.getItem("earningUsers") || "[]");
 }
@@ -6880,10 +4396,6 @@ function updateCurrentUser(){
     }
 }
 
-
-/* =====================================================
-   WEEK KEY
-===================================================== */
 
 function getWeekKey(date=new Date()){
     const d=new Date(Date.UTC(date.getFullYear(),date.getMonth(),date.getDate()));
@@ -6917,6 +4429,7 @@ function prepareWeeklyData(){
             user.cashoutHistory=[];
             user.gameHistory=[];
             user.weeklyPoints=0;
+            user.weeklyAdsWatched=0;
             changed=true;
         }
         if(!user.gameHistory) user.gameHistory=[];
@@ -6928,6 +4441,8 @@ function prepareWeeklyData(){
         if(!user.inviteIncome) user.inviteIncome=0;
         if(!user.points) user.points=0;
         if(user.weeklyPoints===undefined) user.weeklyPoints=0;
+        if(user.adsWatched===undefined) user.adsWatched=0;
+        if(user.weeklyAdsWatched===undefined) user.weeklyAdsWatched=0;
         if(!user.balance) user.balance=0;
         if(!user.resolvedViolations) user.resolvedViolations=[];
         if(user.accountStatus===undefined) user.accountStatus="active";
@@ -6998,10 +4513,6 @@ function checkInviterCode(){
 }
 
 
-/* =====================================================
-   SIGN UP
-===================================================== */
-
 document.getElementById("signupForm").addEventListener("submit",async function(event){
 
     event.preventDefault();
@@ -7055,6 +4566,8 @@ document.getElementById("signupForm").addEventListener("submit",async function(e
         balance:inviter ? 0.003 : 0,
         points:0,
         weeklyPoints:0,
+        adsWatched:0,
+        weeklyAdsWatched:0,
         totalInvites:0, inviteIncome:0, totalTransferred:0, totalCashedOut:0,
         transferHistory:[], cashoutHistory:[], gameHistory:[],
         deviceBrand:deviceInfo.brand, deviceModel:deviceInfo.model,
@@ -7087,10 +4600,6 @@ document.getElementById("signupForm").addEventListener("submit",async function(e
     showDashboard(user);
 });
 
-
-/* =====================================================
-   LOGIN
-===================================================== */
 
 document.getElementById("loginForm").addEventListener("submit",async function(event){
 
@@ -7216,10 +4725,6 @@ document.getElementById("loginForm").addEventListener("submit",async function(ev
 });
 
 
-/* =====================================================
-   SHOW DASHBOARD
-===================================================== */
-
 function showDashboard(user){
 
     currentUser=user;
@@ -7310,10 +4815,6 @@ async function saveAccountSettings(){
 }
 
 
-/* =====================================================
-   FOCUS PAGE
-===================================================== */
-
 function showFocus(pageId,navButton){
 
     document.querySelector(".welcome").style.display="none";
@@ -7399,10 +4900,6 @@ function toggleTransaction(button){
     button.classList.add("active");
 }
 
-
-/* =====================================================
-   TRANSFER
-===================================================== */
 
 function updateTransferPauseNotice(){
     const box = document.getElementById("transferPauseNotice");
@@ -7602,10 +5099,6 @@ function renderTransferHistory(){
 }
 
 
-/* =====================================================
-   CASHOUT
-===================================================== */
-
 function isCashoutTime(){
     const hour=new Date().getHours();
     return hour>=18 && hour<20;
@@ -7761,10 +5254,6 @@ ${receiptRow("Date and Time",item.dateTime)}`;
 }
 
 
-/* =====================================================
-   LIVE CASHOUT — 5PM RESET
-===================================================== */
-
 function getLivePeriodKey(){
     const now=new Date();
     if(now.getHours()>=17) return now.toDateString();
@@ -7829,7 +5318,7 @@ function renderLiveCashouts(){
 
 
 /* =====================================================
-   LEADERBOARD (RENDER)
+   LEADERBOARD (USER) — TOP 30 WITH ADS STATS
 ===================================================== */
 
 function renderLeaderboard(){
@@ -7840,13 +5329,16 @@ function renderLeaderboard(){
 
     html += `
         <div class="info-box" style="background:linear-gradient(135deg,#fff0f4,#ffe0e9);border-color:#e34968;">
-            <strong>🏆 Weekly Leaderboard Rewards</strong><br><br>
-            Rank 1-15: <strong>₱0.020</strong><br>
-            Rank 16-30: <strong>₱0.015</strong><br>
-            Rank 31-50: <strong>₱0.010</strong><br>
-            Rank 51-80: <strong>₱0.008</strong><br>
-            Rank 81-100: <strong>₱0.005</strong><br><br>
-            <em>Every Monday, top 100 members win rewards!</em>
+            <strong>🏆 Weekly Leaderboard Rewards (Top 30)</strong><br><br>
+            Rank 1: <strong>₱0.010</strong><br>
+            Rank 2: <strong>₱0.008</strong><br>
+            Rank 3: <strong>₱0.006</strong><br>
+            Rank 4-8: <strong>₱0.005</strong><br>
+            Rank 9-14: <strong>₱0.004</strong><br>
+            Rank 15-20: <strong>₱0.003</strong><br>
+            Rank 21-25: <strong>₱0.002</strong><br>
+            Rank 26-30: <strong>₱0.001</strong><br><br>
+            <em>Every Monday, top 30 members win rewards!</em>
         </div>
     `;
 
@@ -7876,12 +5368,15 @@ function renderLeaderboard(){
         }
     }
 
-    const currentUsers = getUsers()
+    const allUsers = getUsers();
+    const totalAdsAll = allUsers.reduce((sum, u) => sum + Number(u.weeklyAdsWatched || 0), 0);
+
+    const currentUsers = allUsers
         .filter(u => Number(u.weeklyPoints||0) > 0)
         .sort((a,b) => Number(b.weeklyPoints||0) - Number(a.weeklyPoints||0))
-        .slice(0, 100);
+        .slice(0, 30);
 
-    html += `<h3 style="color:#9d1839;margin:26px 0 10px;font-family:Georgia,serif;">🔥 This Week's Rankings</h3>`;
+    html += `<h3 style="color:#9d1839;margin:26px 0 10px;font-family:Georgia,serif;">🔥 This Week's Top 30 Rankings</h3>`;
 
     if(!currentUsers.length){
         html += '<div class="empty-history">No members with points yet this week. Play the game to earn points!</div>';
@@ -7890,13 +5385,19 @@ function renderLeaderboard(){
             const rank = index + 1;
             const reward = getRankReward(rank);
             const isMe = currentUser && user.userId === currentUser.userId;
+            const adsWatched = Number(user.weeklyAdsWatched || 0);
+            const adsPercent = totalAdsAll > 0 ? ((adsWatched / totalAdsAll) * 100) : 0;
+
             html += `
                 <div class="history-item" style="${isMe ? 'background:linear-gradient(135deg,#fff8e6,#ffe9c2);border-color:#d4a017;box-shadow:0 0 0 2px #f5b942;' : ''}">
                     <div class="history-top">
                         <span class="history-title">#${rank} ${escapeHtml(user.username)}${isMe ? ' ⭐ (You)' : ''}</span>
                         <span class="history-amount">${Number(user.weeklyPoints||0).toFixed(3)} pts</span>
                     </div>
-                    <div class="history-bottom">Potential Reward: ₱${reward.toFixed(3)}</div>
+                    <div class="history-bottom">
+                        📺 Ads Watched: <strong>${adsWatched}</strong> • Contributed: <strong>${adsPercent.toFixed(2)}%</strong> ng total ads<br>
+                        🏆 Potential Reward: <strong>₱${reward.toFixed(3)}</strong>
+                    </div>
                 </div>
             `;
         });
@@ -8006,11 +5507,6 @@ function submitGameAnswer(){
 }
 
 
-/* =====================================================
-   WATCH AD — MONETAG REWARDED INTERSTITIAL
-   Zone: 11847520
-===================================================== */
-
 function watchGameAd(){
 
     if(!currentGame||!currentGame.correct) return;
@@ -8022,23 +5518,14 @@ function watchGameAd(){
     button.disabled=true;
     status.textContent="Loading advertisement...";
 
-    /* 
-       Monetag Rewarded Interstitial:
-       - Nagbabalik ng Promise
-       - Nagre-resolve PAGKATAPOS mapanood ng user ang ad
-       - Walang parameters na kailangan
-    */
-
     show_11847520()
         .then(() => {
-            // Ang code na ito ay tatakbo PAGKATAPOS mapanood ng user ang ad
             adResolved = true;
             adWatched = true;
             status.textContent = "✓ Ad completed.";
             claimGameReward();
         })
         .catch((error) => {
-            // Kapag nag-error o hindi natapos ang ad
             console.error("Monetag ad error:", error);
             adResolved = true;
             status.textContent = "❌ No ad loaded. Continue without points.";
@@ -8055,6 +5542,8 @@ function claimGameReward(){
     currentUser.balance=Number(currentUser.balance||0)+0.001;
     currentUser.points=Number(currentUser.points||0)+0.001;
     currentUser.weeklyPoints=Number(currentUser.weeklyPoints||0)+0.001;
+    currentUser.adsWatched=Number(currentUser.adsWatched||0)+1;
+    currentUser.weeklyAdsWatched=Number(currentUser.weeklyAdsWatched||0)+1;
     updateCurrentUser();
     updateBalanceDisplay();
     showNotification("Reward Added","₱0.001 added to balance.");
@@ -8115,10 +5604,6 @@ function renderGameHistory(){
 }
 
 
-/* =====================================================
-   CALCULATOR
-===================================================== */
-
 function calcPress(value){
     if(calcValue==="0") calcValue="";
     calcValue+=value;
@@ -8138,10 +5623,6 @@ function calcEqual(){
 }
 
 
-/* =====================================================
-   NOTIFICATION
-===================================================== */
-
 function showNotification(title,message){
     const box=document.getElementById("appNotification");
     document.getElementById("notificationTitle").textContent=title;
@@ -8153,10 +5634,6 @@ function showNotification(title,message){
     },8000);
 }
 
-
-/* =====================================================
-   RESET TRANSFER
-===================================================== */
 
 function resetTransferForm(){
     pendingTransfer=null;
@@ -8185,10 +5662,6 @@ function escapeHtml(value){
 }
 
 
-/* =====================================================
-   LOGOUT
-===================================================== */
-
 function logout(){
     if(gameTimerInterval) clearInterval(gameTimerInterval);
     localStorage.setItem("loggedIn","false");
@@ -8200,10 +5673,6 @@ function logout(){
     showLogin();
 }
 
-
-/* =====================================================
-   OLD USER MIGRATION
-===================================================== */
 
 function migrateOldUser(){
     const oldUser=localStorage.getItem("earningUser");
@@ -8223,6 +5692,8 @@ function migrateOldUser(){
                 balance:Number(old.balance||0),
                 points:Number(old.points||0),
                 weeklyPoints:0,
+                adsWatched:0,
+                weeklyAdsWatched:0,
                 totalInvites:0, inviteIncome:0, totalTransferred:0, totalCashedOut:0,
                 transferHistory:[], cashoutHistory:[], gameHistory:[],
                 deviceBrand:dev.brand, deviceModel:dev.model,
@@ -8242,10 +5713,6 @@ function migrateOldUser(){
 }
 
 
-/* =====================================================
-   AUTO LOGIN
-===================================================== */
-
 window.addEventListener("load",async function(){
     migrateOldUser();
     prepareWeeklyData();
@@ -8261,10 +5728,6 @@ window.addEventListener("load",async function(){
     }
 });
 
-
-/* =====================================================
-   AUTO UPDATE — WITH ADMIN TYPING PROTECTION
-===================================================== */
 
 setInterval(function(){
 
