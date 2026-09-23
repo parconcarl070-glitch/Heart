@@ -10,6 +10,9 @@
 <!-- ===== NEW ADS — SITE VERIFICATION ===== -->
 <meta name="7f5c6e40754201ad39d892eead448d33.html">
 
+<!-- ===== MONEYTAG ADS SDK ===== -->
+<script src='//libtl.com/sdk.js' data-zone='11871542' data-sdk='show_11871542'></script>
+
 <style>
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -246,6 +249,9 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 .ai-chat-input button{width:46px;height:46px;border:none;border-radius:12px;background:linear-gradient(135deg,#b51f43,#e34968);color:white;font-size:17px;font-weight:bold;cursor:pointer;box-shadow:0 8px 18px rgba(181,31,67,.28);transition:.2s;display:flex;justify-content:center;align-items:center;}
 .ai-chat-input button:active{transform:scale(.95);}
 .ai-chat-input button:disabled{opacity:.5;cursor:not-allowed;}
+.ai-chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;background:#fffafb;border-top:1px solid #f0c6d0;}
+.ai-chat-suggestions button{padding:7px 12px;border:1px solid #f0c6d0;border-radius:20px;background:white;color:#b51f43;font-size:11.5px;font-weight:bold;cursor:pointer;transition:.2s;}
+.ai-chat-suggestions button:hover{background:#b51f43;color:white;border-color:#b51f43;}
 
 .ticket-confirm-card{margin:14px 16px;padding:18px;background:linear-gradient(135deg,#fff8e6,#ffe9c2);border:2px dashed #d4a017;border-radius:14px;text-align:center;}
 .ticket-confirm-card .ticket-icon-big{font-size:38px;margin-bottom:8px;}
@@ -948,7 +954,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 </div>
 
 <div class="ad-box">
-<div class="ad-status" id="adStatus">You must watch the ad before receiving the 0.001 reward.</div>
+<div class="ad-status" id="adStatus">📺 You must watch the ad before receiving the ₱0.001 reward.</div>
 <button class="main-btn" id="watchAdButton" onclick="watchGameAd()" disabled>WATCH AD</button>
 <div id="adContainer"></div>
 </div>
@@ -1249,7 +1255,7 @@ Need help? Reach out to our support team or join the community for updates.
             <button type="submit" id="aiSendBtn">➤</button>
         </form>
     </div>
-    <div class="ai-chat-suggestions" style="border-top:1px solid #f0c6d0;">
+    <div class="ai-chat-suggestions">
         <button type="button" onclick="askAI('How do I sign up?')">Sign up</button>
         <button type="button" onclick="askAI('How to transfer?')">Transfer</button>
         <button type="button" onclick="askAI('Paano mag cashout?')">Cashout</button>
@@ -5704,32 +5710,49 @@ function submitGameAnswer(){
 
 
 /* =====================================================
-   WATCH GAME AD
-   =====================================================
-   ⚠️ TEMPORARY: Walang ad script na naka-integrate.
-   Auto-grant muna ang reward para gumana ang game.
-   Kapag may actual ad script ka na, i-paste mo sa loob
-   ng function na ito para kumita ka.
+   WATCH GAME AD — MONEYTAG REWARDED INTERSTITIAL
 ===================================================== */
 
 function watchGameAd(){
 
-    if(!currentGame||!currentGame.correct) return;
+    if(!currentGame || !currentGame.correct) return;
     if(adResolved) return;
-    adResolved=false;
 
-    const button=document.getElementById("watchAdButton");
-    const status=document.getElementById("adStatus");
-    button.disabled=true;
-    status.textContent="Loading advertisement...";
+    const button = document.getElementById("watchAdButton");
+    const status = document.getElementById("adStatus");
 
-    // TEMPORARY: Auto-grant reward since no ad script is active
-    setTimeout(function(){
+    button.disabled = true;
+    status.textContent = "📺 Loading advertisement...";
+
+    // Check kung naka-load ang Moneytag SDK
+    if(typeof show_11871542 !== "function"){
+        status.textContent = "⚠️ Ad SDK not loaded. Please refresh the page.";
+        showNotification("Ad Error", "Hindi nag-load ang ads. I-refresh ang page.");
+        button.disabled = false;
+        return;
+    }
+
+    // Rewarded Interstitial — Moneytag
+    show_11871542().then(() => {
+
+        // ✅ Ad completed — bigyan ng reward
         adResolved = true;
         adWatched = true;
-        status.textContent = "✓ Ad completed.";
+        status.textContent = "✓ Ad completed. Reward unlocked!";
+        showNotification("Ad Completed", "Reward unlocked! Adding ₱0.001 to your balance.");
         claimGameReward();
-    }, 1500);
+
+    }).catch((error) => {
+
+        // ❌ Ad failed / closed / skipped — WALANG reward
+        console.log("Ad error:", error);
+        adResolved = false;
+        adWatched = false;
+        status.textContent = "❌ Ad not completed. Please try again.";
+        showNotification("Ad Skipped", "Kailangan mong tapusin ang ad para makuha ang reward.");
+        button.disabled = false;
+
+    });
 }
 
 
@@ -5916,6 +5939,15 @@ window.addEventListener("load",async function(){
     cleanLiveCashouts();
     updateUpdatesBadge();
     updateAdminPreview();
+
+    // ✅ Check kung naka-load ang Moneytag SDK
+    setTimeout(() => {
+        if(typeof show_11871542 !== "function"){
+            console.warn("⚠️ Moneytag SDK not loaded. Ads will not work.");
+        } else {
+            console.log("✅ Moneytag SDK loaded successfully.");
+        }
+    }, 2000);
 
     const loggedIn=localStorage.getItem("loggedIn");
     const user=getCurrentStoredUser();
