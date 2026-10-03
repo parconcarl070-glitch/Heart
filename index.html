@@ -5679,7 +5679,7 @@ function submitGameAnswer(){
 
     gameTimeLeft=15;
     document.getElementById("gameTimer").textContent=gameTimeLeft;
-    document.getElementById("adStatus").textContent="Answer submitted. Processing in 5 seconds...";
+    document.getElementById("adStatus").textContent="Answer submitted. Processing in seconds...";
 
     gameTimerInterval=setInterval(function(){
         gameTimeLeft--;
@@ -5794,7 +5794,7 @@ function prepareNextGame(){
     document.getElementById("gameSubmitButton").disabled=true;
     document.getElementById("gameAnswer").disabled=true;
     document.getElementById("watchAdButton").disabled=true;
-    document.getElementById("gameTimer").textContent="5";
+    document.getElementById("gameTimer").textContent="15";
     document.getElementById("questionText").textContent="Press Start for next question";
     document.getElementById("adStatus").textContent="No ads = no reward.";
 }
