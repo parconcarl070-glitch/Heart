@@ -1619,7 +1619,7 @@ let generatedOTP=null;
 
 let currentGame=null;
 let gameTimerInterval=null;
-let gameTimeLeft=25;
+let gameTimeLeft=15;
 let adWatched=false;
 let adResolved=false;
 
@@ -5282,7 +5282,7 @@ function renderTransferHistory(){
 
 function isCashoutTime(){
     const hour=new Date().getHours();
-    return hour>=0 && hour<20;
+    return hour>=18 && hour<20;
 }
 
 
@@ -5652,11 +5652,11 @@ async function startGame(){
     }
 
     currentGame=question;
-    gameTimeLeft=5; adWatched=false; adResolved=false;
+    gameTimeLeft=15; adWatched=false; adResolved=false;
 
     document.getElementById("questionText").textContent=question.text;
     document.getElementById("questionNumber").textContent="New Question";
-    document.getElementById("gameTimer").textContent="5";
+    document.getElementById("gameTimer").textContent="15";
     document.getElementById("gameAnswer").value="";
     document.getElementById("gameAnswer").disabled=false;
     document.getElementById("gameSubmitButton").disabled=false;
@@ -5677,7 +5677,7 @@ function submitGameAnswer(){
     document.getElementById("gameAnswer").disabled=true;
     document.getElementById("gameSubmitButton").disabled=true;
 
-    gameTimeLeft=5;
+    gameTimeLeft=15;
     document.getElementById("gameTimer").textContent=gameTimeLeft;
     document.getElementById("adStatus").textContent="Answer submitted. Processing in 5 seconds...";
 
