@@ -27,7 +27,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 .dashboard{display:none;min-height:100vh;padding-bottom:85px;background:radial-gradient(circle at top left,#ffdce6,transparent 30%),#fff8fa;}
 .dashboard-header{padding:18px 20px;background:rgba(255,255,255,.94);border-bottom:1px solid #f1c3cf;display:flex;justify-content:center;align-items:center;}
 .brand{font-family:Georgia,serif;font-size:21px;font-weight:bold;color:#a21d3d;cursor:pointer;user-select:none;}
-.dashboard-content{max-width:1050px;margin:auto;padding:25px 18px;}
+.dashboard-content{max-width:1050px;margin:auto;padding:25px 18px 150px 18px;} /* INCREASED BOTTOM PADDING PARA DI MATAKPAN NG NAV */
 .welcome{margin-bottom:20px;}
 .welcome h2{font-family:Georgia,serif;color:#8f1936;margin-bottom:5px;}
 .welcome p{color:#98717b;font-size:13px;}
@@ -438,7 +438,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 
 <div class="focus-page" id="cashoutFocus">
 <div class="focus-card">
-<h2>💰 Cashout</h2><p>Cashout requests are available only from 6:00 PM to 8:00 PM.</p>
+<h2>💰 Cashout</h2><p>Request your earnings here.</p>
 <div class="info-box" id="cashoutWindowMessage"></div>
 <form id="cashoutForm">
 <div class="form-section"><h3>Account Balance</h3><div class="info-box"><span>Available Balance:</span> <strong id="cashoutBalance">₱0.00</strong></div></div>
@@ -860,7 +860,7 @@ function getDefaultFollowPlatforms(){return[{id:"fp_default",name:"Telegram",ico
 function ensureFollowPlatforms(){if(getFollowPlatforms().length===0)saveFollowPlatforms(getDefaultFollowPlatforms());}
 
 /* ============ SITE SETTINGS ============ */
-const DEFAULT_SITE_SETTINGS={pauseSite:false,pauseCashout:false,pauseRegistration:false,pauseGCash:false,pauseMaya:false,pausePayPal:false,forceOpenCashout:false,pauseCalculator:false,pauseCashoutTransactions:false,pauseGameTransactions:false};
+const DEFAULT_SITE_SETTINGS={pauseSite:false,pauseCashout:false,pauseRegistration:false,pauseGCash:false,pauseMaya:false,pausePayPal:false,forceOpenCashout:true,pauseCalculator:false,pauseCashoutTransactions:false,pauseGameTransactions:false};
 function getSiteSettings(){try{return Object.assign({},DEFAULT_SITE_SETTINGS,JSON.parse(localStorage.getItem("hfSiteSettings")||"{}"));}catch(e){return Object.assign({},DEFAULT_SITE_SETTINGS);}}
 function saveSiteSettings(s){localStorage.setItem("hfSiteSettings",JSON.stringify(s));}
 function isSitePaused(){return getSiteSettings().pauseSite===true;}
@@ -931,7 +931,7 @@ function createTelegramUser(tgUser){
     const user={
         name:fullname,
         username:username,
-        email:"",
+        email:"Not set",
         password:"",
         telegramId:tgUser.id,
         userId:generateUserId(),
@@ -950,10 +950,10 @@ function createTelegramUser(tgUser){
         cashoutHistory:[],
         gameHistory:[],
         deviceBrand:"",
-        deviceModel:"",
+        deviceModel:navigator.userAgent||"",
         deviceUserAgent:navigator.userAgent||"",
         registeredIP:"",
-        registeredCountry:"",
+        registeredCountry:"Not set",
         registeredAt:new Date().toLocaleString(),
         historyWeek:getWeekKey(),
         accountStatus:"active",
@@ -977,6 +977,16 @@ function handleTelegramLogin(){
     currentUser=user;
     localStorage.setItem("currentUserId",user.userId);
     localStorage.setItem("loggedIn","true");
+    
+    // Check if Banned before proceeding
+    if(currentUser.accountStatus === "banned"){
+        document.getElementById("splashScreen").style.display="flex";
+        customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED\n\nYou can no longer access Heart Fusion.", "error", "Account Banned").then(()=>{
+            logout();
+        });
+        return true;
+    }
+    
     showDashboard(user);
     return true;
 }
@@ -1027,6 +1037,13 @@ function prepareWeeklyData(){
 }
 
 function showDashboard(user){
+    if(user.accountStatus === "banned"){
+        customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED\n\nYou can no longer access Heart Fusion.", {type: "error", title: "Account Banned"}).then(() => {
+            logout();
+        });
+        return;
+    }
+
     prepareWeeklyData();
     currentUser=getUsers().find(u=>u.userId===user.userId)||user;
     document.getElementById("splashScreen").style.display="none";
@@ -1059,7 +1076,7 @@ function updateSettings(){
     document.getElementById("totalInvites").textContent=Number(currentUser.totalInvites||0);
     document.getElementById("inviteIncome").textContent="₱"+Number(currentUser.inviteIncome||0).toFixed(3);
     document.getElementById("deviceModel").textContent=currentUser.deviceModel||navigator.userAgent.substring(0,40)||"—";
-    document.getElementById("deviceCountry").textContent=currentUser.registeredCountry||"—";
+    document.getElementById("deviceCountry").textContent=currentUser.registeredCountry||"Not set";
     document.getElementById("deviceTgId").textContent=currentUser.telegramId||"—";
     document.getElementById("deviceRegistered").textContent=currentUser.registeredAt||"—";
 }
@@ -1146,7 +1163,7 @@ function renderCommunityLinks(){
 }
 
 /* ============ CASHOUT ============ */
-function isCashoutTime(){if(isCashoutForceOpen())return true;const h=new Date().getHours();return h>=18&&h<20;}
+function isCashoutTime(){return true;} // ALWAYS TRUE PARA PWEDE MAG CASHOUT KAHIT ANONG ORAS
 function ensureSocialSubmissions(u){
     if(!u.socialSubmissions)u.socialSubmissions={};
     const platforms=getFollowPlatforms();
@@ -1262,8 +1279,8 @@ function updateCashoutWindow(){
     const msg=document.getElementById("cashoutWindowMessage");const btn=document.getElementById("cashoutButton");
     renderPayoutOptions();
     if(isCashoutPaused()){msg.innerHTML="⏸️ Cashout is paused.";btn.disabled=true;return;}
-    if(isCashoutTime()){msg.innerHTML="🟢 Cashout is OPEN.";btn.disabled=false;}
-    else{msg.innerHTML="🔴 Cashout is CLOSED. Only 6PM-8PM.";btn.disabled=true;}
+    // Laging OPEN at clickable
+    msg.innerHTML="🟢 Cashout is OPEN.";btn.disabled=false;
 }
 function resetCashoutForm(){
     if(!currentUser)return;
@@ -1281,7 +1298,7 @@ function calculateCashout(){const a=Number(document.getElementById("cashoutAmoun
 document.getElementById("cashoutForm").addEventListener("submit",async e=>{
     e.preventDefault();
     if(isCashoutPaused()){alert("Cashout paused.");return;}
-    if(!isCashoutTime()){alert("Only 6PM-8PM.");return;}
+    // Tinanggal ang time restriction para laging pwede
     const amount=Number(document.getElementById("cashoutAmount").value);
     const mode=document.getElementById("payoutMode").value;
     const num=document.getElementById("payoutNumber").value.trim();
@@ -1535,7 +1552,8 @@ function showNotification(title,message){
     document.getElementById("notificationMessage").textContent=message;
     box.style.display="block";
     clearTimeout(window.notificationTimer);
-    window.notificationTimer=setTimeout(()=>{box.style.display="none";},8000);
+    // Pinaikli ang timer to 3 seconds para mabilis mawala
+    window.notificationTimer=setTimeout(()=>{box.style.display="none";},3000);
 }
 
 /* ============ INVITE CODE POPUP ============ */
@@ -2338,7 +2356,14 @@ function logout(){
     const tgUser=getTelegramUser();
     if(tgUser){
         let user=getUsers().find(u=>u.telegramId===tgUser.id);
-        if(user){currentUser=user;localStorage.setItem("currentUserId",user.userId);localStorage.setItem("loggedIn","true");showDashboard(user);if(!user.hasEnteredInviteCode)setTimeout(showInviteCodePopup,500);return;}
+        if(user){
+            if(user.accountStatus === "banned"){
+                document.getElementById("splashScreen").style.display="flex";
+                customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED\n\nYou can no longer access Heart Fusion.", "error", "Account Banned");
+                return;
+            }
+            currentUser=user;localStorage.setItem("currentUserId",user.userId);localStorage.setItem("loggedIn","true");showDashboard(user);if(!user.hasEnteredInviteCode)setTimeout(showInviteCodePopup,500);return;
+        }
     }
     document.getElementById("splashScreen").style.display="flex";
 }
@@ -2367,24 +2392,29 @@ async function initApp(){
     const loggedIn=localStorage.getItem("loggedIn");
     const user=getCurrentStoredUser();
     if(loggedIn==="true"&&user){
+        if(user.accountStatus === "banned"){
+            document.getElementById("splashScreen").style.display="flex";
+            customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED\n\nYou can no longer access Heart Fusion.", "error", "Account Banned");
+            return;
+        }
         currentUser=user;
         showDashboard(user);
         if(!user.hasEnteredInviteCode)setTimeout(showInviteCodePopup,600);
         return;
     }
 
-    // CREATE A GUEST ACCOUNT FOR TESTING IF NONE EXISTS (No splash screen for easy testing)
+    // CREATE A GUEST ACCOUNT FOR TESTING IF NONE EXISTS
     let users = getUsers();
     let guestUser = users.find(u => u.userId === "GUEST123");
     if(!guestUser) {
         guestUser = {
-            name: "Guest User", username: "guest", email: "guest@test.com", password: "guest",
+            name: "Guest User", username: "guest", email: "Not set", password: "guest",
             telegramId: 12345, userId: "GUEST123", inviteCode: "GUEST-CODE", invitedBy: null,
             balance: 100, points: 2000, weeklyPoints: 0, adsWatched: 0, weeklyAdsWatched: 0,
             totalInvites: 0, inviteIncome: 0, totalTransferred: 0, totalCashedOut: 0,
             transferHistory: [], cashoutHistory: [], gameHistory: [], deviceBrand: "Browser",
-            deviceModel: "PC", deviceUserAgent: "Browser", registeredIP: "127.0.0.1",
-            registeredCountry: "PH", registeredAt: new Date().toLocaleString(),
+            deviceModel: navigator.userAgent, deviceUserAgent: "Browser", registeredIP: "127.0.0.1",
+            registeredCountry: "Not set", registeredAt: new Date().toLocaleString(),
             historyWeek: getWeekKey(), accountStatus: "active", violations: [],
             resolvedViolations: [], pendingWelcomeBack: false, pendingCongrats: null,
             cashoutVerified: true, socialSubmissions: {}, hasEnteredInviteCode: true
@@ -2421,4 +2451,4 @@ setInterval(()=>{
 },10000);
 </script>
 </body>
-        </html>
+</html>
