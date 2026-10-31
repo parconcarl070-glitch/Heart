@@ -364,6 +364,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 .admin-publish-btn{width:100%;padding:13px;border:none;border-radius:12px;background:linear-gradient(135deg,#ff2a75,#ff6b9d);color:white;font-weight:700;font-size:13px;cursor:pointer;margin-top:4px;font-family:inherit;}
 .admin-publish-btn.green{background:linear-gradient(135deg,#10b981,#34d399);}
 .admin-publish-btn.blue{background:linear-gradient(135deg,#3b82f6,#60a5fa);}
+.admin-publish-btn.purple{background:linear-gradient(135deg,#8b5cf6,#a78bfa);}
 .admin-control-card{padding:16px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
 .admin-control-card.on{background:rgba(231,76,60,.08);border-color:rgba(231,76,60,.3);}
 .admin-control-info{flex:1;min-width:160px;}
@@ -722,14 +723,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 <div class="cs-section"><div class="cs-section-header"><span class="cs-section-icon">💖</span><h3>Heart Fusion AI</h3></div><p class="cs-section-desc">Instant help 24/7.</p><div class="ai-launch-card" onclick="showFocus('heartFusionAiFocus')"><div class="ai-launch-icon">💖</div><div class="ai-launch-text"><strong>Chat with Heart Fusion AI</strong><span>Ask anything!</span></div><div class="ai-launch-arrow">→</div></div></div>
 <div class="cs-section"><div class="cs-section-header"><span class="cs-section-icon">🎫</span><h3>Create Ticket</h3></div><p class="cs-section-desc">Report a serious issue.</p><div class="ai-launch-card ticket-card" onclick="startTicketFlow()"><div class="ai-launch-icon ticket-icon">🎫</div><div class="ai-launch-text"><strong>Create a Support Ticket</strong><span>Report serious issues.</span></div><div class="ai-launch-arrow">→</div></div></div>
 <div class="cs-section"><div class="cs-section-header"><span class="cs-section-icon">👥</span><h3>Group Community</h3></div><p class="cs-section-desc">Join our community.</p>
-<div class="community-links">
-<a class="community-link" href="https://www.facebook.com/profile.php?id=61588354341346" target="_blank"><span class="community-icon">📘</span><span>Facebook Group</span></a>
-<a class="community-link" href="https://t.me/+9l7fOEFaHCllYWY1" target="_blank"><span class="community-icon">💬</span><span>Telegram Channel</span></a>
-<div class="community-link" onclick="showFocus('complanFocus')"><span class="community-icon">💖</span><span>Heart Fusion Complan</span></div>
-<div class="community-link" onclick="showFocus('updatesFocus')"><span class="community-icon">📢</span><span>Updates</span><span class="updates-link-badge" id="updatesBadge" style="display:none;">0</span></div>
-<div class="community-link" onclick="renderMySuggestions();showFocus('suggestionsUserListFocus')"><span class="community-icon">💡</span><span>My Suggestions</span></div>
-<div id="yourTicketLinkContainer"></div>
-</div></div>
+<div class="community-links" id="communityLinksContainer"></div></div>
 <button class="back-btn" onclick="backDashboard()">← Back to Dashboard</button>
 </div>
 </div>
@@ -878,6 +872,7 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
         <div class="admin-sub-tabs">
             <button class="active" onclick="showAdminSubTab('adminViewSettings','adminSiteControlTab',this)">🛑 Site Control</button>
             <button onclick="showAdminSubTab('adminViewSettings','adminSystemSettingsTab',this)">⚙️ System</button>
+            <button onclick="showAdminSubTab('adminViewSettings','adminPagesTab',this)">🔗 Pages</button>
             <button onclick="showAdminSubTab('adminViewSettings','adminAlertsTab',this)">🔔 Alerts</button>
             <button onclick="showAdminSubTab('adminViewSettings','adminUpdatesTab',this)">📢 Updates</button>
             <button onclick="showAdminSubTab('adminViewSettings','adminCustomGamesTab',this)">🎮 Games</button>
@@ -885,15 +880,10 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
         <div id="adminSiteControlTab" data-subtab><div id="adminSiteControlList"></div></div>
         <div id="adminSystemSettingsTab" data-subtab style="display:none;">
             <div id="adminSystemSettingsList"></div>
-            <div class="admin-update-form" style="margin-top:14px;">
-                <h3 style="color:#ffd166;font-size:14px;margin-bottom:8px;">🔗 Custom Follow Links</h3>
-                <label>Platform Name</label>
-                <input type="text" id="newLinkName" placeholder="e.g. YouTube" maxlength="50">
-                <label>URL</label>
-                <input type="url" id="newLinkUrl" placeholder="https://youtube.com/..." maxlength="500">
-                <button class="admin-publish-btn blue" onclick="addCustomLink()">➕ Add Custom Link</button>
-            </div>
-            <div id="adminCustomLinksList"></div>
+        </div>
+        <div id="adminPagesTab" data-subtab style="display:none;">
+            <div id="adminSocialPagesList"></div>
+            <div id="adminCommunityLinksList" style="margin-top:16px;"></div>
         </div>
         <div id="adminAlertsTab" data-subtab style="display:none;">
             <div class="admin-update-form">
@@ -1016,13 +1006,75 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 </div>
 
 <div class="user-info-modal-overlay" id="userInfoModalOverlay"><div class="user-info-modal" id="userInfoModalContent"></div></div>
+
+<div class="penalty-modal-overlay" id="violationChoiceModalOverlay">
+<div class="penalty-modal">
+<h3>⚠️ Give Violation</h3>
+<p class="penalty-sub">Choose violation type</p>
+<div style="display:flex;flex-direction:column;gap:10px;">
+<button class="penalty-btn" style="background:linear-gradient(135deg,#8b5cf6,#a78bfa);color:#fff;height:60px;font-size:14px;" onclick="openManualViolationModal()">✍️ Manual Violation<br><span style="font-size:10.5px;font-weight:400;opacity:.85;">Type your own Subject &amp; Message</span></button>
+<button class="penalty-btn" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8);color:#fff;height:60px;font-size:14px;" onclick="showAutoViolations()">🤖 Auto (Server Detected)<br><span style="font-size:10.5px;font-weight:400;opacity:.85;">Multiple payout / multiple accounts</span></button>
+<button class="penalty-btn penalty-btn-cancel" style="height:48px;" onclick="closeViolationChoice()">Cancel</button>
+</div>
+</div>
+</div>
+
+<div class="penalty-modal-overlay" id="manualViolationModalOverlay">
+<div class="penalty-modal" style="max-width:480px;">
+<h3>✍️ Manual Violation</h3>
+<p class="penalty-sub">Search user &amp; write your message</p>
+<div class="penalty-field">
+<label>🔍 Search User (email / username / User ID / name)</label>
+<input type="text" id="manualViolationSearch" placeholder="Type to search..." oninput="searchViolationUser()" autocomplete="off">
+</div>
+<div id="manualViolationSearchResult" style="margin-bottom:12px;"></div>
+<div class="penalty-field">
+<label>📌 Subject</label>
+<input type="text" id="manualViolationSubject" placeholder="e.g. Account Violation Notice" maxlength="150">
+</div>
+<div class="penalty-field">
+<label>💬 Message Content (shown on login)</label>
+<textarea id="manualViolationMessage" maxlength="2000" placeholder="Write the full message the user will see when they try to log in..." style="min-height:110px;"></textarea>
+</div>
+<div class="penalty-field">
+<label>Violation Type</label>
+<select id="manualViolationType">
+<option value="Using Cheat">Using Cheat</option>
+<option value="Giving False Information">Giving False Information</option>
+<option value="Multiple Account in 1 IP">Multiple Account</option>
+<option value="Multiple Payout In 1 Day">Multiple Payout</option>
+<option value="Other">Other</option>
+</select>
+</div>
+<div class="penalty-field">
+<label>Penalty Type</label>
+<select id="manualPenaltyType" onchange="updateManualPenaltySummary()">
+<option value="hours">Hours</option>
+<option value="days">Days</option>
+<option value="months">Months</option>
+<option value="permanent">Permanent Ban</option>
+</select>
+</div>
+<div class="penalty-field" id="manualPenaltyDurationField">
+<label>Duration</label>
+<input type="number" id="manualPenaltyDuration" min="1" value="1" oninput="updateManualPenaltySummary()">
+</div>
+<div class="penalty-summary" id="manualPenaltySummary"></div>
+<div class="penalty-buttons">
+<button class="penalty-btn penalty-btn-cancel" onclick="closeManualViolationModal()">Cancel</button>
+<button class="penalty-btn penalty-btn-confirm" onclick="confirmManualViolation()">⚠️ Issue Violation</button>
+</div>
+</div>
+</div>
+
 <div class="penalty-modal-overlay" id="penaltyModalOverlay"><div class="penalty-modal"><h3>⚠️ Issue Penalty</h3><p class="penalty-sub" id="penaltyUserInfo">User</p><div class="penalty-field"><label>Violation Type</label><select id="penaltyViolationType"><option value="Using Cheat">Using Cheat</option><option value="Giving False Information">Giving False Information</option><option value="Multiple Account in 1 IP">Multiple Account</option><option value="Multiple Payout In 1 Day">Multiple Payout</option></select></div><div class="penalty-field"><label>Penalty Type</label><select id="penaltyType" onchange="updatePenaltySummary()"><option value="hours">Hours</option><option value="days">Days</option><option value="months">Months</option><option value="permanent">Permanent Ban</option></select></div><div class="penalty-field" id="penaltyDurationField"><label>Duration</label><input type="number" id="penaltyDuration" min="1" value="1" oninput="updatePenaltySummary()"></div><div class="penalty-field"><label>Reason (Optional)</label><textarea id="penaltyDetails" maxlength="300"></textarea></div><div class="penalty-summary" id="penaltySummary"></div><div class="penalty-buttons"><button class="penalty-btn penalty-btn-cancel" onclick="closePenaltyModal()">Cancel</button><button class="penalty-btn penalty-btn-confirm" onclick="confirmIssuePenalty()">Issue Penalty</button></div></div></div>
 <div class="cashout-req-overlay" id="cashoutReqModalOverlay"><div class="cashout-req-modal"><div class="req-modal-header"><h3>🔒 Cashout Requirements</h3><button class="req-modal-close-x" onclick="closeCashoutReqModal()">✕</button></div><div class="req-modal-body" id="cashoutReqModalBody"></div><div class="req-modal-footer"><button onclick="closeCashoutReqModal()">Close</button></div></div></div>
 <div class="penalty-modal-overlay" id="rejectReasonModalOverlay"><div class="penalty-modal"><h3>❌ Reject Cashout</h3><p class="penalty-sub" id="rejectReasonUserInfo">Cashout</p><div class="penalty-field"><label>Reason (Optional)</label><textarea id="rejectReasonInput" maxlength="300"></textarea></div><div class="penalty-buttons"><button class="penalty-btn penalty-btn-cancel" onclick="closeRejectReasonModal()">Cancel</button><button class="penalty-btn penalty-btn-confirm" onclick="confirmRejectWithReason()">❌ Reject Request</button></div></div></div>
 <div class="rating-modal-overlay" id="ratingModalOverlay"><div class="rating-modal"><h3>⭐ Rate Your Experience</h3><p class="rating-sub">How was your support experience?</p><div class="rating-stars" id="ratingStars"><span class="star" data-value="1" onclick="setRating(1)">★</span><span class="star" data-value="2" onclick="setRating(2)">★</span><span class="star" data-value="3" onclick="setRating(3)">★</span><span class="star" data-value="4" onclick="setRating(4)">★</span><span class="star" data-value="5" onclick="setRating(5)">★</span></div><label class="rating-notes-label">Notes (Optional)</label><textarea class="rating-notes" id="ratingNotes" maxlength="500"></textarea><span class="rating-notes-hint">Visible to admin.</span><div class="rating-buttons"><button class="rating-btn rating-btn-cancel" onclick="closeRatingModal()">Cancel</button><button class="rating-btn rating-btn-submit" onclick="submitRating()">✓ Submit</button></div></div></div>
 <div class="app-notification" id="appNotification"><strong id="notificationTitle">Notification</strong><span id="notificationMessage">Message</span></div>
-<div class="modal-overlay" id="modalOverlay"><div class="modal-card"><div class="modal-icon" id="modalIcon">ℹ</div><h3 class="modal-title" id="modalTitle">Notice</h3><p class="modal-message" id="modalMessage">Message</p></div>
-                                                                                                                                                                                                                              <script>
+<div class="modal-overlay" id="modalOverlay"><div class="modal-card"><div class="modal-icon" id="modalIcon">ℹ</div><h3 class="modal-title" id="modalTitle">Notice</h3><p class="modal-message" id="modalMessage">Message</p><div class="modal-buttons" id="modalButtons"></div></div></div>
+
+<script>
 "use strict";
 const $=(s,r=document)=>r.querySelector(s);
 const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
@@ -1037,13 +1089,92 @@ let selectedChoice="";
 let gameSubmitted=false;
 let gameTimerTickId=0;
 let pendingSugImage=null;
+let manualViolationUserId=null;
+let editingSocialPageId=null;
+let editingCommunityLinkId=null;
+
 const MAX_OTP_ATTEMPTS=5;
 const ADMIN_EMAIL="Carl",ADMIN_PASSWORD="carl123";
 const CASHOUT_ALLOWED_AMOUNTS=[1,3,5];
 const LEADERBOARD_REWARDS=[{min:1,max:1,reward:0.010},{min:2,max:2,reward:0.008},{min:3,max:3,reward:0.006},{min:4,max:8,reward:0.005},{min:9,max:14,reward:0.004},{min:15,max:20,reward:0.003},{min:21,max:25,reward:0.002},{min:26,max:30,reward:0.001}];
 function getRankReward(rank){for(let i=0;i<LEADERBOARD_REWARDS.length;i++){const r=LEADERBOARD_REWARDS[i];if(rank>=r.min&&rank<=r.max)return r.reward;}return 0;}
 
-/* ====== TIMER HELPERS (FIXED — countdown starts ONLY after submit) ====== */
+/* ====== SOCIAL PAGES (Cashout Follow Requirements) ====== */
+const DEFAULT_SOCIAL_PAGES=[
+    {id:"facebook",name:"Facebook",icon:"📘",url:"https://www.facebook.com/profile.php?id=61588354341346"},
+    {id:"telegram",name:"Telegram",icon:"💬",url:"https://t.me/+9l7fOEFaHCllYWY1"}
+];
+function getSocialPages(){
+    const customized=localStorage.getItem("hfSocialPagesCustomized")==="true";
+    if(customized){
+        let pages=null;
+        try{pages=JSON.parse(localStorage.getItem("hfSocialPages")||"null");}catch(e){pages=null;}
+        if(Array.isArray(pages))return pages;
+    }
+    const pages=JSON.parse(JSON.stringify(DEFAULT_SOCIAL_PAGES));
+    try{
+        const old=JSON.parse(localStorage.getItem("hfCustomFollowLinks")||"[]");
+        old.forEach(l=>{pages.push({id:"custom_"+l.id,name:l.name,icon:"🔗",url:l.url});});
+    }catch(e){}
+    return pages;
+}
+function saveSocialPages(pages){
+    localStorage.setItem("hfSocialPages",JSON.stringify(pages));
+    localStorage.setItem("hfSocialPagesCustomized","true");
+}
+
+/* ====== COMMUNITY LINKS (CS Group Community) ====== */
+const DEFAULT_COMMUNITY_LINKS=[
+    {id:"fb_group",type:"external",icon:"📘",label:"Facebook Group",url:"https://www.facebook.com/profile.php?id=61588354341346"},
+    {id:"tg_channel",type:"external",icon:"💬",label:"Telegram Channel",url:"https://t.me/+9l7fOEFaHCllYWY1"},
+    {id:"complan",type:"system",icon:"💖",label:"Heart Fusion Complan",value:"complanFocus"},
+    {id:"updates",type:"system",icon:"📢",label:"Updates",value:"updatesFocus",showBadge:true},
+    {id:"my_suggestions",type:"system",icon:"💡",label:"My Suggestions",value:"suggestionsUserListFocus",preAction:"renderMySuggestions();"}
+];
+function getCommunityLinks(){
+    const customized=localStorage.getItem("hfCommunityLinksCustomized")==="true";
+    if(customized){
+        let links=null;
+        try{links=JSON.parse(localStorage.getItem("hfCommunityLinks")||"null");}catch(e){links=null;}
+        if(Array.isArray(links))return links;
+    }
+    return JSON.parse(JSON.stringify(DEFAULT_COMMUNITY_LINKS));
+}
+function saveCommunityLinks(links){
+    localStorage.setItem("hfCommunityLinks",JSON.stringify(links));
+    localStorage.setItem("hfCommunityLinksCustomized","true");
+}
+const FOCUS_PAGE_OPTIONS=[
+    {value:"complanFocus",label:"Heart Fusion Complan"},
+    {value:"updatesFocus",label:"Updates"},
+    {value:"suggestionsUserListFocus",label:"My Suggestions"},
+    {value:"leaderboardFocus",label:"Leaderboard"},
+    {value:"liveCashoutFocus",label:"Live Cashout"},
+    {value:"gamesFocus",label:"Games"},
+    {value:"heartFusionAiFocus",label:"Heart Fusion AI"},
+    {value:"ticketFocus",label:"Create Ticket"}
+];
+function renderCommunityLinks(){
+    const c=document.getElementById("communityLinksContainer");
+    if(!c)return;
+    const links=getCommunityLinks();
+    let html="";
+    links.forEach(link=>{
+        if(link.type==="external"){
+            html+=`<a class="community-link" href="${escapeHtml(link.url||"")}" target="_blank" rel="noopener"><span class="community-icon">${escapeHtml(link.icon||"🔗")}</span><span>${escapeHtml(link.label||"")}</span></a>`;
+        }else if(link.type==="system"){
+            const pre=link.preAction||"";
+            const badge=link.showBadge?'<span class="updates-link-badge" id="updatesBadge" style="display:none;">0</span>':"";
+            html+=`<div class="community-link" onclick="${pre}showFocus('${escapeHtml(link.value||"")}')"><span class="community-icon">${escapeHtml(link.icon||"🔗")}</span><span>${escapeHtml(link.label||"")}</span>${badge}</div>`;
+        }
+    });
+    html+='<div id="yourTicketLinkContainer"></div>';
+    c.innerHTML=html;
+    updateUpdatesBadge();
+    updateYourTicketSection();
+}
+
+/* ====== TIMER HELPERS ====== */
 function stopGameTimer(){
     gameTimerTickId++;
     if(gameTimerInterval){clearInterval(gameTimerInterval);gameTimerInterval=null;}
@@ -1366,10 +1497,6 @@ function isCashoutTransactionsPaused(){return getSiteSettings().pauseCashoutTran
 function isGameTransactionsPaused(){return getSiteSettings().pauseGameTransactions===true;}
 function isTransferTransactionsPaused(){return getSiteSettings().pauseTransferTransactions===true;}
 
-/* ====== DYNAMIC FOLLOW LINKS ====== */
-function getCustomFollowLinks(){try{return JSON.parse(localStorage.getItem("hfCustomFollowLinks")||"[]");}catch(e){return[];}}
-function saveCustomFollowLinks(links){localStorage.setItem("hfCustomFollowLinks",JSON.stringify(links));}
-
 /* ====== ADS STATS ====== */
 function getAdsDailyStats(){try{return JSON.parse(localStorage.getItem("hfAdsDailyStats")||"{}");}catch(e){return{};}}
 function saveAdsDailyStats(s){localStorage.setItem("hfAdsDailyStats",JSON.stringify(s));}
@@ -1552,7 +1679,7 @@ document.getElementById("signupForm").addEventListener("submit",async e=>{
     let inviter=null;
     if(inviterCode){inviter=users.find(u=>u.inviteCode===inviterCode);if(!inviter){await customAlert("Invalid inviter code.","error");return;}}
     const sys=getSystemSettings();
-    const user={name,username,email,password,userId:generateUserId(),inviteCode:generateInviteCode(users),invitedBy:inviterCode||null,balance:inviter?sys.inviteBonusNewUser:0,points:0,weeklyPoints:0,adsWatched:0,weeklyAdsWatched:0,totalInvites:0,inviteIncome:0,totalTransferred:0,totalCashedOut:0,transferHistory:[],cashoutHistory:[],gameHistory:[],deviceBrand:dev.brand,deviceModel:dev.model,deviceUserAgent:dev.userAgent,registeredIP:loc.ip||"Unavailable",registeredCountry:loc.country||"Unknown",registeredCountryCode:loc.countryCode||"",registeredCity:loc.city||"",registeredRegion:loc.region||"",registeredAt:new Date().toLocaleString(),historyWeek:getWeekKey(),accountStatus:"active",violations:[],resolvedViolations:[],pendingWelcomeBack:false,pendingCongrats:null,cashoutVerified:false,socialSubmissions:{facebook:{name:"",imageData:null,status:"none",submittedAt:null,reason:""},telegram:{name:"",imageData:null,status:"none",submittedAt:null,reason:""}}};
+    const user={name,username,email,password,userId:generateUserId(),inviteCode:generateInviteCode(users),invitedBy:inviterCode||null,balance:inviter?sys.inviteBonusNewUser:0,points:0,weeklyPoints:0,adsWatched:0,weeklyAdsWatched:0,totalInvites:0,inviteIncome:0,totalTransferred:0,totalCashedOut:0,transferHistory:[],cashoutHistory:[],gameHistory:[],deviceBrand:dev.brand,deviceModel:dev.model,deviceUserAgent:dev.userAgent,registeredIP:loc.ip||"Unavailable",registeredCountry:loc.country||"Unknown",registeredCountryCode:loc.countryCode||"",registeredCity:loc.city||"",registeredRegion:loc.region||"",registeredAt:new Date().toLocaleString(),historyWeek:getWeekKey(),accountStatus:"active",violations:[],resolvedViolations:[],pendingWelcomeBack:false,pendingCongrats:null,cashoutVerified:false,socialSubmissions:{}};
     if(inviter){inviter.balance=Number(inviter.balance||0)+sys.inviteBonusInviter;inviter.inviteIncome=Number(inviter.inviteIncome||0)+sys.inviteBonusInviter;inviter.totalInvites=Number(inviter.totalInvites||0)+1;}
     users.push(user);saveUsers(users);
     localStorage.setItem("currentUserId",user.userId);localStorage.setItem("loggedIn","true");
@@ -1560,6 +1687,7 @@ document.getElementById("signupForm").addEventListener("submit",async e=>{
     await customAlert("Account created! User ID: "+user.userId+"\nInvite: "+user.inviteCode,"success");
     showDashboard(user);
 });
+
 document.getElementById("loginForm").addEventListener("submit",async e=>{
     e.preventDefault();
     const email=document.getElementById("loginEmail").value.trim();
@@ -1569,7 +1697,15 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
     const user=users.find(u=>u.email.toLowerCase()===email.toLowerCase()&&u.password===password);
     if(!user){await customAlert("Incorrect email or password.",{type:"error"});return;}
     const status=user.accountStatus||"active";
-    if(status==="banned"){await customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED",{type:"error",title:"Account Banned"});return;}
+    if(status==="banned"){
+        const activeViolation=(user.violations||[]).find(v=>v.active===true);
+        if(activeViolation&&activeViolation.category==="manual"&&activeViolation.subject&&activeViolation.message){
+            await customAlert(activeViolation.subject+"\n\n"+activeViolation.message+"\n\n🚫 This account is permanently banned.",{type:"error",title:"⚠️ Account Banned"});
+            return;
+        }
+        await customAlert("🚫 YOUR ACCOUNT IS PERMANENTLY BANNED",{type:"error",title:"Account Banned"});
+        return;
+    }
     if(status==="onhold"){
         const activeViolation=(user.violations||[]).find(v=>v.active===true);
         const penaltyExpired=activeViolation&&activeViolation.penaltyEndTime&&Date.now()>=activeViolation.penaltyEndTime;
@@ -1586,6 +1722,13 @@ document.getElementById("loginForm").addEventListener("submit",async e=>{
             await customAlert("🎉 WELCOME BACK!\n\nYour account penalty has been lifted.",{type:"success",title:"Welcome Back!"});
             currentUser=user;localStorage.setItem("currentUserId",user.userId);localStorage.setItem("loggedIn","true");
             prepareWeeklyData();currentUser=getCurrentStoredUser();showDashboard(currentUser);
+            return;
+        }
+        if(activeViolation&&activeViolation.category==="manual"&&activeViolation.subject&&activeViolation.message){
+            let manualMsg=activeViolation.subject+"\n\n"+activeViolation.message;
+            if(activeViolation.penaltyEndTime){manualMsg+="\n\n⏱️ Account invalid until: "+new Date(activeViolation.penaltyEndTime).toLocaleString();}
+            else{manualMsg+="\n\n⏱️ Permanent Ban";}
+            await customAlert(manualMsg,{type:"error",title:"⚠️ Account Violation"});
             return;
         }
         let endText="Permanent";
@@ -1609,8 +1752,7 @@ function showDashboard(user){
     document.getElementById("floatingSugBtn").style.display="flex";
     document.getElementById("welcomeName").textContent="Welcome, "+currentUser.name+"!";
     updateBalanceDisplay();updateSettings();resetTransferForm();resetCashoutForm();
-    renderLeaderboard();cleanLiveCashouts();updateYourTicketSection();updateUpdatesBadge();
-    backDashboard();renderHeroInfoRow();checkSitePause();
+    renderLeaderboard();cleanLiveCashouts();renderCommunityLinks();renderHeroInfoRow();checkSitePause();
     setTimeout(checkPendingCongrats,800);
     setTimeout(checkPendingCashoutRejections,1500);
     setTimeout(checkSocialApprovalUpdates,2000);
@@ -1668,7 +1810,7 @@ function prepareWeeklyData(){
         if(!user.violations)user.violations=[];
         if(user.cashoutVerified===undefined)user.cashoutVerified=false;
         if(user.registeredCountry===undefined)user.registeredCountry="Unknown";
-        if(!user.socialSubmissions){user.socialSubmissions={facebook:{name:"",imageData:null,status:"none",submittedAt:null,reason:""},telegram:{name:"",imageData:null,status:"none",submittedAt:null,reason:""}};changed=true;}
+        if(!user.socialSubmissions){user.socialSubmissions={};changed=true;}
         if(!user.inviteCode){user.inviteCode=generateInviteCode(users);changed=true;}
         if(user.cashoutHistory&&user.cashoutHistory.length>0){
             const originalLength=user.cashoutHistory.length;
@@ -1757,7 +1899,7 @@ function showFocus(pageId,navBtn){
     if(pageId==="gamesFocus")renderGamesList();
     if(pageId==="gamePlayFocus"){updateCalculatorVisibility();}
     if(pageId==="heartFusionAiFocus")initAIChat();
-    if(pageId==="customerServiceFocus")updateYourTicketSection();
+    if(pageId==="customerServiceFocus")renderCommunityLinks();
     if(pageId==="transferFocus")updateTransferPauseNotice();
     if(pageId==="transferOtpFocus"){setupOTPInputs();showOTPMainView();updateOTPVerifyBtn();}
     if(pageId==="updatesFocus"){renderUserUpdates();markAllUpdatesRead();updateUpdatesBadge();}
@@ -1974,20 +2116,16 @@ function openCashoutPage(){
 }
 function closeCashoutReqModal(){document.getElementById("cashoutReqModalOverlay").classList.remove("show");}
 function isAllSocialApproved(u){
+    const pages=getSocialPages();
+    if(pages.length===0)return true;
     const s=u.socialSubmissions||{};
-    let count=0;
-    if(s.facebook&&s.facebook.status==="approved")count++;
-    if(s.telegram&&s.telegram.status==="approved")count++;
-    const customLinks=getCustomFollowLinks();
-    customLinks.forEach(link=>{const key="custom_"+link.id;if(s[key]&&s[key].status==="approved")count++;});
-    const totalReq=2+customLinks.length;
-    return count>=totalReq;
+    for(const p of pages){if(!s[p.id]||s[p.id].status!=="approved")return false;}
+    return true;
 }
 function ensureSocialSubmissions(u){
     if(!u.socialSubmissions)u.socialSubmissions={};
-    ["facebook","telegram"].forEach(k=>{if(!u.socialSubmissions[k])u.socialSubmissions[k]={name:"",imageData:null,status:"none",submittedAt:null,reason:""};});
-    const customLinks=getCustomFollowLinks();
-    customLinks.forEach(link=>{const k="custom_"+link.id;if(!u.socialSubmissions[k])u.socialSubmissions[k]={name:"",imageData:null,status:"none",submittedAt:null,reason:""};});
+    const pages=getSocialPages();
+    pages.forEach(p=>{if(!u.socialSubmissions[p.id])u.socialSubmissions[p.id]={name:"",imageData:null,status:"none",submittedAt:null,reason:""};});
 }
 function renderCashoutReqModal(){
     if(!currentUser)return;
@@ -1999,36 +2137,32 @@ function renderCashoutReqModal(){
     const hasInv=invites>=sys.cashoutInvitesReq;
     const hasReq=hasPts||hasInv;
     const s=currentUser.socialSubmissions;
-    const customLinks=getCustomFollowLinks();
-    const platforms=[
-        {key:"facebook",label:"Facebook",icon:"📘",url:"https://www.facebook.com/profile.php?id=61588354341346"},
-        {key:"telegram",label:"Telegram",icon:"💬",url:"https://t.me/+9l7fOEFaHCllYWY1"}
-    ];
-    customLinks.forEach(link=>{platforms.push({key:"custom_"+link.id,label:link.name,icon:"🔗",url:link.url});});
+    const platforms=getSocialPages().map(p=>({key:p.id,label:p.name,icon:p.icon,url:p.url}));
     let approvedCount=0;
     platforms.forEach(p=>{if(s[p.key]&&s[p.key].status==="approved")approvedCount++;});
     const totalReq=platforms.length;
     const allApproved=approvedCount>=totalReq;
     const canProceed=hasReq&&allApproved;
     let socialHTML="";
-    platforms.forEach(p=>{
+    if(platforms.length===0){socialHTML='<div class="social-status approved">✅ No follow requirements set by admin.</div>';}
+    else{platforms.forEach(p=>{
         const d=s[p.key];
         let inner="";
-        if(!d||d.status==="none"){inner=`<div class="social-form"><input type="text" class="social-name-${p.key}" placeholder="Your name" value="${escapeHtml(d?.name||"")}"><input type="file" accept="image/*" onchange="handleSocialProofUpload(event,'${p.key}')"><img class="social-preview" id="socialPreview_${p.key}" style="display:none;"><button class="social-submit-btn" onclick="submitSocialProof('${p.key}')" ${!hasReq?'disabled':''}>📤 Submit ${p.label} Proof</button></div>`;}
+        if(!d||d.status==="none"){inner=`<div class="social-form"><input type="text" class="social-name-${p.key}" placeholder="Your name" value="${escapeHtml(d?.name||"")}"><input type="file" accept="image/*" onchange="handleSocialProofUpload(event,'${p.key}')"><img class="social-preview" id="socialPreview_${p.key}" style="display:none;"><button class="social-submit-btn" onclick="submitSocialProof('${p.key}')" ${!hasReq?'disabled':''}>📤 Submit ${escapeHtml(p.label)} Proof</button></div>`;}
         else if(d.status==="pending"){inner=`<div class="social-status pending">⏳ Submitted ${escapeHtml(d.submittedAt||"")}. Wait for approval.</div>`;}
         else if(d.status==="approved"){inner=`<div class="social-status approved">✅ Approved!</div>`;}
         else if(d.status==="rejected"){inner=`<div class="social-status rejected">❌ Rejected: ${escapeHtml(d.reason||"")}<br><button class="resubmit-btn" onclick="allowResubmit('${p.key}')">🔄 Submit Again</button></div>`;}
-        socialHTML+=`<div class="social-submit-item"><div class="social-item-header"><span>${p.icon} ${p.label}</span><a class="social-follow-btn" href="${p.url}" target="_blank" rel="noopener">Follow →</a></div>${inner}</div>`;
-    });
+        socialHTML+=`<div class="social-submit-item"><div class="social-item-header"><span>${escapeHtml(p.icon)} ${escapeHtml(p.label)}</span><a class="social-follow-btn" href="${escapeHtml(p.url||"")}" target="_blank" rel="noopener">Follow →</a></div>${inner}</div>`;
+    });}
     let continueBtnHTML="";
     if(canProceed){continueBtnHTML=`<button class="social-submit-btn continue-btn" onclick="proceedToCashout()">✅ Continue to Cashout →</button>`;}
     else{
         let missing=[];
         if(!hasReq)missing.push(`⚠️ You must first meet <strong>${sys.cashoutPointsReq} points</strong> OR <strong>${sys.cashoutInvitesReq} invites</strong>`);
-        if(!allApproved)missing.push(`⚠️ You need <strong>${totalReq} approved follows</strong> (Currently: ${approvedCount}/${totalReq})`);
+        if(!allApproved&&totalReq>0)missing.push(`⚠️ You need <strong>${totalReq} approved follows</strong> (Currently: ${approvedCount}/${totalReq})`);
         continueBtnHTML=`<div style="padding:12px;background:#fff8e6;border:1px solid #e6c66e;border-radius:10px;font-size:12px;color:#8a6500;line-height:1.7;text-align:center;">${missing.join("<br>")}</div>`;
     }
-    document.getElementById("cashoutReqModalBody").innerHTML=`<div class="req-block"><h4>📋 Requirement #1</h4><p>You need ${sys.cashoutPointsReq} points OR ${sys.cashoutInvitesReq} invites.</p><div class="req-progress-row ${hasPts?'ok':''}"><span>⭐ Points</span><span><strong>${points.toFixed(3)}</strong> / ${sys.cashoutPointsReq} ${hasPts?'✅':''}</span></div><div class="req-progress-row ${hasInv?'ok':''}"><span>🎁 Invites</span><span><strong>${invites}</strong> / ${sys.cashoutInvitesReq} ${hasInv?'✅':''}</span></div></div><div class="req-block"><h4>📋 Requirement #2</h4><p>Follow our ${totalReq} pages/links and submit proof.</p>${socialHTML}</div>${continueBtnHTML}`;
+    document.getElementById("cashoutReqModalBody").innerHTML=`<div class="req-block"><h4>📋 Requirement #1</h4><p>You need ${sys.cashoutPointsReq} points OR ${sys.cashoutInvitesReq} invites.</p><div class="req-progress-row ${hasPts?'ok':''}"><span>⭐ Points</span><span><strong>${points.toFixed(3)}</strong> / ${sys.cashoutPointsReq} ${hasPts?'✅':''}</span></div><div class="req-progress-row ${hasInv?'ok':''}"><span>🎁 Invites</span><span><strong>${invites}</strong> / ${sys.cashoutInvitesReq} ${hasInv?'✅':''}</span></div></div><div class="req-block"><h4>📋 Requirement #2</h4><p>Follow our ${totalReq} page(s)/link(s) and submit proof.</p>${socialHTML}</div>${continueBtnHTML}`;
     platforms.forEach(p=>{if(pendingSocialProof[p.key]){const img=document.getElementById("socialPreview_"+p.key);if(img){img.src=pendingSocialProof[p.key];img.style.display="block";}}});
 }
 function proceedToCashout(){
@@ -2294,7 +2428,6 @@ function generateQuestion(){
     return{a,b,op,answer:ans,text,key};
 }
 
-/* ====== FIXED startGame: NO TIMER DURING ANSWERING ====== */
 async function startGame(){
     stopGameTimer();
     adWatched=false;adResolved=false;gameSubmitted=false;selectedChoice="";
@@ -2346,7 +2479,6 @@ function selectChoice(choice){
     submitGameAnswer();
 }
 
-/* ====== FIXED submitGameAnswer: TIMER STARTS ONLY AFTER SUBMIT ====== */
 function submitGameAnswer(){
     if(!currentGame||gameSubmitted)return;
     gameSubmitted=true;
@@ -2437,7 +2569,6 @@ function prepareNextMathRound(){
     if(mc)mc.innerHTML="";
 }
 
-/* FIXED watchGameAd: NO TIME PRESSURE — timer stops after submit already */
 function watchGameAd(){
     if(!currentGame||!currentGame.correct)return;
     const btn=document.getElementById("watchAdButton");btn.disabled=true;
@@ -2458,7 +2589,7 @@ function claimGameReward(){
     if(!currentGame||!currentGame.correct||!adWatched)return;
     stopGameTimer();
     const reward=Number(currentGame.pointsPerCorrect)||getSystemSettings().gameReward;
-    recordGameResult(currentGame.userAnswer,true,reward,"Correct + Reward");
+    recordGameResult(currentUser.gameHistory,true,reward,"Correct + Reward");
     currentUser.balance=Number(currentUser.balance||0)+reward;
     currentUser.points=Number(currentUser.points||0)+reward;
     currentUser.weeklyPoints=Number(currentUser.weeklyPoints||0)+reward;
@@ -2705,7 +2836,7 @@ function showAdminView(view,btn){
     if(view==="dashboard"){renderAdminAnalytics();renderAdminWeekly();renderAdminLeaderboard();}
     if(view==="users"){renderAdminUsers();renderAdminViolations();renderAdminVerifications();}
     if(view==="transact"){renderAdminCashouts();renderAdminPayouts();renderAdminTickets();renderAdminSuggestions();}
-    if(view==="settings"){renderAdminSiteControl();renderAdminSystemSettings();renderAdminAlerts();renderAdminUpdates();renderAdminCustomGames();}
+    if(view==="settings"){renderAdminSiteControl();renderAdminSystemSettings();renderAdminPages();renderAdminAlerts();renderAdminUpdates();renderAdminCustomGames();}
 }
 function showAdminSubTab(parentId,targetId,btn){
     const p=document.getElementById(parentId);if(!p)return;
@@ -2722,6 +2853,7 @@ function showAdminSubTab(parentId,targetId,btn){
     if(targetId==="adminViolationsTab")renderAdminViolations();
     if(targetId==="adminUpdatesTab")renderAdminUpdates();
     if(targetId==="adminCustomGamesTab")renderAdminCustomGames();
+    if(targetId==="adminPagesTab")renderAdminPages();
 }
 function renderAdminPanel(){
     const users=getUsers();
@@ -2734,7 +2866,7 @@ function renderAdminPanel(){
     renderAdminUsers();renderAdminCashouts();renderAdminPayouts();renderAdminTickets();renderAdminSuggestions();
     renderAdminViolations();renderAdminUpdates();renderAdminAlerts();renderAdminSiteControl();
     renderAdminLeaderboard();renderAdminVerifications();renderAdminAnalytics();renderAdminWeekly();
-    renderAdminSystemSettings();renderAdminCustomGames();
+    renderAdminSystemSettings();renderAdminCustomGames();renderAdminPages();
     updateAdminTicketBadge();updateVerificationBadges();
 }
 function updateVerificationBadges(){
@@ -2744,6 +2876,219 @@ function updateVerificationBadges(){
     if(tabBadge){if(pendingCount>0){tabBadge.textContent=pendingCount>99?"99+":String(pendingCount);tabBadge.style.display="inline-block";}else tabBadge.style.display="none";}
     const navBadge=document.getElementById("adminVerifyNavBadge");
     if(navBadge){if(pendingCount>0){navBadge.textContent=pendingCount>99?"99+":String(pendingCount);navBadge.style.display="flex";}else navBadge.style.display="none";}
+}
+
+/* ====== ADMIN PAGES MANAGEMENT ====== */
+function renderAdminPages(){
+    renderAdminSocialPages();
+    renderAdminCommunityLinks();
+}
+
+function renderAdminSocialPages(){
+    const list=document.getElementById("adminSocialPagesList");if(!list)return;
+    const pages=getSocialPages();
+    let html=`<div class="admin-update-form">
+        <h3 style="color:#ff6b9d;font-size:14px;margin-bottom:8px;">🔗 Cashout Follow Requirements</h3>
+        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">Users must follow ALL of these pages and submit proof to unlock cashout. If empty, users can cashout without following anything.</p>`;
+    if(pages.length===0){
+        html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No pages — users don't need to follow anything to cashout.</div>`;
+    } else {
+        pages.forEach(p=>{
+            if(editingSocialPageId===p.id){
+                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
+                    <input type="text" id="editSPIcon_${p.id}" value="${escapeHtml(p.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
+                    <input type="text" id="editSPName_${p.id}" value="${escapeHtml(p.name)}" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+                    <input type="url" id="editSPUrl_${p.id}" value="${escapeHtml(p.url)}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <div class="admin-cashout-actions">
+                        <button class="admin-approve-btn" onclick="saveSocialPageEdit('${p.id}')">💾 Save</button>
+                        <button class="admin-reject-btn" onclick="cancelSocialPageEdit()">✕ Cancel</button>
+                    </div>
+                </div>`;
+            } else {
+                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
+                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(p.icon)} ${escapeHtml(p.name)}</strong><span class="admin-user-id">${escapeHtml(p.id)}</span></div>
+                    <div class="admin-user-row"><span>URL</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(p.url)}</strong></div>
+                    <div class="admin-cashout-actions">
+                        <button class="admin-view-btn" onclick="startEditSocialPage('${p.id}')">✏️ Edit</button>
+                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteSocialPage('${p.id}')">🗑 Delete</button>
+                    </div>
+                </div>`;
+            }
+        });
+    }
+    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Page</h4>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon (emoji)</label>
+        <input type="text" id="newSPIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
+        <input type="text" id="newSPName" placeholder="e.g. YouTube Channel" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+        <input type="url" id="newSPUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <button class="admin-publish-btn blue" onclick="addSocialPage()">➕ Add Page</button>
+        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreSocialPagesDefaults()">🔄 Restore Default Pages</button>
+    </div>`;
+    list.innerHTML=html;
+}
+function addSocialPage(){
+    const name=document.getElementById("newSPName").value.trim();
+    const url=document.getElementById("newSPUrl").value.trim();
+    const icon=document.getElementById("newSPIcon").value.trim()||"🔗";
+    if(!name){customAlert("Name required.","warning");return;}
+    if(!url){customAlert("URL required.","warning");return;}
+    const pages=getSocialPages();
+    pages.push({id:"social_"+Date.now()+"_"+Math.floor(Math.random()*900+100),name,icon,url});
+    saveSocialPages(pages);
+    showNotification("Added","Page added.");renderAdminSocialPages();
+}
+function startEditSocialPage(id){editingSocialPageId=id;renderAdminSocialPages();}
+function cancelSocialPageEdit(){editingSocialPageId=null;renderAdminSocialPages();}
+function saveSocialPageEdit(id){
+    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
+    const icon=document.getElementById("editSPIcon_"+id).value.trim()||"🔗";
+    const name=document.getElementById("editSPName_"+id).value.trim();
+    const url=document.getElementById("editSPUrl_"+id).value.trim();
+    if(!name){customAlert("Name required.","warning");return;}
+    if(!url){customAlert("URL required.","warning");return;}
+    p.icon=icon;p.name=name;p.url=url;
+    saveSocialPages(pages);editingSocialPageId=null;
+    showNotification("Updated","Page updated.");renderAdminSocialPages();
+}
+async function deleteSocialPage(id){
+    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
+    const ok=await customAlert("Delete '"+p.name+"'?\n\nUsers won't need to follow this page anymore.","warning","Confirm Delete","Yes, Delete");
+    if(!ok)return;
+    saveSocialPages(pages.filter(x=>x.id!==id));
+    showNotification("Deleted","Page removed.");renderAdminSocialPages();
+}
+async function restoreSocialPagesDefaults(){
+    const ok=await customAlert("Restore Cashout Follow Requirements to default pages?\n\nThis will reset to Facebook + Telegram.","warning","Restore Defaults","Yes, Restore");
+    if(!ok)return;
+    localStorage.removeItem("hfSocialPages");
+    localStorage.removeItem("hfSocialPagesCustomized");
+    showNotification("Restored","Default pages restored.");renderAdminSocialPages();
+}
+
+function renderAdminCommunityLinks(){
+    const list=document.getElementById("adminCommunityLinksList");if(!list)return;
+    const links=getCommunityLinks();
+    let html=`<div class="admin-update-form">
+        <h3 style="color:#ffd166;font-size:14px;margin-bottom:8px;">👥 CS Community Links</h3>
+        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">These links appear under "Group Community" in the user's CS section.</p>`;
+    if(links.length===0){
+        html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No community links — CS section will be empty.</div>`;
+    } else {
+        links.forEach(l=>{
+            const typeLabel=l.type==="external"?"🌐 External":"📄 System";
+            if(editingCommunityLinkId===l.id){
+                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
+                    <input type="text" id="editCLIcon_${l.id}" value="${escapeHtml(l.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
+                    <input type="text" id="editCLLabel_${l.id}" value="${escapeHtml(l.label)}" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    ${l.type==="external"?
+                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+                        <input type="url" id="editCLUrl_${l.id}" value="${escapeHtml(l.url||"")}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">`:
+                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
+                        <select id="editCLValue_${l.id}" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                        ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}" ${l.value===o.value?"selected":""}>${o.label}</option>`).join("")}
+                        </select>`}
+                    <div class="admin-cashout-actions">
+                        <button class="admin-approve-btn" onclick="saveCommunityLinkEdit('${l.id}')">💾 Save</button>
+                        <button class="admin-reject-btn" onclick="cancelCommunityLinkEdit()">✕ Cancel</button>
+                    </div>
+                </div>`;
+            } else {
+                const valDisplay=l.type==="external"?(l.url||""):(l.value||"");
+                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
+                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(l.icon)} ${escapeHtml(l.label)}</strong><span class="admin-user-id">${typeLabel}</span></div>
+                    <div class="admin-user-row"><span>${l.type==="external"?"URL":"Page"}</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(valDisplay)}</strong></div>
+                    <div class="admin-cashout-actions">
+                        <button class="admin-view-btn" onclick="startEditCommunityLink('${l.id}')">✏️ Edit</button>
+                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteCommunityLink('${l.id}')">🗑 Delete</button>
+                    </div>
+                </div>`;
+            }
+        });
+    }
+    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Community Link</h4>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Type</label>
+        <select id="newCLType" onchange="toggleCommunityLinkTypeFields()" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+            <option value="external">🌐 External Link (opens URL)</option>
+            <option value="system">📄 System Page (opens focus page)</option>
+        </select>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon (emoji)</label>
+        <input type="text" id="newCLIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
+        <input type="text" id="newCLLabel" placeholder="e.g. YouTube Channel" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <div id="newCLUrlGroup">
+            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+            <input type="url" id="newCLUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        </div>
+        <div id="newCLValueGroup" style="display:none;">
+            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
+            <select id="newCLValue" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}">${o.label}</option>`).join("")}
+            </select>
+        </div>
+        <button class="admin-publish-btn purple" onclick="addCommunityLink()">➕ Add Community Link</button>
+        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreCommunityLinksDefaults()">🔄 Restore Default Links</button>
+    </div>`;
+    list.innerHTML=html;
+}
+function toggleCommunityLinkTypeFields(){
+    const type=document.getElementById("newCLType").value;
+    document.getElementById("newCLUrlGroup").style.display=type==="external"?"block":"none";
+    document.getElementById("newCLValueGroup").style.display=type==="system"?"block":"none";
+}
+function addCommunityLink(){
+    const type=document.getElementById("newCLType").value;
+    const icon=document.getElementById("newCLIcon").value.trim()||"🔗";
+    const label=document.getElementById("newCLLabel").value.trim();
+    if(!label){customAlert("Label required.","warning");return;}
+    const newLink={id:"cl_"+Date.now()+"_"+Math.floor(Math.random()*900+100),type,icon,label};
+    if(type==="external"){
+        const url=document.getElementById("newCLUrl").value.trim();
+        if(!url){customAlert("URL required.","warning");return;}
+        newLink.url=url;
+    }else{
+        newLink.value=document.getElementById("newCLValue").value;
+    }
+    const links=getCommunityLinks();
+    links.push(newLink);saveCommunityLinks(links);
+    showNotification("Added","Community link added.");renderAdminCommunityLinks();
+}
+function startEditCommunityLink(id){editingCommunityLinkId=id;renderAdminCommunityLinks();}
+function cancelCommunityLinkEdit(){editingCommunityLinkId=null;renderAdminCommunityLinks();}
+function saveCommunityLinkEdit(id){
+    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
+    l.icon=document.getElementById("editCLIcon_"+id).value.trim()||"🔗";
+    l.label=document.getElementById("editCLLabel_"+id).value.trim();
+    if(!l.label){customAlert("Label required.","warning");return;}
+    if(l.type==="external"){
+        const url=document.getElementById("editCLUrl_"+id).value.trim();
+        if(!url){customAlert("URL required.","warning");return;}
+        l.url=url;
+    }else{
+        l.value=document.getElementById("editCLValue_"+id).value;
+    }
+    saveCommunityLinks(links);editingCommunityLinkId=null;
+    showNotification("Updated","Community link updated.");renderAdminCommunityLinks();
+}
+async function deleteCommunityLink(id){
+    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
+    const ok=await customAlert("Delete '"+l.label+"' from CS section?","warning","Confirm Delete","Yes, Delete");
+    if(!ok)return;
+    saveCommunityLinks(links.filter(x=>x.id!==id));
+    showNotification("Deleted","Community link removed.");renderAdminCommunityLinks();
+}
+async function restoreCommunityLinksDefaults(){
+    const ok=await customAlert("Restore CS Community Links to default?\n\nThis will reset to Facebook Group, Telegram, Complan, Updates, My Suggestions.","warning","Restore Defaults","Yes, Restore");
+    if(!ok)return;
+    localStorage.removeItem("hfCommunityLinks");
+    localStorage.removeItem("hfCommunityLinksCustomized");
+    showNotification("Restored","Default links restored.");renderAdminCommunityLinks();
 }
 
 /* ====== ANALYTICS ====== */
@@ -3041,19 +3386,102 @@ function getAllUsersWithViolations(){
     users.forEach(user=>{const detected=getAllViolationsForUser(user,users);const active=(user.violations||[]).filter(v=>v.active===true).length;const total=detected.length+active;if(detected.length>0||active>0)results.push({user,detectedViolations:detected,activeCount:active,totalCount:total});});
     return results;
 }
+
+function openViolationChoiceModal(){document.getElementById("violationChoiceModalOverlay").classList.add("show");}
+function closeViolationChoice(){document.getElementById("violationChoiceModalOverlay").classList.remove("show");}
+async function showAutoViolations(){
+    closeViolationChoice();
+    const usersWithViolations=getAllUsersWithViolations();
+    const detectedCount=usersWithViolations.filter(e=>e.detectedViolations.length>0).length;
+    await customAlert("🤖 AUTO-DETECTED VIOLATIONS\n\nThe server has detected "+detectedCount+" user(s) with auto violations:\n\n• Multiple Payout In 1 Day\n• Multiple Account in 1 IP Address\n\nDisplayed automatically in the Violations tab below.\n\nUse 'Manual Violation' for custom messages.","info","Auto Violation Info");
+}
+
+function openManualViolationModal(){
+    closeViolationChoice();
+    manualViolationUserId=null;
+    document.getElementById("manualViolationSearch").value="";
+    document.getElementById("manualViolationSearchResult").innerHTML="";
+    document.getElementById("manualViolationSubject").value="";
+    document.getElementById("manualViolationMessage").value="";
+    document.getElementById("manualViolationType").value="Using Cheat";
+    document.getElementById("manualPenaltyType").value="hours";
+    document.getElementById("manualPenaltyDuration").value="1";
+    updateManualPenaltySummary();
+    document.getElementById("manualViolationModalOverlay").classList.add("show");
+}
+function closeManualViolationModal(){manualViolationUserId=null;document.getElementById("manualViolationModalOverlay").classList.remove("show");}
+function searchViolationUser(){
+    const query=document.getElementById("manualViolationSearch").value.trim().toLowerCase();
+    const resultEl=document.getElementById("manualViolationSearchResult");
+    manualViolationUserId=null;
+    if(!query){resultEl.innerHTML="";return;}
+    const users=getUsers();
+    const matches=users.filter(u=>(u.email||"").toLowerCase().includes(query)||(u.username||"").toLowerCase().includes(query)||(u.userId||"").toLowerCase().includes(query)||(u.name||"").toLowerCase().includes(query)).slice(0,10);
+    if(!matches.length){resultEl.innerHTML='<div style="padding:10px;color:#ff8a96;font-size:12px;text-align:center;background:rgba(231,76,60,.1);border-radius:10px;">No user found</div>';return;}
+    resultEl.innerHTML=matches.map(u=>`<div style="padding:10px;margin-bottom:6px;background:rgba(255,42,117,.1);border:1px solid rgba(255,42,117,.3);border-radius:10px;cursor:pointer;color:#fff;font-size:12px;" onclick="selectViolationUser('${u.userId}')"><strong>@${escapeHtml(u.username)}</strong> — ${escapeHtml(u.name)}<br><span style="color:#8a8aa0;font-size:10px;">${escapeHtml(u.email)} • ${escapeHtml(u.userId)}</span></div>`).join("");
+}
+function selectViolationUser(userId){
+    manualViolationUserId=userId;
+    const user=getUsers().find(u=>u.userId===userId);
+    if(!user)return;
+    const resultEl=document.getElementById("manualViolationSearchResult");
+    resultEl.innerHTML=`<div style="padding:12px;background:rgba(46,204,113,.15);border:1px solid rgba(46,204,113,.4);border-radius:10px;color:#7dff9a;font-size:12px;"><strong>✅ Selected:</strong> @${escapeHtml(user.username)} — ${escapeHtml(user.name)}<br><span style="color:#8a8aa0;font-size:10px;">${escapeHtml(user.email)} • ${escapeHtml(user.userId)}</span></div>`;
+}
+function updateManualPenaltySummary(){
+    const type=document.getElementById("manualPenaltyType").value;
+    const durationField=document.getElementById("manualPenaltyDurationField");
+    const summary=document.getElementById("manualPenaltySummary");
+    if(type==="permanent"){durationField.style.display="none";summary.innerHTML="🚫 <strong>Permanent Ban</strong>";return;}
+    durationField.style.display="block";
+    const duration=Number(document.getElementById("manualPenaltyDuration").value)||1;
+    let ms=0,label="";
+    if(type==="hours"){ms=duration*60*60*1000;label=duration+" hour(s)";}
+    else if(type==="days"){ms=duration*24*60*60*1000;label=duration+" day(s)";}
+    else if(type==="months"){ms=duration*30*24*60*60*1000;label=duration+" month(s)";}
+    const endDate=new Date(Date.now()+ms);
+    summary.innerHTML="⏱️ Penalty: <strong>"+label+"</strong><br>Until: <strong>"+endDate.toLocaleString()+"</strong>";
+}
+async function confirmManualViolation(){
+    if(!manualViolationUserId){await customAlert("Please search and select a user first.","warning");return;}
+    const subject=document.getElementById("manualViolationSubject").value.trim();
+    const message=document.getElementById("manualViolationMessage").value.trim();
+    if(!subject){await customAlert("Subject is required.","warning");return;}
+    if(!message){await customAlert("Message content is required.","warning");return;}
+    const violationType=document.getElementById("manualViolationType").value;
+    const penaltyType=document.getElementById("manualPenaltyType").value;
+    const duration=Number(document.getElementById("manualPenaltyDuration").value)||1;
+    let penaltyEndTime=null,penaltyLabel="";
+    if(penaltyType==="permanent"){penaltyEndTime=null;penaltyLabel="Permanent";}
+    else if(penaltyType==="hours"){penaltyEndTime=Date.now()+(duration*60*60*1000);penaltyLabel=duration+" hour(s)";}
+    else if(penaltyType==="days"){penaltyEndTime=Date.now()+(duration*24*60*60*1000);penaltyLabel=duration+" day(s)";}
+    else if(penaltyType==="months"){penaltyEndTime=Date.now()+(duration*30*24*60*60*1000);penaltyLabel=duration+" month(s)";}
+    const users=getUsers();
+    const user=users.find(u=>u.userId===manualViolationUserId);
+    if(!user){closeManualViolationModal();return;}
+    if(!user.violations)user.violations=[];
+    const violation={id:"VIO-"+Date.now()+"-"+Math.floor(100+Math.random()*900),type:violationType,category:"manual",subject:subject,message:message,details:"Manual violation by admin",dateIssued:new Date().toLocaleString(),penaltyType:penaltyType,penaltyLabel:penaltyLabel,penaltyEndTime:penaltyEndTime,active:true,acknowledged:false};
+    user.violations.unshift(violation);
+    user.accountStatus=(penaltyType==="permanent")?"banned":"onhold";
+    saveUsers(users);closeManualViolationModal();showNotification("Violation Issued","@"+user.username+" — "+violationType);renderAdminPanel();
+}
+
 function renderAdminViolations(){
     const list=document.getElementById("adminViolationsList");const usersWithViolations=getAllUsersWithViolations();
-    if(!usersWithViolations.length){list.innerHTML='<div class="admin-empty">✅ No violations detected.</div>';return;}
-    list.innerHTML="";
+    const headerHTML=`<div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
+        <button class="admin-publish-btn" style="flex:1;min-width:160px;background:linear-gradient(135deg,#8b5cf6,#a78bfa);margin:0;" onclick="openManualViolationModal()">✍️ Manual Violation</button>
+        <button class="admin-publish-btn" style="flex:1;min-width:160px;background:linear-gradient(135deg,#0ea5e9,#38bdf8);margin:0;" onclick="openViolationChoiceModal()">➕ Give Violation</button>
+    </div>`;
+    if(!usersWithViolations.length){list.innerHTML=headerHTML+'<div class="admin-empty">✅ No violations detected.</div>';return;}
+    list.innerHTML=headerHTML;
     usersWithViolations.forEach(entry=>{
         const user=entry.user;const status=user.accountStatus||"active";
         const activeViolations=(user.violations||[]).filter(v=>v.active===true);
-        let detectedHTML="";entry.detectedViolations.forEach(v=>{detectedHTML+=`<div class="admin-user-row"><span>🔍 ${escapeHtml(v.type)}</span><strong>${escapeHtml(v.details)}</strong></div>`;});
-        let activeHTML="";activeViolations.forEach(v=>{let endText="Permanent";if(v.penaltyEndTime){const rem=v.penaltyEndTime-Date.now();endText=rem<=0?"Expired":new Date(v.penaltyEndTime).toLocaleString();}activeHTML+=`<div class="admin-user-row"><span>⚠️ Active</span><strong>${escapeHtml(v.type)} — ${escapeHtml(v.penaltyLabel)}</strong></div>`;});
+        let detectedHTML="";entry.detectedViolations.forEach(v=>{detectedHTML+=`<div class="admin-user-row"><span>🔍 Auto: ${escapeHtml(v.type)}</span><strong>${escapeHtml(v.details)}</strong></div>`;});
+        let activeHTML="";activeViolations.forEach(v=>{const catLabel=v.category==="manual"?"✍️ Manual":"🤖 Auto";activeHTML+=`<div class="admin-user-row"><span>⚠️ ${catLabel}</span><strong>${escapeHtml(v.type)} — ${escapeHtml(v.penaltyLabel)}</strong></div>`;if(v.category==="manual"&&v.subject){activeHTML+=`<div class="admin-user-row"><span>📌 Subject</span><strong style="color:#ffd166;">${escapeHtml(v.subject)}</strong></div>`;}});
         let statusBadge=status==="active"?"":'<span class="violation-badge">'+(status==="banned"?"🚫 BANNED":"⏸ ON HOLD")+'</span>';
         let actionButtons="";if(status!=="active")actionButtons+=`<button class="admin-reactivate-btn" onclick="reactivateUser('${user.userId}')">✓ Reactivate</button>`;actionButtons+=`<button class="admin-penalty-btn" onclick="openPenaltyModal('${user.userId}')">⚠️ Penalty</button>`;
         const div=document.createElement("div");div.className="admin-violation-item";
-        div.innerHTML=`<div class="admin-user-header"><strong class="violation-title">${escapeHtml(user.name)}</strong><div style="display:flex;gap:6px;flex-wrap:wrap;">${statusBadge}<span class="admin-user-id">${escapeHtml(user.userId)}</span></div></div><div class="admin-user-row"><span>Username</span><strong>@${escapeHtml(user.username)}</strong></div>${detectedHTML}${activeHTML}<div class="admin-cashout-actions">${actionButtons}</div>`;
+        div.innerHTML=`<div class="admin-user-header"><strong class="violation-title">${escapeHtml(user.name)}</strong><div style="display:flex;gap:6px;flex-wrap:wrap;">${statusBadge}<span class="admin-user-id">${escapeHtml(user.userId)}</span></div></div><div class="admin-user-row"><span>Username</span><strong>@${escapeHtml(user.username)}</strong></div><div class="admin-user-row"><span>Email</span><strong>${escapeHtml(user.email)}</strong></div>${detectedHTML}${activeHTML}<div class="admin-cashout-actions">${actionButtons}</div>`;
         list.appendChild(div);
     });
 }
@@ -3082,7 +3510,7 @@ async function confirmIssuePenalty(){
     if(penaltyType==="permanent"){penaltyEndTime=null;penaltyLabel="Permanent";}else if(penaltyType==="hours"){penaltyEndTime=Date.now()+(duration*60*60*1000);penaltyLabel=duration+" hour(s)";}else if(penaltyType==="days"){penaltyEndTime=Date.now()+(duration*24*60*60*1000);penaltyLabel=duration+" day(s)";}else if(penaltyType==="months"){penaltyEndTime=Date.now()+(duration*30*24*60*60*1000);penaltyLabel=duration+" month(s)";}
     const users=getUsers();const user=users.find(u=>u.userId===currentPenaltyUserId);if(!user){closePenaltyModal();return;}
     if(!user.violations)user.violations=[];
-    const violation={id:"VIO-"+Date.now()+"-"+Math.floor(100+Math.random()*900),type:violationType,details,dateIssued:new Date().toLocaleString(),penaltyType,penaltyLabel,penaltyEndTime,active:true,acknowledged:false};
+    const violation={id:"VIO-"+Date.now()+"-"+Math.floor(100+Math.random()*900),type:violationType,category:"auto",details,dateIssued:new Date().toLocaleString(),penaltyType,penaltyLabel,penaltyEndTime,active:true,acknowledged:false};
     user.violations.unshift(violation);user.accountStatus=(penaltyType==="permanent")?"banned":"onhold";
     saveUsers(users);closePenaltyModal();showNotification("Penalty Issued","@"+user.username+" penalized.");renderAdminPanel();
 }
@@ -3103,6 +3531,7 @@ function renderAdminVerifications(){
     const list=document.getElementById("adminVerificationsList");if(!list)return;
     const users=getUsers();const grouped=[];
     let totalApprovedSubs=0,totalPendingSubs=0;
+    const pages=getSocialPages();const pageMap={};pages.forEach(p=>{pageMap[p.id]=p;});
     users.forEach(u=>{
         if(u.socialSubmissions){
             const subs=[];let allApproved=true,hasAnySubmission=false;
@@ -3112,11 +3541,9 @@ function renderAdminVerifications(){
                     hasAnySubmission=true;
                     if(s.status==="approved")totalApprovedSubs++;
                     if(s.status==="pending")totalPendingSubs++;
-                    let label=k;
-                    let icon="🔗";
-                    if(k==="facebook"){label="Facebook";icon="📘";}
-                    else if(k==="telegram"){label="Telegram";icon="💬";}
-                    else if(k.startsWith("custom_")){const linkId=k.replace("custom_","");const customLinks=getCustomFollowLinks();const link=customLinks.find(l=>l.id===linkId);if(link)label=link.name;}
+                    const p=pageMap[k];
+                    const label=p?p.name:(k.startsWith("custom_")?"Custom "+k.slice(-4):k);
+                    const icon=p?p.icon:"🔗";
                     subs.push({platform:k,platformLabel:label,platformIcon:icon,name:s.name,imageData:s.imageData,status:s.status,submittedAt:s.submittedAt,reason:s.reason});
                     if(s.status!=="approved")allApproved=false;
                 }else allApproved=false;
@@ -3196,32 +3623,7 @@ function renderAdminSystemSettings(){
         <label>Required Invites</label><input type="number" id="sysCashoutInvitesReq" value="${s.cashoutInvitesReq}" min="1" step="1">
         <button class="admin-publish-btn" onclick="saveSystemSettingsFromForm()">💾 Save Settings</button>
     </div>`;
-    const linksList=document.getElementById("adminCustomLinksList");
-    if(linksList){
-        const links=getCustomFollowLinks();
-        if(!links.length){linksList.innerHTML='<div class="admin-empty">No custom links added yet.</div>';}
-        else{linksList.innerHTML=links.map(l=>`<div class="admin-ticket-item" style="display:flex;justify-content:space-between;align-items:center;padding:10px;"><div><strong style="color:#ffd166;display:block;font-size:12px;">${escapeHtml(l.name)}</strong><span style="font-size:10px;color:#8a8aa0;word-break:break-all;">${escapeHtml(l.url)}</span></div><button class="admin-delete-btn" style="width:auto;margin:0;padding:6px 12px;" onclick="deleteCustomLink('${l.id}')">🗑</button></div>`).join("");}
-    }
 }
-function addCustomLink(){
-    const name=document.getElementById("newLinkName").value.trim();
-    const url=document.getElementById("newLinkUrl").value.trim();
-    if(!name||!url){customAlert("Name and URL required.","warning");return;}
-    const links=getCustomFollowLinks();
-    links.push({id:Date.now().toString(),name,url});
-    saveCustomFollowLinks(links);
-    document.getElementById("newLinkName").value="";
-    document.getElementById("newLinkUrl").value="";
-    showNotification("Added","New follow link added.");renderAdminSystemSettings();
-}
-async function deleteCustomLink(id){
-    const ok=await customAlert("Delete this link? Users will no longer need to follow it.","warning","Delete","Yes");
-    if(!ok)return;
-    let links=getCustomFollowLinks();
-    links=links.filter(l=>l.id!==id);
-    saveCustomFollowLinks(links);showNotification("Deleted","Link removed.");renderAdminSystemSettings();
-}
-
 function renderAdminUpdates(){
     const list=document.getElementById("adminUpdatesList");if(!list)return;
     const updates=getUpdates();if(!updates.length){list.innerHTML='<div class="admin-empty">📭 No updates yet.</div>';return;}
@@ -3302,18 +3704,7 @@ async function checkPendingCongrats(){
     if(!fresh||!fresh.pendingCongrats)return;
     const c=fresh.pendingCongrats;
     const medal=c.rank===1?"🥇":c.rank===2?"🥈":c.rank===3?"🥉":"🏆";
-    await customAlert(
-        "🎉 CONGRATULATIONS! 🎉\n\n"+
-        "You made it to the Weekly Leaderboard!\n\n"+
-        medal+" Rank: #"+c.rank+" of "+c.totalParticipants+"\n"+
-        "⭐ Points: "+Number(c.points).toFixed(3)+"\n"+
-        "💰 Reward: ₱"+Number(c.reward).toFixed(3)+"\n"+
-        "📅 Week: "+c.weekKey+"\n\n"+
-        "Your reward has been added to your balance.\n"+
-        "Keep up the great work! 💖",
-        "success",
-        "🏆 Weekly Leaderboard Achievement"
-    );
+    await customAlert("🎉 CONGRATULATIONS! 🎉\n\nYou made it to the Weekly Leaderboard!\n\n"+medal+" Rank: #"+c.rank+" of "+c.totalParticipants+"\n⭐ Points: "+Number(c.points).toFixed(3)+"\n💰 Reward: ₱"+Number(c.reward).toFixed(3)+"\n📅 Week: "+c.weekKey+"\n\nYour reward has been added to your balance.\nKeep up the great work! 💖","success","🏆 Weekly Leaderboard Achievement");
     const users=getUsers();
     const u=users.find(x=>x.userId===currentUser.userId);
     if(u&&u.pendingCongrats){u.pendingCongrats=null;saveUsers(users);}
@@ -3355,7 +3746,7 @@ setInterval(()=>{
     }
     if(isAdmin){
         const active=document.activeElement;
-        const isTyping=active&&active.id&&(active.id.startsWith("adminTicketInput_")||active.id.startsWith("adminSugInput_")||active.id==="adminUpdateTitle"||active.id==="adminUpdateMessage"||active.id==="alertTitle"||active.id==="alertMessage"||active.id==="rejectReasonInput"||active.id.startsWith("sys")||active.id.startsWith("adminGame")||active.className&&(active.className.indexOf("admin-q-")>=0));
+        const isTyping=active&&active.id&&(active.id.startsWith("adminTicketInput_")||active.id.startsWith("adminSugInput_")||active.id==="adminUpdateTitle"||active.id==="adminUpdateMessage"||active.id==="alertTitle"||active.id==="alertMessage"||active.id==="rejectReasonInput"||active.id.startsWith("sys")||active.id.startsWith("adminGame")||active.id==="manualViolationSearch"||active.id==="manualViolationSubject"||active.id==="manualViolationMessage"||active.id.startsWith("newSP")||active.id.startsWith("newCL")||active.id.startsWith("editSP")||active.id.startsWith("editCL")||active.className&&(active.className.indexOf("admin-q-")>=0));
         if(!isTyping)renderAdminPanel();
     }
 },10000);
