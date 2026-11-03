@@ -322,10 +322,11 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 .admin-stat-card.user-info-card strong{color:#00e5ff;font-size:14px;}
 .admin-stat-card span{display:block;color:#8a8aa0;font-size:10.5px;margin-bottom:6px;text-transform:uppercase;letter-spacing:1px;font-weight:700;}
 .admin-stat-card strong{display:block;color:#fff;font-size:22px;font-weight:700;}
-.admin-sub-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;}
+.admin-sub-tabs{display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none;position:relative;}
 .admin-sub-tabs::-webkit-scrollbar{display:none;}
-.admin-sub-tabs button{padding:9px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#8a8aa0;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;}
+.admin-sub-tabs button{padding:9px 16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#8a8aa0;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;position:relative;}
 .admin-sub-tabs button.active{background:linear-gradient(135deg,#ff2a75,#ff6b9d);color:white;border-color:transparent;}
+.admin-sub-tab-badge{display:none;margin-left:6px;background:#ef4444;color:#fff;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:800;min-width:16px;text-align:center;line-height:1.5;box-shadow:0 0 6px rgba(239,68,68,.6);align-items:center;justify-content:center;}
 .admin-user-item,.admin-cashout-item,.admin-violation-item,.admin-ticket-item{padding:14px;margin-bottom:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:16px;}
 .admin-violation-item{background:rgba(231,76,60,.06);border-color:rgba(231,76,60,.2);}
 .admin-ticket-item{background:rgba(255,200,60,.05);border-color:rgba(255,200,60,.2);}
@@ -832,8 +833,8 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
     <div class="admin-view" id="adminViewUsers">
         <div class="admin-sub-tabs">
             <button class="active" onclick="showAdminSubTab('adminViewUsers','adminUsersTab',this)">👥 All Users</button>
-            <button onclick="showAdminSubTab('adminViewUsers','adminViolationsTab',this)">⚠️ Violations</button>
-            <button onclick="showAdminSubTab('adminViewUsers','adminVerificationsTab',this)">✅ Verifications <span id="adminVerifyBadge" style="display:none;margin-left:6px;background:#ef4444;color:#fff;padding:2px 6px;border-radius:8px;font-size:9px;font-weight:700;">0</span></button>
+            <button onclick="showAdminSubTab('adminViewUsers','adminViolationsTab',this)">⚠️ Violations <span class="admin-sub-tab-badge" id="badgeAdminViolations"></span></button>
+            <button onclick="showAdminSubTab('adminViewUsers','adminVerificationsTab',this)">✅ Verifications <span class="admin-sub-tab-badge" id="adminVerifyBadge"></span></button>
         </div>
         <div id="adminUsersTab" data-subtab><div id="adminUsersList"></div></div>
         <div id="adminViolationsTab" data-subtab style="display:none;"><div id="adminViolationsList"></div></div>
@@ -848,10 +849,10 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
     </div>
     <div class="admin-view" id="adminViewTransact">
         <div class="admin-sub-tabs">
-            <button class="active" onclick="showAdminSubTab('adminViewTransact','adminCashoutsTab',this)">💰 Cashouts</button>
+            <button class="active" onclick="showAdminSubTab('adminViewTransact','adminCashoutsTab',this)">💰 Cashouts <span class="admin-sub-tab-badge" id="badgeAdminCashouts"></span></button>
             <button onclick="showAdminSubTab('adminViewTransact','adminPayoutsTab',this)">📊 Total Payouts</button>
-            <button onclick="showAdminSubTab('adminViewTransact','adminTicketsTab',this)">🎫 Support Tickets</button>
-            <button onclick="showAdminSubTab('adminViewTransact','adminSuggestionsTab',this)">💡 Suggestions</button>
+            <button onclick="showAdminSubTab('adminViewTransact','adminTicketsTab',this)">🎫 Support Tickets <span class="admin-sub-tab-badge" id="badgeAdminTickets"></span></button>
+            <button onclick="showAdminSubTab('adminViewTransact','adminSuggestionsTab',this)">💡 Suggestions <span class="admin-sub-tab-badge" id="badgeAdminSuggestions"></span></button>
         </div>
         <div id="adminCashoutsTab" data-subtab><div id="adminCashoutsList"></div></div>
         <div id="adminPayoutsTab" data-subtab style="display:none;"><div id="adminPayoutsList"></div></div>
@@ -1068,11 +1069,17 @@ h1{text-align:center;font-family:Georgia,serif;color:#9d1839;font-size:31px;marg
 </div>
 
 <div class="penalty-modal-overlay" id="penaltyModalOverlay"><div class="penalty-modal"><h3>⚠️ Issue Penalty</h3><p class="penalty-sub" id="penaltyUserInfo">User</p><div class="penalty-field"><label>Violation Type</label><select id="penaltyViolationType"><option value="Using Cheat">Using Cheat</option><option value="Giving False Information">Giving False Information</option><option value="Multiple Account in 1 IP">Multiple Account</option><option value="Multiple Payout In 1 Day">Multiple Payout</option></select></div><div class="penalty-field"><label>Penalty Type</label><select id="penaltyType" onchange="updatePenaltySummary()"><option value="hours">Hours</option><option value="days">Days</option><option value="months">Months</option><option value="permanent">Permanent Ban</option></select></div><div class="penalty-field" id="penaltyDurationField"><label>Duration</label><input type="number" id="penaltyDuration" min="1" value="1" oninput="updatePenaltySummary()"></div><div class="penalty-field"><label>Reason (Optional)</label><textarea id="penaltyDetails" maxlength="300"></textarea></div><div class="penalty-summary" id="penaltySummary"></div><div class="penalty-buttons"><button class="penalty-btn penalty-btn-cancel" onclick="closePenaltyModal()">Cancel</button><button class="penalty-btn penalty-btn-confirm" onclick="confirmIssuePenalty()">Issue Penalty</button></div></div></div>
+
 <div class="cashout-req-overlay" id="cashoutReqModalOverlay"><div class="cashout-req-modal"><div class="req-modal-header"><h3>🔒 Cashout Requirements</h3><button class="req-modal-close-x" onclick="closeCashoutReqModal()">✕</button></div><div class="req-modal-body" id="cashoutReqModalBody"></div><div class="req-modal-footer"><button onclick="closeCashoutReqModal()">Close</button></div></div></div>
+
 <div class="penalty-modal-overlay" id="rejectReasonModalOverlay"><div class="penalty-modal"><h3>❌ Reject Cashout</h3><p class="penalty-sub" id="rejectReasonUserInfo">Cashout</p><div class="penalty-field"><label>Reason (Optional)</label><textarea id="rejectReasonInput" maxlength="300"></textarea></div><div class="penalty-buttons"><button class="penalty-btn penalty-btn-cancel" onclick="closeRejectReasonModal()">Cancel</button><button class="penalty-btn penalty-btn-confirm" onclick="confirmRejectWithReason()">❌ Reject Request</button></div></div></div>
+
 <div class="rating-modal-overlay" id="ratingModalOverlay"><div class="rating-modal"><h3>⭐ Rate Your Experience</h3><p class="rating-sub">How was your support experience?</p><div class="rating-stars" id="ratingStars"><span class="star" data-value="1" onclick="setRating(1)">★</span><span class="star" data-value="2" onclick="setRating(2)">★</span><span class="star" data-value="3" onclick="setRating(3)">★</span><span class="star" data-value="4" onclick="setRating(4)">★</span><span class="star" data-value="5" onclick="setRating(5)">★</span></div><label class="rating-notes-label">Notes (Optional)</label><textarea class="rating-notes" id="ratingNotes" maxlength="500"></textarea><span class="rating-notes-hint">Visible to admin.</span><div class="rating-buttons"><button class="rating-btn rating-btn-cancel" onclick="closeRatingModal()">Cancel</button><button class="rating-btn rating-btn-submit" onclick="submitRating()">✓ Submit</button></div></div></div>
+
 <div class="app-notification" id="appNotification"><strong id="notificationTitle">Notification</strong><span id="notificationMessage">Message</span></div>
+
 <div class="modal-overlay" id="modalOverlay"><div class="modal-card"><div class="modal-icon" id="modalIcon">ℹ</div><h3 class="modal-title" id="modalTitle">Notice</h3><p class="modal-message" id="modalMessage">Message</p><div class="modal-buttons" id="modalButtons"></div></div></div>
+
 
 <script>
 "use strict";
@@ -1099,7 +1106,6 @@ const CASHOUT_ALLOWED_AMOUNTS=[1,3,5];
 const LEADERBOARD_REWARDS=[{min:1,max:1,reward:0.010},{min:2,max:2,reward:0.008},{min:3,max:3,reward:0.006},{min:4,max:8,reward:0.005},{min:9,max:14,reward:0.004},{min:15,max:20,reward:0.003},{min:21,max:25,reward:0.002},{min:26,max:30,reward:0.001}];
 function getRankReward(rank){for(let i=0;i<LEADERBOARD_REWARDS.length;i++){const r=LEADERBOARD_REWARDS[i];if(rank>=r.min&&rank<=r.max)return r.reward;}return 0;}
 
-/* ====== SOCIAL PAGES (Cashout Follow Requirements) ====== */
 const DEFAULT_SOCIAL_PAGES=[
     {id:"facebook",name:"Facebook",icon:"📘",url:"https://www.facebook.com/profile.php?id=61588354341346"},
     {id:"telegram",name:"Telegram",icon:"💬",url:"https://t.me/+9l7fOEFaHCllYWY1"}
@@ -1123,7 +1129,6 @@ function saveSocialPages(pages){
     localStorage.setItem("hfSocialPagesCustomized","true");
 }
 
-/* ====== COMMUNITY LINKS (CS Group Community) ====== */
 const DEFAULT_COMMUNITY_LINKS=[
     {id:"fb_group",type:"external",icon:"📘",label:"Facebook Group",url:"https://www.facebook.com/profile.php?id=61588354341346"},
     {id:"tg_channel",type:"external",icon:"💬",label:"Telegram Channel",url:"https://t.me/+9l7fOEFaHCllYWY1"},
@@ -1174,7 +1179,6 @@ function renderCommunityLinks(){
     updateYourTicketSection();
 }
 
-/* ====== TIMER HELPERS ====== */
 function stopGameTimer(){
     gameTimerTickId++;
     if(gameTimerInterval){clearInterval(gameTimerInterval);gameTimerInterval=null;}
@@ -1199,12 +1203,10 @@ function startGameTimer(seconds,onTimeUp){
     },1000);
 }
 
-/* ====== PERSISTENT RATINGS ====== */
 function getSavedRatings(){try{return JSON.parse(localStorage.getItem("hfRatings")||"[]");}catch(e){return[];}}
 function saveSavedRatings(r){localStorage.setItem("hfRatings",JSON.stringify(r));}
 function addSavedRating(r){const list=getSavedRatings();list.unshift(r);if(list.length>500)list.length=500;saveSavedRatings(list);}
 
-/* ====== CUSTOM ALERT ====== */
 function customAlert(message,typeOrOptions,title,okText,cancelText){
     return new Promise(resolve=>{
         const overlay=document.getElementById("modalOverlay");
@@ -1247,11 +1249,9 @@ function customAlert(message,typeOrOptions,title,okText,cancelText){
     });
 }
 
-/* ====== CUSTOM GAMES STORAGE ====== */
 function getCustomGames(){try{return JSON.parse(localStorage.getItem("hfCustomGames")||"[]");}catch(e){return[];}}
 function saveCustomGames(g){localStorage.setItem("hfCustomGames",JSON.stringify(g));}
 
-/* ====== SUGGESTIONS STORAGE ====== */
 function getSuggestions(){try{return JSON.parse(localStorage.getItem("hfSuggestions")||"[]");}catch(e){return[];}}
 function saveSuggestions(s){localStorage.setItem("hfSuggestions",JSON.stringify(s));}
 function getMySuggestions(){if(!currentUser)return[];return getSuggestions().filter(s=>s.userId===currentUser.userId);}
@@ -1320,7 +1320,6 @@ document.getElementById("suggestionInboxForm").addEventListener("submit",e=>{
     saveSuggestions(all);inp.value="";openUserSuggestionInbox(currentActiveSuggestionRef);
 });
 
-/* ====== GUEST SUPPORT ====== */
 function openGuestModal(type){if(type==='ai')document.getElementById("guestAiModal").classList.add("show");if(type==='ticket')document.getElementById("guestTicketModal").classList.add("show");}
 function closeGuestModal(id){document.getElementById(id).classList.remove("show");}
 async function sendGuestAiMessage(){
@@ -1354,7 +1353,6 @@ async function submitGuestTicket(){
     await customAlert("Your ticket has been submitted! The admin will review it shortly. Please keep your reference number: "+ref,"success","Ticket Submitted");
 }
 
-/* ====== ADMIN ALERTS ====== */
 function getAdminAlerts(){try{return JSON.parse(localStorage.getItem("hfAdminAlerts")||"[]");}catch(e){return[];}}
 function saveAdminAlerts(a){localStorage.setItem("hfAdminAlerts",JSON.stringify(a));}
 function adminRefreshAlertTargets(){
@@ -1431,7 +1429,6 @@ async function showNextAlert(alert){
     },700);
 }
 
-/* ====== HERO RATINGS ====== */
 function getResolvedRatings(){return getSavedRatings().sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));}
 function setRatingFilter(val){currentRatingFilter=val;renderHeroInfoRow();}
 function renderHeroInfoRow(){
@@ -1480,7 +1477,6 @@ function renderHeroInfoRow(){
     }
 }
 
-/* ====== SITE SETTINGS ====== */
 const DEFAULT_SITE_SETTINGS={pauseSite:false,pauseCashout:false,pauseTransfer:false,pauseRegistration:false,pauseGCash:false,pauseMaya:false,pausePayPal:false,forceOpenCashout:false,pauseCalculator:false,pauseCashoutTransactions:false,pauseGameTransactions:false,pauseTransferTransactions:false};
 function getSiteSettings(){try{return Object.assign({},DEFAULT_SITE_SETTINGS,JSON.parse(localStorage.getItem("hfSiteSettings")||"{}"));}catch(e){return Object.assign({},DEFAULT_SITE_SETTINGS);}}
 function saveSiteSettings(s){localStorage.setItem("hfSiteSettings",JSON.stringify(s));}
@@ -1497,7 +1493,6 @@ function isCashoutTransactionsPaused(){return getSiteSettings().pauseCashoutTran
 function isGameTransactionsPaused(){return getSiteSettings().pauseGameTransactions===true;}
 function isTransferTransactionsPaused(){return getSiteSettings().pauseTransferTransactions===true;}
 
-/* ====== ADS STATS ====== */
 function getAdsDailyStats(){try{return JSON.parse(localStorage.getItem("hfAdsDailyStats")||"{}");}catch(e){return{};}}
 function saveAdsDailyStats(s){localStorage.setItem("hfAdsDailyStats",JSON.stringify(s));}
 function getDateKey(date){const d=date||new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
@@ -1542,12 +1537,10 @@ function renderWeeklyAdsStatsCard(){
     return '<div class="admin-ticket-item" style="margin-bottom:14px;background:linear-gradient(135deg,rgba(255,42,117,.08),rgba(255,150,50,.04));border-color:rgba(255,42,117,.25);">'+'<div class="admin-user-header"><strong class="ticket-title">📺 Weekly Ads Statistics</strong><span class="admin-user-id">'+thisWeekTotal+' this week</span></div>'+'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);flex-wrap:wrap;">'+'<div><div style="color:#8a8aa0;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">This Week</div><div style="color:#ff2a75;font-size:26px;font-weight:800;">'+thisWeekTotal+'</div></div>'+'<div style="text-align:center;"><div style="color:#8a8aa0;font-size:10px;text-transform:uppercase;letter-spacing:1px;font-weight:700;">Last Week</div><div style="color:#fff;font-size:20px;font-weight:700;">'+lastWeekTotal+'</div></div>'+'<div style="text-align:center;padding:8px 12px;border-radius:12px;background:'+diffBg+';border:1px solid '+diffBd+';"><div style="color:'+diffColor+';font-size:15px;font-weight:800;">'+diffIcon+' '+diffDisplay+'</div><div style="color:#8a8aa0;font-size:9px;margin-top:2px;">vs last week</div></div>'+'</div>'+'<div style="margin-top:10px;">'+daysHTML+'</div></div>';
 }
 
-/* ====== SYSTEM SETTINGS ====== */
 const DEFAULT_SYSTEM_SETTINGS={minTransfer:1,gameReward:0.001,inviteBonusInviter:0.005,inviteBonusNewUser:0.003,cashoutFeePercent3:50,cashoutFeePercent5:50,dailyLimitGCash:0,dailyLimitMaya:0,dailyLimitPayPal:0,cashoutPointsReq:1000,cashoutInvitesReq:10,reqSocialFollows:2};
 function getSystemSettings(){try{return Object.assign({},DEFAULT_SYSTEM_SETTINGS,JSON.parse(localStorage.getItem("hfSystemSettings")||"{}"));}catch(e){return Object.assign({},DEFAULT_SYSTEM_SETTINGS);}}
 function getCashoutReceived(amount){const s=getSystemSettings();if(amount===1)return 1;if(amount===3)return amount*(1-(s.cashoutFeePercent3/100));if(amount===5)return amount*(1-(s.cashoutFeePercent5/100));return 0;}
 
-/* ====== DAILY CASHOUT LIMIT ====== */
 function getTodayDateKey(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
 function getTodayCashoutCount(mode){
     const todayKey=getTodayDateKey();let count=0;
@@ -1574,7 +1567,6 @@ function saveSystemSettingsFromForm(){
     showNotification("Settings Saved","System settings updated.");renderAdminSystemSettings();
 }
 
-/* ====== DATA ====== */
 function getUsers(){return JSON.parse(localStorage.getItem("earningUsers")||"[]");}
 function saveUsers(u){localStorage.setItem("earningUsers",JSON.stringify(u));}
 function getCurrentStoredUser(){const id=localStorage.getItem("currentUserId");return getUsers().find(u=>u.userId===id);}
@@ -1628,7 +1620,6 @@ function showNotification(title,message){
     window.notificationTimer=setTimeout(()=>{box.style.display="none";},8000);
 }
 
-/* ====== AUTH ====== */
 function togglePassword(id,btn){const i=document.getElementById(id);if(i.type==="password"){i.type="text";btn.textContent="🙈";}else{i.type="password";btn.textContent="👁";}}
 function showLogin(){document.getElementById("signupSection").style.display="none";document.getElementById("loginSection").style.display="block";}
 function showSignup(){document.getElementById("loginSection").style.display="none";document.getElementById("signupSection").style.display="block";}
@@ -1760,7 +1751,6 @@ function showDashboard(user){
     setTimeout(checkPendingAlerts,3000);
 }
 
-/* ====== WEEKLY DATA + LEADERBOARD SNAPSHOT ====== */
 function prepareWeeklyData(){
     const week=getWeekKey();
     const users=getUsers();
@@ -1876,7 +1866,6 @@ async function saveAccountSettings(){
     showNotification("Account Updated","Your info has been saved.");
 }
 
-/* ====== NAVIGATION ====== */
 function showFocus(pageId,navBtn){
     stopGameTimer();
     document.querySelector(".welcome").style.display="none";
@@ -1953,7 +1942,6 @@ function updateCalculatorVisibility(){
     calc.style.display=isCalculatorPaused()?"none":"block";
 }
 
-/* ====== TRANSFER ====== */
 function verifyReceiver(){
     const username=document.getElementById("receiverUsername").value.trim().toLowerCase();
     const userId=document.getElementById("receiverUserId").value.trim();
@@ -2038,7 +2026,6 @@ function resetTransferForm(){
 }
 function receiptRow(l,v){return `<div class="receipt-row"><span class="receipt-label">${escapeHtml(l)}</span><span class="receipt-value">${escapeHtml(v)}</span></div>`;}
 
-/* ====== OTP ====== */
 function setupOTPInputs(){
     if(otpInputsSetupDone)return;
     otpInputsSetupDone=true;
@@ -2099,7 +2086,6 @@ async function verifyOTPCode(){
     setTimeout(completeTransfer,1600);
 }
 
-/* ====== CASHOUT ====== */
 function getLivePeriodKey(){const n=new Date();if(n.getHours()>=17)return n.toDateString();return new Date(n.getTime()-86400000).toDateString();}
 function isCashoutTime(){if(isCashoutForceOpen())return true;const h=new Date().getHours();return h>=18&&h<20;}
 function openCashoutPage(){
@@ -2311,7 +2297,6 @@ function showCashoutReceiptDetail(ref){
     receipt.innerHTML=`<div class="receipt-title">CASHOUT RECEIPT</div>${receiptRow("Username",item.username)}${receiptRow("User ID",item.userId)}${receiptRow("Mode",item.mode)}${isP?receiptRow("PayPal Email",item.payoutNumber):receiptRow("Number",item.payoutNumber)+receiptRow("Name",item.payoutName)}${receiptRow("Amount","₱"+Number(item.amount).toFixed(3))}${receiptRow("Received","₱"+Number(item.totalReceived).toFixed(3))}${receiptRow("Status",item.status)}${receiptRow("Reference",item.reference)}${receiptRow("Date",item.dateTime)}`;
 }
 
-/* ====== LIVE CASHOUT ====== */
 function cleanLiveCashouts(){const key=getLivePeriodKey();const stored=localStorage.getItem("liveCashoutPeriod");if(stored!==key){localStorage.setItem("liveCashoutPeriod",key);localStorage.setItem("liveCashouts","[]");}}
 function maskEmail(email){if(!email||!email.includes("@"))return "***";const[n,d]=email.split("@");return n.length<=2?n.charAt(0)+"***@"+d:n.substring(0,2)+"***@"+d;}
 function renderLiveCashouts(){
@@ -2332,7 +2317,6 @@ function updateLiveCashoutStatus(ref,status){
     if(item){item.status=status;localStorage.setItem("liveCashouts",JSON.stringify(live));}
 }
 
-/* ====== LEADERBOARD ====== */
 function renderLeaderboard(){
     const list=document.getElementById("leaderboardList");if(!list)return;
     const allUsers=getUsers();
@@ -2353,7 +2337,6 @@ function renderLeaderboard(){
     list.innerHTML=rewardsHTML+rankingsHTML;
 }
 
-/* ====== GAMES LIST ====== */
 function renderGamesList(){
     const container=document.getElementById("gamesListContainer");
     if(!container)return;
@@ -2414,7 +2397,6 @@ function resetGameUI(){
     updateCalculatorVisibility();
 }
 
-/* ====== GAMES PLAY ====== */
 function generateQuestion(){
     if(!currentUser)return null;
     const ops=["+","-","×","÷"];
@@ -2430,6 +2412,7 @@ function generateQuestion(){
 
 async function startGame(){
     stopGameTimer();
+    window.adHandledFlag=false;
     adWatched=false;adResolved=false;gameSubmitted=false;selectedChoice="";
     const mcContainer=document.getElementById("multipleChoiceContainer");
     const answerInput=document.getElementById("gameAnswer");
@@ -2533,6 +2516,7 @@ function advanceToNextRound(){
             showNotification("Cycle Complete! 🎉","Starting fresh with new random order.");
         }
         gameSubmitted=false;selectedChoice="";adWatched=false;adResolved=false;
+        window.adHandledFlag=false;
         document.getElementById("questionText").textContent="Loading...";
         updateGameTimerText("15","#b51f43");
         document.getElementById("gameAnswer").value="";
@@ -2555,56 +2539,157 @@ function advanceToNextRound(){
 function prepareNextMathRound(){
     stopGameTimer();
     currentGame=null;adWatched=false;adResolved=false;gameSubmitted=false;selectedChoice="";
-    document.getElementById("gameStartButton").disabled=false;
+    window.adHandledFlag=false;
+    document.getElementById("gameStartButton").disabled=true;   // ⬅️ disabled na (auto-start)
     document.getElementById("gameSubmitButton").disabled=true;
     document.getElementById("gameAnswer").disabled=true;
     document.getElementById("watchAdButton").disabled=true;
     updateGameTimerText("15","#b51f43");
-    document.getElementById("questionText").textContent="Press Start for next question";
+    document.getElementById("questionText").textContent="Loading next question...";
     document.querySelector(".question-number").textContent="Question";
     document.getElementById("adStatus").textContent="📺 Watch ad for reward.";
     document.getElementById("gameAnswer").style.display="block";
     document.getElementById("gameSubmitButton").style.display="block";
     const mc=document.getElementById("multipleChoiceContainer");
     if(mc)mc.innerHTML="";
-}
 
-function watchGameAd(){
-    if(!currentGame||!currentGame.correct)return;
-    const btn=document.getElementById("watchAdButton");btn.disabled=true;
-    document.getElementById("adStatus").textContent="📺 Loading advertisement...";
-    if(typeof show_11871542!=="function"){showNotification("Ad Error","Ads not loaded.");btn.disabled=false;return;}
-    show_11871542().then(()=>{
-        adResolved=true;adWatched=true;
-        document.getElementById("adStatus").textContent="✓ Ad completed. Reward unlocked!";
-        claimGameReward();
-    }).catch(()=>{
-        btn.disabled=false;
-        document.getElementById("adStatus").textContent="❌ Ad not completed. Tap WATCH AD to retry.";
-        showNotification("Ad Skipped","You must finish the ad to receive the reward.");
-    });
-}
-
-function claimGameReward(){
-    if(!currentGame||!currentGame.correct||!adWatched)return;
-    stopGameTimer();
-    const reward=Number(currentGame.pointsPerCorrect)||getSystemSettings().gameReward;
-    recordGameResult(currentUser.gameHistory,true,reward,"Correct + Reward");
-    currentUser.balance=Number(currentUser.balance||0)+reward;
-    currentUser.points=Number(currentUser.points||0)+reward;
-    currentUser.weeklyPoints=Number(currentUser.weeklyPoints||0)+reward;
-    currentUser.adsWatched=Number(currentUser.adsWatched||0)+1;
-    currentUser.weeklyAdsWatched=Number(currentUser.weeklyAdsWatched||0)+1;
-    trackAdWatched();
-    updateCurrentUser();updateBalanceDisplay();
-    showNotification("Reward Added","+₱"+reward.toFixed(3));
-    updateGameTimerText("✓","#27ae60");
+    // ⭐ AUTO-START next question after 1 second
     const myId=gameTimerTickId;
-    setTimeout(()=>{
+    setTimeout(function(){
         if(myId!==gameTimerTickId)return;
-        advanceToNextRound();
-    },1200);
+        if(typeof startGame === "function") startGame();
+    }, 1000);
+     }
+/* ====== ADS FIX (FALSE NEGATIVE BYPASS) ====== */
+/* =====================================================
+   WATCH GAME AD — ROBUST MONEYTAG INTEGRATION
+===================================================== */
+function watchGameAd(){
+    if(!currentGame || !currentGame.correct){
+        showNotification("Cannot Watch", "Answer correctly first.");
+        return;
+    }
+    if(window.adHandledFlag === "running" || window.adHandledFlag === "done") return;
+
+    window.adHandledFlag = "running";
+    const button = document.getElementById("watchAdButton");
+    const status = document.getElementById("adStatus");
+    button.disabled = true;
+    status.textContent = "📺 Loading advertisement...";
+
+    if(typeof show_11871542 !== "function"){
+        window.adHandledFlag = null;
+        button.disabled = false;
+        status.textContent = "❌ Ad SDK not loaded. Please refresh and try again.";
+        showNotification("Ad Error", "Hindi nag-load ang ads. I-refresh ang page.");
+        return;
+    }
+
+    const startedAt = Date.now();
+
+    const finalize = function(ok){
+        if(window.adHandledFlag === "done") return;
+        window.adHandledFlag = "done";
+
+        if(ok){
+            adResolved = true;
+            adWatched = true;
+            status.textContent = "✓ Ad completed. Claiming reward...";
+            showNotification("Ad Completed", "Reward unlocked!");
+
+            // ⭐ ISOLATED TRY/CATCH: reward errors will NOT trigger outer .catch()
+            try{
+                claimGameReward();
+            }catch(err){
+                console.error("REWARD CLAIM ERROR:", err);
+                status.textContent = "❌ Error claiming reward: " + (err.message || err);
+                showNotification("Reward Error", "There was an issue claiming your reward. Please try again.");
+                button.disabled = false;
+                window.adHandledFlag = null;
+            }
+        }else{
+            adResolved = false;
+            adWatched = false;
+            status.textContent = "❌ Ad not completed. Please try again.";
+            showNotification("Ad Skipped", "Watch the ads first to claim your rewards!.");
+            button.disabled = false;
+            window.adHandledFlag = null;
+        }
+    };
+
+    try{
+        show_11871542().then(function(){
+            finalize(true);
+        }).catch(function(err){
+            console.log("Ad rejected by SDK:", err);
+            const elapsed = Date.now() - startedAt;
+            // ⭐ GRACE PERIOD: 3+ seconds = totoong pinanood ang ad
+            if(elapsed >= 3000){
+                finalize(true);
+            }else{
+                finalize(false);
+            }
+        });
+    }catch(syncErr){
+        console.error("Ad SDK threw sync error:", syncErr);
+        finalize(false);
+    }
 }
+function claimGameReward(){
+    if(!currentGame || !currentGame.correct){
+        console.warn("claimGameReward aborted: no currentGame or incorrect");
+        return;
+    }
+    if(!adWatched){
+        console.warn("claimGameReward aborted: adWatched is false");
+        return;
+    }
+    if(!currentUser){
+        console.warn("claimGameReward aborted: no currentUser");
+        return;
+    }
+
+    const reward = 0.001;
+
+    try{
+        // History
+        if(!currentUser.gameHistory) currentUser.gameHistory = [];
+        currentUser.gameHistory.unshift({
+            dateTime: new Date().toLocaleString(),
+            question: currentGame.text,
+            questionKey: currentGame.key,
+            correctAnswer: currentGame.answer,
+            userAnswer: currentGame.userAnswer,
+            result: "Correct + Reward",
+            reward: reward
+        });
+
+        // Balances / points
+        currentUser.balance        = Number(currentUser.balance||0) + reward;
+        currentUser.points         = Number(currentUser.points||0) + reward;
+        currentUser.weeklyPoints   = Number(currentUser.weeklyPoints||0) + reward;
+        currentUser.adsWatched     = Number(currentUser.adsWatched||0) + 1;
+        currentUser.weeklyAdsWatched = Number(currentUser.weeklyAdsWatched||0) + 1;
+
+        // Save + UI
+        updateCurrentUser();
+        updateBalanceDisplay();
+        renderGameHistory();
+        showNotification("Reward Added", "₱" + reward.toFixed(3) + " added to your balance.");
+    }catch(e){
+        console.error("Reward processing error:", e);
+        showNotification("Reward Error", "Balance not updated. Please try again.");
+    }
+
+    // Advance to next round
+  try{
+      setTimeout(function(){
+          if(typeof advanceToNextRound === "function"){
+              advanceToNextRound();
+          }
+      }, 800);
+  }catch(e){ console.error("advanceToNextRound error:", e); }
+  }
 function recordGameResult(userAnswer,correct,reward,result){
     if(!currentGame)return;
     if(!currentUser.gameHistory)currentUser.gameHistory=[];
@@ -2810,8 +2895,7 @@ function logout(){
     document.getElementById("authPage").style.display="flex";
     showLogin();
 }
-
-/* ====== ADMIN ====== */
+/* ====== ADMIN CORE ====== */
 function showAdminPanel(){
     isAdmin=true;
     document.getElementById("authPage").style.display="none";
@@ -2837,6 +2921,7 @@ function showAdminView(view,btn){
     if(view==="users"){renderAdminUsers();renderAdminViolations();renderAdminVerifications();}
     if(view==="transact"){renderAdminCashouts();renderAdminPayouts();renderAdminTickets();renderAdminSuggestions();}
     if(view==="settings"){renderAdminSiteControl();renderAdminSystemSettings();renderAdminPages();renderAdminAlerts();renderAdminUpdates();renderAdminCustomGames();}
+    updateAllAdminBadges();
 }
 function showAdminSubTab(parentId,targetId,btn){
     const p=document.getElementById(parentId);if(!p)return;
@@ -2867,407 +2952,58 @@ function renderAdminPanel(){
     renderAdminViolations();renderAdminUpdates();renderAdminAlerts();renderAdminSiteControl();
     renderAdminLeaderboard();renderAdminVerifications();renderAdminAnalytics();renderAdminWeekly();
     renderAdminSystemSettings();renderAdminCustomGames();renderAdminPages();
-    updateAdminTicketBadge();updateVerificationBadges();
-}
-function updateVerificationBadges(){
-    const users=getUsers();let pendingCount=0;
-    users.forEach(u=>{if(u.socialSubmissions){Object.keys(u.socialSubmissions).forEach(k=>{const s=u.socialSubmissions[k];if(s&&s.status==="pending")pendingCount++;});}});
-    const tabBadge=document.getElementById("adminVerifyBadge");
-    if(tabBadge){if(pendingCount>0){tabBadge.textContent=pendingCount>99?"99+":String(pendingCount);tabBadge.style.display="inline-block";}else tabBadge.style.display="none";}
-    const navBadge=document.getElementById("adminVerifyNavBadge");
-    if(navBadge){if(pendingCount>0){navBadge.textContent=pendingCount>99?"99+":String(pendingCount);navBadge.style.display="flex";}else navBadge.style.display="none";}
+    updateAllAdminBadges();
 }
 
-/* ====== ADMIN PAGES MANAGEMENT ====== */
-function renderAdminPages(){
-    renderAdminSocialPages();
-    renderAdminCommunityLinks();
-}
-
-function renderAdminSocialPages(){
-    const list=document.getElementById("adminSocialPagesList");if(!list)return;
-    const pages=getSocialPages();
-    let html=`<div class="admin-update-form">
-        <h3 style="color:#ff6b9d;font-size:14px;margin-bottom:8px;">🔗 Cashout Follow Requirements</h3>
-        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">Users must follow ALL of these pages and submit proof to unlock cashout. If empty, users can cashout without following anything.</p>`;
-    if(pages.length===0){
-        html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No pages — users don't need to follow anything to cashout.</div>`;
-    } else {
-        pages.forEach(p=>{
-            if(editingSocialPageId===p.id){
-                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
-                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
-                    <input type="text" id="editSPIcon_${p.id}" value="${escapeHtml(p.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
-                    <input type="text" id="editSPName_${p.id}" value="${escapeHtml(p.name)}" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
-                    <input type="url" id="editSPUrl_${p.id}" value="${escapeHtml(p.url)}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                    <div class="admin-cashout-actions">
-                        <button class="admin-approve-btn" onclick="saveSocialPageEdit('${p.id}')">💾 Save</button>
-                        <button class="admin-reject-btn" onclick="cancelSocialPageEdit()">✕ Cancel</button>
-                    </div>
-                </div>`;
-            } else {
-                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
-                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(p.icon)} ${escapeHtml(p.name)}</strong><span class="admin-user-id">${escapeHtml(p.id)}</span></div>
-                    <div class="admin-user-row"><span>URL</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(p.url)}</strong></div>
-                    <div class="admin-cashout-actions">
-                        <button class="admin-view-btn" onclick="startEditSocialPage('${p.id}')">✏️ Edit</button>
-                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteSocialPage('${p.id}')">🗑 Delete</button>
-                    </div>
-                </div>`;
-            }
-        });
-    }
-    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Page</h4>
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon (emoji)</label>
-        <input type="text" id="newSPIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
-        <input type="text" id="newSPName" placeholder="e.g. YouTube Channel" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
-        <input type="url" id="newSPUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        <button class="admin-publish-btn blue" onclick="addSocialPage()">➕ Add Page</button>
-        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreSocialPagesDefaults()">🔄 Restore Default Pages</button>
-    </div>`;
-    list.innerHTML=html;
-}
-function addSocialPage(){
-    const name=document.getElementById("newSPName").value.trim();
-    const url=document.getElementById("newSPUrl").value.trim();
-    const icon=document.getElementById("newSPIcon").value.trim()||"🔗";
-    if(!name){customAlert("Name required.","warning");return;}
-    if(!url){customAlert("URL required.","warning");return;}
-    const pages=getSocialPages();
-    pages.push({id:"social_"+Date.now()+"_"+Math.floor(Math.random()*900+100),name,icon,url});
-    saveSocialPages(pages);
-    showNotification("Added","Page added.");renderAdminSocialPages();
-}
-function startEditSocialPage(id){editingSocialPageId=id;renderAdminSocialPages();}
-function cancelSocialPageEdit(){editingSocialPageId=null;renderAdminSocialPages();}
-function saveSocialPageEdit(id){
-    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
-    const icon=document.getElementById("editSPIcon_"+id).value.trim()||"🔗";
-    const name=document.getElementById("editSPName_"+id).value.trim();
-    const url=document.getElementById("editSPUrl_"+id).value.trim();
-    if(!name){customAlert("Name required.","warning");return;}
-    if(!url){customAlert("URL required.","warning");return;}
-    p.icon=icon;p.name=name;p.url=url;
-    saveSocialPages(pages);editingSocialPageId=null;
-    showNotification("Updated","Page updated.");renderAdminSocialPages();
-}
-async function deleteSocialPage(id){
-    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
-    const ok=await customAlert("Delete '"+p.name+"'?\n\nUsers won't need to follow this page anymore.","warning","Confirm Delete","Yes, Delete");
-    if(!ok)return;
-    saveSocialPages(pages.filter(x=>x.id!==id));
-    showNotification("Deleted","Page removed.");renderAdminSocialPages();
-}
-async function restoreSocialPagesDefaults(){
-    const ok=await customAlert("Restore Cashout Follow Requirements to default pages?\n\nThis will reset to Facebook + Telegram.","warning","Restore Defaults","Yes, Restore");
-    if(!ok)return;
-    localStorage.removeItem("hfSocialPages");
-    localStorage.removeItem("hfSocialPagesCustomized");
-    showNotification("Restored","Default pages restored.");renderAdminSocialPages();
-}
-
-function renderAdminCommunityLinks(){
-    const list=document.getElementById("adminCommunityLinksList");if(!list)return;
-    const links=getCommunityLinks();
-    let html=`<div class="admin-update-form">
-        <h3 style="color:#ffd166;font-size:14px;margin-bottom:8px;">👥 CS Community Links</h3>
-        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">These links appear under "Group Community" in the user's CS section.</p>`;
-    if(links.length===0){
-        html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No community links — CS section will be empty.</div>`;
-    } else {
-        links.forEach(l=>{
-            const typeLabel=l.type==="external"?"🌐 External":"📄 System";
-            if(editingCommunityLinkId===l.id){
-                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
-                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
-                    <input type="text" id="editCLIcon_${l.id}" value="${escapeHtml(l.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
-                    <input type="text" id="editCLLabel_${l.id}" value="${escapeHtml(l.label)}" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                    ${l.type==="external"?
-                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
-                        <input type="url" id="editCLUrl_${l.id}" value="${escapeHtml(l.url||"")}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">`:
-                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
-                        <select id="editCLValue_${l.id}" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                        ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}" ${l.value===o.value?"selected":""}>${o.label}</option>`).join("")}
-                        </select>`}
-                    <div class="admin-cashout-actions">
-                        <button class="admin-approve-btn" onclick="saveCommunityLinkEdit('${l.id}')">💾 Save</button>
-                        <button class="admin-reject-btn" onclick="cancelCommunityLinkEdit()">✕ Cancel</button>
-                    </div>
-                </div>`;
-            } else {
-                const valDisplay=l.type==="external"?(l.url||""):(l.value||"");
-                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
-                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(l.icon)} ${escapeHtml(l.label)}</strong><span class="admin-user-id">${typeLabel}</span></div>
-                    <div class="admin-user-row"><span>${l.type==="external"?"URL":"Page"}</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(valDisplay)}</strong></div>
-                    <div class="admin-cashout-actions">
-                        <button class="admin-view-btn" onclick="startEditCommunityLink('${l.id}')">✏️ Edit</button>
-                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteCommunityLink('${l.id}')">🗑 Delete</button>
-                    </div>
-                </div>`;
-            }
-        });
-    }
-    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Community Link</h4>
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Type</label>
-        <select id="newCLType" onchange="toggleCommunityLinkTypeFields()" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-            <option value="external">🌐 External Link (opens URL)</option>
-            <option value="system">📄 System Page (opens focus page)</option>
-        </select>
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon (emoji)</label>
-        <input type="text" id="newCLIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
-        <input type="text" id="newCLLabel" placeholder="e.g. YouTube Channel" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        <div id="newCLUrlGroup">
-            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
-            <input type="url" id="newCLUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-        </div>
-        <div id="newCLValueGroup" style="display:none;">
-            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
-            <select id="newCLValue" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
-                ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}">${o.label}</option>`).join("")}
-            </select>
-        </div>
-        <button class="admin-publish-btn purple" onclick="addCommunityLink()">➕ Add Community Link</button>
-        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreCommunityLinksDefaults()">🔄 Restore Default Links</button>
-    </div>`;
-    list.innerHTML=html;
-}
-function toggleCommunityLinkTypeFields(){
-    const type=document.getElementById("newCLType").value;
-    document.getElementById("newCLUrlGroup").style.display=type==="external"?"block":"none";
-    document.getElementById("newCLValueGroup").style.display=type==="system"?"block":"none";
-}
-function addCommunityLink(){
-    const type=document.getElementById("newCLType").value;
-    const icon=document.getElementById("newCLIcon").value.trim()||"🔗";
-    const label=document.getElementById("newCLLabel").value.trim();
-    if(!label){customAlert("Label required.","warning");return;}
-    const newLink={id:"cl_"+Date.now()+"_"+Math.floor(Math.random()*900+100),type,icon,label};
-    if(type==="external"){
-        const url=document.getElementById("newCLUrl").value.trim();
-        if(!url){customAlert("URL required.","warning");return;}
-        newLink.url=url;
-    }else{
-        newLink.value=document.getElementById("newCLValue").value;
-    }
-    const links=getCommunityLinks();
-    links.push(newLink);saveCommunityLinks(links);
-    showNotification("Added","Community link added.");renderAdminCommunityLinks();
-}
-function startEditCommunityLink(id){editingCommunityLinkId=id;renderAdminCommunityLinks();}
-function cancelCommunityLinkEdit(){editingCommunityLinkId=null;renderAdminCommunityLinks();}
-function saveCommunityLinkEdit(id){
-    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
-    l.icon=document.getElementById("editCLIcon_"+id).value.trim()||"🔗";
-    l.label=document.getElementById("editCLLabel_"+id).value.trim();
-    if(!l.label){customAlert("Label required.","warning");return;}
-    if(l.type==="external"){
-        const url=document.getElementById("editCLUrl_"+id).value.trim();
-        if(!url){customAlert("URL required.","warning");return;}
-        l.url=url;
-    }else{
-        l.value=document.getElementById("editCLValue_"+id).value;
-    }
-    saveCommunityLinks(links);editingCommunityLinkId=null;
-    showNotification("Updated","Community link updated.");renderAdminCommunityLinks();
-}
-async function deleteCommunityLink(id){
-    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
-    const ok=await customAlert("Delete '"+l.label+"' from CS section?","warning","Confirm Delete","Yes, Delete");
-    if(!ok)return;
-    saveCommunityLinks(links.filter(x=>x.id!==id));
-    showNotification("Deleted","Community link removed.");renderAdminCommunityLinks();
-}
-async function restoreCommunityLinksDefaults(){
-    const ok=await customAlert("Restore CS Community Links to default?\n\nThis will reset to Facebook Group, Telegram, Complan, Updates, My Suggestions.","warning","Restore Defaults","Yes, Restore");
-    if(!ok)return;
-    localStorage.removeItem("hfCommunityLinks");
-    localStorage.removeItem("hfCommunityLinksCustomized");
-    showNotification("Restored","Default links restored.");renderAdminCommunityLinks();
-}
-
-/* ====== ANALYTICS ====== */
-function renderAdminAnalytics(){
-    const list=document.getElementById("adminAnalyticsList");if(!list)return;
+/* ====== ⭐ RED DOT BADGES (FIX) ⭐ ====== */
+function updateAllAdminBadges(){
     const users=getUsers();
-    let totalBalance=0,totalReceived=0,totalTransferred=0,totalPoints=0,totalAdsWatched=0;
-    let totalApprovedCount=0,totalPendingCount=0,totalInvites=0;
-    let totalActive=0,totalOnHold=0,totalBanned=0;
-    const perUserAds=[],perUserInvites=[],perUserCashouts=[];
-    users.forEach(u=>{
-        totalBalance+=Number(u.balance||0);
-        let userReceived=0,userApprovedCount=0;
-        (u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){totalReceived+=Number(c.totalReceived||0);userReceived+=Number(c.totalReceived||0);totalApprovedCount++;userApprovedCount++;}if(c.status==="Pending")totalPendingCount++;});
-        totalTransferred+=Number(u.totalTransferred||0);totalPoints+=Number(u.points||0);
-        const userAds=Number(u.adsWatched||0);totalAdsWatched+=userAds;
-        const userInvites=Number(u.totalInvites||0);totalInvites+=userInvites;
-        const status=u.accountStatus||"active";
-        if(status==="active")totalActive++;else if(status==="onhold")totalOnHold++;else if(status==="banned")totalBanned++;
-        perUserAds.push({username:u.username,userId:u.userId,ads:userAds});
-        perUserInvites.push({username:u.username,userId:u.userId,invites:userInvites,income:Number(u.inviteIncome||0)});
-        if(userApprovedCount>0)perUserCashouts.push({username:u.username,userId:u.userId,received:userReceived,count:userApprovedCount});
-    });
-    perUserAds.sort((a,b)=>b.ads-a.ads);perUserInvites.sort((a,b)=>b.invites-a.invites);perUserCashouts.sort((a,b)=>b.received-a.received);
-    let adsLeaderboardHTML="";
-    const topAds=perUserAds.filter(u=>u.ads>0).slice(0,10);
-    if(topAds.length===0)adsLeaderboardHTML='<div class="admin-empty">No ads watched yet.</div>';
-    else topAds.forEach((u,idx)=>{const pct=totalAdsWatched>0?((u.ads/totalAdsWatched)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";adsLeaderboardHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.ads} ads • ${pct.toFixed(2)}%</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">${u.ads}</div></div>`;});
-    let invitersHTML="";
-    const topInviters=perUserInvites.filter(u=>u.invites>0).slice(0,10);
-    if(topInviters.length===0)invitersHTML='<div class="admin-empty">No invites yet.</div>';
-    else topInviters.forEach((u,idx)=>{const pct=totalInvites>0?((u.invites/totalInvites)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";invitersHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.invites} invites • ₱${u.income.toFixed(3)}</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">${u.invites} 📨</div></div>`;});
-    let cashoutsHTML="";
-    const topCashouts=perUserCashouts.slice(0,10);
-    if(topCashouts.length===0)cashoutsHTML='<div class="admin-empty">No approved cashouts yet.</div>';
-    else topCashouts.forEach((u,idx)=>{const pct=totalReceived>0?((u.received/totalReceived)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";cashoutsHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.count}x • ₱${u.received.toFixed(3)}</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">₱${u.received.toFixed(2)}</div></div>`;});
-    list.innerHTML=renderWeeklyAdsStatsCard()+`
-        <div class="admin-stats-grid" style="margin-bottom:20px;">
-            <div class="admin-stat-card"><span>Total Balance</span><strong style="color:#7dff9a;">₱${totalBalance.toFixed(3)}</strong></div>
-            <div class="admin-stat-card"><span>Total Paid Out</span><strong style="color:#00e5ff;">₱${totalReceived.toFixed(3)}</strong></div>
-            <div class="admin-stat-card"><span>Approved Cashouts</span><strong style="color:#f5b942;">${totalApprovedCount} x</strong></div>
-            <div class="admin-stat-card"><span>Pending Cashouts</span><strong style="color:#ffd166;">${totalPendingCount} x</strong></div>
-            <div class="admin-stat-card"><span>Total Ads Watched</span><strong style="color:#ff6b9d;">${totalAdsWatched}</strong></div>
-            <div class="admin-stat-card"><span>Total Invites</span><strong style="color:#a78bfa;">${totalInvites}</strong></div>
-        </div>
-        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">📺 Top Ad Watchers</strong></div>${adsLeaderboardHTML}</div>
-        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">🎁 Top Inviters</strong></div>${invitersHTML}</div>
-        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">💰 Top Cashout Users</strong></div>${cashoutsHTML}</div>
-        <div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">👥 User Status Breakdown</strong></div><div class="admin-user-row"><span>🟢 Active Users</span><strong>${totalActive} accounts</strong></div><div class="admin-user-row"><span>⏸️ On Hold</span><strong>${totalOnHold} accounts</strong></div><div class="admin-user-row"><span>🚫 Banned</span><strong>${totalBanned} accounts</strong></div><div class="admin-user-row"><span>💸 Total Transferred</span><strong>₱${totalTransferred.toFixed(3)}</strong></div><div class="admin-user-row"><span>⭐ Total Points</span><strong>${totalPoints.toFixed(3)} pts</strong></div></div>`;
-}
-function renderAdminWeekly(){
-    const list=document.getElementById("adminWeeklyList");if(!list)return;
-    const users=getUsers();const weekKey=getWeekKey();
-    let totalWeeklyPoints=0,totalWeeklyAds=0,totalWeeklyApprovedCashouts=0,totalWeeklyCashoutAmount=0,totalWeeklyTransfers=0,totalWeeklyInvites=0;
-    const weekStart=new Date();const day=weekStart.getDay()||7;weekStart.setDate(weekStart.getDate()-day+1);weekStart.setHours(0,0,0,0);
-    users.forEach(u=>{
-        totalWeeklyPoints+=Number(u.weeklyPoints||0);totalWeeklyAds+=Number(u.weeklyAdsWatched||0);totalWeeklyInvites+=Number(u.totalInvites||0);
-        (u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){const d=new Date(c.dateTime);if(d>=weekStart){totalWeeklyApprovedCashouts++;totalWeeklyCashoutAmount+=Number(c.totalReceived||0);}}});
-        (u.transferHistory||[]).forEach(t=>{const d=new Date(t.dateTime);if(d>=weekStart)totalWeeklyTransfers+=Number(t.amount||0);});
-    });
-    list.innerHTML=renderWeeklyAdsStatsCard()+`
-        <div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">📅 This Week</strong><span class="admin-user-id">${escapeHtml(weekKey)}</span></div></div>
-        <div class="admin-stats-grid" style="margin:16px 0;">
-            <div class="admin-stat-card"><span>Weekly Points</span><strong style="color:#ff6b9d;">${totalWeeklyPoints.toFixed(3)}</strong></div>
-            <div class="admin-stat-card"><span>Weekly Ads</span><strong style="color:#ffd166;">${totalWeeklyAds}</strong></div>
-            <div class="admin-stat-card"><span>Weekly Cashouts</span><strong style="color:#00e5ff;">${totalWeeklyApprovedCashouts} x</strong></div>
-            <div class="admin-stat-card"><span>Weekly Cashout Amount</span><strong style="color:#7dff9a;">₱${totalWeeklyCashoutAmount.toFixed(3)}</strong></div>
-            <div class="admin-stat-card"><span>Weekly Transfers</span><strong style="color:#5dade2;">₱${totalWeeklyTransfers.toFixed(3)}</strong></div>
-            <div class="admin-stat-card"><span>Total Invites</span><strong style="color:#a78bfa;">${totalWeeklyInvites}</strong></div>
-        </div>`;
-}
-function renderAdminLeaderboard(){
-    const list=document.getElementById("adminLeaderboardList");if(!list)return;
-    let html=`<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">🏆 Leaderboard Rewards</strong></div><div class="admin-user-row"><span>Rank 1</span><strong>₱0.010</strong></div><div class="admin-user-row"><span>Rank 2</span><strong>₱0.008</strong></div><div class="admin-user-row"><span>Rank 3</span><strong>₱0.006</strong></div><div class="admin-user-row"><span>Rank 4-8</span><strong>₱0.005</strong></div><div class="admin-user-row"><span>Rank 9-14</span><strong>₱0.004</strong></div><div class="admin-user-row"><span>Rank 15-20</span><strong>₱0.003</strong></div></div>`;
-    const allUsers=getUsers();const totalAdsAll=allUsers.reduce((sum,u)=>sum+Number(u.weeklyAdsWatched||0),0);
-    const ranked=allUsers.filter(u=>Number(u.weeklyPoints||0)>0).sort((a,b)=>Number(b.weeklyPoints||0)-Number(a.weeklyPoints||0)).slice(0,30);
-    if(!ranked.length){html+='<div class="admin-empty">📊 No members with points yet.</div>';list.innerHTML=html;return;}
-    ranked.forEach((user,index)=>{
-        const rank=index+1;const reward=getRankReward(rank);const adsWatched=Number(user.weeklyAdsWatched||0);const adsPercent=totalAdsAll>0?((adsWatched/totalAdsAll)*100):0;
-        html+=`<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">#${rank} @${escapeHtml(user.username)}</strong><span class="admin-user-id">${Number(user.weeklyPoints||0).toFixed(3)} pts</span></div><div class="admin-user-row"><span>Name</span><strong>${escapeHtml(user.name)}</strong></div><div class="admin-user-row"><span>User ID</span><strong>${escapeHtml(user.userId)}</strong></div><div class="admin-user-row"><span>Ads Watched</span><strong>${adsWatched}</strong></div><div class="admin-user-row"><span>Contribution</span><strong>${adsPercent.toFixed(2)}%</strong></div><div class="admin-user-row"><span>Potential Reward</span><strong style="color:#f5b942;">₱${reward.toFixed(3)}</strong></div></div>`;
-    });
-    list.innerHTML=html;
-}
-function renderAdminPayouts(){
-    const list=document.getElementById("adminPayoutsList");if(!list)return;
-    const users=getUsers();const perUser=[];
-    let grandTotal=0,grandRequests=0,totalRequested=0;
-    users.forEach(u=>{let userTotal=0,userCount=0,lastDate="—";(u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){userTotal+=Number(c.totalReceived||0);totalRequested+=Number(c.amount||0);userCount++;if(!lastDate||lastDate==="—"||(c.dateTime&&c.dateTime>lastDate))lastDate=c.dateTime||lastDate;}});if(userTotal>0||userCount>0){perUser.push({username:u.username,userId:u.userId,name:u.name,total:userTotal,count:userCount,lastDate});grandTotal+=userTotal;grandRequests+=userCount;}});
-    perUser.sort((a,b)=>b.total-a.total);
-    let html='<div class="admin-ticket-item" style="background:linear-gradient(135deg,rgba(125,255,154,.12),rgba(46,204,113,.05));border-color:rgba(125,255,154,.4);"><div class="admin-user-header"><strong class="ticket-title">💵 Total Amount Paid Out</strong><span class="admin-user-id">'+grandRequests+' approved</span></div><div style="text-align:center;padding:14px 0;"><div style="color:#7dff9a;font-size:34px;font-weight:800;">₱'+grandTotal.toFixed(3)+'</div><div style="color:#8a8aa0;font-size:11px;margin-top:4px;">Across '+perUser.length+' user(s)</div></div></div>';
-    if(!perUser.length){html+='<div class="admin-empty">💸 No approved cashouts yet.</div>';list.innerHTML=html;return;}
-    html+='<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">📋 Breakdown Per User</strong></div>';
-    perUser.forEach((u,idx)=>{const pct=grandTotal>0?((u.total/grandTotal)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";html+='<div class="leaderboard-item"><div class="leaderboard-rank '+rankCls+'">'+(idx+1)+'</div><div class="leaderboard-info"><strong>@'+escapeHtml(u.username)+'</strong><span>'+u.count+' request(s) • '+pct.toFixed(2)+'%</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:'+pct+'%;"></div></div></div><div class="leaderboard-value">₱'+u.total.toFixed(3)+'</div></div>';});
-    html+='</div>';
-    list.innerHTML=html;
-}
-function renderAdminTickets(){
-    const savedInputs={};
-    document.querySelectorAll('[id^="adminTicketInput_"]').forEach(input=>{savedInputs[input.id]={value:input.value,focused:document.activeElement===input};});
-    const list=document.getElementById("adminTicketsList");const savedScrollTop=list?list.scrollTop:0;
-    const allTickets=getAllTickets();
-    const resolvedCount=allTickets.filter(t=>t.status==="Resolved").length;
-    const activeCount=allTickets.length-resolvedCount;
-    const statsEl=document.getElementById("adminTicketStats");const resolvedStatsEl=document.getElementById("adminTicketResolvedStats");const activeStatsEl=document.getElementById("adminTicketActiveStats");
-    if(statsEl)statsEl.textContent=allTickets.length;if(resolvedStatsEl)resolvedStatsEl.textContent=resolvedCount;if(activeStatsEl)activeStatsEl.textContent=activeCount;
-    updateAdminTicketBadge();
-    if(!allTickets.length){list.innerHTML='<div class="admin-empty">🎫 No tickets in storage.</div>';return;}
-    list.innerHTML="";
-    allTickets.sort((a,b)=>{const aTime=parseInt((a.reference||"").split("-")[1])||0;const bTime=parseInt((b.reference||"").split("-")[1])||0;return bTime-aTime;});
-    allTickets.forEach(ticket=>{
-        const isResolved=ticket.status==="Resolved";const isAwaiting=ticket.status==="AwaitingConfirmation";
-        let statusClass=isResolved?"resolved":(isAwaiting?"awaiting":"open");
-        let statusText=isResolved?"✅ Resolved":(isAwaiting?"Awaiting User":"Open");
-        let guestInfo="";
-        if(ticket.userId==="GUEST"){guestInfo=`<div class="admin-user-row"><span>Name</span><strong>${escapeHtml(ticket.name||"—")}</strong></div><div class="admin-user-row"><span>Email</span><strong>${escapeHtml(ticket.email||"—")}</strong></div>`;}
-        let chatHTML="";
-        (ticket.messages||[]).forEach(m=>{const fromClass=m.from==="admin"?"from-admin":"from-user";const fromLabel=m.from==="admin"?"Admin":"@"+ticket.username;chatHTML+=`<div class="admin-chat-msg ${fromClass}"><strong>${escapeHtml(fromLabel)}:</strong> ${escapeHtml(m.text)}<span class="msg-meta">${escapeHtml(m.time)}</span></div>`;});
-        let actionHTML="";
-        if(!isResolved){actionHTML=`<div class="admin-ticket-chat" id="adminChat_${ticket.reference}">${chatHTML||'<div class="admin-chat-msg from-user">No messages yet.</div>'}</div><div class="admin-ticket-input-row"><input type="text" id="adminTicketInput_${ticket.reference}" placeholder="Type your reply..." onkeydown="if(event.key==='Enter'){event.preventDefault();adminSendTicketMessage('${ticket.reference}');}"><button onclick="adminSendTicketMessage('${ticket.reference}')">Send</button></div><button class="admin-ask-resolved-btn" onclick="adminAskResolved('${ticket.reference}')">❓ Ask if Resolved</button><button class="admin-delete-btn" onclick="adminDeleteTicket('${ticket.reference}')">🗑 Delete Ticket</button>`;}
-        else{let starsHTML="";if(ticket.rating>0){for(let i=1;i<=5;i++){starsHTML+=i<=ticket.rating?"★":"☆";}}actionHTML=`<div class="admin-ticket-chat" id="adminChat_${ticket.reference}">${chatHTML||'<div class="admin-chat-msg from-user">No messages.</div>'}</div>${ticket.rating>0?'<div class="admin-user-row"><span>⭐ Rating</span><strong style="color:#f5b942;">'+starsHTML+'</strong></div>':''}${ticket.notes?'<div class="admin-user-row"><span>📝 Notes</span><strong>"'+escapeHtml(ticket.notes)+'"</strong></div>':''}<div class="admin-user-row"><span>Resolved At</span><strong>${escapeHtml(ticket.resolvedAt||"—")}</strong></div><button class="admin-delete-btn" onclick="adminDeleteTicket('${ticket.reference}')">🗑 Delete Resolved</button>`;}
-        const div=document.createElement("div");div.className="admin-ticket-item "+statusClass;
-        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">🎫 @${escapeHtml(ticket.username)}</strong><span class="status ${statusClass}">${statusText}</span></div><div class="admin-user-row"><span>Reference</span><strong>${escapeHtml(ticket.reference)}</strong></div>${guestInfo}<div class="admin-user-row"><span>User ID</span><strong>${escapeHtml(ticket.userId)}</strong></div><div class="admin-user-row"><span>Created</span><strong>${escapeHtml(ticket.createdAt)}</strong></div>${actionHTML}`;
-        list.appendChild(div);
-    });
-    Object.keys(savedInputs).forEach(id=>{const input=document.getElementById(id);if(input){input.value=savedInputs[id].value;if(savedInputs[id].focused)input.focus();}});
-    if(list)list.scrollTop=savedScrollTop;
-}
-function updateAdminTicketBadge(){
-    const badge=document.getElementById("adminTicketBadge");if(!badge)return;
-    const allTickets=getAllTickets();
-    const activeCount=allTickets.filter(t=>t.status==="Open"||t.status==="AwaitingConfirmation").length;
-    if(activeCount>0){badge.textContent=activeCount>99?"99+":String(activeCount);badge.style.display="flex";}
-    else badge.style.display="none";
-}
-function adminSendTicketMessage(reference){
-    if(!currentAdminTicketRef||currentAdminTicketRef!==reference)currentAdminTicketRef=reference;
-    const input=document.getElementById("adminTicketInput_"+reference);const text=input?input.value.trim():"";if(!text)return;
-    const allTickets=getAllTickets();const ticket=allTickets.find(t=>t.reference===reference);if(!ticket)return;
-    ticket.messages.push({from:"admin",text,time:new Date().toLocaleString()});saveAllTickets(allTickets);if(input)input.value="";
-    renderAdminTickets();setTimeout(()=>{const ni=document.getElementById("adminTicketInput_"+reference);if(ni)ni.focus();},50);
-}
-function adminAskResolved(reference){
-    const allTickets=getAllTickets();const ticket=allTickets.find(t=>t.reference===reference);if(!ticket)return;
-    ticket.adminAskingResolved=true;ticket.status="AwaitingConfirmation";
-    ticket.messages.push({from:"admin",text:"❓ Is your issue resolved? Please tap Yes or No in your ticket inbox.",time:new Date().toLocaleString()});saveAllTickets(allTickets);showNotification("Sent","User asked if resolved.");renderAdminTickets();
-}
-function adminDeleteTicket(reference){
-    customAlert("Delete this ticket?","warning","Confirm Delete","Yes, Delete").then(confirmed=>{if(!confirmed)return;let allTickets=getAllTickets();allTickets=allTickets.filter(t=>t.reference!==reference);saveAllTickets(allTickets);showNotification("Deleted","Ticket removed.");renderAdminTickets();renderAdminPanel();});
-}
-async function adminClearAllTickets(){
-    const allTickets=getAllTickets();if(allTickets.length===0){await customAlert("No tickets.","warning");return;}
-    const confirmed=await customAlert("⚠️ CLEAR ALL TICKETS?","error","Confirm Clear","Yes, Clear All");
-    if(!confirmed)return;saveAllTickets([]);showNotification("Cleared","All tickets removed.");renderAdminTickets();renderAdminPanel();
-}
+    let pendingCashouts=0;
+    users.forEach(function(u){(u.cashoutHistory||[]).forEach(function(c){if(c.status==="Pending")pendingCashouts++;});});
 
-/* ====== ADMIN SUGGESTIONS ====== */
-function renderAdminSuggestions(){
-    const list=document.getElementById("adminSuggestionsList");if(!list)return;
-    const suggestions=getSuggestions();
-    if(!suggestions.length){list.innerHTML='<div class="admin-empty">💡 No suggestions yet.</div>';return;}
-    list.innerHTML="";
-    suggestions.forEach(s=>{
-        let statusClass="awaiting";let statusText="⏳ Pending";
-        if(s.status==="Approved"){statusClass="resolved";statusText="✅ Approved";}
-        if(s.status==="Rejected"){statusClass="open";statusText="❌ Rejected";}
-        let chatHTML="";
-        (s.messages||[]).forEach(m=>{const fromClass=m.from==="admin"?"from-admin":"from-user";const fromLabel=m.from==="admin"?"Admin":"@"+s.username;chatHTML+=`<div class="admin-chat-msg ${fromClass}"><strong>${escapeHtml(fromLabel)}:</strong> ${escapeHtml(m.text)}<span class="msg-meta">${escapeHtml(m.time)}</span></div>`;});
-        let actionHTML="";
-        if(s.status==="Pending"){actionHTML=`<div class="admin-cashout-actions"><button class="admin-approve-btn" onclick="adminApproveSuggestion('${s.id}')">✓ Approve</button><button class="admin-reject-btn" onclick="adminRejectSuggestion('${s.id}')">✕ Reject</button></div>`;}
-        actionHTML+=`<div class="admin-ticket-input-row"><input type="text" id="adminSugInput_${s.id}" placeholder="Type optional message/reply..."><button onclick="adminReplySuggestion('${s.id}')">Send</button></div><button class="admin-delete-btn" onclick="adminDeleteSuggestion('${s.id}')">🗑 Delete Suggestion</button>`;
-        const div=document.createElement("div");div.className="admin-ticket-item "+statusClass;
-        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">💡 Suggestion from @${escapeHtml(s.username)}</strong><span class="status ${statusClass}">${statusText}</span></div><div class="admin-user-row"><span>Ref ID</span><strong>${escapeHtml(s.id)}</strong></div><div class="admin-user-row"><span>Date</span><strong>${escapeHtml(s.createdAt)}</strong></div><div style="margin:10px 0;text-align:center;"><img src="${s.imageData}" style="max-width:100%;max-height:200px;border-radius:8px;"></div><div class="admin-ticket-chat" style="max-height:150px;">${chatHTML||'<div class="admin-chat-msg from-user">No messages.</div>'}</div>${actionHTML}`;
-        list.appendChild(div);
+    const openTickets=getAllTickets().filter(function(t){return t.status==="Open"||t.status==="AwaitingConfirmation";}).length;
+    const pendingSuggestions=getSuggestions().filter(function(s){return s.status==="Pending";}).length;
+    const violationsCount=getAllUsersWithViolations().length;
+
+    let pendingVerifications=0;
+    users.forEach(function(u){
+        if(u.socialSubmissions){
+            Object.keys(u.socialSubmissions).forEach(function(k){
+                const s=u.socialSubmissions[k];
+                if(s&&s.status==="pending")pendingVerifications++;
+            });
+        }
     });
+
+    const setBadge=function(id,count){
+        const el=document.getElementById(id);
+        if(!el)return;
+        if(count>0){el.textContent=count>99?"99+":String(count);el.style.display="inline-flex";}
+        else{el.style.display="none";}
+    };
+
+    setBadge("badgeAdminCashouts",pendingCashouts);
+    setBadge("badgeAdminTickets",openTickets);
+    setBadge("badgeAdminSuggestions",pendingSuggestions);
+    setBadge("badgeAdminViolations",violationsCount);
+    setBadge("adminVerifyBadge",pendingVerifications);
+
+    const transactTotal=pendingCashouts+openTickets+pendingSuggestions;
+    const transactBadge=document.getElementById("adminTicketBadge");
+    if(transactBadge){
+        if(transactTotal>0){transactBadge.textContent=transactTotal>99?"99+":String(transactTotal);transactBadge.style.display="flex";}
+        else transactBadge.style.display="none";
+    }
+
+    const usersTotal=pendingVerifications+violationsCount;
+    const usersBadge=document.getElementById("adminVerifyNavBadge");
+    if(usersBadge){
+        if(usersTotal>0){usersBadge.textContent=usersTotal>99?"99+":String(usersTotal);usersBadge.style.display="flex";}
+        else usersBadge.style.display="none";
+    }
 }
-async function adminApproveSuggestion(id){const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.status="Approved";s.messages.push({from:"admin",text:"✅ Suggestion Approved! Thank you for your feedback.",time:new Date().toLocaleString()});saveSuggestions(all);showNotification("Approved","Suggestion approved.");renderAdminSuggestions();}
-async function adminRejectSuggestion(id){const reason=prompt("Optional rejection reason:","");if(reason===null)return;const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.status="Rejected";let msg="❌ Suggestion Rejected.";if(reason.trim())msg+="\nReason: "+reason.trim();s.messages.push({from:"admin",text:msg,time:new Date().toLocaleString()});saveSuggestions(all);showNotification("Rejected","Suggestion rejected.");renderAdminSuggestions();}
-function adminReplySuggestion(id){const input=document.getElementById("adminSugInput_"+id);const text=input?input.value.trim():"";if(!text)return;const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.messages.push({from:"admin",text,time:new Date().toLocaleString()});saveSuggestions(all);if(input)input.value="";renderAdminSuggestions();}
-async function adminDeleteSuggestion(id){const confirmed=await customAlert("Delete this suggestion?","warning","Confirm","Yes, Delete");if(!confirmed)return;let all=getSuggestions();all=all.filter(x=>x.id!==id);saveSuggestions(all);showNotification("Deleted","Suggestion removed.");renderAdminSuggestions();}
+function updateAdminTicketBadge(){updateAllAdminBadges();}
+function updateVerificationBadges(){updateAllAdminBadges();}
 
 /* ====== ADMIN USERS ====== */
 function renderAdminUsers(){
@@ -3362,7 +3098,85 @@ async function confirmRejectWithReason(){
     showNotification("Rejected","Amount returned.");renderAdminPanel();
 }
 
-/* ====== VIOLATIONS ====== */
+/* ====== ADMIN TICKETS ====== */
+function renderAdminTickets(){
+    const savedInputs={};
+    document.querySelectorAll('[id^="adminTicketInput_"]').forEach(input=>{savedInputs[input.id]={value:input.value,focused:document.activeElement===input};});
+    const list=document.getElementById("adminTicketsList");const savedScrollTop=list?list.scrollTop:0;
+    const allTickets=getAllTickets();
+    const resolvedCount=allTickets.filter(t=>t.status==="Resolved").length;
+    const activeCount=allTickets.length-resolvedCount;
+    const statsEl=document.getElementById("adminTicketStats");const resolvedStatsEl=document.getElementById("adminTicketResolvedStats");const activeStatsEl=document.getElementById("adminTicketActiveStats");
+    if(statsEl)statsEl.textContent=allTickets.length;if(resolvedStatsEl)resolvedStatsEl.textContent=resolvedCount;if(activeStatsEl)activeStatsEl.textContent=activeCount;
+    updateAllAdminBadges();
+    if(!allTickets.length){list.innerHTML='<div class="admin-empty">🎫 No tickets in storage.</div>';return;}
+    list.innerHTML="";
+    allTickets.sort((a,b)=>{const aTime=parseInt((a.reference||"").split("-")[1])||0;const bTime=parseInt((b.reference||"").split("-")[1])||0;return bTime-aTime;});
+    allTickets.forEach(ticket=>{
+        const isResolved=ticket.status==="Resolved";const isAwaiting=ticket.status==="AwaitingConfirmation";
+        let statusClass=isResolved?"resolved":(isAwaiting?"awaiting":"open");
+        let statusText=isResolved?"✅ Resolved":(isAwaiting?"Awaiting User":"Open");
+        let guestInfo="";
+        if(ticket.userId==="GUEST"){guestInfo=`<div class="admin-user-row"><span>Name</span><strong>${escapeHtml(ticket.name||"—")}</strong></div><div class="admin-user-row"><span>Email</span><strong>${escapeHtml(ticket.email||"—")}</strong></div>`;}
+        let chatHTML="";
+        (ticket.messages||[]).forEach(m=>{const fromClass=m.from==="admin"?"from-admin":"from-user";const fromLabel=m.from==="admin"?"Admin":"@"+ticket.username;chatHTML+=`<div class="admin-chat-msg ${fromClass}"><strong>${escapeHtml(fromLabel)}:</strong> ${escapeHtml(m.text)}<span class="msg-meta">${escapeHtml(m.time)}</span></div>`;});
+        let actionHTML="";
+        if(!isResolved){actionHTML=`<div class="admin-ticket-chat" id="adminChat_${ticket.reference}">${chatHTML||'<div class="admin-chat-msg from-user">No messages yet.</div>'}</div><div class="admin-ticket-input-row"><input type="text" id="adminTicketInput_${ticket.reference}" placeholder="Type your reply..." onkeydown="if(event.key==='Enter'){event.preventDefault();adminSendTicketMessage('${ticket.reference}');}"><button onclick="adminSendTicketMessage('${ticket.reference}')">Send</button></div><button class="admin-ask-resolved-btn" onclick="adminAskResolved('${ticket.reference}')">❓ Ask if Resolved</button><button class="admin-delete-btn" onclick="adminDeleteTicket('${ticket.reference}')">🗑 Delete Ticket</button>`;}
+        else{let starsHTML="";if(ticket.rating>0){for(let i=1;i<=5;i++){starsHTML+=i<=ticket.rating?"★":"☆";}}actionHTML=`<div class="admin-ticket-chat" id="adminChat_${ticket.reference}">${chatHTML||'<div class="admin-chat-msg from-user">No messages.</div>'}</div>${ticket.rating>0?'<div class="admin-user-row"><span>⭐ Rating</span><strong style="color:#f5b942;">'+starsHTML+'</strong></div>':''}${ticket.notes?'<div class="admin-user-row"><span>📝 Notes</span><strong>"'+escapeHtml(ticket.notes)+'"</strong></div>':''}<div class="admin-user-row"><span>Resolved At</span><strong>${escapeHtml(ticket.resolvedAt||"—")}</strong></div><button class="admin-delete-btn" onclick="adminDeleteTicket('${ticket.reference}')">🗑 Delete Resolved</button>`;}
+        const div=document.createElement("div");div.className="admin-ticket-item "+statusClass;
+        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">🎫 @${escapeHtml(ticket.username)}</strong><span class="status ${statusClass}">${statusText}</span></div><div class="admin-user-row"><span>Reference</span><strong>${escapeHtml(ticket.reference)}</strong></div>${guestInfo}<div class="admin-user-row"><span>User ID</span><strong>${escapeHtml(ticket.userId)}</strong></div><div class="admin-user-row"><span>Created</span><strong>${escapeHtml(ticket.createdAt)}</strong></div>${actionHTML}`;
+        list.appendChild(div);
+    });
+    Object.keys(savedInputs).forEach(id=>{const input=document.getElementById(id);if(input){input.value=savedInputs[id].value;if(savedInputs[id].focused)input.focus();}});
+    if(list)list.scrollTop=savedScrollTop;
+}
+function adminSendTicketMessage(reference){
+    if(!currentAdminTicketRef||currentAdminTicketRef!==reference)currentAdminTicketRef=reference;
+    const input=document.getElementById("adminTicketInput_"+reference);const text=input?input.value.trim():"";if(!text)return;
+    const allTickets=getAllTickets();const ticket=allTickets.find(t=>t.reference===reference);if(!ticket)return;
+    ticket.messages.push({from:"admin",text,time:new Date().toLocaleString()});saveAllTickets(allTickets);if(input)input.value="";
+    renderAdminTickets();setTimeout(()=>{const ni=document.getElementById("adminTicketInput_"+reference);if(ni)ni.focus();},50);
+}
+function adminAskResolved(reference){
+    const allTickets=getAllTickets();const ticket=allTickets.find(t=>t.reference===reference);if(!ticket)return;
+    ticket.adminAskingResolved=true;ticket.status="AwaitingConfirmation";
+    ticket.messages.push({from:"admin",text:"❓ Is your issue resolved? Please tap Yes or No in your ticket inbox.",time:new Date().toLocaleString()});saveAllTickets(allTickets);showNotification("Sent","User asked if resolved.");renderAdminTickets();
+}
+function adminDeleteTicket(reference){
+    customAlert("Delete this ticket?","warning","Confirm Delete","Yes, Delete").then(confirmed=>{if(!confirmed)return;let allTickets=getAllTickets();allTickets=allTickets.filter(t=>t.reference!==reference);saveAllTickets(allTickets);showNotification("Deleted","Ticket removed.");renderAdminTickets();renderAdminPanel();});
+}
+async function adminClearAllTickets(){
+    const allTickets=getAllTickets();if(allTickets.length===0){await customAlert("No tickets.","warning");return;}
+    const confirmed=await customAlert("⚠️ CLEAR ALL TICKETS?","error","Confirm Clear","Yes, Clear All");
+    if(!confirmed)return;saveAllTickets([]);showNotification("Cleared","All tickets removed.");renderAdminTickets();renderAdminPanel();
+}
+
+/* ====== ADMIN SUGGESTIONS ====== */
+function renderAdminSuggestions(){
+    const list=document.getElementById("adminSuggestionsList");if(!list)return;
+    const suggestions=getSuggestions();
+    if(!suggestions.length){list.innerHTML='<div class="admin-empty">💡 No suggestions yet.</div>';return;}
+    list.innerHTML="";
+    suggestions.forEach(s=>{
+        let statusClass="awaiting";let statusText="⏳ Pending";
+        if(s.status==="Approved"){statusClass="resolved";statusText="✅ Approved";}
+        if(s.status==="Rejected"){statusClass="open";statusText="❌ Rejected";}
+        let chatHTML="";
+        (s.messages||[]).forEach(m=>{const fromClass=m.from==="admin"?"from-admin":"from-user";const fromLabel=m.from==="admin"?"Admin":"@"+s.username;chatHTML+=`<div class="admin-chat-msg ${fromClass}"><strong>${escapeHtml(fromLabel)}:</strong> ${escapeHtml(m.text)}<span class="msg-meta">${escapeHtml(m.time)}</span></div>`;});
+        let actionHTML="";
+        if(s.status==="Pending"){actionHTML=`<div class="admin-cashout-actions"><button class="admin-approve-btn" onclick="adminApproveSuggestion('${s.id}')">✓ Approve</button><button class="admin-reject-btn" onclick="adminRejectSuggestion('${s.id}')">✕ Reject</button></div>`;}
+        actionHTML+=`<div class="admin-ticket-input-row"><input type="text" id="adminSugInput_${s.id}" placeholder="Type optional message/reply..."><button onclick="adminReplySuggestion('${s.id}')">Send</button></div><button class="admin-delete-btn" onclick="adminDeleteSuggestion('${s.id}')">🗑 Delete Suggestion</button>`;
+        const div=document.createElement("div");div.className="admin-ticket-item "+statusClass;
+        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">💡 Suggestion from @${escapeHtml(s.username)}</strong><span class="status ${statusClass}">${statusText}</span></div><div class="admin-user-row"><span>Ref ID</span><strong>${escapeHtml(s.id)}</strong></div><div class="admin-user-row"><span>Date</span><strong>${escapeHtml(s.createdAt)}</strong></div><div style="margin:10px 0;text-align:center;"><img src="${s.imageData}" style="max-width:100%;max-height:200px;border-radius:8px;"></div><div class="admin-ticket-chat" style="max-height:150px;">${chatHTML||'<div class="admin-chat-msg from-user">No messages.</div>'}</div>${actionHTML}`;
+        list.appendChild(div);
+    });
+}
+async function adminApproveSuggestion(id){const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.status="Approved";s.messages.push({from:"admin",text:"✅ Suggestion Approved! Thank you for your feedback.",time:new Date().toLocaleString()});saveSuggestions(all);showNotification("Approved","Suggestion approved.");renderAdminSuggestions();updateAllAdminBadges();}
+async function adminRejectSuggestion(id){const reason=prompt("Optional rejection reason:","");if(reason===null)return;const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.status="Rejected";let msg="❌ Suggestion Rejected.";if(reason.trim())msg+="\nReason: "+reason.trim();s.messages.push({from:"admin",text:msg,time:new Date().toLocaleString()});saveSuggestions(all);showNotification("Rejected","Suggestion rejected.");renderAdminSuggestions();updateAllAdminBadges();}
+function adminReplySuggestion(id){const input=document.getElementById("adminSugInput_"+id);const text=input?input.value.trim():"";if(!text)return;const all=getSuggestions();const s=all.find(x=>x.id===id);if(!s)return;s.messages.push({from:"admin",text,time:new Date().toLocaleString()});saveSuggestions(all);if(input)input.value="";renderAdminSuggestions();}
+async function adminDeleteSuggestion(id){const confirmed=await customAlert("Delete this suggestion?","warning","Confirm","Yes, Delete");if(!confirmed)return;let all=getSuggestions();all=all.filter(x=>x.id!==id);saveSuggestions(all);showNotification("Deleted","Suggestion removed.");renderAdminSuggestions();updateAllAdminBadges();}
+
+/* ====== VIOLATIONS SYSTEM ====== */
 function getViolationSignature(v){return v.type+"|"+v.details;}
 function detectMultiplePayouts(user){
     const dailyCounts={};(user.cashoutHistory||[]).forEach(c=>{const dateKey=(c.dateTime||"").split(",")[0].trim();if(!dateKey)return;dailyCounts[dateKey]=(dailyCounts[dateKey]||0)+1;});
@@ -3386,7 +3200,6 @@ function getAllUsersWithViolations(){
     users.forEach(user=>{const detected=getAllViolationsForUser(user,users);const active=(user.violations||[]).filter(v=>v.active===true).length;const total=detected.length+active;if(detected.length>0||active>0)results.push({user,detectedViolations:detected,activeCount:active,totalCount:total});});
     return results;
 }
-
 function openViolationChoiceModal(){document.getElementById("violationChoiceModalOverlay").classList.add("show");}
 function closeViolationChoice(){document.getElementById("violationChoiceModalOverlay").classList.remove("show");}
 async function showAutoViolations(){
@@ -3395,7 +3208,6 @@ async function showAutoViolations(){
     const detectedCount=usersWithViolations.filter(e=>e.detectedViolations.length>0).length;
     await customAlert("🤖 AUTO-DETECTED VIOLATIONS\n\nThe server has detected "+detectedCount+" user(s) with auto violations:\n\n• Multiple Payout In 1 Day\n• Multiple Account in 1 IP Address\n\nDisplayed automatically in the Violations tab below.\n\nUse 'Manual Violation' for custom messages.","info","Auto Violation Info");
 }
-
 function openManualViolationModal(){
     closeViolationChoice();
     manualViolationUserId=null;
@@ -3464,7 +3276,6 @@ async function confirmManualViolation(){
     user.accountStatus=(penaltyType==="permanent")?"banned":"onhold";
     saveUsers(users);closeManualViolationModal();showNotification("Violation Issued","@"+user.username+" — "+violationType);renderAdminPanel();
 }
-
 function renderAdminViolations(){
     const list=document.getElementById("adminViolationsList");const usersWithViolations=getAllUsersWithViolations();
     const headerHTML=`<div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;">
@@ -3553,7 +3364,7 @@ function renderAdminVerifications(){
     });
     const totalEl=document.getElementById("adminVerifyTotal");const appEl=document.getElementById("adminVerifyApproved");const pendEl=document.getElementById("adminVerifyPending");
     if(totalEl)totalEl.textContent=grouped.length;if(appEl)appEl.textContent=totalApprovedSubs;if(pendEl)pendEl.textContent=totalPendingSubs;
-    updateVerificationBadges();
+    updateAllAdminBadges();
     if(!grouped.length){list.innerHTML='<div class="admin-empty">✅ No pending verifications.</div>';return;}
     if(currentVerifyUser){const u=grouped.find(g=>g.userId===currentVerifyUser);if(u){renderVerifyUserDetail(list,u);return;}else currentVerifyUser=null;}
     list.innerHTML="";
@@ -3581,9 +3392,317 @@ function renderVerifyUserDetail(list,group){
         list.appendChild(div);
     });
 }
-async function approveSocialSubmission(userId,platform){const confirmed=await customAlert("Approve this submission?","warning","Approve","Yes");if(!confirmed)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform].status="approved";u.socialSubmissions[platform].reason="";if(isAllSocialApproved(u))u.cashoutVerified=true;saveUsers(users);showNotification("Approved","@"+u.username+" — "+platform+" verified.");renderAdminVerifications();}
-async function rejectSocialSubmission(userId,platform){const reason=prompt("Rejection reason (optional):","");if(reason===null)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform].status="rejected";u.socialSubmissions[platform].reason=reason.trim()||"Proof unclear.";u.cashoutVerified=false;saveUsers(users);showNotification("Rejected","User notified.");renderAdminVerifications();}
-async function resetSocialSubmission(userId,platform){const confirmed=await customAlert("Reset?","warning","Reset","Yes");if(!confirmed)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform]={name:"",imageData:null,status:"none",submittedAt:null,reason:""};u.cashoutVerified=false;saveUsers(users);showNotification("Reset","Submission reset.");renderAdminVerifications();}
+async function approveSocialSubmission(userId,platform){const confirmed=await customAlert("Approve this submission?","warning","Approve","Yes");if(!confirmed)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform].status="approved";u.socialSubmissions[platform].reason="";if(isAllSocialApproved(u))u.cashoutVerified=true;saveUsers(users);showNotification("Approved","@"+u.username+" — "+platform+" verified.");renderAdminVerifications();updateAllAdminBadges();}
+async function rejectSocialSubmission(userId,platform){const reason=prompt("Rejection reason (optional):","");if(reason===null)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform].status="rejected";u.socialSubmissions[platform].reason=reason.trim()||"Proof unclear.";u.cashoutVerified=false;saveUsers(users);showNotification("Rejected","User notified.");renderAdminVerifications();updateAllAdminBadges();}
+async function resetSocialSubmission(userId,platform){const confirmed=await customAlert("Reset?","warning","Reset","Yes");if(!confirmed)return;const users=getUsers();const u=users.find(x=>x.userId===userId);if(!u||!u.socialSubmissions||!u.socialSubmissions[platform])return;u.socialSubmissions[platform]={name:"",imageData:null,status:"none",submittedAt:null,reason:""};u.cashoutVerified=false;saveUsers(users);showNotification("Reset","Submission reset.");renderAdminVerifications();updateAllAdminBadges();}
+
+/* ====== LEADERBOARD CONGRATS ====== */
+async function checkPendingCongrats(){
+    if(!currentUser||isAdmin)return;
+    const fresh=getUsers().find(u=>u.userId===currentUser.userId);
+    if(!fresh||!fresh.pendingCongrats)return;
+    const c=fresh.pendingCongrats;
+    const medal=c.rank===1?"🥇":c.rank===2?"🥈":c.rank===3?"🥉":"🏆";
+    await customAlert("🎉 CONGRATULATIONS! 🎉\n\nYou made it to the Weekly Leaderboard!\n\n"+medal+" Rank: #"+c.rank+" of "+c.totalParticipants+"\n⭐ Points: "+Number(c.points).toFixed(3)+"\n💰 Reward: ₱"+Number(c.reward).toFixed(3)+"\n📅 Week: "+c.weekKey+"\n\nYour reward has been added to your balance.\nKeep up the great work! 💖","success","🏆 Weekly Leaderboard Achievement");
+    const users=getUsers();
+    const u=users.find(x=>x.userId===currentUser.userId);
+    if(u&&u.pendingCongrats){u.pendingCongrats=null;saveUsers(users);}
+    const refreshed=getUsers().find(x=>x.userId===currentUser.userId);
+    if(refreshed){currentUser=refreshed;updateBalanceDisplay();}
+}
+/* ====== ADMIN ANALYTICS ====== */
+function renderAdminAnalytics(){
+    const list=document.getElementById("adminAnalyticsList");if(!list)return;
+    const users=getUsers();
+    let totalBalance=0,totalReceived=0,totalTransferred=0,totalPoints=0,totalAdsWatched=0;
+    let totalApprovedCount=0,totalPendingCount=0,totalInvites=0;
+    let totalActive=0,totalOnHold=0,totalBanned=0;
+    const perUserAds=[],perUserInvites=[],perUserCashouts=[];
+    users.forEach(u=>{
+        totalBalance+=Number(u.balance||0);
+        let userReceived=0,userApprovedCount=0;
+        (u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){totalReceived+=Number(c.totalReceived||0);userReceived+=Number(c.totalReceived||0);totalApprovedCount++;userApprovedCount++;}if(c.status==="Pending")totalPendingCount++;});
+        totalTransferred+=Number(u.totalTransferred||0);totalPoints+=Number(u.points||0);
+        const userAds=Number(u.adsWatched||0);totalAdsWatched+=userAds;
+        const userInvites=Number(u.totalInvites||0);totalInvites+=userInvites;
+        const status=u.accountStatus||"active";
+        if(status==="active")totalActive++;else if(status==="onhold")totalOnHold++;else if(status==="banned")totalBanned++;
+        perUserAds.push({username:u.username,userId:u.userId,ads:userAds});
+        perUserInvites.push({username:u.username,userId:u.userId,invites:userInvites,income:Number(u.inviteIncome||0)});
+        if(userApprovedCount>0)perUserCashouts.push({username:u.username,userId:u.userId,received:userReceived,count:userApprovedCount});
+    });
+    perUserAds.sort((a,b)=>b.ads-a.ads);perUserInvites.sort((a,b)=>b.invites-a.invites);perUserCashouts.sort((a,b)=>b.received-a.received);
+    let adsLeaderboardHTML="";
+    const topAds=perUserAds.filter(u=>u.ads>0).slice(0,10);
+    if(topAds.length===0)adsLeaderboardHTML='<div class="admin-empty">No ads watched yet.</div>';
+    else topAds.forEach((u,idx)=>{const pct=totalAdsWatched>0?((u.ads/totalAdsWatched)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";adsLeaderboardHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.ads} ads • ${pct.toFixed(2)}%</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">${u.ads}</div></div>`;});
+    let invitersHTML="";
+    const topInviters=perUserInvites.filter(u=>u.invites>0).slice(0,10);
+    if(topInviters.length===0)invitersHTML='<div class="admin-empty">No invites yet.</div>';
+    else topInviters.forEach((u,idx)=>{const pct=totalInvites>0?((u.invites/totalInvites)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";invitersHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.invites} invites • ₱${u.income.toFixed(3)}</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">${u.invites} 📨</div></div>`;});
+    let cashoutsHTML="";
+    const topCashouts=perUserCashouts.slice(0,10);
+    if(topCashouts.length===0)cashoutsHTML='<div class="admin-empty">No approved cashouts yet.</div>';
+    else topCashouts.forEach((u,idx)=>{const pct=totalReceived>0?((u.received/totalReceived)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";cashoutsHTML+=`<div class="leaderboard-item"><div class="leaderboard-rank ${rankCls}">${idx+1}</div><div class="leaderboard-info"><strong>@${escapeHtml(u.username)}</strong><span>${u.count}x • ₱${u.received.toFixed(3)}</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:${pct}%;"></div></div></div><div class="leaderboard-value">₱${u.received.toFixed(2)}</div></div>`;});
+    list.innerHTML=renderWeeklyAdsStatsCard()+`
+        <div class="admin-stats-grid" style="margin-bottom:20px;">
+            <div class="admin-stat-card"><span>Total Balance</span><strong style="color:#7dff9a;">₱${totalBalance.toFixed(3)}</strong></div>
+            <div class="admin-stat-card"><span>Total Paid Out</span><strong style="color:#00e5ff;">₱${totalReceived.toFixed(3)}</strong></div>
+            <div class="admin-stat-card"><span>Approved Cashouts</span><strong style="color:#f5b942;">${totalApprovedCount} x</strong></div>
+            <div class="admin-stat-card"><span>Pending Cashouts</span><strong style="color:#ffd166;">${totalPendingCount} x</strong></div>
+            <div class="admin-stat-card"><span>Total Ads Watched</span><strong style="color:#ff6b9d;">${totalAdsWatched}</strong></div>
+            <div class="admin-stat-card"><span>Total Invites</span><strong style="color:#a78bfa;">${totalInvites}</strong></div>
+        </div>
+        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">📺 Top Ad Watchers</strong></div>${adsLeaderboardHTML}</div>
+        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">🎁 Top Inviters</strong></div>${invitersHTML}</div>
+        <div class="admin-ticket-item" style="margin-bottom:14px;"><div class="admin-user-header"><strong class="ticket-title">💰 Top Cashout Users</strong></div>${cashoutsHTML}</div>
+        <div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">👥 User Status Breakdown</strong></div><div class="admin-user-row"><span>🟢 Active Users</span><strong>${totalActive} accounts</strong></div><div class="admin-user-row"><span>⏸️ On Hold</span><strong>${totalOnHold} accounts</strong></div><div class="admin-user-row"><span>🚫 Banned</span><strong>${totalBanned} accounts</strong></div><div class="admin-user-row"><span>💸 Total Transferred</span><strong>₱${totalTransferred.toFixed(3)}</strong></div><div class="admin-user-row"><span>⭐ Total Points</span><strong>${totalPoints.toFixed(3)} pts</strong></div></div>`;
+}
+function renderAdminWeekly(){
+    const list=document.getElementById("adminWeeklyList");if(!list)return;
+    const users=getUsers();const weekKey=getWeekKey();
+    let totalWeeklyPoints=0,totalWeeklyAds=0,totalWeeklyApprovedCashouts=0,totalWeeklyCashoutAmount=0,totalWeeklyTransfers=0,totalWeeklyInvites=0;
+    const weekStart=new Date();const day=weekStart.getDay()||7;weekStart.setDate(weekStart.getDate()-day+1);weekStart.setHours(0,0,0,0);
+    users.forEach(u=>{
+        totalWeeklyPoints+=Number(u.weeklyPoints||0);totalWeeklyAds+=Number(u.weeklyAdsWatched||0);totalWeeklyInvites+=Number(u.totalInvites||0);
+        (u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){const d=new Date(c.dateTime);if(d>=weekStart){totalWeeklyApprovedCashouts++;totalWeeklyCashoutAmount+=Number(c.totalReceived||0);}}});
+        (u.transferHistory||[]).forEach(t=>{const d=new Date(t.dateTime);if(d>=weekStart)totalWeeklyTransfers+=Number(t.amount||0);});
+    });
+    list.innerHTML=renderWeeklyAdsStatsCard()+`
+        <div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">📅 This Week</strong><span class="admin-user-id">${escapeHtml(weekKey)}</span></div></div>
+        <div class="admin-stats-grid" style="margin:16px 0;">
+            <div class="admin-stat-card"><span>Weekly Points</span><strong style="color:#ff6b9d;">${totalWeeklyPoints.toFixed(3)}</strong></div>
+            <div class="admin-stat-card"><span>Weekly Ads</span><strong style="color:#ffd166;">${totalWeeklyAds}</strong></div>
+            <div class="admin-stat-card"><span>Weekly Cashouts</span><strong style="color:#00e5ff;">${totalWeeklyApprovedCashouts} x</strong></div>
+            <div class="admin-stat-card"><span>Weekly Cashout Amount</span><strong style="color:#7dff9a;">₱${totalWeeklyCashoutAmount.toFixed(3)}</strong></div>
+            <div class="admin-stat-card"><span>Weekly Transfers</span><strong style="color:#5dade2;">₱${totalWeeklyTransfers.toFixed(3)}</strong></div>
+            <div class="admin-stat-card"><span>Total Invites</span><strong style="color:#a78bfa;">${totalWeeklyInvites}</strong></div>
+        </div>`;
+}
+function renderAdminLeaderboard(){
+    const list=document.getElementById("adminLeaderboardList");if(!list)return;
+    let html=`<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">🏆 Leaderboard Rewards</strong></div><div class="admin-user-row"><span>Rank 1</span><strong>₱0.010</strong></div><div class="admin-user-row"><span>Rank 2</span><strong>₱0.008</strong></div><div class="admin-user-row"><span>Rank 3</span><strong>₱0.006</strong></div><div class="admin-user-row"><span>Rank 4-8</span><strong>₱0.005</strong></div><div class="admin-user-row"><span>Rank 9-14</span><strong>₱0.004</strong></div><div class="admin-user-row"><span>Rank 15-20</span><strong>₱0.003</strong></div></div>`;
+    const allUsers=getUsers();const totalAdsAll=allUsers.reduce((sum,u)=>sum+Number(u.weeklyAdsWatched||0),0);
+    const ranked=allUsers.filter(u=>Number(u.weeklyPoints||0)>0).sort((a,b)=>Number(b.weeklyPoints||0)-Number(a.weeklyPoints||0)).slice(0,30);
+    if(!ranked.length){html+='<div class="admin-empty">📊 No members with points yet.</div>';list.innerHTML=html;return;}
+    ranked.forEach((user,index)=>{
+        const rank=index+1;const reward=getRankReward(rank);const adsWatched=Number(user.weeklyAdsWatched||0);const adsPercent=totalAdsAll>0?((adsWatched/totalAdsAll)*100):0;
+        html+=`<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">#${rank} @${escapeHtml(user.username)}</strong><span class="admin-user-id">${Number(user.weeklyPoints||0).toFixed(3)} pts</span></div><div class="admin-user-row"><span>Name</span><strong>${escapeHtml(user.name)}</strong></div><div class="admin-user-row"><span>User ID</span><strong>${escapeHtml(user.userId)}</strong></div><div class="admin-user-row"><span>Ads Watched</span><strong>${adsWatched}</strong></div><div class="admin-user-row"><span>Contribution</span><strong>${adsPercent.toFixed(2)}%</strong></div><div class="admin-user-row"><span>Potential Reward</span><strong style="color:#f5b942;">₱${reward.toFixed(3)}</strong></div></div>`;
+    });
+    list.innerHTML=html;
+}
+function renderAdminPayouts(){
+    const list=document.getElementById("adminPayoutsList");if(!list)return;
+    const users=getUsers();const perUser=[];
+    let grandTotal=0,grandRequests=0;
+    users.forEach(u=>{let userTotal=0,userCount=0,lastDate="—";(u.cashoutHistory||[]).forEach(c=>{if(c.status==="Approved"){userTotal+=Number(c.totalReceived||0);userCount++;if(!lastDate||lastDate==="—"||(c.dateTime&&c.dateTime>lastDate))lastDate=c.dateTime||lastDate;}});if(userTotal>0||userCount>0){perUser.push({username:u.username,userId:u.userId,name:u.name,total:userTotal,count:userCount,lastDate});grandTotal+=userTotal;grandRequests+=userCount;}});
+    perUser.sort((a,b)=>b.total-a.total);
+    let html='<div class="admin-ticket-item" style="background:linear-gradient(135deg,rgba(125,255,154,.12),rgba(46,204,113,.05));border-color:rgba(125,255,154,.4);"><div class="admin-user-header"><strong class="ticket-title">💵 Total Amount Paid Out</strong><span class="admin-user-id">'+grandRequests+' approved</span></div><div style="text-align:center;padding:14px 0;"><div style="color:#7dff9a;font-size:34px;font-weight:800;">₱'+grandTotal.toFixed(3)+'</div><div style="color:#8a8aa0;font-size:11px;margin-top:4px;">Across '+perUser.length+' user(s)</div></div></div>';
+    if(!perUser.length){html+='<div class="admin-empty">💸 No approved cashouts yet.</div>';list.innerHTML=html;return;}
+    html+='<div class="admin-ticket-item"><div class="admin-user-header"><strong class="ticket-title">📋 Breakdown Per User</strong></div>';
+    perUser.forEach((u,idx)=>{const pct=grandTotal>0?((u.total/grandTotal)*100):0;const rankCls=idx===0?"gold":idx===1?"silver":idx===2?"bronze":"";html+='<div class="leaderboard-item"><div class="leaderboard-rank '+rankCls+'">'+(idx+1)+'</div><div class="leaderboard-info"><strong>@'+escapeHtml(u.username)+'</strong><span>'+u.count+' request(s) • '+pct.toFixed(2)+'%</span><div class="leaderboard-bar-wrap"><div class="leaderboard-bar" style="width:'+pct+'%;"></div></div></div><div class="leaderboard-value">₱'+u.total.toFixed(3)+'</div></div>';});
+    html+='</div>';
+    list.innerHTML=html;
+}
+
+/* ====== ADMIN PAGES MANAGEMENT ====== */
+function renderAdminPages(){
+    renderAdminSocialPages();
+    renderAdminCommunityLinks();
+}
+function renderAdminSocialPages(){
+    const list=document.getElementById("adminSocialPagesList");if(!list)return;
+    const pages=getSocialPages();
+    let html=`<div class="admin-update-form">
+        <h3 style="color:#ff6b9d;font-size:14px;margin-bottom:8px;">🔗 Cashout Follow Requirements</h3>
+        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">Users must follow ALL of these pages and submit proof to unlock cashout.</p>`;
+    if(pages.length===0){html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No pages — users don't need to follow anything to cashout.</div>`;}
+    else{
+        pages.forEach(p=>{
+            if(editingSocialPageId===p.id){
+                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
+                    <input type="text" id="editSPIcon_${p.id}" value="${escapeHtml(p.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
+                    <input type="text" id="editSPName_${p.id}" value="${escapeHtml(p.name)}" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+                    <input type="url" id="editSPUrl_${p.id}" value="${escapeHtml(p.url)}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <div class="admin-cashout-actions">
+                        <button class="admin-approve-btn" onclick="saveSocialPageEdit('${p.id}')">💾 Save</button>
+                        <button class="admin-reject-btn" onclick="cancelSocialPageEdit()">✕ Cancel</button>
+                    </div>
+                </div>`;
+            }else{
+                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
+                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(p.icon)} ${escapeHtml(p.name)}</strong><span class="admin-user-id">${escapeHtml(p.id)}</span></div>
+                    <div class="admin-user-row"><span>URL</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(p.url)}</strong></div>
+                    <div class="admin-cashout-actions">
+                        <button class="admin-view-btn" onclick="startEditSocialPage('${p.id}')">✏️ Edit</button>
+                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteSocialPage('${p.id}')">🗑 Delete</button>
+                    </div>
+                </div>`;
+            }
+        });
+    }
+    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Page</h4>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon (emoji)</label>
+        <input type="text" id="newSPIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Name</label>
+        <input type="text" id="newSPName" placeholder="e.g. YouTube Channel" maxlength="50" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+        <input type="url" id="newSPUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <button class="admin-publish-btn blue" onclick="addSocialPage()">➕ Add Page</button>
+        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreSocialPagesDefaults()">🔄 Restore Default Pages</button>
+    </div>`;
+    list.innerHTML=html;
+}
+function addSocialPage(){
+    const name=document.getElementById("newSPName").value.trim();
+    const url=document.getElementById("newSPUrl").value.trim();
+    const icon=document.getElementById("newSPIcon").value.trim()||"🔗";
+    if(!name){customAlert("Name required.","warning");return;}
+    if(!url){customAlert("URL required.","warning");return;}
+    const pages=getSocialPages();
+    pages.push({id:"social_"+Date.now()+"_"+Math.floor(Math.random()*900+100),name,icon,url});
+    saveSocialPages(pages);
+    showNotification("Added","Page added.");renderAdminSocialPages();
+}
+function startEditSocialPage(id){editingSocialPageId=id;renderAdminSocialPages();}
+function cancelSocialPageEdit(){editingSocialPageId=null;renderAdminSocialPages();}
+function saveSocialPageEdit(id){
+    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
+    const icon=document.getElementById("editSPIcon_"+id).value.trim()||"🔗";
+    const name=document.getElementById("editSPName_"+id).value.trim();
+    const url=document.getElementById("editSPUrl_"+id).value.trim();
+    if(!name){customAlert("Name required.","warning");return;}
+    if(!url){customAlert("URL required.","warning");return;}
+    p.icon=icon;p.name=name;p.url=url;
+    saveSocialPages(pages);editingSocialPageId=null;
+    showNotification("Updated","Page updated.");renderAdminSocialPages();
+}
+async function deleteSocialPage(id){
+    const pages=getSocialPages();const p=pages.find(x=>x.id===id);if(!p)return;
+    const ok=await customAlert("Delete '"+p.name+"'?\n\nUsers won't need to follow this page anymore.","warning","Confirm Delete","Yes, Delete");
+    if(!ok)return;
+    saveSocialPages(pages.filter(x=>x.id!==id));
+    showNotification("Deleted","Page removed.");renderAdminSocialPages();
+}
+async function restoreSocialPagesDefaults(){
+    const ok=await customAlert("Restore Cashout Follow Requirements to default pages?","warning","Restore Defaults","Yes, Restore");
+    if(!ok)return;
+    localStorage.removeItem("hfSocialPages");
+    localStorage.removeItem("hfSocialPagesCustomized");
+    showNotification("Restored","Default pages restored.");renderAdminSocialPages();
+}
+function renderAdminCommunityLinks(){
+    const list=document.getElementById("adminCommunityLinksList");if(!list)return;
+    const links=getCommunityLinks();
+    let html=`<div class="admin-update-form">
+        <h3 style="color:#ffd166;font-size:14px;margin-bottom:8px;">👥 CS Community Links</h3>
+        <p style="color:#8a8aa0;font-size:11.5px;margin-bottom:12px;line-height:1.5;">These links appear under "Group Community" in the user's CS section.</p>`;
+    if(links.length===0){html+=`<div class="admin-empty" style="padding:14px;margin-bottom:10px;">📌 No community links — CS section will be empty.</div>`;}
+    else{
+        links.forEach(l=>{
+            const typeLabel=l.type==="external"?"🌐 External":"📄 System";
+            if(editingCommunityLinkId===l.id){
+                html+=`<div class="admin-ticket-item" style="padding:12px;margin-bottom:8px;background:rgba(59,130,246,.15);border-color:rgba(59,130,246,.4);">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
+                    <input type="text" id="editCLIcon_${l.id}" value="${escapeHtml(l.icon)}" maxlength="5" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    <label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
+                    <input type="text" id="editCLLabel_${l.id}" value="${escapeHtml(l.label)}" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                    ${l.type==="external"?
+                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+                        <input type="url" id="editCLUrl_${l.id}" value="${escapeHtml(l.url||"")}" maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">`:
+                        `<label style="color:#ccc;font-size:11px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
+                        <select id="editCLValue_${l.id}" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                        ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}" ${l.value===o.value?"selected":""}>${o.label}</option>`).join("")}
+                        </select>`}
+                    <div class="admin-cashout-actions">
+                        <button class="admin-approve-btn" onclick="saveCommunityLinkEdit('${l.id}')">💾 Save</button>
+                        <button class="admin-reject-btn" onclick="cancelCommunityLinkEdit()">✕ Cancel</button>
+                    </div>
+                </div>`;
+            }else{
+                const valDisplay=l.type==="external"?(l.url||""):(l.value||"");
+                html+=`<div class="admin-ticket-item" style="padding:10px;margin-bottom:8px;">
+                    <div class="admin-user-header"><strong class="ticket-title">${escapeHtml(l.icon)} ${escapeHtml(l.label)}</strong><span class="admin-user-id">${typeLabel}</span></div>
+                    <div class="admin-user-row"><span>${l.type==="external"?"URL":"Page"}</span><strong style="font-size:10px;word-break:break-all;">${escapeHtml(valDisplay)}</strong></div>
+                    <div class="admin-cashout-actions">
+                        <button class="admin-view-btn" onclick="startEditCommunityLink('${l.id}')">✏️ Edit</button>
+                        <button class="admin-delete-btn" style="width:auto;margin:0;flex:none;min-width:auto;padding:10px 14px;" onclick="deleteCommunityLink('${l.id}')">🗑 Delete</button>
+                    </div>
+                </div>`;
+            }
+        });
+    }
+    html+=`<h4 style="color:#ffd166;font-size:12px;margin:14px 0 8px;">➕ Add New Community Link</h4>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Type</label>
+        <select id="newCLType" onchange="toggleCommunityLinkTypeFields()" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+            <option value="external">🌐 External Link</option>
+            <option value="system">📄 System Page</option>
+        </select>
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Icon</label>
+        <input type="text" id="newCLIcon" placeholder="🔗" maxlength="5" value="🔗" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">Label</label>
+        <input type="text" id="newCLLabel" placeholder="e.g. YouTube Channel" maxlength="80" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        <div id="newCLUrlGroup">
+            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">URL</label>
+            <input type="url" id="newCLUrl" placeholder="https://..." maxlength="500" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+        </div>
+        <div id="newCLValueGroup" style="display:none;">
+            <label style="color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;display:block;">System Page</label>
+            <select id="newCLValue" style="width:100%;padding:8px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:13px;">
+                ${FOCUS_PAGE_OPTIONS.map(o=>`<option value="${o.value}">${o.label}</option>`).join("")}
+            </select>
+        </div>
+        <button class="admin-publish-btn purple" onclick="addCommunityLink()">➕ Add Community Link</button>
+        <button class="admin-publish-btn" style="margin-top:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);" onclick="restoreCommunityLinksDefaults()">🔄 Restore Default Links</button>
+    </div>`;
+    list.innerHTML=html;
+}
+function toggleCommunityLinkTypeFields(){
+    const type=document.getElementById("newCLType").value;
+    document.getElementById("newCLUrlGroup").style.display=type==="external"?"block":"none";
+    document.getElementById("newCLValueGroup").style.display=type==="system"?"block":"none";
+}
+function addCommunityLink(){
+    const type=document.getElementById("newCLType").value;
+    const icon=document.getElementById("newCLIcon").value.trim()||"🔗";
+    const label=document.getElementById("newCLLabel").value.trim();
+    if(!label){customAlert("Label required.","warning");return;}
+    const newLink={id:"cl_"+Date.now()+"_"+Math.floor(Math.random()*900+100),type,icon,label};
+    if(type==="external"){const url=document.getElementById("newCLUrl").value.trim();if(!url){customAlert("URL required.","warning");return;}newLink.url=url;}
+    else{newLink.value=document.getElementById("newCLValue").value;}
+    const links=getCommunityLinks();
+    links.push(newLink);saveCommunityLinks(links);
+    showNotification("Added","Community link added.");renderAdminCommunityLinks();
+}
+function startEditCommunityLink(id){editingCommunityLinkId=id;renderAdminCommunityLinks();}
+function cancelCommunityLinkEdit(){editingCommunityLinkId=null;renderAdminCommunityLinks();}
+function saveCommunityLinkEdit(id){
+    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
+    l.icon=document.getElementById("editCLIcon_"+id).value.trim()||"🔗";
+    l.label=document.getElementById("editCLLabel_"+id).value.trim();
+    if(!l.label){customAlert("Label required.","warning");return;}
+    if(l.type==="external"){const url=document.getElementById("editCLUrl_"+id).value.trim();if(!url){customAlert("URL required.","warning");return;}l.url=url;}
+    else{l.value=document.getElementById("editCLValue_"+id).value;}
+    saveCommunityLinks(links);editingCommunityLinkId=null;
+    showNotification("Updated","Community link updated.");renderAdminCommunityLinks();
+}
+async function deleteCommunityLink(id){
+    const links=getCommunityLinks();const l=links.find(x=>x.id===id);if(!l)return;
+    const ok=await customAlert("Delete '"+l.label+"' from CS section?","warning","Confirm Delete","Yes, Delete");
+    if(!ok)return;
+    saveCommunityLinks(links.filter(x=>x.id!==id));
+    showNotification("Deleted","Community link removed.");renderAdminCommunityLinks();
+}
+async function restoreCommunityLinksDefaults(){
+    const ok=await customAlert("Restore CS Community Links to default?","warning","Restore Defaults","Yes, Restore");
+    if(!ok)return;
+    localStorage.removeItem("hfCommunityLinks");
+    localStorage.removeItem("hfCommunityLinksCustomized");
+    showNotification("Restored","Default links restored.");renderAdminCommunityLinks();
+}
 
 /* ====== SITE CONTROL ====== */
 function renderAdminSiteControl(){
@@ -3595,9 +3714,9 @@ function renderAdminSiteControl(){
         {key:"pauseCashout",icon:"💰",title:"Pause Cashout",desc:"Block all cashouts."},
         {key:"pauseTransfer",icon:"💸",title:"Pause Transfer",desc:"Block transfers."},
         {key:"pauseCalculator",icon:"🧮",title:"Hide Calculator",desc:"Hide calculator on game pages."},
-        {key:"pauseCashoutTransactions",icon:"📋",title:"Hide Cashout Transactions",desc:"Hide cashout history (data preserved)."},
-        {key:"pauseGameTransactions",icon:"🎮",title:"Hide Game Transactions",desc:"Hide game history (data preserved)."},
-        {key:"pauseTransferTransactions",icon:"📊",title:"Hide Transfer Transactions",desc:"Hide transfer history (data preserved)."},
+        {key:"pauseCashoutTransactions",icon:"📋",title:"Hide Cashout Transactions",desc:"Hide cashout history."},
+        {key:"pauseGameTransactions",icon:"🎮",title:"Hide Game Transactions",desc:"Hide game history."},
+        {key:"pauseTransferTransactions",icon:"📊",title:"Hide Transfer Transactions",desc:"Hide transfer history."},
         {key:"pauseGCash",icon:"🟦",title:"Pause GCash",desc:"Hide GCash option."},
         {key:"pauseMaya",icon:"🟩",title:"Pause Maya",desc:"Hide Maya option."},
         {key:"pausePayPal",icon:"🅿️",title:"Pause PayPal",desc:"Hide PayPal option."},
@@ -3612,7 +3731,7 @@ function renderAdminSystemSettings(){
     const todayUsed={GCash:getTodayCashoutCount("GCash"),Maya:getTodayCashoutCount("Maya"),PayPal:getTodayCashoutCount("PayPal")};
     list.innerHTML=`<div class="admin-update-form"><label>Min Transfer (₱)</label><input type="number" id="sysMinTransfer" value="${s.minTransfer}" step="0.01"><label>Game Reward (₱)</label><input type="number" id="sysGameReward" value="${s.gameReward}" step="0.001"><label>Inviter Bonus (₱)</label><input type="number" id="sysInviteBonusInviter" value="${s.inviteBonusInviter}" step="0.001"><label>New User Bonus (₱)</label><input type="number" id="sysInviteBonusNewUser" value="${s.inviteBonusNewUser}" step="0.001"><label>Cashout ₱3 Fee (%)</label><input type="number" id="sysFee3" value="${s.cashoutFeePercent3}" min="0" max="100"><label>Cashout ₱5 Fee (%)</label><input type="number" id="sysFee5" value="${s.cashoutFeePercent5}" min="0" max="100"></div>
     <div class="admin-update-form">
-        <h3 style="color:#00e5ff;font-size:14px;margin-bottom:8px;">📊 Daily Cashout Limits Per Method</h3>
+        <h3 style="color:#00e5ff;font-size:14px;margin-bottom:8px;">📊 Daily Cashout Limits</h3>
         <label>🟦 GCash (used today: ${todayUsed.GCash})</label><input type="number" id="sysLimitGCash" value="${s.dailyLimitGCash||0}" min="0" step="1" placeholder="0 = unlimited">
         <label>🟩 Maya (used today: ${todayUsed.Maya})</label><input type="number" id="sysLimitMaya" value="${s.dailyLimitMaya||0}" min="0" step="1" placeholder="0 = unlimited">
         <label>🅿️ PayPal (used today: ${todayUsed.PayPal})</label><input type="number" id="sysLimitPayPal" value="${s.dailyLimitPayPal||0}" min="0" step="1" placeholder="0 = unlimited">
@@ -3645,10 +3764,8 @@ function adminAddQuestionField(){
     const idx=container.children.length+1;
     const div=document.createElement("div");
     div.className="admin-ticket-item";
-    div.style.background="rgba(59,130,246,.08)";
-    div.style.borderColor="rgba(59,130,246,.3)";
-    div.style.marginBottom="10px";
-    div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">Q${idx}</strong><button type="button" class="admin-reject-btn" style="width:auto;flex:none;padding:6px 12px;font-size:11px;min-width:auto;" onclick="this.closest('.admin-ticket-item').remove();adminRenumberQuestions();">✕ Remove</button></div><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Question</label><textarea class="admin-q-question" rows="2" maxlength="500" placeholder="What is 2+2?" style="width:100%;padding:10px 12px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;resize:vertical;"></textarea><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Choices (Optional — one per line, leave blank for typed answer)</label><textarea class="admin-q-wordings" rows="3" maxlength="1000" placeholder="3&#10;4&#10;5&#10;6" style="width:100%;padding:10px 12px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;resize:vertical;"></textarea><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Correct Answer</label><input type="text" class="admin-q-answer" placeholder="4" maxlength="200" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;">`;
+    div.style.background="rgba(59,130,246,.08)";div.style.borderColor="rgba(59,130,246,.3)";div.style.marginBottom="10px";
+    div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">Q${idx}</strong><button type="button" class="admin-reject-btn" style="width:auto;flex:none;padding:6px 12px;font-size:11px;min-width:auto;" onclick="this.closest('.admin-ticket-item').remove();adminRenumberQuestions();">✕ Remove</button></div><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Question</label><textarea class="admin-q-question" rows="2" maxlength="500" placeholder="What is 2+2?" style="width:100%;padding:10px 12px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;resize:vertical;"></textarea><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Choices (Optional — one per line)</label><textarea class="admin-q-wordings" rows="3" maxlength="1000" placeholder="3&#10;4&#10;5&#10;6" style="width:100%;padding:10px 12px;margin-bottom:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;resize:vertical;"></textarea><label style="display:block;color:#ccc;font-size:11.5px;font-weight:700;margin-bottom:6px;">Correct Answer</label><input type="text" class="admin-q-answer" placeholder="4" maxlength="200" style="width:100%;padding:10px 12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:12px;color:#fff;font-size:13px;outline:none;font-family:inherit;">`;
     container.appendChild(div);
 }
 function adminRenumberQuestions(){const container=document.getElementById("adminQuestionsContainer");if(!container)return;Array.from(container.children).forEach((el,i)=>{const title=el.querySelector(".ticket-title");if(title)title.textContent="Q"+(i+1);});}
@@ -3673,7 +3790,7 @@ function adminCreateCustomGame(){
         questions.push({question:qText,wordings,correctAnswer:aText});
     });
     if(questions.length===0){customAlert("At least 1 valid question is required.","warning");return;}
-    if(invalidCount>0){customAlert(invalidCount+" invalid question(s) were skipped.\n\nMake sure correct answer matches one of the choices (if choices provided).","warning");}
+    if(invalidCount>0){customAlert(invalidCount+" invalid question(s) were skipped.","warning");}
     const games=getCustomGames();
     games.unshift({id:"GAME-"+Date.now()+"-"+Math.floor(1000+Math.random()*9000),title,profile,description,points:Number(points.toFixed(3)),questions,createdAt:new Date().toLocaleString()});
     saveCustomGames(games);
@@ -3691,26 +3808,11 @@ function renderAdminCustomGames(){
     list.innerHTML="";
     games.forEach(g=>{
         const div=document.createElement("div");div.className="admin-ticket-item";
-        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">${escapeHtml(g.profile||"🎮")} ${escapeHtml(g.title)}</strong><span class="admin-user-id">${(g.questions||[]).length} Q</span></div><div class="admin-user-row"><span>Description</span><strong>${escapeHtml(g.description||"—")}</strong></div><div class="admin-user-row"><span>Points/Correct</span><strong style="color:#7dff9a;">${Number(g.points||0.001).toFixed(3)}</strong></div><div class="admin-user-row"><span>Created</span><strong>${escapeHtml(g.createdAt||"—")}</strong></div><div style="margin-top:10px;padding:10px;background:rgba(0,0,0,.2);border-radius:12px;"><div style="color:#8a8aa0;font-size:11px;margin-bottom:8px;font-weight:700;">❓ Questions Preview:</div>${(g.questions||[]).map((q,i)=>`<div style="padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.08);font-size:12px;color:#ccc;"><strong style="color:#ffd166;">Q${i+1}:</strong> ${escapeHtml(q.question)}<br><span style="color:#7dff9a;">✓ ${escapeHtml(String(q.correctAnswer))}</span>${q.wordings&&q.wordings.length>0?'<br><span style="color:#8a8aa0;font-size:11px;">Choices: '+q.wordings.map(w=>escapeHtml(w)).join(", ")+'</span>':''}</div>`).join("")}</div><button class="admin-delete-btn" onclick="adminDeleteCustomGame('${g.id}')">🗑 Delete Game</button>`;
+        div.innerHTML=`<div class="admin-user-header"><strong class="ticket-title">${escapeHtml(g.profile||"🎮")} ${escapeHtml(g.title)}</strong><span class="admin-user-id">${(g.questions||[]).length} Q</span></div><div class="admin-user-row"><span>Description</span><strong>${escapeHtml(g.description||"—")}</strong></div><div class="admin-user-row"><span>Points/Correct</span><strong style="color:#7dff9a;">${Number(g.points||0.001).toFixed(3)}</strong></div><div class="admin-user-row"><span>Created</span><strong>${escapeHtml(g.createdAt||"—")}</strong></div><button class="admin-delete-btn" onclick="adminDeleteCustomGame('${g.id}')">🗑 Delete Game</button>`;
         list.appendChild(div);
     });
 }
-async function adminDeleteCustomGame(gameId){const confirmed=await customAlert("Delete this game? Users will no longer see it.","warning","Confirm Delete","Yes");if(!confirmed)return;let games=getCustomGames();games=games.filter(g=>g.id!==gameId);saveCustomGames(games);showNotification("Game Deleted","Game removed.");renderAdminCustomGames();}
-
-/* ====== LEADERBOARD CONGRATS ====== */
-async function checkPendingCongrats(){
-    if(!currentUser||isAdmin)return;
-    const fresh=getUsers().find(u=>u.userId===currentUser.userId);
-    if(!fresh||!fresh.pendingCongrats)return;
-    const c=fresh.pendingCongrats;
-    const medal=c.rank===1?"🥇":c.rank===2?"🥈":c.rank===3?"🥉":"🏆";
-    await customAlert("🎉 CONGRATULATIONS! 🎉\n\nYou made it to the Weekly Leaderboard!\n\n"+medal+" Rank: #"+c.rank+" of "+c.totalParticipants+"\n⭐ Points: "+Number(c.points).toFixed(3)+"\n💰 Reward: ₱"+Number(c.reward).toFixed(3)+"\n📅 Week: "+c.weekKey+"\n\nYour reward has been added to your balance.\nKeep up the great work! 💖","success","🏆 Weekly Leaderboard Achievement");
-    const users=getUsers();
-    const u=users.find(x=>x.userId===currentUser.userId);
-    if(u&&u.pendingCongrats){u.pendingCongrats=null;saveUsers(users);}
-    const refreshed=getUsers().find(x=>x.userId===currentUser.userId);
-    if(refreshed){currentUser=refreshed;updateBalanceDisplay();}
-}
+async function adminDeleteCustomGame(gameId){const confirmed=await customAlert("Delete this game?","warning","Confirm Delete","Yes");if(!confirmed)return;let games=getCustomGames();games=games.filter(g=>g.id!==gameId);saveCustomGames(games);showNotification("Game Deleted","Game removed.");renderAdminCustomGames();}
 
 /* ====== INIT ====== */
 function cleanLiveCashoutsOnLoad(){const key=getLivePeriodKey();const s=localStorage.getItem("liveCashoutPeriod");if(s!==key){localStorage.setItem("liveCashoutPeriod",key);localStorage.setItem("liveCashouts","[]");}}
@@ -3745,8 +3847,9 @@ setInterval(()=>{
         updateCalculatorVisibility();
     }
     if(isAdmin){
+        updateAllAdminBadges();
         const active=document.activeElement;
-        const isTyping=active&&active.id&&(active.id.startsWith("adminTicketInput_")||active.id.startsWith("adminSugInput_")||active.id==="adminUpdateTitle"||active.id==="adminUpdateMessage"||active.id==="alertTitle"||active.id==="alertMessage"||active.id==="rejectReasonInput"||active.id.startsWith("sys")||active.id.startsWith("adminGame")||active.id==="manualViolationSearch"||active.id==="manualViolationSubject"||active.id==="manualViolationMessage"||active.id.startsWith("newSP")||active.id.startsWith("newCL")||active.id.startsWith("editSP")||active.id.startsWith("editCL")||active.className&&(active.className.indexOf("admin-q-")>=0));
+        const isTyping=active&&active.id&&(active.id.startsWith("adminTicketInput_")||active.id.startsWith("adminSugInput_")||active.id==="adminUpdateTitle"||active.id==="adminUpdateMessage"||active.id==="alertTitle"||active.id==="alertMessage"||active.id==="rejectReasonInput"||active.id.startsWith("sys")||active.id.startsWith("adminGame")||active.id==="manualViolationSearch"||active.id==="manualViolationSubject"||active.id==="manualViolationMessage"||active.id.startsWith("newSP")||active.id.startsWith("newCL")||active.id.startsWith("editSP")||active.id.startsWith("editCL")||(active.className&&String(active.className).indexOf("admin-q-")>=0));
         if(!isTyping)renderAdminPanel();
     }
 },10000);
